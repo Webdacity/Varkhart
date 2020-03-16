@@ -1,0 +1,79 @@
+/* Variables */
+:root {
+  --beige: #f4f1ef;
+  --grey: #f4f4f4;
+  --brown: #2d150e;
+}
+
+
+/* General  */
+
+body,
+html {
+  font-family: "Ubuntu";
+  margin: 0;
+  padding: 0;
+}
+
+section {}
+
+/* ------------------------ */
+
+/* Navbar */
+.navbar {
+  box-shadow: 0px 4px 20px rgba(146, 146, 146, 0.3);
+}
+
+.navbar-brand img {
+  height: 50px;
+}
+
+.nav-link {
+  color: var(--brown);
+  margin-right: 30px;
+}
+
+.nav-link i {
+  padding-right: 5px;
+}
+
+
+
+/* ------------------------ */
+
+/*  HOME PAGE */
+
+.home-carousel {
+  margin: 2.5% 0;
+}
+
+.home-carousel h1 {
+  position: absolute;
+  left: 20%;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  color: --brown;
+  font-size: 5rem;
+  font-weight: 500;
+}
+
+.home-carousel h1 span {
+  font-weight: 700;
+}
+
+.product-block-section {}
+
+.product-block a {
+  width: 100%;
+  height: 100%;
+
+
+}
+
+.product-block img {
+  min-width: 100% !important;
+}
