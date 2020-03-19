@@ -75,7 +75,7 @@
                         <i class="fas fa-shopping-bag">
                         </i>
                         Mandjie
-                        <span class="nav-cart-count">1</span>
+                        <span class="nav-cart-count"></span>
                     </a>
                 </li>
             </ul>
@@ -122,90 +122,6 @@
 
                     <!-- Cart Item -->
 
-                    <!-- Cart Item -->
-                    <!-- <div class="cart-content-item row d-flex align-items-center" id="cart-item-2">
-                        <div class="col-sm-4">
-                            <div class="row d-flex align-items-center">
-                                <div class="col-sm-3">
-                                    <img src="./assets/images/products/test-product.png" alt=""
-                                        class="img-fluid cart-content-image">
-                                </div>
-                                <div class="col-sm-9">
-                                    <a class="cart-content-item-name" href="./produk.html">Varkhart T-Hemp - Groen</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <p class="cart-content-price">
-                                R <span>150</span>
-                            </p>
-                        </div>
-                        <div class="col-sm-1">
-                            <p class="cart-content-size">
-                                XL
-                            </p>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="cart-content-quantity">
-                                <i class="far fa-minus minus"></i>
-                                <input type="number" value="1" disabled class="cart-content-quantity-input">
-                                <i class="far fa-plus plus"></i>
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <p class="cart-content-total">
-                                R <span>200</span>
-                            </p>
-                        </div>
-                        <div class="col-sm-1">
-                            <p class="cart-content-item-delete">
-                                <i class="fal fa-times"></i>
-                            </p>
-                        </div>
-                    </div> -->
-
-                    <!-- Cart Item -->
-                    <!-- <div class="cart-content-item row d-flex align-items-center" id="cart-item-3">
-                        <div class="col-sm-4">
-                            <div class="row d-flex align-items-center">
-                                <div class="col-sm-3">
-                                    <img src="./assets/images/products/test-product.png" alt=""
-                                        class="img-fluid cart-content-image">
-                                </div>
-                                <div class="col-sm-9">
-                                    <a class="cart-content-item-name" href="./produk.html">Varkhart T-Hemp - Groen</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <p class="cart-content-price">
-                                R <span>100</span>
-                            </p>
-                        </div>
-                        <div class="col-sm-1">
-                            <p class="cart-content-size">
-                                XL
-                            </p>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="cart-content-quantity">
-                                <i class="far fa-minus minus"></i>
-                                <input type="number" value="1" disabled class="cart-content-quantity-input">
-                                <i class="far fa-plus plus"></i>
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <p class="cart-content-total">
-                                R <span>100</span>
-                            </p>
-                        </div>
-                        <div class="col-sm-1">
-                            <p class="cart-content-item-delete">
-                                <i class="fal fa-times" ></i>
-                            </p>
-                        </div>
-                    </div> -->
-
 
                 </div> <!-- End Cart Items-->
 
@@ -226,28 +142,7 @@
                             <i class="far fa-angle-left"></i>
                             <p>Terug na Winkel</p>
                         </a>
-                        <!-- <a class="cart-options-continue"
-                            href="https://sandbox.payfast.co.za/eng/process?cmd=_paynow&amp;receiver=14615769&amp;item_name=Varkhart&amp;item_description=Varkhart-Klere&amp;amount=100.00&amp;return_url=http%3A%2F%2F127.0.0.1%3A5500%2Findex.html&amp;cancel_url=http%3A%2F%2F127.0.0.1%3A5500%2Fcancel.html"> -->
-                        <form action="https://sandbox.payfast.co.za/eng/process" method="POST">
-                            <input type="hidden" name="name_first" value="John">
-                            <input type="hidden" name="name_last" value="Doe">
-                            <input type="hidden" name="email_address" value="john@doe.com">
-                            <input type="hidden" name="cell_number" value="0823456789">
-                            <input type="hidden" name="merchant_id" value="10000100">
-                            <input type="hidden" name="merchant_key" value="46f0cd694581a">
-                            <input type="hidden" name="return_url" value="https://www.yoursite.com/return">
-                            <input type="hidden" name="cancel_url" value="https://www.yoursite.com/cancel">
-                            <input type="hidden" name="notify_url" value="https://www.yoursite.com/notify">
-                            <input type="hidden" name="m_payment_id" value="01AB">
-                            <input type="hidden" name="amount" value="100.00">
-                            <input type="hidden" name="item_name" value="Test Item">
-                            <input type="hidden" name="item_description" value="A test product">
-                            <input type="hidden" name="custom_int1" value="2">
-                            <input type="hidden" name="custom_str1" value="Extra order information">
-                            <input type="hidden" name="email_confirmation" value="1">
-                            <input type="hidden" name="confirmation_address" value="arnovanstaden@gmail.com.com">
-                            <input type="submit">
-                        </form>
+
                         <a class="cart-options-continue" href="https://sandbox.payfast.co.za/eng/process">
                             <p>Gaan Voort</p>
                             <i class="far fa-angle-right"></i>
@@ -285,6 +180,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script src="./assets/js/main.js"></script>
     <script src="./assets/js/cart.js"></script>
+    <script src="./assets/js/storage.js"></script>
 
 
 </body>

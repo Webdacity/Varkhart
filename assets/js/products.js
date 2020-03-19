@@ -94,7 +94,7 @@ if (window.location.pathname == "/produk.html") {
             if (sizes.length == 0) {
                 $(".product-page-sizes-buttons").append(
                     // `<p> Een Groote </p>`
-                    `<button class="active-size"> Een Grootte </button>`
+                    `<button class="active-size">Een Grootte</button>`
                 )
             } else {
                 for (i = 0; i < sizes.length; i++) {
