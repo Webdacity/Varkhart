@@ -1,0 +1,33 @@
+{
+    "VH1": {
+        "name": "Varkhart T-Hemp - Navy",
+        "price": 199,
+        "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime laudantium esse provident voluptate dolorum porro velit doloribus, aliquam ipsam ab.",
+        "gender": "Mans",
+        "sizes": ["S", "M", "L", "XL", "2XL"],
+        "material": ["100% Katoen"],
+        "info": ["180g"],
+        "colors": ["#222F52", "#000"]
+    },
+    "VH2": {
+        "name": "Varkhart T-Hemp - Wit",
+        "price": 199,
+        "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime laudantium esse provident voluptate dolorum porro velit doloribus, aliquam ipsam ab.",
+        "gender": "Unisex",
+        "sizes": ["S", "M", "L", "XL", "2XL"],
+        "material": ["100% Katoen"],
+        "info": ["180g"],
+        "colors": ["#FD32FD", "#000"]
+    },
+    "VH3": {
+        "name": "Varkhart Keps - Grys",
+        "price": 149,
+        "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime laudantium esse provident voluptate dolorum porro velit doloribus, aliquam ipsam ab.",
+        "gender": "Unisex",
+        "sizes": [],
+        "material": "",
+        "info": ["6 Paneel", "Verstelbaar"],
+        "colors": ["#525252", "#EAEAEA"]
+    }
+
+}
