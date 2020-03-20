@@ -108,7 +108,7 @@ const updateCartCounter = () => {
         // Get Cart Count
         let cartCount = JSON.parse(localStorage.getItem("cart")).length;
     } else {
-        cartCount = 0;
+        let cartCount = 0;
     }
 
     // Change Counter
