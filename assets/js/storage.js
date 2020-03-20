@@ -19,7 +19,7 @@ const loadCart = () => {
     let cartArray = JSON.parse(localStorage.getItem("cart"));
 
     // Empty Cart
-    if (cartArray.length == 0) {
+    if (cartArray == null || cartArray.length == 0) {
         $(".cart-content").hide();
         $(".cart-empty").fadeIn();
     } else {
