@@ -144,13 +144,15 @@ const addToCart = () => {
     localStorage.setItem("cart", JSON.stringify(currentCart));
     console.log("Cart Updated. New Cart: " + localStorage.getItem("cart"));
     updateCartCounter();
+    notify("Bygevoeg in Mandjie");
 }
 
 $(".product-add-cart").click(() => {
     if (!$(".product-page-sizes-buttons > button").hasClass("active-size")) {
-        alert("Kies eers 'n grootte");
+        notify("Kies eers 'n grootte");
     } else {
         addToCart();
+
     }
 });
 
@@ -174,4 +176,19 @@ const deleteCartItem = (item) => {
 
     localStorage.setItem("cart", JSON.stringify(currentCart));
     updateCartCounter();
+    notify("Produk Verwyder");
+}
+
+
+
+
+
+// Notification
+const notify = (text) => {
+    $(".notification p").html(text);
+    $(".notification").fadeIn(() => {
+        setTimeout(() => {
+            $(".notification").fadeOut();
+        }, 2000)
+    });
 }

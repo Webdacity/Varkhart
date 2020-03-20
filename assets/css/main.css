@@ -284,6 +284,36 @@ footer form input:focus {
   -o-transform: scale(1.1);
 }
 
+
+/* Notifications */
+
+.notification {
+  background-color: var(--brown);
+  position: absolute;
+  top: 15vh;
+  right: 1vw;
+  z-index: 10;
+  color: var(--beige);
+  padding: 10px 40px 10px 20px;
+  display: none;
+}
+
+.notification>div {
+  display: flex;
+  align-items: center;
+}
+
+.notification img {
+  width: 2rem;
+}
+
+.notification p {
+  margin: 0;
+  font-size: 1.1rem;
+  padding-left: 20px;
+}
+
+
 /* ------------------------ */
 
 /*  HOME PAGE */
