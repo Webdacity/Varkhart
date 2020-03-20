@@ -9,7 +9,6 @@ const clearCart = () => {
 
 const showCart = () => {
     console.log("Current Cart:" + localStorage.getItem("cart"));
-    console.log("Current Cart Count:" + localStorage.getItem("cartCounter"));
 }
 
 // CART FUNCTIONS
@@ -104,19 +103,17 @@ loadCart();
 
 const updateCartCounter = () => {
 
-    if (localStorage.getItem("cart") !== null) {
+    let cartCount = 0;
+    if (localStorage.getItem("cart") != null) {
         // Get Cart Count
-        let cartCount = JSON.parse(localStorage.getItem("cart")).length;
-    } else {
-        let cartCount = 0;
+        cartCount = JSON.parse(localStorage.getItem("cart")).length;
     }
 
-    // Change Counter
-    if (cartCount === 0) {
-        $(".nav-cart-count").hide();
-    } else {
+    if (cartCount > 0) {
         $(".nav-cart-count").show();
         $(".nav-cart-count").html(cartCount);
+    } else {
+        $(".nav-cart-count").hide();
     }
 
 
@@ -185,6 +182,7 @@ const deleteCartItem = (item) => {
 
     localStorage.setItem("cart", JSON.stringify(currentCart));
     updateCartCounter();
+    showCart();
     notify("Produk Verwyder");
 }
 
@@ -193,7 +191,11 @@ const deleteCartItem = (item) => {
 
 
 // Notification
-const notify = (text) => {
+const notify = (text, position) => {
+    if (position == "bottom") {
+        $(".notification").css("top", "unset")
+        $(".notification").css("bottom", "15vh")
+    }
     $(".notification p").html(text);
     $(".notification").fadeIn(() => {
         setTimeout(() => {
