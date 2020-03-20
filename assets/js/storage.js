@@ -104,8 +104,12 @@ loadCart();
 
 const updateCartCounter = () => {
 
-    // Get Cart Count
-    let cartCount = JSON.parse(localStorage.getItem("cart")).length;
+    if (localStorage.getItem("cart") !== null) {
+        // Get Cart Count
+        let cartCount = JSON.parse(localStorage.getItem("cart")).length;
+    } else {
+        cartCount = 0;
+    }
 
     // Change Counter
     if (cartCount === 0) {
@@ -114,6 +118,8 @@ const updateCartCounter = () => {
         $(".nav-cart-count").show();
         $(".nav-cart-count").html(cartCount);
     }
+
+
 }
 
 // Update cart on load
