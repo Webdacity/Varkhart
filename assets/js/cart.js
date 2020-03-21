@@ -22,18 +22,10 @@ function getCartSize() {
 }
 
 // Load Empty Cart Div
-const loadEmptyCart = (time) => {
+const loadEmptyCart = () => {
     if (getCartSize() < 1) {
-        if (getCartSize() < 1) {
-            if (time > 0) {
-                $(".cart-content").fadeOut(time, function () {
-                    $(".cart-empty").fadeIn();
-                });
-            } else {
-                $(".cart-content").hide();
-                $(".cart-empty").fadeIn();
-            }
-        }
+        $(".cart-content").hide();
+        $(".cart-empty").fadeIn();
     }
 }
 
@@ -85,6 +77,60 @@ $(document).on("click", ".cart-content-item-delete i", function () {
         $(`.cart-content-item:nth-child(${i})`).attr("id", `cart-item-${i}`)
     }
     // Show Empty Cart Info
-    loadEmptyCart(500);
     calcCartTotal();
+    loadEmptyCart();
 });
+
+
+
+// Buyer Details
+
+// Checkout Cart
+
+
+$(".cart-options-continue").click(() => {
+    $(".cart-section").fadeOut(500, () => {
+        $(".cart-details").fadeIn();
+    });
+    checkoutCart();
+});
+
+const checkoutCart = () => {
+
+    $(".details-cart").empty();
+    const cartLength = $(".cart-content-item-grid").children().length;
+    const cartTotal = $(".cart-content-totals span").html()
+    for (i = 1; i <= cartLength; i++) {
+        const itemName = $(`#cart-item-${i} .cart-content-item-name`).html();
+        const itemSize = $(`#cart-item-${i} .cart-content-size`).html();
+        const itemQuant = $(`#cart-item-${i} .cart-content-quantity-input`).val();
+        const itemPrice = $(`#cart-item-${i} .cart-content-total span`).html();
+
+        $(".details-cart").append(`
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                 <div>
+                 <h6 class="my-0">${itemName}</h6>
+                  <small class="text-muted">${itemQuant} | ${itemSize}</small>
+              </div>
+              <span class="text-muted">R ${itemPrice}</span>
+            </li>
+           `);
+    }
+
+
+    $(".checkout-cart-count").html(cartLength)
+    $(".checkout-total h5").html(`R ${cartTotal}`);
+
+    loadPayButton();
+}
+
+const loadPayButton = () => {
+
+}
+
+
+
+// Open Buyer Details
+$(".cart-options-continue").click(function () {
+    ;
+})

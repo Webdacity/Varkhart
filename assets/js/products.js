@@ -14,22 +14,28 @@ if (window.location.pathname == "/winkel.html") {
 
             // Insert HTML
             for (i = 0; i < productKeys.length; i++) {
-
                 // Get product details
                 let productID = productKeys[i];
                 let product = response[productID];
-                let productName = product.name;
-                let productPrice = product.price;
 
                 // Insert HTML
                 $(".shop-product-grid").append(
-                    `<a class="col-sm-6 col-md-3 product" href="./produk.html#${productID}">
-                    <img class="img-fluid" src="./assets/images/products/${productID}/1.png" alt="">
-                    <p class="product-name">${productName}</p>
-                    <p class="product-price">R ${productPrice}</p>
+                    `<a class="col-sm-6 col-md-3 product" href="./produk.html#${productID}" id="${productID}">
+                    <div class="product-image-container">
+                    <img src="./assets/images/products/${productID}/1.png" alt="">
+                    </div>
+                    <p class="product-name">${product.name}</p>
+                    <p class="product-price">R ${product.price}</p>
                 </a>`
                 );
+
+                // Insert Product Tag
+                if (product.tag !== "") {
+                    $(`<span class="product-tag">${product.tag}</span>`).prependTo(`#${productID}.product`)
+                }
+
             }
+
         }
     };
 
@@ -119,9 +125,72 @@ if (window.location.pathname == "/produk.html") {
                 }
             }
 
+            // Images 
+            for (i = 0; i < product.images; i++) {
+                $(".product-slick").append(
+                    `
+                    <div class="product-slick-image-container">
+                    <img src="./assets/images/products/${productID}/${i+1}.png" />
+                    </div>
+                    `
+                )
+            }
+
+            $('.product-slick').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: false,
+            })
+
         }
     };
 
     xhttp.open("GET", "./assets/js/products.json", true);
     xhttp.send();
+}
+
+
+// Insert Products in Home:
+if (window.location.pathname == "/index.html") {
+
+    // JSON
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            let response = JSON.parse(this.responseText);
+
+            // Get Object Keys
+            const productKeys = Object.keys(response);
+
+            // Insert HTML
+            for (i = 0; i < productKeys.length; i++) {
+                // Get product details
+                let productID = productKeys[i];
+                let product = response[productID];
+
+                // Insert HTML
+                $(".product-range").append(
+                    `
+                <a class="col-sm-6 col-md-3 product" href="./produk.html#${productID}" id="${productID}">
+                    <div class="product-image-container">
+                        <img class="img-fluid" src="./assets/images/products/${productID}/1.png" alt="">
+                    </div>
+                    <p class="product-name">${product.name}</p>
+                    <p class="product-price">R ${product.price}</p>
+                </a>`
+                );
+
+                // Insert Product Tag
+                if (product.tag !== "") {
+                    $(`<span class="product-tag">${product.tag}</span>`).prependTo(`#${productID}.product`)
+                }
+
+            }
+
+        }
+    };
+
+    xhttp.open("GET", "./assets/js/products.json", true);
+    xhttp.send();
+
 }

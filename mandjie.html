@@ -85,6 +85,7 @@
     <div class="page-container">
 
         <section class="cart-section container">
+
             <div class="cart-content">
                 <div class="cart-content-headings row">
                     <div class="col-sm-4">
@@ -143,7 +144,7 @@
                             <p>Terug na Winkel</p>
                         </a>
 
-                        <a class="cart-options-continue" href="https://sandbox.payfast.co.za/eng/process">
+                        <a class="cart-options-continue">
                             <p>Gaan Voort</p>
                             <i class="far fa-angle-right"></i>
                         </a>
@@ -161,6 +162,153 @@
 
             </div>
         </section>
+
+        <section class="cart-details">
+            <div class="container">
+                <div class="row">
+
+                    <!-- Cart -->
+                    <div class="col-md-4 order-md-2 mb-4">
+                        <h4 class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="text-muted">Jou Mandjie</span>
+                            <span class="badge badge-secondary badge-pill checkout-cart-count">3</span>
+                        </h4>
+                        <ul class="list-group mb-3 details-cart">
+                        </ul>
+                        <div class="checkout-total d-flex justify-content-between align-items-center">
+                            <p class="mb-0">Totaal:</p>
+                            <h5 class="mb-0"></h5>
+                        </div>
+                        <hr class="mb-4">
+
+                        <!-- Payfast -->
+
+                        <form class="payfast-form" action="https://sandbox.payfast.co.za/eng/process" method="POST">
+
+                            <input type="hidden" name="merchant_id" value="10016549">
+                            <input type="hidden" name="merchant_key" value="sxou1f0t4mr2c">
+                            <input type="hidden" name="return_url" value="http://127.0.0.1:5500/sukses.html">
+                            <input type="hidden" name="cancel_url" value="http://127.0.0.1:5500/cancel.html">
+                            <input type="hidden" name="m_payment_id" value="01AB">
+                            <input type="hidden" name="amount" value="100.00">
+                            <input type="hidden" name="item_name" value="Test Item">
+                            <input type="hidden" name="item_description" value="A test product">
+                            <input type="hidden" name="email_confirmation" value="1">
+                            <input type="hidden" name="confirmation_address" value="admin@webdacity.co.za">
+
+
+                            <button class="btn btn-lg btn-block" type="submit">
+                                Betaal deur Payfast
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Details -->
+                    <div class="col-md-8 order-md-1">
+                        <h4 class="mb-3">Kontak Details</h4>
+                        <form class="needs-validation" novalidate="">
+
+                            <div class="mb-3">
+                                <label for="email">E-pos Adres</label>
+                                <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                                <div class="invalid-feedback">
+                                    'n Geldige e-pos word vereis vir aflewerings kontak doeleindes
+                                </div>
+                                <small id="emailHelp" class="form-text text-muted">Ons sal nooit jou e-pos vir enige
+                                    ander doel gebruik nie</small>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">Naam</label>
+                                    <input type="text" class="form-control" id="firstName" placeholder="" value=""
+                                        required="">
+                                    <div class="invalid-feedback">
+                                        'n Geldige naam word vereis.
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName">Van</label>
+                                    <input type="text" class="form-control" id="lastName" placeholder="" value=""
+                                        required="">
+                                    <div class="invalid-feedback">
+                                        'n Geldige van word vereis.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3" id="locationField">
+                                <label for="address">Adres <span class="text-muted">(Begin tik om te
+                                        soek)</span></label>
+                                <input type="text" class="form-control" id="autocomplete"
+                                    placeholder="Tik hier om te soek" onFocus="geolocate()" />
+                            </div>
+
+
+
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <label for="address2">Straatnommer</label>
+                                    <input type="text" class="form-control field" id="street_number" placeholder="123">
+                                </div>
+                                <div class="col-md-9 mb-3">
+                                    <label for="address2">Straatnaam</label>
+                                    <input type="text" class="form-control field" id="route" placeholder="Hoek Straat">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="">Woongebied</label>
+                                <input type="text" class="form-control field" id="" placeholder="Waterkloof">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="address">Gebou Details <span class="text-muted">Optioneel -
+                                        (flat/woonstelblok/kompleks ens.)
+                                    </span> </label>
+                                <input type="text" class="form-control" placeholder="Flat 24 Jacaranda Villas"
+                                    required="">
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom03">Stad / Dorp</label>
+                                    <input type="text" class="form-control field" id="locality" placeholder="Pretoria"
+                                        required>
+                                    <div class="invalid-feedback">
+                                        'n Geldige stad/dorp word vereis. </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="state">Provinsie</label>
+                                    <input type="text" class="form-control field" id="administrative_area_level_1"
+                                        placeholder="Gauteng" required>
+                                    <div class="invalid-feedback">
+                                        'n Geldige provinsie word vereis.
+                                    </div>
+                                </div>
+                                <div class="col-md-2 mb-3">
+                                    <label for="zip">Poskode</label>
+                                    <input type="text" class="form-control" id="postal_code" placeholder="4321"
+                                        required="">
+                                    <div class="invalid-feedback">
+                                        'n Geldige poskode word vereis.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Afleweringsnotas <span class="text-muted"> -
+                                        Optioneel</span> </label> </label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
 
     </div> <!-- End Page Container-->
 
@@ -186,10 +334,14 @@
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGcnsccpIzvxi1Q4sSbPnIUukeTDbBRa8&libraries=places&callback=initAutocomplete"
+        async defer></script>
+
     <script src="./assets/js/main.js"></script>
     <script src="./assets/js/cart.js"></script>
     <script src="./assets/js/storage.js"></script>
-
+    <script src="./assets/js/autocomplete.js"></script>
 
 </body>
 

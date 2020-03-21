@@ -41,6 +41,8 @@ const loadCart = () => {
                     let productID = productIDs[i];
                     const product = response[productID]
                     initialCartTotal += product.price;
+
+                    // Actual Cart
                     $(".cart-content-item-grid").append(
                         ` <div class="cart-content-item row d-flex align-items-center" id="cart-item-${i+1}">
                         <template id=${productID}></template>
@@ -185,8 +187,6 @@ const deleteCartItem = (item) => {
     showCart();
     notify("Produk Verwyder");
 }
-
-
 
 
 

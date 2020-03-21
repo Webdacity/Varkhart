@@ -6,10 +6,6 @@ $(document).ready(() => {
         $("#footer").html(data)
     });
 
-    // Initiate Tooltips
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
 
     //  Animations
 
@@ -35,12 +31,8 @@ $(document).ready(() => {
         }
     );
 
-    $(".product-page-sizes button").click(
-        function () {
-            $(".active-size").toggleClass("active-size");
-            $(this).toggleClass("active-size");
-        }
-    );
-
-
+    $(document).on("click", ".product-page-sizes-buttons button", function () {
+        $(".active-size").toggleClass("active-size");
+        $(this).toggleClass("active-size");
+    });
 });
