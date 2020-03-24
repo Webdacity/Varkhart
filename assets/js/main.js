@@ -36,3 +36,19 @@ $(document).ready(() => {
         $(this).toggleClass("active-size");
     });
 });
+
+
+
+// Nav Search
+
+
+const navSearch = (e) => {
+    const searchTerm = $(".search-bar input").val();
+    console.log("search :" + searchTerm)
+    location.replace(`./winkel.html?${searchTerm}`);
+}
+
+$(".search-bar").on("submit", function (event) {
+    event.preventDefault();
+    navSearch();
+});

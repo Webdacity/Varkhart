@@ -9,21 +9,24 @@
         "info": ["180g"],
         "colors": ["#222F52", "#000"],
         "images": 2,
-        "tag": "",
-        "home": true
+        "promo": "",
+        "home": true,
+        "tags": ["hemp", "t-hemp", "themp", "mans", "navy"]
     },
     "VH2": {
         "name": "Varkhart T-Hemp - Wit",
         "price": 199,
         "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime laudantium esse provident voluptate dolorum porro velit doloribus, aliquam ipsam ab.",
-        "gender": "Unisex",
+        "gender": "Dames",
         "sizes": ["S", "M", "L", "XL", "2XL"],
         "material": ["100% Katoen"],
         "info": ["180g"],
         "colors": ["#FD32FD", "#000"],
         "images": 1,
-        "tag": "",
-        "home": true
+        "promo": "",
+        "home": true,
+        "tags": []
+
     },
     "VH3": {
         "name": "Varkhart Keps - Grys",
@@ -35,8 +38,10 @@
         "info": ["6 Paneel", "Verstelbaar"],
         "colors": ["#525252", "#EAEAEA"],
         "images": 1,
-        "tag": "Nuut",
-        "home": true
+        "promo": "Nuut",
+        "home": true,
+        "tags": []
+
     },
     "VH4": {
         "name": "Varkhart Koelsak",
@@ -48,8 +53,10 @@
         "info": ["30 Blik"],
         "colors": ["#1A1A1C", "#EAEAEA"],
         "images": 1,
-        "tag": "",
-        "home": true
+        "promo": "",
+        "home": true,
+        "tags": []
+
     }
 
 }

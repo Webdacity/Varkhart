@@ -15,12 +15,13 @@ if (window.location.pathname == "/winkel.html") {
             // Insert HTML
             for (i = 0; i < productKeys.length; i++) {
                 // Get product details
-                let productID = productKeys[i];
-                let product = response[productID];
+                const productID = productKeys[i];
+                const product = response[productID];
 
                 // Insert HTML
                 $(".shop-product-grid").append(
-                    `<a class="col-sm-6 col-md-3 product" href="./produk.html#${productID}" id="${productID}">
+                    `<a class="col-sm-6 col-md-3 product" href="./produk.html#${productID}" id="${productID}" data-product-tags="${product.name},${product.tags.toString(),product.gender}">
+                    <template class=""></template>
                     <div class="product-image-container">
                     <img src="./assets/images/products/${productID}/1.png" alt="">
                     </div>
@@ -30,8 +31,8 @@ if (window.location.pathname == "/winkel.html") {
                 );
 
                 // Insert Product Tag
-                if (product.tag !== "") {
-                    $(`<span class="product-tag">${product.tag}</span>`).prependTo(`#${productID}.product`)
+                if (product.promo !== "") {
+                    $(`<span class="product-promo" data-product-promo="${product.promo}">${product.promo}</span>`).prependTo(`#${productID}.product`)
                 }
 
             }
@@ -194,3 +195,103 @@ if (window.location.pathname == "/index.html") {
     xhttp.send();
 
 }
+
+
+
+
+// ---------------
+
+// Shop Page Search,Sort & Filter
+
+// Instant Search
+
+const instantSearch = (term) => {
+
+    if (term == "") {
+        $(`.shop-product-grid a`).removeClass("instant-search-hide");
+    } else {
+        // Get shop length 
+        const shopLength = $(".shop-product-grid").children().length;
+
+        for (i = 1; i <= shopLength; i++) {
+            const productName = $(`.shop-product-grid a:nth-child(${i}) .product-name`).html().toLowerCase();
+            // $(`.shop-product-grid a:nth-child(${i})`).hide()
+            if (!productName.includes(term.toLowerCase())) {
+                $(`.shop-product-grid a:nth-child(${i})`).addClass("instant-search-hide");
+            }
+        }
+    }
+}
+
+$("#instant-search").on("input", function () {
+    instantSearch($(this).val());
+});
+
+// Nav Search Bar
+
+const loadNavSearch = () => {
+    // Get Search Term
+    let searchTerm = window.location.href;
+    if (searchTerm.includes("?") > 0) {
+        searchTerm = searchTerm.slice(searchTerm.indexOf("?") + 1).toLocaleLowerCase();
+    } else {
+        searchTerm = null;
+    }
+
+    if (searchTerm != null) {
+        const shopLength = $(".shop-product-grid").children().length;
+        let resultsCount = 0;
+        // Loop through every product to & hide non-results
+        for (i = 1; i <= shopLength; i++) {
+            const productTags = $(`.shop-product-grid a:nth-child(${i})`).attr("data-product-tags").toLowerCase();
+
+            // Load Results
+            if (!productTags.includes(searchTerm)) {
+                $(`.shop-product-grid a:nth-child(${i})`).hide()
+            } else {
+                resultsCount++
+            }
+        }
+        // Check for no results
+        if (resultsCount == 0) {
+            $(`.shop-product-grid`).hide()
+            $(`.shop-products-noresults`).fadeIn()
+
+        }
+    }
+
+
+
+}
+
+const shopSort = (option) => {
+    switch (option) {
+        case "":
+            location.reload()
+            break;
+        case "Nuut":
+            const products = $(".product > span").attr("data-product-promo", "Nuut").parent()
+            $(products).detach();
+            $(products).prependTo(".shop-product-grid");
+            break;
+        case "Price-LH":
+
+            break;
+        case "Price-HL":
+
+            break;
+        default:
+            break;
+    }
+    // if (option == "Nuut") {
+
+    // }
+}
+
+$(".shop-display-sort select").change(function () {
+    shopSort($(this).val());
+});
+
+$(document).ready(function () {
+    loadNavSearch();
+})
