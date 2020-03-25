@@ -1,4 +1,148 @@
-// Logic
+// Shop Page Search, Sort & Filter
+
+// SEARCH
+
+// Search in current results for string included in product name
+// const instantSearch = (term) => {
+
+//     if (term == "") {
+//         $(`.shop-product-grid a`).removeClass("product-hide");
+//     } else {
+//         // Get shop length 
+//         const shopLength = $(".shop-product-grid").children().length;
+
+//         for (i = 1; i <= shopLength; i++) {
+//             const productName = $(`.shop-product-grid a:nth-child(${i}) .product-name`).html().toLowerCase();
+//             // $(`.shop-product-grid a:nth-child(${i})`).hide()
+//             if (!productName.includes(term.toLowerCase())) {
+//                 $(`.shop-product-grid a:nth-child(${i})`).addClass("product-hide");
+//             }
+//         }
+//     }
+// }
+
+// // (fire instant search on every keystroke)
+// $("#instant-search").on("input", function () {
+//     instantSearch($(this).val());
+// });
+
+// Nav Search Bar
+const loadNavSearch = () => {
+    // Get Search Term
+    let searchTerm = window.location.href;
+    if (searchTerm.includes("?") > 0) {
+        searchTerm = searchTerm.slice(searchTerm.indexOf("?") + 1).toLocaleLowerCase();
+    } else {
+        searchTerm = null;
+    }
+
+    // {Find products who's product tags match ~ searchterm}
+    if (searchTerm != null) {
+        const shopLength = $(".shop-product-grid").children().length;
+        let resultsCount = 0;
+        // Loop through every product to & hide non-results
+        for (i = 1; i <= shopLength; i++) {
+            const productTags = $(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-tags").toLowerCase();
+
+            // Load Results
+            if (!productTags.includes(searchTerm)) {
+                $(`.shop-product-grid a:nth-child(${i})`).hide()
+            } else {
+                resultsCount++
+            }
+        }
+        // Check for no results
+        if (resultsCount == 0) {
+            $(`.shop-product-grid`).hide()
+            $(`.shop-products-noresults`).fadeIn()
+        }
+    }
+
+
+    // (Insert searchterm in filters)
+    if (searchTerm != null) {
+        $(".card-search input").val(`-  "${searchTerm}"`);
+    } else {
+        $(".card-search").hide();
+    }
+}
+
+//  (Run nav load search results on document load)
+$(document).ready(function () {
+    loadNavSearch();
+    loadFilters();
+});
+
+// CLear Nav Search
+$(".card-search .card-body i").click(() => {
+    location.replace("./winkel.html")
+})
+
+// FILTER
+
+$(".filter-price-range").on("input", function () {
+    let priceLow = $(".filter-price-range").val();
+    console.log(priceLow)
+});
+
+const loadFilters = () => {
+    // Get shop length 
+    const shopLength = $(".shop-product-grid").children().length;
+    const productColors = [];
+    let currentProduct;
+    let currentColor;
+
+    for (i = 1; i <= shopLength; i++) {
+        currentProduct = $(`.shop-product-grid a:nth-child(${i}) template`);
+
+        // Color
+        currentColor = currentProduct.attr("data-product-color").toLowerCase();
+        productColors.push(currentColor);
+        $(".card-color .color-boxes").append(
+            `<div style="background-color:${currentColor}"></div>`
+        )
+    }
+}
+
+
+
+// SORT 
+
+// {sort products according to select options}
+const shopSort = (option) => {
+    switch (option) {
+        case "":
+            location.reload()
+            break;
+        case "Nuut":
+            const products = $(".product > span").attr("data-product-promo", "Nuut").parent()
+            $(products).detach();
+            $(products).prependTo(".shop-product-grid");
+            break;
+        case "Price-LH":
+
+            break;
+        case "Price-HL":
+
+            break;
+        default:
+            break;
+    }
+    // if (option == "Nuut") {
+
+    // }
+}
+
+//  (Run sorting on select change)
+$(".shop-display-sort select").change(function () {
+    shopSort($(this).val());
+});
+
+
+// ------------------
+
+// Insert Products 
+
 
 // Insert Products in Store:
 if (window.location.pathname == "/winkel.html") {
@@ -20,8 +164,11 @@ if (window.location.pathname == "/winkel.html") {
 
                 // Insert HTML
                 $(".shop-product-grid").append(
-                    `<a class="col-sm-6 col-md-3 product" href="./produk.html#${productID}" id="${productID}" data-product-tags="${product.name},${product.tags.toString(),product.gender}">
-                    <template class=""></template>
+                    `<a class="col-sm-6 col-md-3 product" href="./produk.html#${productID}" id="${productID}" >
+                    <template data-product-tags="${product.name},${product.tags},${product.gender}"
+                    data-product-color="${product.colorMain}"
+                    data-product-sizes="${product.sizes}"
+                    ></template>
                     <div class="product-image-container">
                     <img src="./assets/images/products/${productID}/1.png" alt="">
                     </div>
@@ -32,7 +179,7 @@ if (window.location.pathname == "/winkel.html") {
 
                 // Insert Product Tag
                 if (product.promo !== "") {
-                    $(`<span class="product-promo" data-product-promo="${product.promo}">${product.promo}</span>`).prependTo(`#${productID}.product`)
+                    $(`<span class="product-promo" data-product-promo="${product.promo}">${product.promo}</span>`).prependTo(`#${productID}`)
                 }
 
             }
@@ -195,103 +342,3 @@ if (window.location.pathname == "/index.html") {
     xhttp.send();
 
 }
-
-
-
-
-// ---------------
-
-// Shop Page Search,Sort & Filter
-
-// Instant Search
-
-const instantSearch = (term) => {
-
-    if (term == "") {
-        $(`.shop-product-grid a`).removeClass("instant-search-hide");
-    } else {
-        // Get shop length 
-        const shopLength = $(".shop-product-grid").children().length;
-
-        for (i = 1; i <= shopLength; i++) {
-            const productName = $(`.shop-product-grid a:nth-child(${i}) .product-name`).html().toLowerCase();
-            // $(`.shop-product-grid a:nth-child(${i})`).hide()
-            if (!productName.includes(term.toLowerCase())) {
-                $(`.shop-product-grid a:nth-child(${i})`).addClass("instant-search-hide");
-            }
-        }
-    }
-}
-
-$("#instant-search").on("input", function () {
-    instantSearch($(this).val());
-});
-
-// Nav Search Bar
-
-const loadNavSearch = () => {
-    // Get Search Term
-    let searchTerm = window.location.href;
-    if (searchTerm.includes("?") > 0) {
-        searchTerm = searchTerm.slice(searchTerm.indexOf("?") + 1).toLocaleLowerCase();
-    } else {
-        searchTerm = null;
-    }
-
-    if (searchTerm != null) {
-        const shopLength = $(".shop-product-grid").children().length;
-        let resultsCount = 0;
-        // Loop through every product to & hide non-results
-        for (i = 1; i <= shopLength; i++) {
-            const productTags = $(`.shop-product-grid a:nth-child(${i})`).attr("data-product-tags").toLowerCase();
-
-            // Load Results
-            if (!productTags.includes(searchTerm)) {
-                $(`.shop-product-grid a:nth-child(${i})`).hide()
-            } else {
-                resultsCount++
-            }
-        }
-        // Check for no results
-        if (resultsCount == 0) {
-            $(`.shop-product-grid`).hide()
-            $(`.shop-products-noresults`).fadeIn()
-
-        }
-    }
-
-
-
-}
-
-const shopSort = (option) => {
-    switch (option) {
-        case "":
-            location.reload()
-            break;
-        case "Nuut":
-            const products = $(".product > span").attr("data-product-promo", "Nuut").parent()
-            $(products).detach();
-            $(products).prependTo(".shop-product-grid");
-            break;
-        case "Price-LH":
-
-            break;
-        case "Price-HL":
-
-            break;
-        default:
-            break;
-    }
-    // if (option == "Nuut") {
-
-    // }
-}
-
-$(".shop-display-sort select").change(function () {
-    shopSort($(this).val());
-});
-
-$(document).ready(function () {
-    loadNavSearch();
-})

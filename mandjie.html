@@ -168,13 +168,18 @@
                 <div class="row">
 
                     <!-- Cart -->
-                    <div class="col-md-4 order-md-2 mb-4">
+                    <div class="col-md-4 order-md-2 mb-4 cart-summary">
                         <h4 class="d-flex justify-content-between align-items-center mb-3">
-                            <span class="text-muted">Jou Mandjie</span>
+                            <span>Jou Mandjie</span>
                             <span class="badge badge-secondary badge-pill checkout-cart-count">3</span>
                         </h4>
-                        <ul class="list-group mb-3 details-cart">
+                        <ul class="list-group mb-3 cart-details-list">
                         </ul>
+                        <div class="checkout-delivery d-flex justify-content-between align-items-center">
+                            <p class="mb-0">Aflewering:</p>
+                            <h6 class="mb-0">R 100</h6>
+                        </div>
+                        <hr class="my-2">
                         <div class="checkout-total d-flex justify-content-between align-items-center">
                             <p class="mb-0">Totaal:</p>
                             <h5 class="mb-0"></h5>
@@ -187,13 +192,13 @@
 
                             <input type="hidden" name="merchant_id" value="10016549">
                             <input type="hidden" name="merchant_key" value="sxou1f0t4mr2c">
-                            <input type="hidden" name="return_url" value="http://127.0.0.1:5500/sukses.html">
-                            <input type="hidden" name="cancel_url" value="http://127.0.0.1:5500/cancel.html">
+                            <input type="hidden" name="return_url" value="http://127.0.0.1:5501/sukses.html">
+                            <input type="hidden" name="cancel_url" value="http://127.0.0.1:5501/cancel.html">
                             <input type="hidden" name="notify_url"
                                 value="https://us-central1-sendgrid-test-40a62.cloudfunctions.net/emailMessage">
                             <input type="hidden" name="name_first" value="Piet">
                             <input type="hidden" name="name_last" value="Poggenpoel">
-                            <input type="hidden" name="email_address" value="piet@test.com">
+                            <input type="hidden" name="email_address" value="arnovanstaden@gmail.com">
                             <input type="hidden" name="cell_number" value="0823456789">
                             <input type="hidden" name="m_payment_id" value="01AB">
                             <input type="hidden" name="amount" value="100.00">
@@ -201,6 +206,8 @@
                             <input type="hidden" name="item_description" value="A test product">
                             <input type="hidden" name="email_confirmation" value="1">
                             <input type="hidden" name="confirmation_address" value="admin@webdacity.co.za">
+                            <input type="hidden" name="custom_str1" value="21 Goseberry Welgeveonden">
+                            <input type="hidden" name="custom_int1" value="0784225564">
 
 
                             <button class="btn btn-lg btn-block" type="submit">

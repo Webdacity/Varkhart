@@ -97,29 +97,30 @@ $(".cart-options-continue").click(() => {
 
 const checkoutCart = () => {
 
-    $(".details-cart").empty();
+    $(".cart-details-list").empty();
     const cartLength = $(".cart-content-item-grid").children().length;
-    const cartTotal = $(".cart-content-totals span").html()
+    const cartTotal = parseInt($(".cart-content-totals span").html());
     for (i = 1; i <= cartLength; i++) {
         const itemName = $(`#cart-item-${i} .cart-content-item-name`).html();
         const itemSize = $(`#cart-item-${i} .cart-content-size`).html();
         const itemQuant = $(`#cart-item-${i} .cart-content-quantity-input`).val();
         const itemPrice = $(`#cart-item-${i} .cart-content-total span`).html();
+        const itemId = $(`#cart-item-${i} template`).attr("id");
 
-        $(".details-cart").append(`
+        $(".cart-details-list").append(`
             <li class="list-group-item d-flex justify-content-between lh-condensed">
                  <div>
-                 <h6 class="my-0">${itemName}</h6>
-                  <small class="text-muted">${itemQuant} | ${itemSize}</small>
+                 <a class="my-0" href="./produk.html#${itemId}">${itemName}</a>
+                  <small class=text-muted">${itemQuant} | ${itemSize}</small>
               </div>
-              <span class="text-muted">R ${itemPrice}</span>
+              <p>R ${itemPrice}</p>
             </li>
            `);
     }
 
 
-    $(".checkout-cart-count").html(cartLength)
-    $(".checkout-total h5").html(`R ${cartTotal}`);
+    $(".checkout-cart-count").html(cartLength);
+    $(".checkout-total h5").html(`R ${cartTotal+100}`); // {Incl Delivery}
 
     loadPayButton();
 }
@@ -127,10 +128,3 @@ const checkoutCart = () => {
 const loadPayButton = () => {
 
 }
-
-
-
-// Open Buyer Details
-$(".cart-options-continue").click(function () {
-    ;
-})

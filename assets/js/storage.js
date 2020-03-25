@@ -86,10 +86,8 @@ const loadCart = () => {
                         </div>
                     </div>`
                     );
-
-                    $(".cart-content-totals h4 span").html(initialCartTotal);
-
                 }
+                $(".cart-content-totals h4 span").html(initialCartTotal);
             }
 
         }
@@ -152,7 +150,7 @@ const addToCart = () => {
     localStorage.setItem("cart", JSON.stringify(currentCart));
     console.log("Cart Updated. New Cart: " + localStorage.getItem("cart"));
     updateCartCounter();
-    notify("Bygevoeg in Mandjie");
+    notify("Bygevoeg in Mandjie", true);
 }
 
 $(".product-add-cart").click(() => {
@@ -160,7 +158,6 @@ $(".product-add-cart").click(() => {
         notify("Kies eers 'n grootte");
     } else {
         addToCart();
-
     }
 });
 
@@ -185,21 +182,22 @@ const deleteCartItem = (item) => {
     localStorage.setItem("cart", JSON.stringify(currentCart));
     updateCartCounter();
     showCart();
-    notify("Produk Verwyder");
+    notify("Produk Verwyder", true);
 }
 
 
 
 // Notification
-const notify = (text, position) => {
-    if (position == "bottom") {
-        $(".notification").css("top", "unset")
-        $(".notification").css("bottom", "15vh")
-    }
+const notify = (text, sound) => {
+    var audio = new Audio('./assets/audio/deduction.ogg');
     $(".notification p").html(text);
     $(".notification").fadeIn(() => {
         setTimeout(() => {
             $(".notification").fadeOut();
         }, 2000)
     });
+    if (sound === true) {
+        audio.play();
+    }
+
 }

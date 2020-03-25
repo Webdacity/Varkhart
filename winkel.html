@@ -61,7 +61,7 @@
             </form>
             <ul class="navbar-nav ">
                 <li class="nav-item">
-                    <a class="nav-link" href="./winkel.html">
+                    <a class="nav-link" href="./index.html">
                         <img src="./assets/images/icons/vark.png" alt="">
                         Tuis
                     </a>
@@ -96,57 +96,108 @@
                     <div class="col-12 col-sm-3 ">
                         <div class="shop-filter">
 
-                            <!-- <div class="filter-heading">
-                            <h3>Filter</h3>
-                            <label class=" switch">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </div> -->
+                            <div class="filter-heading">
+                                <h3>FILTER</h3>
+                                <!-- <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label> -->
+                                <p>clear</p>
+                            </div>
 
-                            <!-- <div class="filter-category">
-                            <div class="accordion" id="accordionExample">
-                                <div class="card">
-                                    <div class="card-header" id="headingOne" data-toggle="collapse"
-                                        data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        <h5>
-                                            Mans
-                                        </h5>
+                            <div class="filter-category">
+                                <div class="accordion" id="accordionExample">
+
+                                    <!-- Soektog -->
+                                    <div class="card card-search">
+                                        <div class="card-header" data-toggle="collapse" data-target="#collapseSearch"
+                                            aria-expanded="true" aria-controls="collapseSearch">
+                                            <h5>
+                                                Soektog
+                                            </h5>
+                                            <i class="fas fa-caret-down"></i>
+                                        </div>
+                                        <div id="collapseSearch" class="collapse show" aria-labelledby="headingOne"
+                                            data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <input type="text" disabled>
+                                                <i class="far fa-times"></i>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-                                        data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            <ul>
-                                                <li>Hemde</li>
-                                                <li>Broeke</li>
-                                                <li>Bykomstighede</li>
-                                            </ul>
+
+                                    <!-- Price -->
+                                    <div class="card card-price">
+                                        <div class="card-header collapsed" data-toggle="collapse"
+                                            data-target="#collapsePrice" aria-expanded="true"
+                                            aria-controls="collapsePrice">
+                                            <h5>
+                                                Prys
+                                            </h5>
+                                            <i class="fas fa-caret-down"></i>
+                                        </div>
+                                        <div id="collapsePrice" class="collapse" aria-labelledby="headingOne"
+                                            data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <form>
+                                                    <input type="number" placeholder="1" min="1">
+                                                    <span></span>
+                                                    <input type="number" placeholder="100">
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Colour -->
+                                    <div class="card card-color">
+                                        <div class="card-header collapsed" data-toggle="collapse"
+                                            data-target="#collapseColor" aria-expanded="true"
+                                            aria-controls="collapseColor">
+                                            <h5>
+                                                Kleur
+                                            </h5>
+                                            <i class="fas fa-caret-down"></i>
+                                        </div>
+                                        <div id="collapseColor" class="collapse" aria-labelledby="headingOne"
+                                            data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <div class="color-boxes">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Sizes -->
+                                    <div class="card card-color">
+                                        <div class="card-header collapsed" data-toggle="collapse"
+                                            data-target="#collapseSize" aria-expanded="true"
+                                            aria-controls="collapseSize">
+                                            <h5>
+                                                Grootte
+                                            </h5>
+                                            <i class="fas fa-caret-down"></i>
+                                        </div>
+                                        <div id="collapseSize" class="collapse" aria-labelledby="headingOne"
+                                            data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <div class="size-boxes">
+                                                    <button>
+                                                        XS
+                                                    </button>
+                                                    <button>
+                                                        S
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
 
-                            <div class="filter-price">
-                                <h4 class="filter-heading">
-                                    Soektog
-                                </h4>
-                            </div>
-                            <div class="filter-search ">
-                                <h4 class="filter-heading">
-                                    Prys
-                                </h4>
-                            </div>
-                            <div class="filter-size">
-                                <h4 class="filter-heading">
-                                    Geslag
-                                </h4>
-                            </div>
-                            <div class="filter-colour">
-                                <h4 class="filter-heading">
-                                    Kleur
-                                </h4>
-                            </div>
+                        </div>
+                        <div class="filter-button">
+                            <button>FILTER</button>
                         </div>
                     </div>
 
