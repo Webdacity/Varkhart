@@ -187,20 +187,23 @@ const deleteCartItem = (item) => {
 }
 
 // Notify Defaults
-$.notify.addStyle("Varkhart", {
-    html: "<div> <img src='./assets/images/logos/notifications.png'><span data-notify-text/></div>",
-    classes: {
-        base: {
-            "color": "var(--beige)",
-            "background-color": "var(--brown)",
-            "padding": "5px 10px"
+
+if (window.location.pathname == "/produk.html" || window.location.pathname == "/mandjie.html") {
+    $.notify.addStyle("Varkhart", {
+        html: "<div> <img src='./assets/images/logos/notifications.png'><span data-notify-text/></div>",
+        classes: {
+            base: {
+                "color": "var(--beige)",
+                "background-color": "var(--brown)",
+                "padding": "5px 10px"
+            }
         }
-    }
 
-})
+    })
 
-$.notify.defaults({
-    style: "Varkhart",
-    position: "right middle",
-    className: "base",
-});
+    $.notify.defaults({
+        style: "Varkhart",
+        position: "right middle",
+        className: "base",
+    });
+}
