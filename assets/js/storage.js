@@ -96,9 +96,6 @@ const loadCart = () => {
     }
 }
 
-// Load Cart
-loadCart();
-
 // Update Cart Counter
 
 const updateCartCounter = () => {
@@ -118,9 +115,6 @@ const updateCartCounter = () => {
 
 
 }
-
-// Update cart on load
-$("body").on("load", updateCartCounter());
 
 // Cart Storage
 
@@ -207,3 +201,11 @@ if (window.location.pathname == "/produk.html" || window.location.pathname == "/
         className: "base",
     });
 }
+
+$(document).ready(function () {
+
+    if (window.location.pathname == "/mandjie.html") {
+        loadCart();
+        updateCartCounter();
+    }
+});
