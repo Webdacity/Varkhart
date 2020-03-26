@@ -7,9 +7,10 @@ const loadNavSearch = () => {
     } else {
         searchTerm = null;
     }
+    console.log("SearchTerm = " + searchTerm)
 
     // {Find products who's product tags match ~ searchterm}
-    if (searchTerm != null) {
+    if (searchTerm !== null) {
         const shopLength = $(".shop-product-grid").children().length;
         let resultsCount = 0;
         // Loop through every product to & hide non-results
@@ -191,8 +192,7 @@ $(".shop-display-sort select").change(function () {
 
 // ------------------
 
-// Insert Products 
-
+// INSERT PRODUCTS 
 
 // Insert Products in Store:
 const loadShopProducts = () => {
@@ -237,12 +237,9 @@ const loadShopProducts = () => {
 
         }
     };
-
     xhttp.open("GET", "./assets/js/products.json", true);
     xhttp.send();
 }
-
-
 
 // Insert Products in Product Page:
 const loadProductPage = () => {
@@ -272,7 +269,6 @@ const loadProductPage = () => {
 
             // Info
             const info = product.info;
-
             if (info.length !== 0) {
                 for (i = 0; i < info.length; i++) {
                     if (i == 0) {
@@ -286,7 +282,6 @@ const loadProductPage = () => {
 
             // Material
             const material = product.material;
-
             if (material.length !== 0) {
                 $(".product-page-info").append(
                     `<p>${product.material}</p>`
@@ -295,7 +290,6 @@ const loadProductPage = () => {
 
             // Sizes
             const sizes = product.sizes;
-
             if (sizes.length == 0) {
                 $(".product-page-sizes-buttons").append(
                     // `<p> Een Groote </p>`
@@ -308,8 +302,6 @@ const loadProductPage = () => {
                     )
                 }
             }
-
-
 
             // Colors
             const colors = product.colors;
@@ -343,7 +335,6 @@ const loadProductPage = () => {
 
         }
     };
-
     xhttp.open("GET", "./assets/js/products.json", true);
     xhttp.send();
 }
@@ -398,6 +389,9 @@ $(document).on("click", ".product-page-sizes-buttons >*", function () {
     $(".active-size").toggleClass("active-size");
     $(this).toggleClass("active-size");
 });
+
+// ------------
+// LOADING
 
 $(document).ready(function () {
 
