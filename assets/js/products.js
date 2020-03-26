@@ -350,7 +350,7 @@ if (window.location.pathname == "/produk.html") {
 
 
 // Insert Products in Home:
-if (window.location.pathname == "/index.html" || window.location.pathname == "") {
+const loadHomeProducts = () => {
 
     // JSON
     let xhttp = new XMLHttpRequest();
@@ -402,6 +402,12 @@ $(document).on("click", ".product-page-sizes-buttons >*", function () {
 
 //  (Run nav load search results on document load)
 $(document).ready(function () {
+
+    if (window.location.pathname == "/index.html" || window.location.pathname == "") {
+        loadHomeProducts();
+        console.log("This is home")
+    }
+
     if (window.location.pathname == "/winkel.html") {
         loadNavSearch();
         loadFilterColors();
