@@ -12,9 +12,10 @@ const loadNavSearch = () => {
     if (searchTerm !== null) {
         const shopLength = $(".shop-product-grid").children().length;
         let resultsCount = 0;
+        console.log(shopLength)
         // Loop through every product to & hide non-results
         for (i = 1; i <= shopLength; i++) {
-            console.log(shopLength)
+
             const productTags = $(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-tags").toLowerCase();
             // Load Results
             if (!productTags.includes(searchTerm)) {
@@ -37,6 +38,8 @@ const loadNavSearch = () => {
     } else {
         $(".card-search").hide();
     }
+
+    console.log("Fire LoadNavSearch")
 }
 
 
@@ -195,7 +198,7 @@ $(".shop-display-sort select").change(function () {
 
 // Insert Products in Store:
 const loadShopProducts = () => {
-
+    let shopLength = 0;
     // JSON
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -207,6 +210,7 @@ const loadShopProducts = () => {
 
             // Insert HTML
             for (i = 0; i < productKeys.length; i++) {
+                shopLength++;
                 // Get product details
                 const productID = productKeys[i];
                 const product = response[productID];
@@ -236,8 +240,14 @@ const loadShopProducts = () => {
 
         }
     };
-    xhttp.open("GET", "./assets/js/products.json", true);
+    xhttp.open("GET", "./assets/js/products.json", false);
     xhttp.send();
+
+    console.log("Shop Products Loaded");
+    console.log(shopLength);
+    loadNavSearch();
+    loadFilterColors();
+    loadFilterPrice();
 }
 
 // Insert Products in Product Page:
@@ -347,7 +357,6 @@ const loadHomeProducts = () => {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             let response = JSON.parse(this.responseText);
-
             // Get Object Keys
             const productKeys = Object.keys(response);
 
@@ -402,12 +411,9 @@ if (window.location.pathname == "/produk.html") {
 }
 
 if (window.location.pathname == "/winkel.html") {
-    console.log("This is Shop");
     loadShopProducts();
 }
 
 $(document).ready(function () {
-    loadNavSearch();
-    loadFilterColors();
-    loadFilterPrice();
+
 });
