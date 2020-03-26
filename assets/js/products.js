@@ -1,31 +1,3 @@
-// Shop Page Search, Sort & Filter
-
-// SEARCH
-
-// Search in current results for string included in product name
-// const instantSearch = (term) => {
-
-//     if (term == "") {
-//         $(`.shop-product-grid a`).removeClass("product-hide");
-//     } else {
-//         // Get shop length 
-//         const shopLength = $(".shop-product-grid").children().length;
-
-//         for (i = 1; i <= shopLength; i++) {
-//             const productName = $(`.shop-product-grid a:nth-child(${i}) .product-name`).html().toLowerCase();
-//             // $(`.shop-product-grid a:nth-child(${i})`).hide()
-//             if (!productName.includes(term.toLowerCase())) {
-//                 $(`.shop-product-grid a:nth-child(${i})`).addClass("product-hide");
-//             }
-//         }
-//     }
-// }
-
-// // (fire instant search on every keystroke)
-// $("#instant-search").on("input", function () {
-//     instantSearch($(this).val());
-// });
-
 // Nav Search Bar
 const loadNavSearch = () => {
     // Get Search Term
@@ -46,7 +18,7 @@ const loadNavSearch = () => {
 
             // Load Results
             if (!productTags.includes(searchTerm)) {
-                $(`.shop-product-grid a:nth-child(${i})`).hide()
+                $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-search")
             } else {
                 resultsCount++
             }
@@ -70,7 +42,8 @@ const loadNavSearch = () => {
 //  (Run nav load search results on document load)
 $(document).ready(function () {
     loadNavSearch();
-    loadFilters();
+    loadFilterColors();
+    loadFilterPrice();
 });
 
 // CLear Nav Search
@@ -80,30 +53,112 @@ $(".card-search .card-body i").click(() => {
 
 // FILTER
 
-$(".filter-price-range").on("input", function () {
-    let priceLow = $(".filter-price-range").val();
-    console.log(priceLow)
-});
+// Filter Price
 
-const loadFilters = () => {
+const loadFilterPrice = () => {
+    // Get min max
+    const shopLength = $(".shop-product-grid").children().length;
+    let minPrice = 0;
+    let maxPrice = 0;
+    let currentPrice = 0;
+    let priceRange = [];
+
+    for (i = 1; i <= shopLength; i++) {
+        currentPrice = parseInt($(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-price"));
+        priceRange.push(currentPrice);
+        priceRange.sort(function (a, b) {
+            return a - b
+        });
+    }
+
+    minPrice = priceRange[0];
+    maxPrice = priceRange[priceRange.length - 1];
+
+    $("#slider-range").slider({
+        range: true,
+        min: minPrice,
+        max: maxPrice,
+        values: [minPrice, maxPrice],
+        slide: function (event, ui) {
+            $("#amount").val("R " + ui.values[0] + " - R " + ui.values[1]);
+
+            // Change products on slide
+            for (i = 1; i <= shopLength; i++) {
+                currentPrice = parseInt($(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-price"));
+                // Min Price
+                if (currentPrice < ui.values[0]) {
+                    $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-price")
+                } // Max Price
+                else if (currentPrice > ui.values[1]) {
+                    $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-price")
+                } else {
+                    $(`.shop-product-grid a:nth-child(${i})`).removeClass("filter-hide-price")
+                }
+            }
+        }
+    });
+    $("#amount").val("R " + $("#slider-range").slider("values", 0) +
+        " - R " + $("#slider-range").slider("values", 1));
+}
+
+
+
+
+
+
+// Filter Colors
+const loadFilterColors = () => {
     // Get shop length 
     const shopLength = $(".shop-product-grid").children().length;
     const productColors = [];
     let currentProduct;
     let currentColor;
 
+    // Insert Color Filter Options
     for (i = 1; i <= shopLength; i++) {
         currentProduct = $(`.shop-product-grid a:nth-child(${i}) template`);
-
         // Color
         currentColor = currentProduct.attr("data-product-color").toLowerCase();
         productColors.push(currentColor);
         $(".card-color .color-boxes").append(
-            `<div style="background-color:${currentColor}"></div>`
-        )
+            `<span style="background-color:${currentColor}"></span>`
+        );
     }
 }
 
+const adjustFilterColors = () => {
+    const shopLength = $(".shop-product-grid").children().length;
+    activeColorOptions = [];
+    let activeColor = "";
+    let productColor = "";
+
+    // Get Current Active Color Filter
+    for (i = 1; i <= $(".color-boxes").children().length; i++) {
+        if ($(`.color-boxes span:nth-child(${i})`).hasClass("active-color-filter")) {
+            activeColor = $(`.color-boxes span:nth-child(${i})`).attr("style");
+            activeColor = activeColor.slice(activeColor.indexOf(":") + 1);
+            activeColorOptions.push(activeColor);
+        }
+    }
+
+    console.log(activeColorOptions);
+
+    // Match Above against product colors
+    for (i = 1; i <= shopLength; i++) {
+        productColor = $(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-color");
+        if (activeColorOptions.length > 0 && activeColorOptions.indexOf(productColor) < 0) {
+            $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-color")
+        } else {
+            $(`.shop-product-grid a:nth-child(${i})`).removeClass("filter-hide-color")
+        }
+    }
+
+}
+
+$(document).on("click", ".card-color .color-boxes>span", function () {
+    $(this).toggleClass("active-color-filter");
+    adjustFilterColors();
+});
 
 
 // SORT 
@@ -168,6 +223,7 @@ if (window.location.pathname == "/winkel.html") {
                     <template data-product-tags="${product.name},${product.tags},${product.gender}"
                     data-product-color="${product.colorMain}"
                     data-product-sizes="${product.sizes}"
+                    data-product-price="${product.price}"
                     ></template>
                     <div class="product-image-container">
                     <img src="./assets/images/products/${productID}/1.png" alt="">
@@ -253,7 +309,7 @@ if (window.location.pathname == "/produk.html") {
             } else {
                 for (i = 0; i < sizes.length; i++) {
                     $(".product-page-sizes-buttons").append(
-                        `<button>${sizes[i]}</button>`
+                        `<span>${sizes[i]}</span>`
                     )
                 }
             }
@@ -342,3 +398,8 @@ if (window.location.pathname == "/index.html") {
     xhttp.send();
 
 }
+
+$(document).on("click", ".product-page-sizes-buttons >*", function () {
+    $(".active-size").toggleClass("active-size");
+    $(this).toggleClass("active-size");
+});

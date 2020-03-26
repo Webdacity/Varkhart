@@ -7,7 +7,7 @@
         "sizes": ["S", "M", "L", "XL", "2XL"],
         "material": ["100% Katoen"],
         "info": ["180g"],
-        "colorMain": ["Navy"],
+        "colorMain": ["navy"],
         "colors": ["#222F52", "#000"],
         "images": 2,
         "promo": "",
@@ -22,12 +22,12 @@
         "sizes": ["XS", "S", "M", "L", "XL", "2XL"],
         "material": ["100% Katoen"],
         "info": ["180g"],
-        "colorMain": ["White"],
+        "colorMain": ["white"],
         "colors": ["#FD32FD", "#000"],
         "images": 1,
         "promo": "",
         "home": true,
-        "tags": []
+        "tags": ["hemp", "t-hemp", "themp", "dames", "wit", "pink"]
 
     },
     "VH3": {
@@ -38,12 +38,12 @@
         "sizes": [],
         "material": "",
         "info": ["6 Paneel", "Verstelbaar"],
-        "colorMain": ["Grey"],
+        "colorMain": ["grey"],
         "colors": ["#525252", "#EAEAEA"],
         "images": 1,
         "promo": "Nuut",
         "home": true,
-        "tags": []
+        "tags": ["kep", "pet", "hoed", "unisex", "grys", "verstelbaar"]
 
     },
     "VH4": {
@@ -54,12 +54,12 @@
         "sizes": [],
         "material": "",
         "info": ["30 Blik"],
-        "colorMain": ["Black"],
+        "colorMain": ["black"],
         "colors": ["#1A1A1C", "#EAEAEA"],
         "images": 1,
         "promo": "",
         "home": true,
-        "tags": []
+        "tags": ["koel", "koud", "sak", "swart"]
 
     }
 

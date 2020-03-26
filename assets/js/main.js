@@ -30,11 +30,6 @@ $(document).ready(() => {
             $(this).children().toggleClass("far");
         }
     );
-
-    $(document).on("click", ".product-page-sizes-buttons button", function () {
-        $(".active-size").toggleClass("active-size");
-        $(this).toggleClass("active-size");
-    });
 });
 
 

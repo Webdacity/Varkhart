@@ -139,11 +139,10 @@
                                         <div id="collapsePrice" class="collapse" aria-labelledby="headingOne"
                                             data-parent="#accordionExample">
                                             <div class="card-body">
-                                                <form>
-                                                    <input type="number" placeholder="1" min="1">
-                                                    <span></span>
-                                                    <input type="number" placeholder="100">
-                                                </form>
+                                                <p>
+                                                    <input type="text" id="amount" readonly>
+                                                </p>
+                                                <div id="slider-range"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -169,7 +168,7 @@
                                     </div>
 
                                     <!-- Sizes -->
-                                    <div class="card card-color">
+                                    <!-- <div class="card card-sizes">
                                         <div class="card-header collapsed" data-toggle="collapse"
                                             data-target="#collapseSize" aria-expanded="true"
                                             aria-controls="collapseSize">
@@ -182,28 +181,25 @@
                                             data-parent="#accordionExample">
                                             <div class="card-body">
                                                 <div class="size-boxes">
-                                                    <button>
-                                                        XS
-                                                    </button>
-                                                    <button>
-                                                        S
-                                                    </button>
+                                                    <span>XS</span>
+                                                    <span>S</span>
+                                                    <span>M</span>
+                                                    <span>L</span>
+                                                    <span>XL</span>
+                                                    <span>XXL</span>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
 
-                        </div>
-                        <div class="filter-button">
-                            <button>FILTER</button>
                         </div>
                     </div>
 
                     <!-- Shop Product Grid -->
                     <div class="shop-products col-12 col-sm-9">
-                        <div class="shop-product-search row">
+                        <!-- <div class="shop-product-search row">
                             <div class="col-12">
                                 <i class="far fa-search"></i>
                                 <input id="instant-search" type="search" placeholder="Soek in resultate"
@@ -211,7 +207,7 @@
 
                             </div>
                         </div>
-                        <hr class="my-4">
+                        <hr class="my-4"> -->
                         <div class="row">
                             <div class="shop-product-display col-12 d-flex justify-content-end">
                                 <div class="shop-display-sort">
@@ -248,118 +244,10 @@
 
     </div> <!-- End Page Container-->
 
+
+
     <!-- Footer -->
-
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <h1>VARKHART</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque tenetur nisi eos aliquam
-                        pariatur
-                        at
-                        vero officia a vitae nobis qui necessitatibus ab consequatur iure veniam ullam laborum saepe
-                        sed
-                        quibusdam quos dicta, est nostrum! Neque vitae voluptas qui enim soluta </p>
-                    <h4>Skryf in vir ons nuusbrief:</h4>
-                    <p>Maak seker jy mis nooit enigiets van Varkhart nie!</p>
-                    <form class="form-inline">
-                        <div class="form-group">
-                            <input type="email" id="" placeholder="E-pos">
-                        </div>
-                        <button type="submit" class="">Skryf In</button>
-                    </form>
-                </div>
-                <div class="col-sm-6 footer-links">
-                    <div class="row justify-content-around">
-                        <div class="col-sm-6">
-                            <h6>Varkhart</h6>
-                            <span></span>
-                            <ul>
-                                <li>
-                                    <a href="">
-                                        <i class="fas fa-chevron-right"></i>
-                                        Vrae & Antwoorde
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <i class="fas fa-chevron-right"></i>
-                                        Ons Storie
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <i class="fas fa-chevron-right"></i>
-                                        Privaatbeleid
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <i class="fas fa-chevron-right"></i>
-                                        Terme & Voorwaardes
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-6">
-                            <h6>Kontak Ons</h6>
-                            <span></span>
-                            <ul>
-                                <li>
-                                    <a href="tel:074 059 5106">
-                                        <i class="fas fa-phone"></i>
-                                        074 059 5106
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="mailto:info@varkhart.co.za">
-                                        <i class="fas fa-paper-plane"></i>
-                                        info@varkhart.co.za
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <i class="fas fa-map-marker-alt"></i>
-
-
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-bottom container">
-            <div class="row justify-content-between">
-                <p>2020 © Varkhart </p>
-                <div class="footer-social">
-                    <a href="https://www.facebook.com/Varkhart/" target="blank">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="https://api.whatsapp.com/send?phone=27740595106&text=Hi%20Varkhart" target="blank">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
-                    <a href="https://www.instagram.com/varkhart/?hl=en" target="blank">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="m.me/Varkhart" target="blank">
-                        <i class="fab fa-facebook-messenger"></i>
-                    </a>
-                </div>
-            </div>
-
-
-        </div>
-    </footer>
+    <div id="footer"></div>
 
     <!-- Notification -->
     <div class="notification">
@@ -381,7 +269,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="./assets/js/main.js"></script>
     <script src="./assets/js/products.js"></script>
     <script src="./assets/js/storage.js"></script>
