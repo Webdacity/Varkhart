@@ -39,14 +39,7 @@ const loadNavSearch = () => {
     }
 }
 
-//  (Run nav load search results on document load)
-$(document).ready(function () {
-    if (window.location.pathname == "/winkel.html") {
-        loadNavSearch();
-        loadFilterColors();
-        loadFilterPrice();
-    }
-});
+
 
 // CLear Nav Search
 $(".card-search .card-body i").click(() => {
@@ -405,4 +398,13 @@ if (window.location.pathname == "/index.html") {
 $(document).on("click", ".product-page-sizes-buttons >*", function () {
     $(".active-size").toggleClass("active-size");
     $(this).toggleClass("active-size");
+});
+
+//  (Run nav load search results on document load)
+$(document).ready(function () {
+    if (window.location.pathname == "/winkel.html") {
+        loadNavSearch();
+        loadFilterColors();
+        loadFilterPrice();
+    }
 });
