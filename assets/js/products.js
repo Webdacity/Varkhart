@@ -195,7 +195,7 @@ $(".shop-display-sort select").change(function () {
 
 
 // Insert Products in Store:
-if (window.location.pathname == "/winkel.html") {
+const loadShopProducts = () => {
 
     // JSON
     let xhttp = new XMLHttpRequest();
@@ -245,7 +245,7 @@ if (window.location.pathname == "/winkel.html") {
 
 
 // Insert Products in Product Page:
-if (window.location.pathname == "/produk.html") {
+const loadProductPage = () => {
 
     // Get Product ID:
     let productID = window.location.hash; //Get Recipe ID
@@ -392,7 +392,6 @@ const loadHomeProducts = () => {
 
     xhttp.open("GET", "./assets/js/products.json", true);
     xhttp.send();
-    console.log("Home Products Loaded")
 }
 
 $(document).on("click", ".product-page-sizes-buttons >*", function () {
@@ -404,11 +403,15 @@ $(document).ready(function () {
 
     if (window.location.pathname == "/index.html" || window.location.pathname == "/") {
         loadHomeProducts();
-        console.log("This is home")
+    }
+
+    if (window.location.pathname == "/produk.html") {
+        loadProductPage();
     }
 
     if (window.location.pathname == "/winkel.html") {
         console.log("This is Shop");
+        loadShopProducts();
         loadNavSearch();
         loadFilterColors();
         loadFilterPrice();
