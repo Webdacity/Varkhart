@@ -224,7 +224,7 @@ const loadShopProducts = () => {
                     data-product-price="${product.price}"
                     ></template>
                     <div class="product-image-container">
-                    <img src="./assets/images/products/${productID}/1.png" alt="">
+                    <img src="./assets/images/products/${productID}/1-thumb.png" alt="">
                     </div>
                     <p class="product-name">${product.name}</p>
                     <p class="product-price">R ${product.price}</p>
@@ -371,7 +371,7 @@ const loadHomeProducts = () => {
                     `
                 <a class="col-10 offset-1 offset-sm-0 col-sm-6 col-md-3 product" href="./produk.html#${productID}" id="${productID}">
                     <div class="product-image-container">
-                        <img class="img-fluid" src="./assets/images/products/${productID}/1.png" alt="">
+                        <img class="img-fluid" src="./assets/images/products/${productID}/1-thumb.png" alt="">
                     </div>
                     <p class="product-name">${product.name}</p>
                     <p class="product-price">R ${product.price}</p>
