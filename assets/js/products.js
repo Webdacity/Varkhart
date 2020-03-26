@@ -10,13 +10,13 @@ const loadNavSearch = () => {
 
     // {Find products who's product tags match ~ searchterm}
     if (searchTerm !== null) {
-        console.log("There is a searchterm")
         const shopLength = $(".shop-product-grid").children().length;
         let resultsCount = 0;
         // Loop through every product to & hide non-results
         for (i = 1; i <= shopLength; i++) {
             console.log(shopLength)
             const productTags = $(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-tags").toLowerCase();
+            console.log(productTags)
 
             // Load Results
             if (!productTags.includes(searchTerm)) {
@@ -27,8 +27,6 @@ const loadNavSearch = () => {
         }
         // Check for no results
         if (resultsCount == 0) {
-            console.log("No Reults Match")
-
             $(`.shop-product-grid`).hide()
             $(`.shop-products-noresults`).fadeIn()
         }
