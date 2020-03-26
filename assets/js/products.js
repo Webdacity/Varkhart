@@ -392,7 +392,7 @@ if (window.location.pathname == "/index.html" || window.location.pathname == "/i
 
     xhttp.open("GET", "./assets/js/products.json", true);
     xhttp.send();
-
+    console.log("Home Products Loaded")
 }
 
 $(document).on("click", ".product-page-sizes-buttons >*", function () {
