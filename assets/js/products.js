@@ -12,8 +12,6 @@ const loadNavSearch = () => {
     if (searchTerm !== null) {
         const shopLength = $(".shop-product-grid").children().length;
         let resultsCount = 0;
-        console.log(searchTerm)
-        console.log(shopLength)
         // Loop through every product to & hide non-results
         for (i = 1; i <= shopLength; i++) {
             console.log(shopLength)
@@ -408,9 +406,11 @@ $(document).ready(function () {
 
     if (window.location.pathname == "/winkel.html") {
         console.log("This is Shop");
-        loadShopProducts();
-        loadNavSearch();
-        loadFilterColors();
-        loadFilterPrice();
+        loadShopProducts().then(function () {
+            loadNavSearch();
+            loadFilterColors();
+            loadFilterPrice();
+        });
+
     }
 });
