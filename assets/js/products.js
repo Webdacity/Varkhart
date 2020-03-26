@@ -350,7 +350,7 @@ if (window.location.pathname == "/produk.html") {
 
 
 // Insert Products in Home:
-if (window.location.pathname == "/index.html" || window.location.pathname == "/index.html") {
+if (window.location.pathname == "/index.html" || window.location.pathname == "") {
 
     // JSON
     let xhttp = new XMLHttpRequest();
