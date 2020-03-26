@@ -41,9 +41,11 @@ const loadNavSearch = () => {
 
 //  (Run nav load search results on document load)
 $(document).ready(function () {
-    loadNavSearch();
-    loadFilterColors();
-    loadFilterPrice();
+    if (window.location.pathname == "/winkel.html") {
+        loadNavSearch();
+        loadFilterColors();
+        loadFilterPrice();
+    }
 });
 
 // CLear Nav Search
@@ -121,7 +123,7 @@ const loadFilterColors = () => {
         currentColor = currentProduct.attr("data-product-color").toLowerCase();
         productColors.push(currentColor);
         $(".card-color .color-boxes").append(
-            `<span style="background-color:${currentColor}"></span>`
+            `<span style="background-color:${currentColor}" data-toggle="tooltip" data-placement="top" title="${currentColor}"></span>`
         );
     }
 }
@@ -219,7 +221,7 @@ if (window.location.pathname == "/winkel.html") {
 
                 // Insert HTML
                 $(".shop-product-grid").append(
-                    `<a class="col-sm-6 col-md-3 product" href="./produk.html#${productID}" id="${productID}" >
+                    `<a class="col-10 offset-1 offset-sm-0 col-sm-6 col-md-6 col-lg-4 col-xl-3 product" href="./produk.html#${productID}" id="${productID}" >
                     <template data-product-tags="${product.name},${product.tags},${product.gender}"
                     data-product-color="${product.colorMain}"
                     data-product-sizes="${product.sizes}"
@@ -375,7 +377,7 @@ if (window.location.pathname == "/index.html") {
                 // Insert HTML
                 $(".product-range").append(
                     `
-                <a class="col-sm-6 col-md-3 product" href="./produk.html#${productID}" id="${productID}">
+                <a class="col-10 offset-1 offset-sm-0 col-sm-6 col-md-3 product" href="./produk.html#${productID}" id="${productID}">
                     <div class="product-image-container">
                         <img class="img-fluid" src="./assets/images/products/${productID}/1.png" alt="">
                     </div>
@@ -384,9 +386,10 @@ if (window.location.pathname == "/index.html") {
                 </a>`
                 );
 
-                // Insert Product Tag
-                if (product.tag !== "") {
-                    $(`<span class="product-tag">${product.tag}</span>`).prependTo(`#${productID}.product`)
+
+                // Insert Product Promo
+                if (product.promo !== "") {
+                    $(`<span class="product-promo" data-product-promo="${product.promo}">${product.promo}</span>`).prependTo(`#${productID}`)
                 }
 
             }

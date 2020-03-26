@@ -40,6 +40,8 @@
 
     <!-- Internal -->
     <link rel="stylesheet" type="text/css" href="./assets/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="./assets/css/responsive.css" />
+
 
 </head>
 
@@ -85,7 +87,8 @@
     <section class="product-page-section">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-5 product-details d-flex justify-content-center">
+                <div
+                    class="order-sm-2 order-2 order-md-1 col-sm-12 col-md-6 col-lg-5 product-details d-flex justify-content-center mb-5 mb-lg-0">
                     <h1 class="product-page-name"></h1>
                     <div>
                         <h5 class="product-page-price"></h5>
@@ -98,18 +101,18 @@
                     </div>
                     <div class="product-cart-specs">
                         <div class="row">
-                            <div class="product-page-sizes col-6">
+                            <div class="product-page-sizes order-3 mt-3 mt-lg-0 col-12 order-lg-1 col-md-6 col-lg-6">
                                 <h4>Groottes</h4>
                                 <div class="heading-divider"></div>
                                 <div class="product-page-sizes-buttons">
                                 </div>
                             </div>
-                            <div class="product-page-gender col-3">
+                            <div class="product-page-gender order-1 order-lg-2 col-6 col-md-6 col-lg-3">
                                 <h4>Geslag</h4>
                                 <div class="heading-divider"></div>
                                 <p></p>
                             </div>
-                            <div class="product-page-gender col-3">
+                            <div class="product-page-gender order-2 order-lg-3 col-6 col-md-6 col-lg-3">
                                 <h4>Kleure</h4>
                                 <div class="heading-divider"></div>
                                 <div class="product-page-colours">
@@ -122,15 +125,11 @@
                         <h3>VOEG BY MANDJIE</h3>
                     </div>
                 </div>
-                <div class="col-7 product-gallery">
+                <div class="order-sm-1 col-sm-12 order-1 order-md-2 col-md-6 col-lg-7 product-gallery">
                     <div class="product-slick-container">
                         <div class="product-slick">
-                            <!-- <div class="product-slick-image-container">
-                                <img src="./assets/images/products/VH1/1.png" />
-                            </div>
-                            <div class="product-slick-image-container">
-                                <img src="./assets/images/products/VH1/2.png" />
-                            </div> -->
+
+                            <!-- Insert Slick -->
                         </div>
                     </div>
                 </div>
@@ -141,14 +140,6 @@
 
     <!-- Footer -->
     <div id="footer"></div>
-
-    <!-- Notification -->
-    <div class="notification">
-        <div>
-            <img src=" ./assets/images/logos/notifications.png" alt="">
-            <p> Notification Text</p>
-        </div>
-    </div>
 
 
     <!-- Scripts -->
@@ -161,10 +152,12 @@
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+    <script src="./assets/vendors/notify.js/notify.min.js"></script>
     <script src="./assets/js/main.js"></script>
     <script src="./assets/js/products.js"></script>
     <script src="./assets/js/cart.js"></script>
     <script src="./assets/js/storage.js"></script>
+
 
 
     <script>

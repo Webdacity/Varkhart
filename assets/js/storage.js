@@ -150,12 +150,12 @@ const addToCart = () => {
     localStorage.setItem("cart", JSON.stringify(currentCart));
     console.log("Cart Updated. New Cart: " + localStorage.getItem("cart"));
     updateCartCounter();
-    notify("Bygevoeg in Mandjie", true);
+    $.notify("Bygevoeg in Mandjie");
 }
 
 $(".product-add-cart").click(() => {
-    if (!$(".product-page-sizes-buttons > button").hasClass("active-size")) {
-        notify("Kies eers 'n grootte");
+    if (!$(".product-page-sizes-buttons > *").hasClass("active-size")) {
+        $.notify("Kies eers 'n Grootte");
     } else {
         addToCart();
     }
@@ -182,22 +182,25 @@ const deleteCartItem = (item) => {
     localStorage.setItem("cart", JSON.stringify(currentCart));
     updateCartCounter();
     showCart();
-    notify("Produk Verwyder", true);
+    $.notify("Produk Verwyder");
+
 }
 
-
-
-// Notification
-const notify = (text, sound) => {
-    var audio = new Audio('./assets/audio/deduction.ogg');
-    $(".notification p").html(text);
-    $(".notification").fadeIn(() => {
-        setTimeout(() => {
-            $(".notification").fadeOut();
-        }, 2000)
-    });
-    if (sound === true) {
-        audio.play();
+// Notify Defaults
+$.notify.addStyle("Varkhart", {
+    html: "<div> <img src='./assets/images/logos/notifications.png'><span data-notify-text/></div>",
+    classes: {
+        base: {
+            "color": "var(--beige)",
+            "background-color": "var(--brown)",
+            "padding": "5px 10px"
+        }
     }
 
-}
+})
+
+$.notify.defaults({
+    style: "Varkhart",
+    position: "right middle",
+    className: "base",
+});

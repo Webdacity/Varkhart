@@ -1,0 +1,30 @@
+/* Large */
+@media screen and (max-width:992px) {
+
+    /* Product Page */
+}
+
+/* Medium */
+@media screen and (max-width:769px) {
+
+    /* Product Page */
+    .product-details {
+        height: auto;
+        padding: 7.5vh 5% 15vh 5%;
+    }
+
+    .product-slick-image-container {
+        max-height: 75vh;
+    }
+
+    .product-slick {
+        padding-top: 5vh;
+    }
+}
+
+/* Small */
+@media screen and (max-width:576px) {
+
+    /* Product Page */
+
+}

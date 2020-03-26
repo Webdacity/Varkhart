@@ -36,10 +36,11 @@
 
     <!-- Internal -->
     <link rel="stylesheet" type="text/css" href="./assets/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="./assets/css/responsive.css" />
 
 </head>
 
-<body>
+<body class="shop-page-body">
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-md">
@@ -93,82 +94,79 @@
         <section class="shop-body">
             <div class="container">
                 <div class="row">
-                    <div class="col-12 col-sm-3 ">
-                        <div class="shop-filter">
+                    <div class="col-sm-12 col-md-4 col-lg-3 shop-filter">
 
-                            <div class="filter-heading">
-                                <h3>FILTER</h3>
-                                <!-- <label class="switch">
+                        <div class="filter-heading">
+                            <h3>FILTER</h3>
+                            <!-- <label class="switch">
                                     <input type="checkbox">
                                     <span class="slider round"></span>
                                 </label> -->
-                                <p>clear</p>
-                            </div>
+                            <p>clear</p>
+                        </div>
 
-                            <div class="filter-category">
-                                <div class="accordion" id="accordionExample">
+                        <div class="filter-category">
+                            <div class="accordion" id="accordionExample">
 
-                                    <!-- Soektog -->
-                                    <div class="card card-search">
-                                        <div class="card-header" data-toggle="collapse" data-target="#collapseSearch"
-                                            aria-expanded="true" aria-controls="collapseSearch">
-                                            <h5>
-                                                Soektog
-                                            </h5>
-                                            <i class="fas fa-caret-down"></i>
+                                <!-- Soektog -->
+                                <div class="card card-search">
+                                    <div class="card-header" data-toggle="collapse" data-target="#collapseSearch"
+                                        aria-expanded="true" aria-controls="collapseSearch">
+                                        <h5>
+                                            Soektog
+                                        </h5>
+                                        <i class="fas fa-caret-down"></i>
+                                    </div>
+                                    <div id="collapseSearch" class="collapse show" aria-labelledby="headingOne"
+                                        data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <input type="text" disabled>
+                                            <i class="far fa-times"></i>
                                         </div>
-                                        <div id="collapseSearch" class="collapse show" aria-labelledby="headingOne"
-                                            data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                <input type="text" disabled>
-                                                <i class="far fa-times"></i>
+                                    </div>
+                                </div>
+
+                                <!-- Price -->
+                                <div class="card card-price">
+                                    <div class="card-header collapsed" data-toggle="collapse"
+                                        data-target="#collapsePrice" aria-expanded="true" aria-controls="collapsePrice">
+                                        <h5>
+                                            Prys
+                                        </h5>
+                                        <i class="fas fa-caret-down"></i>
+                                    </div>
+                                    <div id="collapsePrice" class="collapse" aria-labelledby="headingOne"
+                                        data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <p>
+                                                <input type="text" id="amount" readonly>
+                                            </p>
+                                            <div id="slider-range"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Colour -->
+                                <div class="card card-color">
+                                    <div class="card-header collapsed" data-toggle="collapse"
+                                        data-target="#collapseColor" aria-expanded="true" aria-controls="collapseColor">
+                                        <h5>
+                                            Kleur
+                                        </h5>
+                                        <i class="fas fa-caret-down"></i>
+                                    </div>
+                                    <div id="collapseColor" class="collapse" aria-labelledby="headingOne"
+                                        data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="color-boxes">
+
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <!-- Price -->
-                                    <div class="card card-price">
-                                        <div class="card-header collapsed" data-toggle="collapse"
-                                            data-target="#collapsePrice" aria-expanded="true"
-                                            aria-controls="collapsePrice">
-                                            <h5>
-                                                Prys
-                                            </h5>
-                                            <i class="fas fa-caret-down"></i>
-                                        </div>
-                                        <div id="collapsePrice" class="collapse" aria-labelledby="headingOne"
-                                            data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                <p>
-                                                    <input type="text" id="amount" readonly>
-                                                </p>
-                                                <div id="slider-range"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Colour -->
-                                    <div class="card card-color">
-                                        <div class="card-header collapsed" data-toggle="collapse"
-                                            data-target="#collapseColor" aria-expanded="true"
-                                            aria-controls="collapseColor">
-                                            <h5>
-                                                Kleur
-                                            </h5>
-                                            <i class="fas fa-caret-down"></i>
-                                        </div>
-                                        <div id="collapseColor" class="collapse" aria-labelledby="headingOne"
-                                            data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                <div class="color-boxes">
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Sizes -->
-                                    <!-- <div class="card card-sizes">
+                                <!-- Sizes -->
+                                <!-- <div class="card card-sizes">
                                         <div class="card-header collapsed" data-toggle="collapse"
                                             data-target="#collapseSize" aria-expanded="true"
                                             aria-controls="collapseSize">
@@ -191,23 +189,13 @@
                                             </div>
                                         </div>
                                     </div> -->
-                                </div>
                             </div>
 
                         </div>
                     </div>
 
                     <!-- Shop Product Grid -->
-                    <div class="shop-products col-12 col-sm-9">
-                        <!-- <div class="shop-product-search row">
-                            <div class="col-12">
-                                <i class="far fa-search"></i>
-                                <input id="instant-search" type="search" placeholder="Soek in resultate"
-                                    aria-label="Search" />
-
-                            </div>
-                        </div>
-                        <hr class="my-4"> -->
+                    <div class="shop-products col-sm-12 col-md-8 col-lg-9">
                         <div class="row">
                             <div class="shop-product-display col-12 d-flex justify-content-end">
                                 <div class="shop-display-sort">
