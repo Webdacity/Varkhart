@@ -16,8 +16,6 @@ const loadNavSearch = () => {
         for (i = 1; i <= shopLength; i++) {
             console.log(shopLength)
             const productTags = $(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-tags").toLowerCase();
-            console.log(productTags)
-
             // Load Results
             if (!productTags.includes(searchTerm)) {
                 $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-search")
@@ -391,26 +389,25 @@ $(document).on("click", ".product-page-sizes-buttons >*", function () {
     $(this).toggleClass("active-size");
 });
 
+
 // ------------
 // LOADING
 
+if (window.location.pathname == "/index.html" || window.location.pathname == "/") {
+    loadHomeProducts();
+}
+
+if (window.location.pathname == "/produk.html") {
+    loadProductPage();
+}
+
+if (window.location.pathname == "/winkel.html") {
+    console.log("This is Shop");
+    loadShopProducts();
+}
+
 $(document).ready(function () {
-
-    if (window.location.pathname == "/index.html" || window.location.pathname == "/") {
-        loadHomeProducts();
-    }
-
-    if (window.location.pathname == "/produk.html") {
-        loadProductPage();
-    }
-
-    if (window.location.pathname == "/winkel.html") {
-        console.log("This is Shop");
-        loadShopProducts().then(function () {
-            loadNavSearch();
-            loadFilterColors();
-            loadFilterPrice();
-        });
-
-    }
+    loadNavSearch();
+    loadFilterColors();
+    loadFilterPrice();
 });
