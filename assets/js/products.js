@@ -400,15 +400,15 @@ $(document).on("click", ".product-page-sizes-buttons >*", function () {
     $(this).toggleClass("active-size");
 });
 
-//  (Run nav load search results on document load)
 $(document).ready(function () {
 
-    if (window.location.pathname == "/index.html" || window.location.pathname == "") {
+    if (window.location.pathname == "/index.html" || window.location.pathname == "/") {
         loadHomeProducts();
         console.log("This is home")
     }
 
     if (window.location.pathname == "/winkel.html") {
+        console.log("This is Shop");
         loadNavSearch();
         loadFilterColors();
         loadFilterPrice();
