@@ -12,7 +12,6 @@ const loadNavSearch = () => {
     if (searchTerm !== null) {
         const shopLength = $(".shop-product-grid").children().length;
         let resultsCount = 0;
-        console.log(shopLength)
         // Loop through every product to & hide non-results
         for (i = 1; i <= shopLength; i++) {
 
@@ -38,8 +37,6 @@ const loadNavSearch = () => {
     } else {
         $(".card-search").hide();
     }
-
-    console.log("Fire LoadNavSearch")
 }
 
 
@@ -138,8 +135,6 @@ const adjustFilterColors = () => {
             activeColorOptions.push(activeColor);
         }
     }
-
-    console.log(activeColorOptions);
 
     // Match Above against product colors
     for (i = 1; i <= shopLength; i++) {
@@ -242,9 +237,6 @@ const loadShopProducts = () => {
     };
     xhttp.open("GET", "./assets/js/products.json", false);
     xhttp.send();
-
-    console.log("Shop Products Loaded");
-    console.log(shopLength);
     loadNavSearch();
     loadFilterColors();
     loadFilterPrice();
@@ -413,7 +405,3 @@ if (window.location.pathname == "/produk.html") {
 if (window.location.pathname == "/winkel.html") {
     loadShopProducts();
 }
-
-$(document).ready(function () {
-
-});

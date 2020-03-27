@@ -30,8 +30,9 @@ $(document).ready(() => {
             $(this).children().toggleClass("far");
         }
     );
-});
 
+    updateCartCounter();
+});
 
 
 // Nav Search

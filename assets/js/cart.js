@@ -125,6 +125,10 @@ const checkoutCart = () => {
     loadPayButton();
 }
 
+$(document).ready(function () {
+    updateCartCounter();
+})
+
 const loadPayButton = () => {
 
 }

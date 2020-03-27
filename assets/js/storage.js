@@ -5,7 +5,7 @@ const notify = (text) => {
     $(".notify-bar").height("unset",
         setTimeout(() => {
             $(".notify-bar").height("0px")
-        }, 4000)
+        }, 3000)
     );
 }
 
@@ -90,7 +90,7 @@ const loadCart = () => {
             }
 
         }
-        xhttp.open("GET", "./assets/js/products.json", true);
+        xhttp.open("GET", "./assets/js/products.json", false);
         xhttp.send();
     }
 }
@@ -111,8 +111,6 @@ const updateCartCounter = () => {
     } else {
         $(".nav-cart-count").hide();
     }
-
-
 }
 
 // Cart Storage
@@ -126,7 +124,6 @@ const addToCart = () => {
     const productSize = $(".active-size").html();
 
     // Get Current Cart
-    console.log("before: " + localStorage.getItem("cart"));
     let currentCart = JSON.parse(localStorage.getItem("cart"));
 
     // Add new Item
@@ -141,7 +138,6 @@ const addToCart = () => {
         currentCart.push(newItem);
     }
     localStorage.setItem("cart", JSON.stringify(currentCart));
-    console.log("Cart Updated. New Cart: " + localStorage.getItem("cart"));
     updateCartCounter();
     notify("Bygevoeg in Mandjie");
 }
