@@ -31,7 +31,7 @@ const loadEmptyCart = () => {
 
 // Update Item Specific Totals
 function updateItemTotal(itemID, quantity) {
-    const price = $(`#${itemID}`).find(".cart-content-price span").html();
+    const price = $(`#${itemID}`).attr("data-cart-item-price");
     $(`#${itemID}`).find(".cart-content-total span").html(price * quantity);
 }
 

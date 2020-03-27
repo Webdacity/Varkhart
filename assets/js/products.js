@@ -219,7 +219,7 @@ const loadShopProducts = () => {
                 $(".shop-product-grid").append(
                     `<a class="col-10 offset-1 offset-sm-0 col-sm-6 col-md-6 col-lg-4 col-xl-3 product" href="./produk.html#${productID}" id="${productID}" >
                     <template data-product-tags="${product.name},${product.tags},${product.gender}"
-                    data-product-color="${product.colorMain}"
+                    data-product-color="${product.colorGroup}"
                     data-product-sizes="${product.sizes}"
                     data-product-price="${product.price}"
                     ></template>
@@ -313,7 +313,7 @@ const loadProductPage = () => {
             }
 
             // Colors
-            const colors = product.colors;
+            const colors = product.colorBlocks;
 
             if (colors.length == 0) {
                 $(".product-page-colours").remove();

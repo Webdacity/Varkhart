@@ -53,48 +53,36 @@ const loadCart = () => {
 
                     // Actual Cart
                     $(".cart-content-item-grid").append(
-                        ` <div class="cart-content-item row d-flex align-items-center" id="cart-item-${i+1}">
+                        `
+                    <div class="cart-content-item container d-flex align-items-center" id="cart-item-${i+1}"
+                        data-cart-item-price=${product.price}>
                         <template id=${productID}></template>
-                        <div class="col-3 col-md-4">
-                            <div class="col-md-12">
-                                <div class="row d-flex align-items-center">
-                                    <div class="col-sm-3 cart-content-image-container">
-                                        <img src="./assets/images/products/${productID}/1.png" alt=""
-                                            class="img-fluid">
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <a class="cart-content-item-name" href="./produk.html#${productID}">${product.name}</a>
-                                    </div>
-                                </div>
+                        <div class="4 col-md-1 cart-content-image-container">
+                            <img src="./assets/images/products/${productID}/1-thumb.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="col-md-3">
+                            <div class="d-flex flex-column">
+                                <a class="cart-content-item-name" href="./produk.html#${productID}">${product.name}</a>
+                                <small class="text-muted">${product.color} - ${cartArray[i].size}</small>
                             </div>
                         </div>
-                        <div class="col-9 col-md-8 d-flex">
-                            <div class="col-md-3">
-                                <p class="cart-content-price">
-                                    R <span>${product.price}</span>
-                                </p>
-                            </div>
-                            <div class="col-md-3">
-                                <p class="cart-content-size">
-                                ${cartArray[i].size}
-                                </p>
-                            </div>
-                            <div class="col-md-3">
+                        <div class="offset-md-0 col-md-8 d-flex align-items-center">
+                            <div class="col-md-3 offset-md-5">
                                 <div class="cart-content-quantity">
                                     <i class="far fa-minus minus"></i>
                                     <input type="number" value="1" disabled class="cart-content-quantity-input">
                                     <i class="far fa-plus plus"></i>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 mt-md-0">
                                 <p class="cart-content-total">
                                     R <span>${product.price}</span>
                                 </p>
                             </div>
                         </div>
                         <div class="cart-content-item-delete">
-                        <i class="fal fa-times"></i>
-                    </div>
+                            <i class="fal fa-times"></i>
+                        </div>
                     </div>`
                     );
                 }
