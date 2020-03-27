@@ -65,3 +65,12 @@ $(".search-bar").on("submit", function (event) {
     event.preventDefault();
     navSearch();
 });
+
+
+
+// Mobile Nav {
+$(".navbar-toggler").click(function () {
+    $(".mobile-nav").toggleClass("mobile-nav-open");
+    $(".navbar-toggler").toggleClass("navbar-toggler-open")
+
+})
