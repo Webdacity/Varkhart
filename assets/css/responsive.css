@@ -1,8 +1,5 @@
 /* Large */
-@media screen and (max-width:992px) {
-
-    /* Product Page */
-}
+@media screen and (max-width:992px) {}
 
 /* Medium */
 @media screen and (max-width:769px) {
@@ -19,6 +16,11 @@
 
     .product-slick {
         padding-top: 5vh;
+    }
+
+    /* Cart Page */
+    .cart-content-headings {
+        display: none;
     }
 }
 

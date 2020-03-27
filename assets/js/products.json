@@ -1,6 +1,6 @@
 {
     "VH1": {
-        "name": "Varkhart T-Hemp - Navy",
+        "name": "Varkhart T-Hemp",
         "price": 199,
         "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime laudantium esse provident voluptate dolorum porro velit doloribus, aliquam ipsam ab.",
         "gender": "Mans",
@@ -15,7 +15,7 @@
         "tags": ["hemp", "t-hemp", "themp", "mans", "navy"]
     },
     "VH2": {
-        "name": "Varkhart T-Hemp - Wit",
+        "name": "Varkhart T-Hemp",
         "price": 199,
         "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime laudantium esse provident voluptate dolorum porro velit doloribus, aliquam ipsam ab.",
         "gender": "Dames",
@@ -31,7 +31,7 @@
 
     },
     "VH3": {
-        "name": "Varkhart Keps - Grys",
+        "name": "Varkhart Keps",
         "price": 149,
         "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime laudantium esse provident voluptate dolorum porro velit doloribus, aliquam ipsam ab.",
         "gender": "Unisex",

@@ -1,5 +1,14 @@
 // UTILS
 
+const notify = (text) => {
+    $(".notify-bar p").html(text);
+    $(".notify-bar").height("unset",
+        setTimeout(() => {
+            $(".notify-bar").height("0px")
+        }, 4000)
+    );
+}
+
 // Clear Cart Storage
 const clearCart = () => {
     localStorage.clear();
@@ -46,44 +55,46 @@ const loadCart = () => {
                     $(".cart-content-item-grid").append(
                         ` <div class="cart-content-item row d-flex align-items-center" id="cart-item-${i+1}">
                         <template id=${productID}></template>
-                        <div class="col-sm-4">
-                            <div class="row d-flex align-items-center">
-                                <div class="col-sm-3">
-                                    <img src="./assets/images/products/${productID}/1.png" alt=""
-                                        class="img-fluid cart-content-image">
-                                </div>
-                                <div class="col-sm-9">
-                                    <a class="cart-content-item-name" href="./produk.html#${productID}">${product.name}</a>
+                        <div class="col-3 col-md-4">
+                            <div class="col-md-12">
+                                <div class="row d-flex align-items-center">
+                                    <div class="col-sm-3 cart-content-image-container">
+                                        <img src="./assets/images/products/${productID}/1.png" alt=""
+                                            class="img-fluid">
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <a class="cart-content-item-name" href="./produk.html#${productID}">${product.name}</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-2">
-                            <p class="cart-content-price">
-                                R <span>${product.price}</span>
-                            </p>
-                        </div>
-                        <div class="col-sm-1">
-                            <p class="cart-content-size">
-                               ${cartArray[i].size}
-                            </p>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="cart-content-quantity">
-                                <i class="far fa-minus minus"></i>
-                                <input type="number" value="1" disabled class="cart-content-quantity-input">
-                                <i class="far fa-plus plus"></i>
+                        <div class="col-9 col-md-8 d-flex">
+                            <div class="col-md-3">
+                                <p class="cart-content-price">
+                                    R <span>${product.price}</span>
+                                </p>
+                            </div>
+                            <div class="col-md-3">
+                                <p class="cart-content-size">
+                                ${cartArray[i].size}
+                                </p>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="cart-content-quantity">
+                                    <i class="far fa-minus minus"></i>
+                                    <input type="number" value="1" disabled class="cart-content-quantity-input">
+                                    <i class="far fa-plus plus"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <p class="cart-content-total">
+                                    R <span>${product.price}</span>
+                                </p>
                             </div>
                         </div>
-                        <div class="col-sm-2">
-                            <p class="cart-content-total">
-                                R <span>${product.price}</span>
-                            </p>
-                        </div>
-                        <div class="col-sm-1">
-                            <p class="cart-content-item-delete">
-                                <i class="fal fa-times"></i>
-                            </p>
-                        </div>
+                        <div class="cart-content-item-delete">
+                        <i class="fal fa-times"></i>
+                    </div>
                     </div>`
                     );
                 }
@@ -144,12 +155,13 @@ const addToCart = () => {
     localStorage.setItem("cart", JSON.stringify(currentCart));
     console.log("Cart Updated. New Cart: " + localStorage.getItem("cart"));
     updateCartCounter();
-    $.notify("Bygevoeg in Mandjie");
+    notify("Bygevoeg in Mandjie");
 }
 
 $(".product-add-cart").click(() => {
     if (!$(".product-page-sizes-buttons > *").hasClass("active-size")) {
-        $.notify("Kies eers 'n Grootte");
+        notify("Kies eers 'n Grootte!");
+        $(".product-page-sizes-buttons span").addClass("choose-size-flash")
     } else {
         addToCart();
     }
@@ -176,31 +188,10 @@ const deleteCartItem = (item) => {
     localStorage.setItem("cart", JSON.stringify(currentCart));
     updateCartCounter();
     showCart();
-    $.notify("Produk Verwyder");
+    notify("Produk Verwyder");
 
 }
 
-// Notify Defaults
-
-if (window.location.pathname == "/produk.html" || window.location.pathname == "/mandjie.html") {
-    $.notify.addStyle("Varkhart", {
-        html: "<div> <img src='./assets/images/logos/notifications.png'><span data-notify-text/></div>",
-        classes: {
-            base: {
-                "color": "var(--beige)",
-                "background-color": "var(--brown)",
-                "padding": "5px 10px"
-            }
-        }
-
-    })
-
-    $.notify.defaults({
-        style: "Varkhart",
-        position: "right middle",
-        className: "base",
-    });
-}
 
 $(document).ready(function () {
 
