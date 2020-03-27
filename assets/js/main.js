@@ -34,7 +34,24 @@ $(document).ready(() => {
     updateCartCounter();
 });
 
+// Update Cart Counter
 
+const updateCartCounter = () => {
+
+    let cartCount = 0;
+    if (localStorage.getItem("cart") != null) {
+        // Get Cart Count
+        cartCount = JSON.parse(localStorage.getItem("cart")).length;
+    }
+
+    if (cartCount > 0) {
+        $(".nav-cart-count").show();
+        $(".nav-cart-count").html(cartCount);
+    } else {
+        $(".nav-cart-count").hide();
+    }
+
+}
 // Nav Search
 
 

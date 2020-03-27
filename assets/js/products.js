@@ -358,23 +358,26 @@ const loadHomeProducts = () => {
                 let productID = productKeys[i];
                 let product = response[productID];
 
-                // Insert HTML
-                $(".product-range").append(
-                    `
-                <a class="col-10 offset-1 offset-sm-0 col-sm-6 col-md-3 product" href="./produk.html#${productID}" id="${productID}">
-                    <div class="product-image-container">
-                        <img class="img-fluid" src="./assets/images/products/${productID}/1-thumb.png" alt="">
-                    </div>
-                    <p class="product-name">${product.name}</p>
-                    <p class="product-price">R ${product.price}</p>
-                </a>`
-                );
+                if (product.home == true) {
+                    // Insert HTML
+                    $(".product-range").append(
+                        `
+                        <a class="col-10 offset-1 offset-sm-0 col-sm-6 col-md-3 product" href="./produk.html#${productID}" id="${productID}">
+                            <div class="product-image-container">
+                                <img class="img-fluid" src="./assets/images/products/${productID}/1-thumb.png" alt="">
+                            </div>
+                            <p class="product-name">${product.name}</p>
+                            <p class="product-price">R ${product.price}</p>
+                        </a>`
+                    );
 
 
-                // Insert Product Promo
-                if (product.promo !== "") {
-                    $(`<span class="product-promo" data-product-promo="${product.promo}">${product.promo}</span>`).prependTo(`#${productID}`)
+                    // Insert Product Promo
+                    if (product.promo !== "") {
+                        $(`<span class="product-promo" data-product-promo="${product.promo}">${product.promo}</span>`).prependTo(`#${productID}`)
+                    }
                 }
+
 
             }
 
