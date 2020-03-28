@@ -69,8 +69,6 @@ $(".search-bar").on("submit", function (event) {
 
 
 // Mobile Nav {
-$(".navbar-toggler").click(function () {
+$(".navbar-toggler, .mobile-nav-close").click(function () {
     $(".mobile-nav").toggleClass("mobile-nav-open");
-    $(".navbar-toggler").toggleClass("navbar-toggler-open")
-
 })
