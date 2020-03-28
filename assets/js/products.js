@@ -368,14 +368,15 @@ const loadHomeProducts = () => {
                             </div>
                             <p class="product-name">${product.name}</p>
                             <p class="product-price">R ${product.price}</p>
+                            <div class="product-divider"></div>
                         </a>`
                     );
 
 
-                    // Insert Product Promo
-                    if (product.promo !== "") {
-                        $(`<span class="product-promo" data-product-promo="${product.promo}">${product.promo}</span>`).prependTo(`#${productID}`)
-                    }
+                    // // Insert Product Promo
+                    // if (product.promo !== "") {
+                    //     $(`<span class="product-promo" data-product-promo="${product.promo}">${product.promo}</span>`).prependTo(`#${productID}`)
+                    // }
                 }
 
 
