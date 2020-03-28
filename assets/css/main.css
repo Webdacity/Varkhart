@@ -166,7 +166,7 @@ html {
 }
 
 .mobile-nav {
-  height: 100vh;
+  height: 100%;
   max-height: 100vh;
   width: 0;
   position: fixed;
@@ -270,7 +270,7 @@ html {
 }
 
 .mobile-nav-open {
-  width: 90vw;
+  width: 90%;
 }
 
 
