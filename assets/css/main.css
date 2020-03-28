@@ -280,7 +280,7 @@ html {
 
 footer {
   background-color: var(--beige);
-  padding-top: 2.5%;
+  padding-top: 30px;
   color: var(--brown);
   width: 100%;
 }
@@ -312,13 +312,13 @@ footer form button {
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-size: 0.8rem;
-  margin-left: 20px;
 }
 
 footer form input {
   border: none;
   padding: 4px 12px;
   background-color: white;
+  margin-right: 20px;
 }
 
 footer form input:focus {
@@ -353,7 +353,8 @@ footer form input:focus {
   font-weight: 500;
   margin: 10px 0;
   font-size: 0.9rem;
-
+  padding: 5px 0;
+  margin: 0;
 }
 
 .footer-links li a {
@@ -384,7 +385,7 @@ footer form input:focus {
 
 .footer-social a {
   text-decoration: none;
-
+  margin-right: 10px;
 }
 
 
@@ -397,6 +398,7 @@ footer form input:focus {
   -moz-transition: 0.5s;
   -ms-transition: 0.5s;
   -o-transition: 0.5s;
+  margin: 0;
 }
 
 

@@ -112,4 +112,11 @@
         font-size: 4rem;
     }
 
+    /* Footer */
+
+    footer ul,
+    .footer-bottom p {
+        padding-left: 15px !important;
+    }
+
 }
