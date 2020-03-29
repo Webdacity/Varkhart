@@ -153,6 +153,84 @@ $(document).on("click", ".card-color .color-boxes>span", function () {
     adjustFilterColors();
 });
 
+// Filter Category
+
+
+$(".card-category h6").click(function () {
+    if ($(this).hasClass("active-category-filter")) {
+        $(".card-category h6").removeClass("active-category-filter");
+        $(this).children().first().addClass("fal fa-square");
+        $(this).children().first().removeClass("fas fa-check-square");
+    } else {
+        $(".card-category h6").removeClass("active-category-filter");
+        $(this).addClass("active-category-filter");
+        $(".card-category h6 i").removeClass("fas fa-check-square");
+        $(".card-category h6 i").addClass("fal fa-square");
+        $(this).children().first().removeClass("fal fa-square");
+        $(this).children().first().addClass("fas fa-check-square");
+    }
+    filterCategories();
+});
+
+const filterCategories = () => {
+    const shopLength = $(".shop-product-grid").children().length;
+    let activeCategory = "";
+    let productCategory = "";
+    let productGender = "";
+
+    activeCategoryOption = $(".active-category-filter span").html();
+
+    // Match Above against product catgories
+    for (i = 1; i <= shopLength; i++) {
+        productGender = $(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-gender");
+        productCategory = $(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-category");
+        console.log(productGender, productCategory);
+
+        switch (activeCategoryOption) {
+            case undefined:
+                $(`.shop-product-grid a:nth-child(${i})`).removeClass("filter-hide-category");
+                break;
+            case "Bybehore":
+                if (productCategory !== "Bybehore") {
+                    $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-category");
+                } else {
+                    $(`.shop-product-grid a:nth-child(${i})`).removeClass("filter-hide-category");
+                }
+                break;
+            case "Mans":
+                if (productGender !== "Mans") {
+                    $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-category")
+                } else {
+                    $(`.shop-product-grid a:nth-child(${i})`).removeClass("filter-hide-category");
+                }
+                break;
+            case "Dames":
+                if (productGender !== "Dames") {
+                    $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-category");
+                } else {
+                    $(`.shop-product-grid a:nth-child(${i})`).removeClass("filter-hide-category");
+                }
+                break;
+            default:
+                break;
+        }
+
+
+        // if (productCategory !== "Bybehore" && activeCategoryOption == "Bybehore") {
+        //     $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-category");
+        // } else {
+        //     $(`.shop-product-grid a:nth-child(${i})`).removeClass("filter-hide-category");
+        //     console.log("hide");
+        // }
+    }
+}
+
+
+
+
+
+
+
 
 // SORT 
 
@@ -217,6 +295,8 @@ const loadShopProducts = () => {
                     data-product-color="${product.colorGroup}"
                     data-product-sizes="${product.sizes}"
                     data-product-price="${product.price}"
+                    data-product-gender="${product.gender}"
+                    data-product-category="${product.category}"
                     ></template>
                     <div class="product-image-container">
                     <img src="./assets/images/products/${productID}/1-thumb.png" alt="">

@@ -71,4 +71,5 @@ $(".search-bar").on("submit", function (event) {
 // Mobile Nav {
 $(".navbar-toggler, .mobile-nav-close").click(function () {
     $(".mobile-nav").toggleClass("mobile-nav-open");
+    $("body, html").toggleClass("nav-no-scroll");
 })

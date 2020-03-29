@@ -13,7 +13,9 @@
         "images": 2,
         "promo": "",
         "home": true,
-        "tags": ["hemp", "t-hemp", "themp", "mans", "navy"]
+        "tags": ["hemp", "t-hemp", "themp", "mans", "navy"],
+        "category": "Hemde",
+        "subCategory": "T-Hemde"
     },
     "VH2": {
         "name": "Varkhart T-Hemp",
@@ -29,7 +31,9 @@
         "images": 1,
         "promo": "",
         "home": true,
-        "tags": ["hemp", "t-hemp", "themp", "dames", "wit", "pink"]
+        "tags": ["hemp", "t-hemp", "themp", "dames", "wit", "pink"],
+        "category": "Hemde",
+        "subCategory": "T-Hemde"
 
     },
     "VH3": {
@@ -46,7 +50,9 @@
         "images": 1,
         "promo": "Nuut",
         "home": true,
-        "tags": ["kep", "pet", "hoed", "unisex", "grys", "verstelbaar"]
+        "tags": ["kep", "pet", "hoed", "unisex", "grys", "verstelbaar"],
+        "category": "Bybehore",
+        "subCategory": ""
 
     },
     "VH4": {
@@ -63,7 +69,9 @@
         "images": 1,
         "promo": "",
         "home": true,
-        "tags": ["koel", "koud", "sak", "swart"]
+        "tags": ["koel", "koud", "sak", "swart"],
+        "category": "Bybehore",
+        "subCategory": ""
 
     }
 
