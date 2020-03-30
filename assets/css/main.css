@@ -1168,6 +1168,14 @@ input:checked+.slider:before {
 
 /* PRODUCT PAGE */
 
+.product-page .navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
+
 .product-page-section {
   min-height: 100vh;
   position: relative;

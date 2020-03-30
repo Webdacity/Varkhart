@@ -46,6 +46,10 @@
         padding-top: 5vh;
     }
 
+    .product-page .navbar {
+        position: unset;
+    }
+
     /* Cart Page */
     .cart-content-headings {
         display: none;
