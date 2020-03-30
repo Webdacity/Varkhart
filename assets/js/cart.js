@@ -182,9 +182,9 @@ const loadCart = () => {
                     <div class="cart-content-item container d-flex align-items-center" id="cart-item-${i+1}"
                         data-cart-item-price=${product.price}>
                         <template id=${productID}></template>
-                        <a class="4 col-md-1 cart-content-image-container" href="./produk.html#${productID}">
+                        <div class="4 col-md-1 cart-content-image-container">
                             <img src="./assets/images/products/${productID}/1-thumb.png" alt="Varkhart Cart Item" class="img-fluid">
-                        </a>
+                        </div>
                         <div class="col-md-3">
                             <div class="d-flex flex-column">
                                 <a class="cart-content-item-name" href="./produk.html#${productID}">${product.name}</a>
