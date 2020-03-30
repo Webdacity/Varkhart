@@ -299,7 +299,7 @@ const loadShopProducts = () => {
                     data-product-category="${product.category}"
                     ></template>
                     <div class="product-image-container">
-                    <img src="./assets/images/products/${productID}/1-thumb.png" alt="">
+                    <img src="./assets/images/products/${productID}/1-thumb.png" alt="Varhart Product ${productID} - ${product.name}">
                     </div>
                     <p class="product-name">${product.name}</p>
                     <p class="product-price">R ${product.price}</p>
@@ -402,7 +402,7 @@ const loadProductPage = () => {
                 $(".product-slick").append(
                     `
                     <div class="product-slick-image-container">
-                    <img src="./assets/images/products/${productID}/${i+1}.png" />
+                    <img src="./assets/images/products/${productID}/${i+1}.png" alt="Varkhart Product Slide - ${productID}"/>
                     </div>
                     `
                 )
@@ -413,6 +413,11 @@ const loadProductPage = () => {
                 slidesToScroll: 1,
                 arrows: false,
             })
+
+            // Hide arrows if 1 image
+            if ($(".slick-track").children().length <= 1) {
+                $(".slick-arrow").hide();
+            }
 
         }
     };
@@ -444,7 +449,7 @@ const loadHomeProducts = () => {
                         `
                         <a class="col-10 offset-1 offset-sm-0 col-sm-6 col-md-3 product" href="./produk.html#${productID}" id="${productID}">
                             <div class="product-image-container">
-                                <img class="img-fluid" src="./assets/images/products/${productID}/1-thumb.png" alt="">
+                                <img class="img-fluid" src="./assets/images/products/${productID}/1-thumb.png" alt="Varkhart Bestseller Product - ${productID}">
                             </div>
                             <p class="product-name">${product.name}</p>
                             <p class="product-price">R ${product.price}</p>
@@ -489,3 +494,16 @@ if (window.location.pathname == "/produk.html") {
 if (window.location.pathname == "/winkel.html") {
     loadShopProducts();
 }
+
+
+
+
+// SLICK
+
+// SLick Arrows
+$("#slick-next").click(() => {
+    $('.product-slick').slick("slickNext");
+})
+$("#slick-prev").click(() => {
+    $('.product-slick').slick("slickPrev");
+})
