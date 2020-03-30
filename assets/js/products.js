@@ -48,6 +48,11 @@ $(".card-search .card-body i").click(() => {
 
 // FILTER
 
+// CLear Filter
+$(".filter-heading i").click(() => {
+    location.replace("./winkel.html")
+})
+
 // Filter Price
 
 const loadFilterPrice = () => {
@@ -148,8 +153,9 @@ const adjustFilterColors = () => {
 
 }
 
-$(document).on("click", ".card-color .color-boxes>span", function () {
+$(document).on("click", ".card-color .color-boxes span", function () {
     $(this).toggleClass("active-color-filter");
+    $(`.color-boxes span`).not("active-color-filter").addClass("active-color-filter-not");
     adjustFilterColors();
 });
 

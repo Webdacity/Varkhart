@@ -292,3 +292,8 @@ $(document).ready(function () {
         updateCartCounter();
     }
 });
+
+$(".cart-heading i").click(() => {
+    clearCart();
+    location.reload();
+})

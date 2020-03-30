@@ -718,6 +718,11 @@ footer form input:focus {
   align-items: center;
 }
 
+.filter-heading i {
+  color: var(--brown);
+  cursor: pointer;
+}
+
 .filter-heading h3 {
   display: inline-block;
   color: var(--brown);
@@ -943,7 +948,7 @@ input:checked+.slider:before {
 .card-color .color-boxes>span {
   height: 20px;
   width: 20px;
-  margin-right: 15px;
+  margin-right: 20px;
   cursor: pointer;
   transition: 0.4s;
   -webkit-transition: 0.4s;
@@ -953,21 +958,18 @@ input:checked+.slider:before {
 }
 
 
-.card-color .color-boxes>span:hover {
-  transform: scale(1.1);
-  -webkit-transform: scale(1.1);
-  -moz-transform: scale(1.1);
-  -ms-transform: scale(1.1);
-  -o-transform: scale(1.1);
-}
-
 .color-boxes .active-color-filter {
   border: 2px solid var(--brown);
-  transform: scale(1.5);
-  -webkit-transform: scale(1.5);
-  -moz-transform: scale(1.5);
-  -ms-transform: scale(1.5);
-  -o-transform: scale(1.5);
+  transform: scale(1.4);
+  -webkit-transform: scale(1.4);
+  -moz-transform: scale(1.4);
+  -ms-transform: scale(1.4);
+  -o-transform: scale(1.4);
+  opacity: 1 !important;
+}
+
+.color-boxes .active-color-filter-not {
+  opacity: 0.6;
 }
 
 .card-sizes .size-boxes>span {
@@ -980,7 +982,7 @@ input:checked+.slider:before {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 10px;
+  margin-right: 20px;
   margin-bottom: 10px;
   transition: 0.4s;
   -webkit-transition: 0.4s;
@@ -1448,12 +1450,22 @@ input:checked+.slider:before {
 /* CART PAGE */
 
 .cart-section {
-  padding: 5% 0;
+  padding: 7.5vh 0;
   color: var(--brown);
   /* display: none; */
 }
 
 /* Cart Content */
+
+.cart-heading i {
+  cursor: pointer;
+  padding: 5px;
+
+}
+
+.cart-heading {
+  padding-bottom: 20px
+}
 
 .cart-content-headings {
   border-bottom: 2px solid var(--grey);

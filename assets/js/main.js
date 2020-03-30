@@ -11,6 +11,7 @@ $(document).ready(() => {
 
     $(".cart-content-item-delete i").hover(
         function () {
+            a
             $(this).toggleClass("fal");
             $(this).toggleClass("fas");
         },
