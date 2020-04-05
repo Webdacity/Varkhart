@@ -9,17 +9,7 @@ $(document).ready(() => {
 
     //  Animations
 
-    $(".cart-content-item-delete i").hover(
-        function () {
-            a
-            $(this).toggleClass("fal");
-            $(this).toggleClass("fas");
-        },
-        function () {
-            $(this).toggleClass("fas");
-            $(this).toggleClass("fal");
-        }
-    );
+
 
     $(".search-button").hover(
         function () {
@@ -56,7 +46,7 @@ const updateCartCounter = () => {
 // Nav Search
 
 
-const navSearch = (e) => {
+const navSearch = () => {
     const searchTerm = $(".search-bar input").val();
     console.log("search :" + searchTerm)
     location.replace(`./winkel.html?${searchTerm}`);

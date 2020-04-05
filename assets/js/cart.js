@@ -297,3 +297,15 @@ $(".cart-heading i").click(() => {
     clearCart();
     location.reload();
 })
+
+
+$(".cart-content-item-delete i").hover(
+    function () {
+        $(this).toggleClass("fal");
+        $(this).toggleClass("fas");
+    },
+    function () {
+        $(this).toggleClass("fas");
+        $(this).toggleClass("fal");
+    }
+);

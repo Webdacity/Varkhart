@@ -416,22 +416,6 @@ footer form input:focus {
 
 
 /* Notifications */
-
-.notifyjs-Varkhart-base {
-  display: flex;
-  align-items: center;
-}
-
-.notifyjs-Varkhart-base img {
-  width: 2rem;
-}
-
-.notifyjs-Varkhart-base span {
-  margin: 0;
-  font-size: 1.1rem;
-  padding-left: 20px;
-}
-
 .notify-bar {
   background-color: var(--brown);
   color: var(--beige);
@@ -904,6 +888,10 @@ input:checked+.slider:before {
 
 .filter-category .card-price form input[type=number] {
   -moz-appearance: textfield;
+}
+
+.card-search {
+  display: none;
 }
 
 .card-search .card-body {

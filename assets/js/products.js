@@ -33,6 +33,7 @@ const loadNavSearch = () => {
 
     // (Insert searchterm in filters)
     if (searchTerm != null) {
+        $(".card-search").css("display", "flex");
         $(".card-search input").val(`-  "${searchTerm}"`);
     } else {
         $(".card-search").hide();
@@ -297,7 +298,7 @@ const loadShopProducts = () => {
                 // Insert HTML
                 $(".shop-product-grid").append(
                     `<a class="col-10 offset-1 offset-sm-0 col-sm-6 col-md-6 col-lg-4 col-xl-3 product" href="./produk.html#${productID}" id="${productID}" >
-                    <template data-product-tags="${product.name},${product.tags},${product.gender}"
+                    <template data-product-tags="${product.name},${product.category},${product.subcategory},${product.color},${product.gender},${product.colorGroup},${product.material}"
                     data-product-color="${product.colorGroup}"
                     data-product-sizes="${product.sizes}"
                     data-product-price="${product.price}"
