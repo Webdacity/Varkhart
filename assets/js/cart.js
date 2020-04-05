@@ -33,6 +33,20 @@ const loadEmptyCart = () => {
 function updateItemTotal(itemID, quantity) {
     const price = $(`#${itemID}`).attr("data-cart-item-price");
     $(`#${itemID}`).find(".cart-content-total span").html(price * quantity);
+
+    // Update Cart Storage Quantity
+    let currentCart = JSON.parse(localStorage.getItem("cart"));
+    let currentProductID = $(`#${itemID} template`).attr("id");
+    let currentProductSize = $(`#${itemID} .cart-content-size`).html();
+    let currentProductQuant = parseInt($(`#${itemID} .cart-content-quantity-input`).val());
+    currentCart.forEach(item => {
+        if (item.id == currentProductID && item.size == currentProductSize) {
+            console.log("found")
+            item.quantity = currentProductQuant;
+        }
+    });
+    localStorage.setItem("cart", JSON.stringify(currentCart));
+    showCart()
 }
 
 
@@ -47,6 +61,7 @@ $(document).on("click", ".cart-content-quantity .plus", function () {
     updateItemTotal(currentID, quant);
     calcCartTotal();
 });
+
 
 $(document).on("click", ".cart-content-quantity .minus", function () {
     const currentID = getCartItemID($(this));
@@ -102,7 +117,8 @@ const checkoutCart = () => {
     const cartTotal = parseInt($(".cart-content-totals span").html());
     for (i = 1; i <= cartLength; i++) {
         const itemName = $(`#cart-item-${i} .cart-content-item-name`).html();
-        const itemColorSize = $(`#cart-item-${i} .cart-content-color-size`).html();
+        const itemSize = $(`#cart-item-${i} .cart-content-size`).html();
+        const itemColor = $(`#cart-item-${i} .cart-content-color`).html();
         const itemQuant = $(`#cart-item-${i} .cart-content-quantity-input`).val();
         const itemPrice = $(`#cart-item-${i} .cart-content-total span`).html();
         const itemId = $(`#cart-item-${i} template`).attr("id");
@@ -111,7 +127,7 @@ const checkoutCart = () => {
             <li class="list-group-item d-flex justify-content-between lh-condensed">
                  <div>
                  <a class="my-0" href="./produk.html#${itemId}">${itemName}</a>
-                  <small class=text-muted">${itemQuant} | ${itemColorSize}</small>
+                  <small class=text-muted">${itemQuant} | ${itemSize} ${itemColor}</small>
               </div>
               <p>R ${itemPrice}</p>
             </li>
@@ -130,7 +146,7 @@ const notify = (text) => {
     $(".notify-bar").height("unset",
         setTimeout(() => {
             $(".notify-bar").height("0px")
-        }, 3000)
+        }, 2000)
     );
 }
 
@@ -188,7 +204,10 @@ const loadCart = () => {
                         <div class="col-md-3">
                             <div class="d-flex flex-column">
                                 <a class="cart-content-item-name" href="./produk.html#${productID}">${product.name}</a>
-                                <small class="text-muted cart-content-color-size">${cartArray[i].size}  | ${product.color} </small>
+                                <div>
+                                <small class="text-muted cart-content-size">${cartArray[i].size}</small>
+                                <small class="text-muted cart-content-color">| ${product.color}</small>
+                                </div>
                             </div>
                         </div>
                         <div class="offset-md-0 col-md-8 d-flex align-items-center">
@@ -224,6 +243,19 @@ const loadCart = () => {
 
 // Cart Storage
 
+const searchCart = (productID, productSize) => {
+    let currentCart = JSON.parse(localStorage.getItem("cart"));
+    let searchResults = 0;
+    if (currentCart !== null) {
+        currentCart.forEach(item => {
+            if (item.id == productID && item.size == productSize) {
+                searchResults++
+            }
+        })
+    }
+    return searchResults
+}
+
 const addToCart = () => {
     // Get Product ID:
     let productID = window.location.hash; //Get Recipe ID
@@ -235,20 +267,28 @@ const addToCart = () => {
     // Get Current Cart
     let currentCart = JSON.parse(localStorage.getItem("cart"));
 
-    // Add new Item
-    let newItem = {
-        id: productID,
-        size: productSize
+    // Check if already in cart
+    if (searchCart(productID, productSize) > 0) {
+        notify("Produk is klaar n mandjie - Verander hoeveelheid in mandjie")
+    } else {
+        // Add new Item
+        let newItem = {
+            id: productID,
+            size: productSize,
+            quantity: 1
+        }
+
+        if (currentCart == null) {
+            currentCart = [newItem];
+        } else {
+            currentCart.push(newItem);
+        }
+        localStorage.setItem("cart", JSON.stringify(currentCart));
+        updateCartCounter();
+        notify("Bygevoeg in Mandjie");
     }
 
-    if (currentCart == null) {
-        currentCart = [newItem];
-    } else {
-        currentCart.push(newItem);
-    }
-    localStorage.setItem("cart", JSON.stringify(currentCart));
-    updateCartCounter();
-    notify("Bygevoeg in Mandjie");
+
 }
 
 $(".product-add-cart").click(() => {
@@ -309,3 +349,30 @@ $(".cart-content-item-delete i").hover(
         $(this).toggleClass("fal");
     }
 );
+
+
+// Send POST to backend for validation
+const validate = () => {
+    const cart = localStorage.getItem("cart");
+    $(".order-form [name='custom_str1']").val(
+        $(".order-form #order-straat-nommer").val() + ", " +
+        $(".order-form #order-straat-naam").val() + ", " +
+        $(".order-form #order-gebou-details").val() + ", " +
+        $(".order-form #order-woongebied").val() + ", " +
+        $(".order-form #order-stad").val() + ", " +
+        $(".order-form #order-provinsie").val() + "," +
+        $(".order-form #order-poskode").val()
+    );
+    $(".order-form [name='custom_str3']").val(cart);
+    $(".order-form").submit();
+
+    axios.post('https://varkhart-backend.herokuapp.com/orders/validate', {
+            cart: cart
+        })
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+}

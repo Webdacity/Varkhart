@@ -209,65 +209,47 @@
                         </div>
                         <hr class="mb-4">
 
-                        <!-- Payfast -->
-
-                        <form class="payfast-form" action="https://sandbox.payfast.co.za/eng/process" method="POST">
-
-                            <input type="hidden" name="merchant_id" value="10016549">
-                            <input type="hidden" name="merchant_key" value="sxou1f0t4mr2c">
-                            <input type="hidden" name="return_url" value="https://varkhart.netlify.com/sukses.html">
-                            <input type="hidden" name="cancel_url" value="https://varkhart.netlify.com/cancel.html">
-                            <input type="hidden" name="notify_url"
-                                value="https://webhook.site/bfaff410-9529-4956-a2d5-5fef45e15d08">
-                            <input type="hidden" name="name_first" value="Piet">
-                            <input type="hidden" name="name_last" value="Poggenpoel">
-                            <input type="hidden" name="email_address" value="arnovanstaden@gmail.com">
-                            <input type="hidden" name="cell_number" value="0823456789">
-                            <input type="hidden" name="m_payment_id" value="01AB">
-                            <input type="hidden" name="amount" value="100.00">
-                            <input type="hidden" name="item_name" value="Test Item">
-                            <input type="hidden" name="item_description" value="A test product">
-                            <input type="hidden" name="email_confirmation" value="1">
-                            <input type="hidden" name="confirmation_address" value="admin@webdacity.co.za">
-                            <input type="hidden" name="custom_str1" value="21 Goseberry Welgeveonden">
-                            <input type="hidden" name="custom_int1" value="0784225564">
-
-
-                            <button class="btn btn-lg btn-block" type="submit">
-                                Betaal deur Payfast
-                            </button>
-                        </form>
+                        <button class="btn btn-lg btn-block pay-button" type="submit" onclick="validate()">
+                            Betaal deur Payfast
+                        </button>
                     </div>
 
                     <!-- Details -->
                     <div class="col-md-8 order-md-1">
                         <h4 class="mb-3">Kontak Details</h4>
-                        <form class="needs-validation" novalidate="">
+                        <form class="order-form" action="https://sandbox.payfast.co.za/eng/process" method="POST">
 
-                            <div class="mb-3">
-                                <label for="email">E-pos Adres</label>
-                                <input type="email" class="form-control" id="email" placeholder="you@example.com">
-                                <div class="invalid-feedback">
-                                    'n Geldige e-pos word vereis vir aflewerings kontak doeleindes
+                            <div class="row">
+                                <div class="col-md-7 mb-3">
+                                    <label>E-pos Adres</label>
+                                    <input type="email" class="form-control" placeholder="you@example.com"
+                                        name="email_address">
+                                    <div class="invalid-feedback">
+                                        'n Geldige e-pos word vereis vir aflewerings kontak doeleindes
+                                    </div>
                                 </div>
-                                <small id="emailHelp" class="form-text text-muted">Ons sal nooit jou e-pos vir enige
-                                    ander doel gebruik nie</small>
-
+                                <div class="col-md-5 mb-3">
+                                    <label>Selfoon Nommer</label>
+                                    <input type="tel" class="form-control" placeholder="0781234567" name="cell_number">
+                                    <div class="invalid-feedback">
+                                        'n Geldige e-pos word vereis vir aflewerings kontak doeleindes
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="firstName">Naam</label>
-                                    <input type="text" class="form-control" id="firstName" placeholder="" value=""
-                                        required="">
+                                    <label>Naam</label>
+                                    <input type="text" class="form-control" name="name_first" placeholder="Piet"
+                                        value="" required>
                                     <div class="invalid-feedback">
                                         'n Geldige naam word vereis.
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="lastName">Van</label>
-                                    <input type="text" class="form-control" id="lastName" placeholder="" value=""
-                                        required="">
+                                    <input type="text" class="form-control" name="name_last" placeholder="Legend"
+                                        value="" required>
                                     <div class="invalid-feedback">
                                         'n Geldige van word vereis.
                                     </div>
@@ -276,18 +258,21 @@
 
                             <div class="row">
                                 <div class="col-md-3 mb-3">
-                                    <label for="address2">Straatnommer</label>
-                                    <input type="text" class="form-control field" id="street_number" placeholder="123">
+                                    <label>Straatnommer</label>
+                                    <input type="number" class="form-control field" id="order-straat-nommer"
+                                        placeholder="123">
                                 </div>
                                 <div class="col-md-9 mb-3">
-                                    <label for="address2">Straatnaam</label>
-                                    <input type="text" class="form-control field" id="route" placeholder="Hoek Straat">
+                                    <label>Straatnaam</label>
+                                    <input type="text" class="form-control field" placeholder="Hoek Straat"
+                                        id="order-straat-naam">
                                 </div>
                             </div>
 
                             <div class="mb-3">
                                 <label for="">Woongebied</label>
-                                <input type="text" class="form-control field" id="" placeholder="Waterkloof">
+                                <input type="text" class="form-control field" id="order-woongebied"
+                                    placeholder="Waterkloof">
                             </div>
 
                             <div class="mb-3">
@@ -295,20 +280,20 @@
                                         (flat/woonstelblok/kompleks ens.)
                                     </span> </label>
                                 <input type="text" class="form-control" placeholder="Flat 24 Jacaranda Villas"
-                                    required="">
+                                    id="order-gebou-details">
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationCustom03">Stad / Dorp</label>
-                                    <input type="text" class="form-control field" id="locality" placeholder="Pretoria"
+                                    <label>Stad / Dorp</label>
+                                    <input type="text" class="form-control field" placeholder="Pretoria" id="order-stad"
                                         required>
                                     <div class="invalid-feedback">
                                         'n Geldige stad/dorp word vereis. </div>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="state">Provinsie</label>
-                                    <input type="text" class="form-control field" id="administrative_area_level_1"
+                                    <input type="text" class="form-control field" id="order-provinsie"
                                         placeholder="Gauteng" required>
                                     <div class="invalid-feedback">
                                         'n Geldige provinsie word vereis.
@@ -316,7 +301,7 @@
                                 </div>
                                 <div class="col-md-2 mb-3">
                                     <label for="zip">Poskode</label>
-                                    <input type="text" class="form-control" id="postal_code" placeholder="4321"
+                                    <input type="number" class="form-control" id="order-poskode" placeholder="4321"
                                         required="">
                                     <div class="invalid-feedback">
                                         'n Geldige poskode word vereis.
@@ -324,12 +309,25 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Afleweringsnotas <span class="text-muted"> -
+                                <label for="exampleFormControlTextarea1">Afleweringsnotas <span class="text-muted">
+                                        -
                                         Optioneel</span> </label> </label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                    name="custom_str2"></textarea>
                             </div>
-
-
+                            <input type="hidden" name="item_name" value="Varkhart Mandjie">
+                            <input type="hidden" name="item_description" value="A test product">
+                            <input type="hidden" name="amount" value="100.00">
+                            <input type="hidden" name="custom_str1" value="">
+                            <input type="hidden" name="custom_str3" value="">
+                            <input type="hidden" name="merchant_id" value="10016549">
+                            <input type="hidden" name="merchant_key" value="sxou1f0t4mr2c">
+                            <input type="hidden" name="return_url" value="http://127.0.0.1:5500/winkel.html">
+                            <input type="hidden" name="cancel_url" value="http://127.0.0.1:5500/mandjie.html">
+                            <input type="hidden" name="notify_url"
+                                value="https://varkhart-backend.herokuapp.com/orders/complete">
+                            <input type="hidden" name="email_confirmation" value="1">
+                            <input type="hidden" name="confirmation_address" value="admin@webdacity.co.za">
                         </form>
                     </div>
                 </div>
@@ -359,6 +357,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./assets/js/main.js"></script>
     <script src="./assets/js/cart.js"></script>
 
