@@ -353,7 +353,8 @@ $(".cart-content-item-delete i").hover(
 
 // Send POST to backend for validation
 const validate = () => {
-    const cart = localStorage.getItem("cart");
+    const cart = JSON.parse(localStorage.getItem("cart"));
+    console.log(typeof (cart));
     $(".order-form [name='custom_str1']").val(
         $(".order-form #order-straat-nommer").val() + ", " +
         $(".order-form #order-straat-naam").val() + ", " +
@@ -363,16 +364,19 @@ const validate = () => {
         $(".order-form #order-provinsie").val() + "," +
         $(".order-form #order-poskode").val()
     );
-    $(".order-form [name='custom_str3']").val(cart);
-    $(".order-form").submit();
-
+    $(".order-form [name='item_description']").val(cart);
+    $(".order-form [name='custom_str3']").val($(".order-form #order-cell").val());
     axios.post('https://varkhart-backend.herokuapp.com/orders/validate', {
             cart: cart
         })
         .then(function (response) {
+            $(".order-form").submit();
             console.log(response);
         })
         .catch(function (error) {
             console.log(error);
         })
+    console.log(cart)
+
+
 }
