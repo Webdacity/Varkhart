@@ -352,7 +352,7 @@ $(".cart-content-item-delete i").hover(
 
 
 // Send POST to backend for validation
-const validate = () => {
+const sendOrder = () => {
     const cart = JSON.parse(localStorage.getItem("cart"));
     console.log(typeof (cart));
     $(".order-form [name='custom_str1']").val(
@@ -378,3 +378,17 @@ const validate = () => {
         })
     console.log(cart)
 }
+
+// Validate Form
+const validateForm = (formToVal, callback) => {
+    let form = document.getElementById(formToVal)
+    if (form.checkValidity() === false) {
+        console.log("Validation Fail")
+        event.preventDefault();
+        event.stopPropagation();
+    } else {
+        console.log("Validation Success")
+        callback();
+    }
+    form.classList.add('was-validated');
+};
