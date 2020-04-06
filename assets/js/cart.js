@@ -377,6 +377,4 @@ const validate = () => {
             console.log(error);
         })
     console.log(cart)
-
-
 }
