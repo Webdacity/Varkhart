@@ -658,7 +658,7 @@ footer form input:focus {
 .product-name {
   color: var(--brown);
   font-weight: 500;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .product-price {
@@ -1905,4 +1905,42 @@ input[type=number] {
   text-decoration: none;
   padding: 8px 15px;
   display: block;
+}
+
+
+/* Sukses Page */
+
+.sukses-section {
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: var(--brown);
+  text-align: center;
+}
+
+.sukses-section h1,
+.sukses-section h3,
+.sukses-section p {
+  padding: 20px 10%;
+}
+
+.sukses-section button {
+  border: none;
+  background-color: var(--brown);
+  color: var(--grey);
+  padding: 10px 20px;
+}
+
+.sukses-section button a {
+  color: var(--grey) !important;
+  padding: 10px 20px;
+}
+
+
+/* Privacy */
+
+.section-privacy {
+  padding-top: 15vh;
 }
