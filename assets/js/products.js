@@ -74,32 +74,48 @@ const loadFilterPrice = () => {
 
     minPrice = priceRange[0];
     maxPrice = priceRange[priceRange.length - 1];
+    $("#price-filter-min").val(minPrice);
+    $("#price-filter-max").val(maxPrice);
 
-    $("#slider-range").slider({
-        range: true,
-        min: minPrice,
-        max: maxPrice,
-        values: [minPrice, maxPrice],
-        slide: function (event, ui) {
-            $("#amount").val("R " + ui.values[0] + " - R " + ui.values[1]);
-
-            // Change products on slide
-            for (i = 1; i <= shopLength; i++) {
-                currentPrice = parseInt($(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-price"));
-                // Min Price
-                if (currentPrice < ui.values[0]) {
-                    $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-price")
-                } // Max Price
-                else if (currentPrice > ui.values[1]) {
-                    $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-price")
-                } else {
-                    $(`.shop-product-grid a:nth-child(${i})`).removeClass("filter-hide-price")
-                }
+    $(".price-filter-body input").change(function () {
+        for (i = 1; i <= shopLength; i++) {
+            currentPriceToFilter = parseInt($(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-price"));
+            if (currentPriceToFilter > maxPrice || currentPriceToFilter < minPrice) {
+                $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-price")
+            } else {
+                $(`.shop-product-grid a:nth-child(${i})`).removeClass("filter-hide-price")
             }
         }
     });
-    $("#amount").val("R " + $("#slider-range").slider("values", 0) +
-        " - R " + $("#slider-range").slider("values", 1));
+
+
+
+    // $("#slider-range").slider({
+    //     range: true,
+    //     min: minPrice,
+    //     max: maxPrice,
+    //     values: [minPrice, maxPrice],
+    //     slide: function (event, ui) {
+    //         $("#amount").val("R " + ui.values[0] + " - R " + ui.values[1]);
+
+    //         // Change products on slide
+    //         for (i = 1; i <= shopLength; i++) {
+    //             currentPrice = parseInt($(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-price"));
+    //             // Min Price
+    //             if (currentPrice < ui.values[0]) {
+    //                 $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-price")
+    //             } // Max Price
+    //             else if (currentPrice > ui.values[1]) {
+    //                 $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-price")
+    //             } else {
+    //                 $(`.shop-product-grid a:nth-child(${i})`).removeClass("filter-hide-price")
+    //             }
+    //         }
+    //     }
+    // });
+    // $("#amount").val("R " + $("#slider-range").slider("values", 0) +
+    //     " - R " + $("#slider-range").slider("values", 1));
+
 }
 
 
@@ -161,74 +177,74 @@ $(document).on("click", ".card-color .color-boxes span", function () {
 });
 
 // Filter Category
+// $(".categoryGender").click(function () {
+//     $(".categoryGender").removeClass("active-category-gender")
+//     $(this).addClass("active-category-gender");
+// })
 
 
-$(".card-category h6").click(function () {
+
+$(".card-category p").click(function () {
     if ($(this).hasClass("active-category-filter")) {
-        $(".card-category h6").removeClass("active-category-filter");
+        $(".shop-product-grid a").removeClass("filter-hide-category");
+    } else {
+        $(".categoryGender").removeClass("active-category-gender");
+        $(this).closest(".collapse ").prev().first().addClass("active-category-gender");
+
+        let activecategoryOption = $(this).find("span").html();
+        let activeCategoryGender = $(".active-category-gender span").html();
+        console.log(activeCategoryGender, activecategoryOption)
+
+
+        filterCategories(activecategoryOption, activeCategoryGender);
+    }
+
+    if ($(this).hasClass("active-category-filter")) {
+        $(".card-category p").removeClass("active-category-filter");
         $(this).children().first().addClass("fal fa-square");
         $(this).children().first().removeClass("fas fa-check-square");
     } else {
-        $(".card-category h6").removeClass("active-category-filter");
+        $(".card-category p").removeClass("active-category-filter");
         $(this).addClass("active-category-filter");
-        $(".card-category h6 i").removeClass("fas fa-check-square");
-        $(".card-category h6 i").addClass("fal fa-square");
+        $(".card-category p i").removeClass("fas fa-check-square");
+        $(".card-category p i").addClass("fal fa-square");
         $(this).children().first().removeClass("fal fa-square");
         $(this).children().first().addClass("fas fa-check-square");
     }
-    filterCategories();
 });
 
-const filterCategories = () => {
+$("#categoryBybehore").click(function () {
+    const shopLength = $(".shop-product-grid").children().length;
+    console.log("bybehore")
+    for (i = 1; i <= shopLength; i++) {
+        productGender = $(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-gender");
+        productCategory = $(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-category");
+        if (productCategory == "Bybehore") {
+            $(`.shop-product-grid a:nth-child(${i})`).removeClass("filter-hide-category");
+        } else {
+            $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-category");
+        }
+    }
+})
+
+const filterCategories = (activecategoryOption, activeCategoryGender) => {
     const shopLength = $(".shop-product-grid").children().length;
     let activeCategory = "";
     let productCategory = "";
     let productGender = "";
 
-    activeCategoryOption = $(".active-category-filter span").html();
 
     // Match Above against product catgories
     for (i = 1; i <= shopLength; i++) {
         productGender = $(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-gender");
         productCategory = $(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-category");
-        console.log(productGender, productCategory);
 
-        switch (activeCategoryOption) {
-            case undefined:
-                $(`.shop-product-grid a:nth-child(${i})`).removeClass("filter-hide-category");
-                break;
-            case "Bybehore":
-                if (productCategory !== "Bybehore") {
-                    $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-category");
-                } else {
-                    $(`.shop-product-grid a:nth-child(${i})`).removeClass("filter-hide-category");
-                }
-                break;
-            case "Mans":
-                if (productGender !== "Mans") {
-                    $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-category")
-                } else {
-                    $(`.shop-product-grid a:nth-child(${i})`).removeClass("filter-hide-category");
-                }
-                break;
-            case "Dames":
-                if (productGender !== "Dames") {
-                    $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-category");
-                } else {
-                    $(`.shop-product-grid a:nth-child(${i})`).removeClass("filter-hide-category");
-                }
-                break;
-            default:
-                break;
+
+        if (productCategory == activecategoryOption && productGender == activeCategoryGender) {
+            $(`.shop-product-grid a:nth-child(${i})`).removeClass("filter-hide-category");
+        } else {
+            $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-category");
         }
-
-
-        // if (productCategory !== "Bybehore" && activeCategoryOption == "Bybehore") {
-        //     $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-category");
-        // } else {
-        //     $(`.shop-product-grid a:nth-child(${i})`).removeClass("filter-hide-category");
-        //     console.log("hide");
-        // }
     }
 }
 
@@ -354,6 +370,7 @@ const loadProductPage = () => {
             $(".product-page-price").html(`R ${product.price}`);
             $(".product-page-description").html(product.description);
             $(".product-page-gender p").html(product.gender);
+            $(".product-page-color p").html(product.color);
 
             // Info
             const info = product.info;
@@ -391,18 +408,6 @@ const loadProductPage = () => {
                 }
             }
 
-            // Colors
-            const colors = product.colorBlocks;
-
-            if (colors.length == 0) {
-                $(".product-page-colours").remove();
-            } else {
-                for (i = 0; i < colors.length; i++) {
-                    $(".product-page-colours").append(
-                        `<div style="background-color:${colors[i]}"> </div>`
-                    )
-                }
-            }
 
             // Images 
             for (i = 0; i < product.images; i++) {

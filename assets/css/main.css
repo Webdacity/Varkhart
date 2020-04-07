@@ -277,6 +277,40 @@ html {
   width: 90%;
 }
 
+.mobile-nav .search-bar {
+  margin-right: 0;
+  margin-top: 20px;
+}
+
+.mobile-nav .search-bar input {
+  border: none;
+  border-bottom: 2px solid var(--grey);
+  color: var(--grey);
+  font-weight: 500;
+  padding: 3px 5px;
+  background-color: transparent;
+  width: 60%;
+
+}
+
+.mobile-nav .search-bar input:focus {
+  outline: none;
+}
+
+.mobile-nav .search-bar input::placeholder {
+  color: var(--grey);
+  font-weight: 400;
+}
+
+.mobile-nav .search-button {
+  background-color: transparent;
+  color: var(--grey);
+  border: none;
+  margin: 0 5px;
+  font-size: 1.2rem;
+  outline: none;
+
+}
 
 /* ----------- */
 
@@ -426,14 +460,10 @@ footer form input:focus {
   justify-content: center;
   align-items: center;
   align-content: center;
-  height: 0;
+  height: auto;
   width: 100%;
   overflow: hidden;
-  transition: 0.5s;
-  -webkit-transition: 0.5s;
-  -moz-transition: 0.5s;
-  -ms-transition: 0.5s;
-  -o-transition: 0.5s;
+  z-index: 200;
 }
 
 .notify-bar p {
@@ -987,7 +1017,7 @@ input:checked+.slider:before {
 
 
 /* Filter Price Slider*/
-
+/* 
 .ui-widget.ui-widget-content {
   height: 2px;
   border: none;
@@ -1032,7 +1062,30 @@ input:checked+.slider:before {
 
 #slider-range span:focus {
   outline: none;
+} */
+
+
+.price-filter-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.price-filter-body span {
+  height: 2px;
+  width: 10px;
+  margin: 0 20px;
+  background-color: var(--brown);
+}
+
+.price-filter-body input {
+  width: 80px;
+  border: 1px solid var(--brown);
+  background-color: transparent;
+  color: var(--brown);
+  text-align: center;
+}
+
 
 /* FIlter Category */
 
@@ -1044,9 +1097,16 @@ input:checked+.slider:before {
   font-size: 1.1rem;
   margin-top: 15px;
   cursor: pointer;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--brown);
 }
 
-.card-category h6 i {
+.card-category p {
+  padding-left: 5px;
+  cursor: pointer;
+}
+
+.card-category p i {
   font-size: 1rem;
   margin-right: 5px;
   transition: 0.3s;
@@ -1306,7 +1366,8 @@ input:checked+.slider:before {
   font-weight: 400;
 }
 
-.product-page-gender p {
+.product-page-gender p,
+.product-page-color p {
   font-weight: 500;
   margin: 0;
 }

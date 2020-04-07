@@ -52,6 +52,12 @@ const navSearch = () => {
     location.replace(`./winkel.html?${searchTerm}`);
 }
 
+// const mobileSearch = () => {
+//     const searchTerm = $(".mobile-nav .search-bar input").val();
+//     console.log("search :" + searchTerm)
+//     location.replace(`./winkel.html?${searchTerm}`);
+// }
+
 $(".search-bar").on("submit", function (event) {
     event.preventDefault();
     navSearch();

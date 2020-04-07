@@ -136,18 +136,20 @@ const checkoutCart = () => {
 
 
     $(".checkout-cart-count").html(cartLength);
-    $(".checkout-total h5").html(`R ${cartTotal+100}`); // {Incl Delivery}
+    $(".checkout-total h5 span").html(`${cartTotal+100}`); // {Incl Delivery}
 }
 
 // UTILS
 
+$(".notify-bar").hide();
+
 const notify = (text) => {
     $(".notify-bar p").html(text);
-    $(".notify-bar").height("unset",
+    $(".notify-bar").fadeIn(500, () => {
         setTimeout(() => {
-            $(".notify-bar").height("0px")
-        }, 2000)
-    );
+            $(".notify-bar").fadeOut(500)
+        }, 2000);
+    })
 }
 
 // Clear Cart Storage
@@ -353,7 +355,7 @@ $(".cart-content-item-delete i").hover(
 
 // Send POST to backend for validation
 const sendOrder = () => {
-    const cart = JSON.parse(localStorage.getItem("cart"));
+    const cart = localStorage.getItem("cart");
     console.log(typeof (cart));
     $(".order-form [name='custom_str1']").val(
         $(".order-form #order-straat-nommer").val() + ", " +
@@ -366,26 +368,33 @@ const sendOrder = () => {
     );
     $(".order-form [name='item_description']").val(cart);
     $(".order-form [name='custom_str3']").val($(".order-form #order-cell").val());
-    axios.post('https://varkhart-backend.herokuapp.com/orders/validate', {
-            cart: cart
-        })
-        .then(function (response) {
-            $(".order-form").submit();
-            console.log(response);
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
-    console.log(cart)
+    $(".order-form [name='amount']").val(parseInt($(".checkout-total h5 span").html()));
+    // axios.post('https://varkhart-backend.herokuapp.com/orders/validate', {
+    //         cart: cart
+    //     })
+    //     .then(function (response) {
+    //         $(".order-form").submit();
+    //         console.log(response);
+    //     })
+    //     .catch(function (error) {
+    //         console.log(error);
+    //     });
+    $(".order-form").submit();
 }
 
 // Validate Form
 const validateForm = (formToVal, callback) => {
-    let form = document.getElementById(formToVal)
+    let form = document.getElementById(formToVal);
+    let email = $(".order-form [name='email_address']").val();
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (form.checkValidity() === false) {
         console.log("Validation Fail")
         event.preventDefault();
         event.stopPropagation();
+    } else if (re.test(String(email).toLowerCase()) === false) {
+        event.preventDefault();
+        event.stopPropagation();
+        alert("You email is invalid")
     } else {
         console.log("Validation Success")
         callback();
