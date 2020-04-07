@@ -355,8 +355,20 @@ $(".cart-content-item-delete i").hover(
 
 // Send POST to backend for validation
 const sendOrder = () => {
-    const cart = localStorage.getItem("cart");
-    console.log(typeof (cart));
+    // Get Cart List 
+    const cart = JSON.parse(localStorage.getItem("cart"));
+    let newCart = [];
+    cartKeys = Object.keys(cart)
+
+    for (i = 0; i < cartKeys.length; i++) {
+        let cartString = `${i+1}. `;
+        cartString = cartString.concat(`#${cart[cartKeys[i]].id} - `)
+        cartString = cartString.concat($(`.cart-details-list li:nth-child(${i+1}) a`).html() + " - ");
+        cartString = cartString.concat($(`.cart-details-list li:nth-child(${i+1}) small`).html() + " - ");
+        cartString = cartString.concat($(`.cart-details-list li:nth-child(${i+1}) p`).html() + "\n \n \n");
+        newCart.push(cartString)
+    }
+    console.log(newCart.toString())
     $(".order-form [name='custom_str1']").val(
         $(".order-form #order-straat-nommer").val() + ", " +
         $(".order-form #order-straat-naam").val() + ", " +
@@ -366,20 +378,18 @@ const sendOrder = () => {
         $(".order-form #order-provinsie").val() + "," +
         $(".order-form #order-poskode").val()
     );
-    $(".order-form [name='item_description']").val(cart);
+    $(".order-form [name='item_description']").val(newCart.toString());
     $(".order-form [name='custom_str3']").val($(".order-form #order-cell").val());
     $(".order-form [name='amount']").val(parseInt($(".checkout-total h5 span").html()));
-    // axios.post('https://varkhart-backend.herokuapp.com/orders/validate', {
-    //         cart: cart
-    //     })
-    //     .then(function (response) {
-    //         $(".order-form").submit();
-    //         console.log(response);
-    //     })
-    //     .catch(function (error) {
-    //         console.log(error);
-    //     });
-    $(".order-form").submit();
+    axios.get('https://varkhart-backend.herokuapp.com/ping')
+        .then(function (response) {
+            $(".order-form").submit();
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    // $(".order-form").submit();
 }
 
 // Validate Form
