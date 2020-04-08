@@ -74,8 +74,18 @@ const loadFilterPrice = () => {
 
     minPrice = priceRange[0];
     maxPrice = priceRange[priceRange.length - 1];
-    $("#price-filter-min").val(minPrice);
-    $("#price-filter-max").val(maxPrice);
+    $(".price-filter-min").attr("min", minPrice);
+    $(".price-filter-min").attr("max", maxPrice);
+    $(".price-filter-max").attr("min", minPrice);
+    $(".price-filter-max").attr("max", maxPrice);
+    $(".price-filter-min").val(minPrice);
+    $(".price-filter-max").val(maxPrice);
+
+    $(".minPriceLabel").html(minPrice);
+    $(".maxPriceLabel").html(maxPrice);
+
+    $(".minPriceLabel").html(minPrice);
+    $(".maxPriceLabel").html(maxPrice);
 
     $(".price-filter-body input").change(function () {
         for (i = 1; i <= shopLength; i++) {
@@ -88,35 +98,16 @@ const loadFilterPrice = () => {
         }
     });
 
-
-
-    // $("#slider-range").slider({
-    //     range: true,
-    //     min: minPrice,
-    //     max: maxPrice,
-    //     values: [minPrice, maxPrice],
-    //     slide: function (event, ui) {
-    //         $("#amount").val("R " + ui.values[0] + " - R " + ui.values[1]);
-
-    //         // Change products on slide
-    //         for (i = 1; i <= shopLength; i++) {
-    //             currentPrice = parseInt($(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-price"));
-    //             // Min Price
-    //             if (currentPrice < ui.values[0]) {
-    //                 $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-price")
-    //             } // Max Price
-    //             else if (currentPrice > ui.values[1]) {
-    //                 $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-price")
-    //             } else {
-    //                 $(`.shop-product-grid a:nth-child(${i})`).removeClass("filter-hide-price")
-    //             }
-    //         }
-    //     }
-    // });
-    // $("#amount").val("R " + $("#slider-range").slider("values", 0) +
-    //     " - R " + $("#slider-range").slider("values", 1));
-
 }
+
+$(".price-filter-min, .price-filter-max").change(function () {
+    console.log($(this).val());
+    minPrice = $(".price-filter-min").val();
+    maxPrice = $(".price-filter-max").val();
+    $(".minPriceLabel").html(minPrice);
+    $(".maxPriceLabel").html(maxPrice);
+    adjustFilterPrice();
+})
 
 
 

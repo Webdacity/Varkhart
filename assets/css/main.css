@@ -1017,74 +1017,85 @@ input:checked+.slider:before {
 
 
 /* Filter Price Slider*/
-/* 
-.ui-widget.ui-widget-content {
-  height: 2px;
-  border: none;
-  width: 90%;
-}
 
-.card-price .card-body input {
-  max-width: 100%;
-  text-align: center;
-  background-color: transparent;
-  border: none;
-  font-weight: 500;
-  color: var(--brown);
-}
-
-.ui-slider-horizontal .ui-slider-range {
-  height: 2px !important;
-  background-color: var(--brown);
-}
-
-.ui-slider .ui-slider-range {
-  z-index: 1;
-  font-size: .7em;
-  display: block;
-  border: 0;
-  background-position: 0 0;
-}
-
-#slider-range span {
-  background-color: var(--brown);
-  border: none;
-  height: 15px;
-  width: 15px;
-  border-radius: 0;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  -ms-border-radius: 0;
-  -o-border-radius: 0;
-  top: -7px;
+input[type=range] {
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 150px;
   margin: 0;
-}
-
-#slider-range span:focus {
+  padding: 0 2px;
+  /* Add some L/R padding to ensure box shadow of handle is shown */
+  overflow: hidden;
+  border: 0;
+  border-radius: 1px;
   outline: none;
-} */
-
-
-.price-filter-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: linear-gradient(grey, grey) no-repeat center;
+  /* Use a linear gradient to generate only the 2px height background */
+  background-size: 100% 2px;
+  pointer-events: none;
 }
 
-.price-filter-body span {
-  height: 2px;
-  width: 10px;
-  margin: 0 20px;
+input[type=range]:active,
+input[type=range]:focus {
+  outline: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 0px;
   background-color: var(--brown);
+  position: relative;
+  margin: 5px 0;
+  /*Addsomemargintoensureboxshadowisshown*/
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  pointer-events: all;
+  box-shadow: 0 1px 4px 0.5px rgba(0, 0, 0, 0.25);
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -ms-border-radius: 0px;
+  -o-border-radius: 0px;
 }
 
-.price-filter-body input {
-  width: 80px;
-  border: 1px solid var(--brown);
-  background-color: transparent;
-  color: var(--brown);
-  text-align: center;
+input[type=range]::-webkit-slider-thumb::before {
+  content: ' ';
+  display: block;
+  position: absolute;
+  top: 13px;
+  left: 100%;
+  width: 2000px;
+  height: 2px;
 }
+
+.multi-range {
+  position: relative;
+  height: 50px;
+}
+
+.multi-range input[type=range] {
+  position: absolute;
+}
+
+.multi-range input[type=range]:nth-child(1)::-webkit-slider-thumb::before {
+  background-color: purple;
+}
+
+.multi-range input[type=range]:nth-child(2) {
+  background: none;
+}
+
+.multi-range input[type=range]:nth-child(2)::-webkit-slider-thumb::before {
+  background-color: grey;
+}
+
+.price-labels p {
+  font-weight: 500;
+}
+
 
 
 /* FIlter Category */
