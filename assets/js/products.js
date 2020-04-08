@@ -193,9 +193,6 @@ $(".card-category p").click(function () {
 
         let activecategoryOption = $(this).find("span").html();
         let activeCategoryGender = $(".active-category-gender span").html();
-        console.log(activeCategoryGender, activecategoryOption)
-
-
         filterCategories(activecategoryOption, activeCategoryGender);
     }
 
@@ -228,6 +225,7 @@ $("#categoryBybehore").click(function () {
 })
 
 const filterCategories = (activecategoryOption, activeCategoryGender) => {
+    console.log(activecategoryOption, activeCategoryGender);
     const shopLength = $(".shop-product-grid").children().length;
     let activeCategory = "";
     let productCategory = "";
@@ -239,8 +237,9 @@ const filterCategories = (activecategoryOption, activeCategoryGender) => {
         productGender = $(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-gender");
         productCategory = $(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-category");
 
-
         if (productCategory == activecategoryOption && productGender == activeCategoryGender) {
+            $(`.shop-product-grid a:nth-child(${i})`).removeClass("filter-hide-category");
+        } else if (productCategory == activecategoryOption && productGender == "Unisex") {
             $(`.shop-product-grid a:nth-child(${i})`).removeClass("filter-hide-category");
         } else {
             $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-category");

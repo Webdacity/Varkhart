@@ -20,7 +20,7 @@
         "name": "Varkhart T-Shirt - Wit",
         "price": 199,
         "description": "Pink, ook nie te pink nie. Lekker om te dra vir ontspan, tee partytjies, Gin drink sessies, (vir die tannies en studente), asook vir die werkplek as jou baas Afrikaans is en af en toe sy braai geniet. Perfek vir legendes soos jy!",
-        "gender": "Dames",
+        "gender": "Vrouens",
         "sizes": ["S", "M", "L", "XL", "2XL"],
         "material": ["100% Katoen"],
         "info": ["180g"],
@@ -29,10 +29,9 @@
         "images": 1,
         "promo": "",
         "home": true,
-        "tags": ["hemp", "t-hemp", "themp", "dames", "wit", "pink"],
+        "tags": ["hemp", "t-hemp", "themp", "Vrouens", "wit", "pink"],
         "category": "Hemde",
         "subCategory": "T-Hemde"
-
     },
     "VH3": {
         "name": "Varkhart Keps - Greis",
@@ -50,7 +49,6 @@
         "tags": ["kep", "pet", "hoed", "unisex", "grys", "verstelbaar"],
         "category": "Bybehore",
         "subCategory": ""
-
     },
     "VH4": {
         "name": "Varkhart Mans Sportsak",
@@ -68,7 +66,6 @@
         "tags": ["kep", "pet", "hoed", "unisex", "grys", "verstelbaar"],
         "category": "Bybehore",
         "subCategory": ""
-
     },
     "VH5": {
         "name": "Varkhart Vrouens Sportsak",
@@ -86,7 +83,6 @@
         "tags": ["kep", "pet", "hoed", "unisex", "grys", "verstelbaar"],
         "category": "Bybehore",
         "subCategory": ""
-
     },
     "VH6": {
         "name": "Koelersak",
@@ -104,7 +100,141 @@
         "tags": ["koel", "koud", "sak", "swart"],
         "category": "Bybehore",
         "subCategory": ""
-
+    },
+    "VH7": {
+        "name": "Varkhart Hightop Vellies",
+        "price": 580,
+        "description": "Vir Varkharte met voete",
+        "gender": "Unisex",
+        "sizes": ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"],
+        "material": "Materiaal van Mars",
+        "info": [],
+        "colorGroup": ["black"],
+        "color": ["Swart"],
+        "images": 1,
+        "promo": "",
+        "home": true,
+        "tags": ["koel", "koud", "sak", "swart"],
+        "category": "Skoene",
+        "subCategory": ""
+    },
+    "VH8": {
+        "name": "Varkhart Mans Vellies",
+        "price": 680,
+        "description": "Perfek vir mense met 11 tone en minder. ",
+        "gender": "Mans",
+        "sizes": ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"],
+        "material": "Materiaal van Mars",
+        "info": [],
+        "colorGroup": ["black"],
+        "color": ["Swart"],
+        "images": 1,
+        "promo": "",
+        "home": true,
+        "tags": ["koel", "koud", "sak", "swart"],
+        "category": "Skoene",
+        "subCategory": ""
+    },
+    "VH9": {
+        "name": "Varkhart Slipons",
+        "price": 780,
+        "description": "Vir Varkharte wat anti-skoenveters is",
+        "gender": "Unisex",
+        "sizes": ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"],
+        "material": "Materiaal van Mars",
+        "info": [],
+        "colorGroup": ["black"],
+        "color": ["Swart"],
+        "images": 1,
+        "promo": "",
+        "home": true,
+        "tags": ["koel", "koud", "sak", "swart"],
+        "category": "Skoene",
+        "subCategory": ""
+    },
+    "VH10": {
+        "name": "Varkhart Trackers",
+        "price": 780,
+        "description": "Vir weermag tipe Varkharte",
+        "gender": "Unisex",
+        "sizes": ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"],
+        "material": "Materiaal van Mars",
+        "info": [],
+        "colorGroup": ["black"],
+        "color": ["Swart"],
+        "images": 1,
+        "promo": "",
+        "home": true,
+        "tags": ["koel", "koud", "sak", "swart"],
+        "category": "Skoene",
+        "subCategory": ""
+    },
+    "VH11": {
+        "name": "Varkhart Unisex Vellies",
+        "price": 580,
+        "description": "Vellies wat gedeel kan word met jou man of vrou.",
+        "gender": "Unisex",
+        "sizes": ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"],
+        "material": "Materiaal van Mars",
+        "info": [],
+        "colorGroup": ["black"],
+        "color": ["Swart"],
+        "images": 1,
+        "promo": "",
+        "home": true,
+        "tags": ["koel", "koud", "sak", "swart"],
+        "category": "Skoene",
+        "subCategory": ""
+    },
+    "VH12": {
+        "name": "Varkhart Hunters",
+        "price": 780,
+        "description": "Vir ernstige skoen kopers",
+        "gender": "Unisex",
+        "sizes": ["3", "4", "5", "6", "7", "8", "9"],
+        "material": "Materiaal van Mars",
+        "info": [],
+        "colorGroup": ["black"],
+        "color": ["Swart"],
+        "images": 1,
+        "promo": "",
+        "home": true,
+        "tags": ["koel", "koud", "sak", "swart"],
+        "category": "Skoene",
+        "subCategory": ""
+    },
+    "VH13": {
+        "name": "Varkhart Lettie pumps",
+        "price": 390,
+        "description": "Of jou naam Lettie is of nie. ",
+        "gender": "Vrouens",
+        "sizes": ["3", "4", "5", "6", "7", "8", "9"],
+        "material": "Materiaal van Mars",
+        "info": [],
+        "colorGroup": ["black"],
+        "color": ["Swart"],
+        "images": 1,
+        "promo": "",
+        "home": true,
+        "tags": ["koel", "koud", "sak", "swart"],
+        "category": "Skoene",
+        "subCategory": ""
+    },
+    "VH14": {
+        "name": "Varkhart Flower Dolls",
+        "price": 390,
+        "description": " ",
+        "gender": "Vrouens",
+        "sizes": ["3", "4", "5", "6", "7", "8", "9"],
+        "material": "Materiaal van Mars",
+        "info": [],
+        "colorGroup": ["black"],
+        "color": ["Swart"],
+        "images": 1,
+        "promo": "",
+        "home": true,
+        "tags": ["koel", "koud", "sak", "swart"],
+        "category": "Skoene",
+        "subCategory": ""
     }
-
 }
