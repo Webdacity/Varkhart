@@ -365,7 +365,7 @@ const sendOrder = () => {
         cartString = cartString.concat(`#${cart[cartKeys[i]].id} - `)
         cartString = cartString.concat($(`.cart-details-list li:nth-child(${i+1}) a`).html() + " - ");
         cartString = cartString.concat($(`.cart-details-list li:nth-child(${i+1}) small`).html() + " - ");
-        cartString = cartString.concat($(`.cart-details-list li:nth-child(${i+1}) p`).html() + "\n \n \n");
+        cartString = cartString.concat($(`.cart-details-list li:nth-child(${i+1}) p`).html());
         newCart.push(cartString)
     }
     console.log(newCart.toString())
