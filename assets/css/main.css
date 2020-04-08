@@ -1941,6 +1941,16 @@ input[type=number] {
 
 /* Privacy */
 
-.section-privacy {
+.section-privacy,
+.section-about,
+.section-returns {
   padding-top: 15vh;
+}
+
+.section-about {
+  text-align: center;
+}
+
+.section-returns span {
+  font-weight: 500;
 }
