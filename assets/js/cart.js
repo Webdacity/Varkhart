@@ -383,13 +383,13 @@ const sendOrder = () => {
     $(".order-form [name='amount']").val(parseInt($(".checkout-total h5 span").html()));
     axios.get('https://varkhart-backend.herokuapp.com/ping')
         .then(function (response) {
-            $(".order-form").submit();
-            console.log(response);
+            // $(".order-form").submit();
+            // console.log(response);
         })
         .catch(function (error) {
             console.log(error);
         });
-    // $(".order-form").submit();
+    $(".order-form").submit();
 }
 
 // Validate Form
