@@ -1023,7 +1023,6 @@ input[type=range] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  width: 150px;
   margin: 0;
   padding: 0 2px;
   /* Add some L/R padding to ensure box shadow of handle is shown */
@@ -1035,6 +1034,7 @@ input[type=range] {
   /* Use a linear gradient to generate only the 2px height background */
   background-size: 100% 2px;
   pointer-events: none;
+  width: auto;
 }
 
 input[type=range]:active,
@@ -1074,6 +1074,7 @@ input[type=range]::-webkit-slider-thumb::before {
 .multi-range {
   position: relative;
   height: 50px;
+  width: 100%;
 }
 
 .multi-range input[type=range] {

@@ -105,3 +105,6 @@ lowerSlider.oninput = function () {
 
     }
 };
+
+const rangeWidth = $(".card-price").width();
+$(".multi-range input[type=range]").width(rangeWidth * 0.85)

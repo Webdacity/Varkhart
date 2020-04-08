@@ -87,17 +87,6 @@ const loadFilterPrice = () => {
     $(".minPriceLabel").html(minPrice);
     $(".maxPriceLabel").html(maxPrice);
 
-    $(".price-filter-body input").change(function () {
-        for (i = 1; i <= shopLength; i++) {
-            currentPriceToFilter = parseInt($(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-price"));
-            if (currentPriceToFilter > maxPrice || currentPriceToFilter < minPrice) {
-                $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-price")
-            } else {
-                $(`.shop-product-grid a:nth-child(${i})`).removeClass("filter-hide-price")
-            }
-        }
-    });
-
 }
 
 $(".price-filter-min, .price-filter-max").change(function () {
@@ -106,8 +95,21 @@ $(".price-filter-min, .price-filter-max").change(function () {
     maxPrice = $(".price-filter-max").val();
     $(".minPriceLabel").html(minPrice);
     $(".maxPriceLabel").html(maxPrice);
-    adjustFilterPrice();
-})
+    adjustFilterPrice(minPrice, maxPrice);
+});
+
+const adjustFilterPrice = (minPrice, maxPrice) => {
+    const shopLength = $(".shop-product-grid").children().length;
+    for (i = 1; i <= shopLength; i++) {
+        currentPriceToFilter = parseInt($(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-price"));
+        if (currentPriceToFilter > maxPrice || currentPriceToFilter < minPrice) {
+            $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-price")
+        } else {
+            $(`.shop-product-grid a:nth-child(${i})`).removeClass("filter-hide-price")
+        }
+    }
+}
+
 
 
 
