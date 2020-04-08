@@ -395,10 +395,10 @@ const loadProductPage = () => {
 
             // Sizes
             const sizes = product.sizes;
-            if (sizes.length == 0) {
+            if (sizes.length == 1) {
                 $(".product-page-sizes-buttons").append(
                     // `<p> Een Groote </p>`
-                    `<button class="active-size">Een Grootte</button>`
+                    `<button class="active-size">${sizes[0]}</button>`
                 )
             } else {
                 for (i = 0; i < sizes.length; i++) {
