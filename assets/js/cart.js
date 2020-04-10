@@ -327,14 +327,6 @@ const deleteCartItem = (item) => {
 
 }
 
-$(document).ready(function () {
-
-    if (window.location.pathname == "/mandjie.html") {
-        loadCart();
-        updateCartCounter();
-    }
-});
-
 $(".cart-heading i").click(() => {
     clearCart();
     location.reload();
@@ -411,3 +403,25 @@ const validateForm = (formToVal, callback) => {
     }
     form.classList.add('was-validated');
 };
+
+
+$(document).ready(function () {
+
+    if (window.location.pathname == "/mandjie.html") {
+        loadCart();
+        updateCartCounter();
+
+        // Wake Backend Server
+        axios.get('https://varkhart-backend.herokuapp.com/ping')
+            .then(function (response) {
+                // $(".order-form").submit();
+                // console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+    }
+
+
+});

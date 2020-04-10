@@ -6,7 +6,6 @@ $(document).ready(() => {
         $("#footer").html(data)
     });
 
-
     //  Animations
 
 
@@ -74,37 +73,39 @@ $(".navbar-toggler, .mobile-nav-close").click(function () {
 
 
 // Price Slider
-var lowerSlider = document.querySelector('#lower'),
-    upperSlider = document.querySelector('#upper'),
-    lowerVal = parseInt(lowerSlider.value);
-upperVal = parseInt(upperSlider.value);
-
-upperSlider.oninput = function () {
-    lowerVal = parseInt(lowerSlider.value);
+if (window.location.pathname === "/winkel.html") {
+    var lowerSlider = document.querySelector('#lower'),
+        upperSlider = document.querySelector('#upper'),
+        lowerVal = parseInt(lowerSlider.value);
     upperVal = parseInt(upperSlider.value);
 
-    if (upperVal < lowerVal + 4) {
-        lowerSlider.value = upperVal - 4;
+    upperSlider.oninput = function () {
+        lowerVal = parseInt(lowerSlider.value);
+        upperVal = parseInt(upperSlider.value);
 
-        if (lowerVal == lowerSlider.min) {
-            upperSlider.value = 4;
+        if (upperVal < lowerVal + 4) {
+            lowerSlider.value = upperVal - 4;
+
+            if (lowerVal == lowerSlider.min) {
+                upperSlider.value = 4;
+            }
         }
-    }
-};
+    };
 
-lowerSlider.oninput = function () {
-    lowerVal = parseInt(lowerSlider.value);
-    upperVal = parseInt(upperSlider.value);
+    lowerSlider.oninput = function () {
+        lowerVal = parseInt(lowerSlider.value);
+        upperVal = parseInt(upperSlider.value);
 
-    if (lowerVal > upperVal - 4) {
-        upperSlider.value = lowerVal + 4;
+        if (lowerVal > upperVal - 4) {
+            upperSlider.value = lowerVal + 4;
 
-        if (upperVal == upperSlider.max) {
-            lowerSlider.value = parseInt(upperSlider.max) - 4;
+            if (upperVal == upperSlider.max) {
+                lowerSlider.value = parseInt(upperSlider.max) - 4;
+            }
+
         }
+    };
 
-    }
-};
-
-const rangeWidth = $(".card-price").width();
-$(".multi-range input[type=range]").width(rangeWidth * 0.85)
+    const rangeWidth = $(".card-price").width();
+    $(".multi-range input[type=range]").width(rangeWidth * 0.85)
+}
