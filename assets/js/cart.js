@@ -1,3 +1,5 @@
+let api_url = "http://localhost:3000"
+
 // Calculate Cart Total
 function calcCartTotal() {
     let totalCart = 0;
@@ -182,64 +184,65 @@ const loadCart = () => {
         });
         let initialCartTotal = 0;
 
-        // Read Cart Item Info from JSON
-        let xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                const response = JSON.parse(this.responseText);
+        axios.get(`${api_url}/products`)
+            .then((response) => {
+                const products = response.data;
+                let counter = 0;
+                products.forEach(product => {
+                    if (productIDs.indexOf(product.productCode) >= 0) {
+                        initialCartTotal += product.price;
 
-                // Insert HTML
-                for (i = 0; i < productIDs.length; i++) {
-                    let productID = productIDs[i];
-                    const product = response[productID]
-                    initialCartTotal += product.price;
-
-                    // Actual Cart
-                    $(".cart-content-item-grid").append(
-                        `
-                    <div class="cart-content-item container d-flex align-items-center" id="cart-item-${i+1}"
-                        data-cart-item-price=${product.price}>
-                        <template id=${productID}></template>
-                        <div class="4 col-md-1 cart-content-image-container">
-                            <img src="./assets/images/products/${productID}/1-thumb.png" alt="Varkhart Cart Item" class="img-fluid">
-                        </div>
-                        <div class="col-md-3">
-                            <div class="d-flex flex-column">
-                                <a class="cart-content-item-name" href="./produk.html#${productID}">${product.name}</a>
-                                <div>
-                                <small class="text-muted cart-content-size">${cartArray[i].size}</small>
-                                <small class="text-muted cart-content-color">| ${product.color}</small>
+                        // Actual Cart
+                        $(".cart-content-item-grid").append(
+                            `
+                            <div class="cart-content-item container d-flex align-items-center" id="cart-item-${counter+1}"
+                                data-cart-item-price=${product.price}>
+                                <template id=${product.productCode}></template>
+                                <div class="4 col-md-1 cart-content-image-container">
+                                    <img src="${product.productThumbnailUrl}" alt="Varkhart Cart Item" class="img-fluid">
                                 </div>
-                            </div>
-                        </div>
-                        <div class="offset-md-0 col-md-8 d-flex align-items-center">
-                            <div class="col-md-3 offset-md-5">
-                                <div class="cart-content-quantity">
-                                    <i class="far fa-minus minus"></i>
-                                    <input type="number" value="1" disabled class="cart-content-quantity-input">
-                                    <i class="far fa-plus plus"></i>
+                                <div class="col-md-3">
+                                    <div class="d-flex flex-column">
+                                        <a class="cart-content-item-name" href="./produk.html#${product.productCode}">${product.name}</a>
+                                        <div>
+                                        <small class="text-muted cart-content-size">${cartArray[counter].size}</small>
+                                        <small class="text-muted cart-content-color">| ${product.color}</small>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3 mt-md-0">
-                                <p class="cart-content-total">
-                                    R <span>${product.price}</span>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="cart-content-item-delete">
-                            <i class="fal fa-times"></i>
-                        </div>
-                    </div>`
-                    );
-                }
-                $(".cart-content-totals h4 span").html(initialCartTotal);
-            }
+                                <div class="offset-md-0 col-md-8 d-flex align-items-center">
+                                    <div class="col-md-3 offset-md-5">
+                                        <div class="cart-content-quantity">
+                                            <i class="far fa-minus minus"></i>
+                                            <input type="number" value="1" disabled class="cart-content-quantity-input">
+                                            <i class="far fa-plus plus"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mt-md-0">
+                                        <p class="cart-content-total">
+                                            R <span>${product.price}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="cart-content-item-delete">
+                                    <i class="fal fa-times"></i>
+                                </div>
+                            </div>`
+                        );
 
-        }
-        xhttp.open("GET", "./assets/js/products.json", false);
-        xhttp.send();
+                        $(".cart-content-totals h4 span").html(initialCartTotal);
+                        counter++;
+                    }
+                })
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }
 }
+
+// 
+
 
 
 
@@ -373,14 +376,6 @@ const sendOrder = () => {
     $(".order-form [name='item_description']").val(newCart.toString());
     $(".order-form [name='custom_str3']").val($(".order-form #order-cell").val());
     $(".order-form [name='amount']").val(parseInt($(".checkout-total h5 span").html()));
-    axios.get('https://varkhart-backend.herokuapp.com/ping')
-        .then(function (response) {
-            // $(".order-form").submit();
-            // console.log(response);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
     $(".order-form").submit();
 }
 
@@ -410,17 +405,6 @@ $(document).ready(function () {
     if (window.location.pathname == "/mandjie.html") {
         loadCart();
         updateCartCounter();
-
-        // Wake Backend Server
-        axios.get('https://varkhart-backend.herokuapp.com/ping')
-            .then(function (response) {
-                // $(".order-form").submit();
-                // console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
     }
 
 

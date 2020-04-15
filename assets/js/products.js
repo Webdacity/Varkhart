@@ -1,3 +1,5 @@
+let api_url = "http://localhost:3000"
+
 // Nav Search Bar
 const loadNavSearch = () => {
     // Get Search Term
@@ -286,75 +288,63 @@ $(".shop-display-sort select").change(function () {
 
 // Insert Products in Store:
 const loadShopProducts = () => {
-    let shopLength = 0;
-    // JSON
-    let xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            let response = JSON.parse(this.responseText);
+    // Axios GET
+    axios.get(`${api_url}/products`)
+        .then((response) => {
+            const products = response.data;
 
-            // Get Object Keys
-            const productKeys = Object.keys(response);
-
-            // Insert HTML
-            for (i = 0; i < productKeys.length; i++) {
-                shopLength++;
-                // Get product details
-                const productID = productKeys[i];
-                const product = response[productID];
-
+            products.forEach(product => {
                 // Insert HTML
                 $(".shop-product-grid").append(
-                    `<a class="col-10 offset-1 offset-sm-0 col-sm-6 col-md-6 col-lg-4 col-xl-3 product" href="./produk.html#${productID}" id="${productID}" >
-                    <template data-product-tags="${product.name},${product.category},${product.subcategory},${product.color},${product.gender},${product.colorGroup},${product.material}"
-                    data-product-color="${product.colorGroup}"
-                    data-product-sizes="${product.sizes}"
-                    data-product-price="${product.price}"
-                    data-product-gender="${product.gender}"
-                    data-product-category="${product.category}"
-                    ></template>
-                    <div class="product-image-container">
-                    <img src="./assets/images/products/${productID}/1-thumb.png" alt="Varhart Product ${productID} - ${product.name}">
-                    </div>
-                    <p class="product-name">${product.name}</p>
-                    <p class="product-price">R ${product.price}</p>
-                </a>`
+                    `<a class="col-10 offset-1 offset-sm-0 col-sm-6 col-md-6 col-lg-4 col-xl-3 product" href="./produk.html#${product.productCode}" id="${product.productCode}" >
+                        <template data-product-tags="${product.name},${product.category},${product.color},${product.gender},${product.material}, ${product.tags}"
+                        data-product-color="${product.colorGroup}"
+                        data-product-sizes="${product.sizes}"
+                        data-product-price="${product.price}"
+                        data-product-gender="${product.gender}"
+                        data-product-category="${product.category}"
+                        ></template>
+                        <div class="product-image-container">
+                        <img src="${product.productThumbnailUrl}">
+                        </div>
+                        <p class="product-name">${product.name}</p>
+                        <p class="product-price">R ${product.price}</p>
+                    </a>`
                 );
 
                 // Insert Product Tag
                 if (product.promo !== "") {
-                    $(`<span class="product-promo" data-product-promo="${product.promo}">${product.promo}</span>`).prependTo(`#${productID}`)
+                    $(`<span class="product-promo" data-product-promo="${product.promo}">${product.promo}</span>`).prependTo(`#${product.productCode}`)
                 }
+            })
+            loadNavSearch();
+            loadFilterColors();
+            loadFilterPrice();
+        })
+        .catch(err => {
+            console.log(err);
+        });
 
-            }
-
-        }
-    };
-    xhttp.open("GET", "./assets/js/products.json", false);
-    xhttp.send();
-    loadNavSearch();
-    loadFilterColors();
-    loadFilterPrice();
 }
 
 // Insert Products in Product Page:
 const loadProductPage = () => {
 
     // Get Product ID:
-    let productID = window.location.hash; //Get Recipe ID
-    productID = productID.substr(1); //Remove #
+    let productCode = window.location.hash; //Get Recipe ID
+    productCode = productCode.substr(1); //Remove #
 
     // Return to home page if no hash
-    if (productID == "") {
+    if (productCode == "") {
         window.location.pathname = "/winkel.html"
     }
 
     // JSON
-    let xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            const response = JSON.parse(this.responseText);
-            const product = response[productID]
+    axios.get(`${api_url}/products/productCode/${productCode}`)
+        .then((response) => {
+            const product = response.data;
+            console.log(product)
+
 
             // Insert HTML
             document.title = product.name;
@@ -363,27 +353,13 @@ const loadProductPage = () => {
             $(".product-page-description").html(product.description);
             $(".product-page-gender p").html(product.gender);
             $(".product-page-color p").html(product.color);
+            $(`<span>${product.info}</span>`).appendTo(".product-page-info p:first-child()")
+            $(".product-page-info").append(
+                `<p>${product.material}</p>`
+            )
 
-            // Info
-            const info = product.info;
-            if (info.length !== 0) {
-                for (i = 0; i < info.length; i++) {
-                    if (i == 0) {
-                        $(`<span>${info[i]}</span>`).appendTo(".product-page-info p:first-child()")
-
-                    } else {
-                        $(`<span> | ${info[i]}</span>`).appendTo(".product-page-info p:first-child()")
-                    }
-                }
-            }
 
             // Material
-            const material = product.material;
-            if (material.length !== 0) {
-                $(".product-page-info").append(
-                    `<p>${product.material}</p>`
-                )
-            }
 
             // Sizes
             const sizes = product.sizes;
@@ -393,24 +369,23 @@ const loadProductPage = () => {
                     `<button class="active-size">${sizes[0]}</button>`
                 )
             } else {
-                for (i = 0; i < sizes.length; i++) {
+                product.sizes.forEach(size => {
                     $(".product-page-sizes-buttons").append(
                         `<span>${sizes[i]}</span>`
                     )
-                }
+                })
             }
 
-
             // Images 
-            for (i = 0; i < product.images; i++) {
+            product.productImageUrls.forEach(image => {
                 $(".product-slick").append(
                     `
                     <div class="product-slick-image-container">
-                    <img src="./assets/images/products/${productID}/${i+1}.png" alt="Varkhart Product Slide - ${productID}"/>
+                    <img src="${image}" alt="Varkhart Product Slide - ${productCode}"/>
                     </div>
                     `
                 )
-            }
+            })
 
             $('.product-slick').slick({
                 slidesToShow: 1,
@@ -419,64 +394,58 @@ const loadProductPage = () => {
             })
 
             // Hide arrows if 1 image
-            if ($(".slick-track").children().length <= 1) {
-                $(".slick-arrow").hide();
+            if ($(".product-slick .slick-track").children().length <= 1) {
+                $(".product-slick .slick-arrow").hide();
             }
 
-        }
-    };
-    xhttp.open("GET", "./assets/js/products.json", true);
-    xhttp.send();
+        })
+        .catch(err => {
+            console.log(err);
+        });
 }
+
+
 
 
 // Insert Products in Home:
 const loadHomeProducts = () => {
 
-    // JSON
-    let xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            let response = JSON.parse(this.responseText);
-            // Get Object Keys
-            const productKeys = Object.keys(response);
+    axios.get(`${api_url}/products`)
+        .then((response) => {
+            const products = response.data;
 
-            // Insert HTML
-            for (i = 0; i < productKeys.length; i++) {
-                // Get product details
-                let productID = productKeys[i];
-                let product = response[productID];
-
-                if (product.home == true) {
+            products.forEach(product => {
+                if (product.home === true) {
+                    console.log(product)
                     // Insert HTML
-                    $(".product-range").append(
+                    $(".home-slick").append(
                         `
-                        <a class="col-10 offset-1 offset-sm-0 col-sm-6 col-md-3 product" href="./produk.html#${productID}" id="${productID}">
+                        <a class="col-10 offset-1 offset-sm-0 col-sm-6 col-md-3 product" href="./produk.html#${product.productCode}" id="${product.productCode}">
                             <div class="product-image-container">
-                                <img class="img-fluid" src="./assets/images/products/${productID}/1-thumb.png" alt="Varkhart Bestseller Product - ${productID}">
+                                <img src="${product.productThumbnailUrl}" alt="Varkhart Bestseller Product - ${product.productCode}">
                             </div>
                             <p class="product-name">${product.name}</p>
                             <p class="product-price">R ${product.price}</p>
                             <div class="product-divider"></div>
                         </a>`
                     );
-
-
                     // // Insert Product Promo
                     // if (product.promo !== "") {
                     //     $(`<span class="product-promo" data-product-promo="${product.promo}">${product.promo}</span>`).prependTo(`#${productID}`)
                     // }
                 }
-
-
-            }
-
-        }
-    };
-
-    xhttp.open("GET", "./assets/js/products.json", true);
-    xhttp.send();
+            });
+            $('.home-slick').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: false,
+            })
+        })
+        .catch(err => {
+            console.log(err);
+        });
 }
+
 
 $(document).on("click", ".product-page-sizes-buttons >*", function () {
     $(".active-size").toggleClass("active-size");
@@ -507,7 +476,9 @@ if (window.location.pathname == "/winkel.html") {
 // SLick Arrows
 $("#slick-next").click(() => {
     $('.product-slick').slick("slickNext");
-})
+    $('.home-slick').slick("slickNext");
+});
 $("#slick-prev").click(() => {
     $('.product-slick').slick("slickPrev");
+    $('.home-slick').slick("slickPrev");
 })
