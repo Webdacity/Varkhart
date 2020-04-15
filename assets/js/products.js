@@ -1,5 +1,3 @@
-let api_url = "http://localhost:3000"
-
 // Nav Search Bar
 const loadNavSearch = () => {
     // Get Search Term
@@ -289,8 +287,10 @@ $(".shop-display-sort select").change(function () {
 // Insert Products in Store:
 const loadShopProducts = () => {
     // Axios GET
-    axios.get(`${api_url}/products`)
+    showLoader();
+    axios.get(`https://varkhart-backend.herokuapp.com/products`)
         .then((response) => {
+            hideLoader()
             const products = response.data;
 
             products.forEach(product => {
@@ -329,7 +329,7 @@ const loadShopProducts = () => {
 
 // Insert Products in Product Page:
 const loadProductPage = () => {
-
+    showLoader();
     // Get Product ID:
     let productCode = window.location.hash; //Get Recipe ID
     productCode = productCode.substr(1); //Remove #
@@ -340,16 +340,23 @@ const loadProductPage = () => {
     }
 
     // JSON
-    axios.get(`${api_url}/products/productCode/${productCode}`)
+    axios.get(`https://varkhart-backend.herokuapp.com/products/productCode/${productCode}`)
         .then((response) => {
+            hideLoader();
             const product = response.data;
-            console.log(product)
+            console.log(product);
 
 
             // Insert HTML
-            document.title = product.name;
+            document.title = "Varkhart | " + product.name;
             $(".product-page-name").html(product.name);
-            $(".product-page-price").html(`R ${product.price}`);
+            if (product.discount > 0 || product.discount !== "") {
+                $(".product-page-price").html(`R ${product.price * (100 - product.discount)/100}`);
+                $(".product-page-price-container p").html(`${product.discount}% Af`)
+
+            } else {
+                $(".product-page-price").html(`R ${product.price}`);
+            }
             $(".product-page-description").html(product.description);
             $(".product-page-gender p").html(product.gender);
             $(".product-page-color p").html(product.color);
@@ -371,7 +378,7 @@ const loadProductPage = () => {
             } else {
                 product.sizes.forEach(size => {
                     $(".product-page-sizes-buttons").append(
-                        `<span>${sizes[i]}</span>`
+                        `<span>${size}</span>`
                     )
                 })
             }
@@ -400,7 +407,11 @@ const loadProductPage = () => {
 
         })
         .catch(err => {
-            console.log(err);
+            if (err.response.status = 404) {
+                window.location = "/winkel.html"
+            } else {
+                console.log(err);
+            }
         });
 }
 
@@ -410,13 +421,22 @@ const loadProductPage = () => {
 // Insert Products in Home:
 const loadHomeProducts = () => {
 
-    axios.get(`${api_url}/products`)
+    axios.get(`https://varkhart-backend.herokuapp.com/products`)
         .then((response) => {
             const products = response.data;
 
             products.forEach(product => {
                 if (product.home === true) {
-                    console.log(product)
+                    console.log(product);
+                    // Check for Discount
+                    let productPrice;
+                    if (product.discount > 0 || product.discount !== "") {
+                        productPrice = product.price * (100 - product.discount) / 100
+                    } else {
+                        productPrice = product.price
+                    }
+
+
                     // Insert HTML
                     $(".home-slick").append(
                         `
@@ -425,7 +445,7 @@ const loadHomeProducts = () => {
                                 <img src="${product.productThumbnailUrl}" alt="Varkhart Bestseller Product - ${product.productCode}">
                             </div>
                             <p class="product-name">${product.name}</p>
-                            <p class="product-price">R ${product.price}</p>
+                            <p class="product-price">R ${productPrice}</p>
                             <div class="product-divider"></div>
                         </a>`
                     );

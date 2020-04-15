@@ -1,5 +1,3 @@
-let api_url = "http://localhost:3000"
-
 // Calculate Cart Total
 function calcCartTotal() {
     let totalCart = 0;
@@ -169,34 +167,45 @@ const showCart = () => {
 
 // Load Cart with Items from Storage
 const loadCart = () => {
+    showLoader()
     let cartArray = JSON.parse(localStorage.getItem("cart"));
 
     // Empty Cart
     if (cartArray == null) {
         $(".cart-content").hide();
         $(".cart-empty").fadeIn();
+        hideLoader();
     } else if (cartArray.length == 0) {
         $(".cart-content").hide();
         $(".cart-empty").fadeIn();
+        hideLoader();
     } else {
         let productIDs = cartArray.map(function (item) {
             return item.id
         });
         let initialCartTotal = 0;
 
-        axios.get(`${api_url}/products`)
+        axios.get(`https://varkhart-backend.herokuapp.com/products`)
             .then((response) => {
+                hideLoader();
                 const products = response.data;
                 let counter = 0;
                 products.forEach(product => {
                     if (productIDs.indexOf(product.productCode) >= 0) {
-                        initialCartTotal += product.price;
 
+
+                        let productPrice;
+                        if (product.discount > 0 || product.discount !== "") {
+                            productPrice = product.price * (100 - product.discount) / 100
+                        } else {
+                            productPrice = product.price
+                        }
+                        initialCartTotal += productPrice;
                         // Actual Cart
                         $(".cart-content-item-grid").append(
                             `
                             <div class="cart-content-item container d-flex align-items-center" id="cart-item-${counter+1}"
-                                data-cart-item-price=${product.price}>
+                                data-cart-item-price=${productPrice}>
                                 <template id=${product.productCode}></template>
                                 <div class="4 col-md-1 cart-content-image-container">
                                     <img src="${product.productThumbnailUrl}" alt="Varkhart Cart Item" class="img-fluid">
@@ -220,7 +229,7 @@ const loadCart = () => {
                                     </div>
                                     <div class="col-md-3 mt-md-0">
                                         <p class="cart-content-total">
-                                            R <span>${product.price}</span>
+                                            R <span>${productPrice}</span>
                                         </p>
                                     </div>
                                 </div>

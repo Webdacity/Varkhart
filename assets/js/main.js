@@ -109,3 +109,13 @@ if (window.location.pathname === "/winkel.html") {
     const rangeWidth = $(".card-price").width();
     $(".multi-range input[type=range]").width(rangeWidth * 0.85)
 }
+
+
+// Loader
+
+const showLoader = () => {
+    $(".loader-container").fadeIn(500)
+}
+const hideLoader = () => {
+    $(".loader-container").fadeOut(500)
+}

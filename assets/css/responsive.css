@@ -35,7 +35,8 @@
     /* Product Page */
     .product-details {
         height: auto;
-        padding: 7.5vh 5% 15vh 5%;
+        min-height: auto;
+        padding: 4rem 5% 6rem 5%;
     }
 
     .product-slick-image-container {

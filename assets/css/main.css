@@ -35,6 +35,7 @@ html {
 
 .section-heading h1 {
   color: var(--brown);
+  font-size: 1.8rem;
 }
 
 .section-heading span {
@@ -77,8 +78,12 @@ html {
   background-color: white;
 }
 
+.navbar-brand {
+  /* padding: 0 !important; */
+}
+
 .navbar-brand img {
-  height: 50px;
+  height: 40px;
 }
 
 .nav-link {
@@ -480,15 +485,33 @@ footer form input:focus {
 
 /* Loader */
 
+.loader-container {
+  width: 100vw;
+  height: 100%;
+  position: absolute;
+  background-color: var(--grey);
+  top: 0;
+  left: 0;
+  text-align: center;
+  z-index: 100;
+  display: none;
+}
+
 .loader {
-  border: 16px solid #f3f3f3;
-  /* Light grey */
-  border-top: 16px solid #3498db;
-  /* Blue */
+  border: 5px solid rgb(177, 177, 177);
+  border-top: 5px solid var(--brown);
   border-radius: 50%;
-  width: 120px;
-  height: 120px;
+  width: 50px;
+  height: 50px;
   animation: spin 2s linear infinite;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
 }
 
 @keyframes spin {
@@ -583,8 +606,9 @@ footer form input:focus {
   display: inline-block;
   color: var(--grey);
   position: absolute;
-  padding: 3px 10px;
+  padding: 3px 8px;
   margin: 0;
+  font-size: 0.9rem;
 }
 
 .pb-top-right {
@@ -651,8 +675,9 @@ footer form input:focus {
 .product {
   text-align: center;
   cursor: pointer;
-  padding: 30px 3% 0 3%;
+  padding: 20px 1rem 0 1rem;
   position: relative;
+  margin-bottom: 2rem;
 }
 
 .product:hover {
@@ -735,6 +760,10 @@ footer form input:focus {
 
 /* SHOP PAGE */
 
+.shop-body>.container {
+  padding: 0;
+}
+
 .shop-body>.container>.row {
   min-height: 100vh;
 }
@@ -766,8 +795,7 @@ footer form input:focus {
 }
 
 .shop-product-grid {
-  padding: 0;
-  padding-top: 5%;
+  padding: 2rem 1rem
 }
 
 .product-image-container {
@@ -1270,20 +1298,19 @@ input[type=range]::-webkit-slider-thumb::before {
 
 .product-details {
   background-color: var(--beige);
-  height: 100vh;
+  min-height: 100vh;
   color: var(--brown);
-  /* display: flex; */
   flex-direction: column;
   justify-content: center;
-  padding: 5% 2.5% 5% 5%;
+  padding: 6rem 2.5% 6rem 2.5%;
   position: relative;
 }
 
 .product-page-name {
   text-transform: uppercase;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 500;
-  letter-spacing: 1;
+  letter-spacing: 1px;
   margin: 0;
 }
 
@@ -1296,6 +1323,20 @@ input[type=range]::-webkit-slider-thumb::before {
   letter-spacing: 1px;
   display: inline-block !important;
   margin: 4% 0;
+  font-size: 1.1rem;
+}
+
+.product-page-price-container {
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
+
+.product-page-price-container p {
+  font-weight: 500;
+  margin: 0;
+  margin-left: 15px;
+  font-size: 1.1rem;
 }
 
 .product-page-info {
