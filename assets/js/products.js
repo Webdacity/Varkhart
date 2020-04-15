@@ -350,7 +350,7 @@ const loadProductPage = () => {
             // Insert HTML
             document.title = "Varkhart | " + product.name;
             $(".product-page-name").html(product.name);
-            if (product.discount > 0 || product.discount !== "") {
+            if (product.discount !== null) {
                 $(".product-page-price").html(`R ${product.price * (100 - product.discount)/100}`);
                 $(".product-page-price-container p").html(`${product.discount}% Af`)
 
@@ -402,7 +402,7 @@ const loadProductPage = () => {
 
             // Hide arrows if 1 image
             if ($(".product-slick .slick-track").children().length <= 1) {
-                $(".product-slick .slick-arrow").hide();
+                $(".product-slick-container .slick-arrow").hide();
             }
 
         })
