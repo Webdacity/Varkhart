@@ -13,6 +13,7 @@ function calcCartTotal() {
 // Cart Quantity + Total Counter
 const getCartItemID = (item) => {
     const id = $(item).closest(".cart-content-item").attr("id");
+    console.log(id)
     return id;
 }
 
@@ -180,42 +181,43 @@ const loadCart = () => {
         $(".cart-empty").fadeIn();
         hideLoader();
     } else {
-        let productIDs = cartArray.map(function (item) {
+        let productCodesToLoad = cartArray.map(function (item) {
             return item.id
         });
         let initialCartTotal = 0;
-
         axios.get(`https://varkhart-backend.herokuapp.com/products`)
             .then((response) => {
                 hideLoader();
                 const products = response.data;
                 let counter = 0;
-                products.forEach(product => {
-                    if (productIDs.indexOf(product.productCode) >= 0) {
+                let itemCount = 1;
 
-
-                        let productPrice;
-                        if (product.discount !== null) {
-                            productPrice = product.price - product.discount;
-                        } else {
-                            productPrice = product.price
-                        }
-                        initialCartTotal += productPrice;
-                        // Actual Cart
-                        $(".cart-content-item-grid").append(
-                            `
-                            <div class="cart-content-item container d-flex align-items-center" id="cart-item-${counter+1}"
+                // Ensure Cart in same format as localStorage cart
+                for (let i = 0; i < productCodesToLoad.length; i++) {
+                    for (let j = 0; j < products.length; j++) {
+                        if (products[j].productCode === productCodesToLoad[i]) {
+                            let productPrice;
+                            if (products[j].discount !== null) {
+                                productPrice = products[j].price - products[j].discount;
+                            } else {
+                                productPrice = products[j].price
+                            }
+                            initialCartTotal += productPrice;
+                            // Actual Cart
+                            $(".cart-content-item-grid").append(
+                                `
+                            <div class="cart-content-item container d-flex align-items-center" id="cart-item-${itemCount}"
                                 data-cart-item-price=${productPrice}>
-                                <template id=${product.productCode}></template>
+                                <template id=${products[j].productCode}></template>
                                 <div class="4 col-md-1 cart-content-image-container">
-                                    <img src="${product.productThumbnailUrl}" alt="Varkhart Cart Item" class="img-fluid">
+                                    <img src="${products[j].productThumbnailUrl}" alt="Varkhart Cart Item" class="img-fluid">
                                 </div>
                                 <div class="col-md-3">
                                     <div class="d-flex flex-column">
-                                        <a class="cart-content-item-name" href="./produk.html#${product.productCode}">${product.name}</a>
+                                        <a class="cart-content-item-name" href="./produk.html#${products[j].productCode}">${products[j].name}</a>
                                         <div>
                                         <small class="text-muted cart-content-size">${cartArray[counter].size}</small>
-                                        <small class="text-muted cart-content-color">| ${product.color}</small>
+                                        <small class="text-muted cart-content-color">| ${products[j].color}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -237,12 +239,14 @@ const loadCart = () => {
                                     <i class="fal fa-times"></i>
                                 </div>
                             </div>`
-                        );
+                            );
 
-                        $(".cart-content-totals h4 span").html(initialCartTotal);
-                        counter++;
+                            $(".cart-content-totals h4 span").html(initialCartTotal);
+                            counter++;
+                            itemCount++;
+                        }
                     }
-                })
+                }
             })
             .catch(err => {
                 console.log(err);
@@ -280,7 +284,7 @@ const addToCart = () => {
 
     // Get Current Cart
     let currentCart = JSON.parse(localStorage.getItem("cart"));
-
+    console.log(currentCart)
     // Check if already in cart
     if (searchCart(productID, productSize) > 0) {
         notify("Produk is klaar n mandjie - Verander hoeveelheid in mandjie")
@@ -330,13 +334,13 @@ const deleteCartItem = (item) => {
     var removeIndex = currentCart.map(function (item) {
         return item.id;
     }).indexOf(cartProductID);
-    currentCart.splice(removeIndex, 1);
+    console.log(removeIndex)
+    currentCart.splice(removeIndex - 1, 1);
 
     localStorage.setItem("cart", JSON.stringify(currentCart));
     updateCartCounter();
     showCart();
     notify("Produk Verwyder");
-
 }
 
 $(".cart-heading i").click(() => {
