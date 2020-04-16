@@ -120,20 +120,27 @@ const adjustFilterPrice = (minPrice, maxPrice) => {
 const loadFilterColors = () => {
     // Get shop length 
     const shopLength = $(".shop-product-grid").children().length;
-    const productColors = [];
+    let productColors = [];
     let currentProduct;
     let currentColor;
 
-    // Insert Color Filter Options
+    // Get all Colour Groups in Shop
     for (i = 1; i <= shopLength; i++) {
         currentProduct = $(`.shop-product-grid a:nth-child(${i}) template`);
-        // Color
         currentColor = currentProduct.attr("data-product-color").toLowerCase();
         productColors.push(currentColor);
-        $(".card-color .color-boxes").append(
-            `<span style="background-color:${currentColor}" data-toggle="tooltip" data-placement="top" title="${currentColor}"></span>`
-        );
     }
+
+    // Insert Colour Options
+    const productColorsSet = new Set(productColors);
+    productColors = productColorsSet;
+    productColors.forEach(color => {
+        $(".card-color .color-boxes").append(
+            `<span style="background-color:${color}" data-toggle="tooltip" data-placement="top" title="${color}"></span>`
+        );
+    })
+
+
 }
 
 const adjustFilterColors = () => {
@@ -205,7 +212,6 @@ $(".card-category p").click(function () {
 
 $("#categoryBybehore").click(function () {
     const shopLength = $(".shop-product-grid").children().length;
-    console.log("bybehore")
     for (i = 1; i <= shopLength; i++) {
         productGender = $(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-gender");
         productCategory = $(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-category");
@@ -218,7 +224,6 @@ $("#categoryBybehore").click(function () {
 })
 
 const filterCategories = (activecategoryOption, activeCategoryGender) => {
-    console.log(activecategoryOption, activeCategoryGender);
     const shopLength = $(".shop-product-grid").children().length;
     let activeCategory = "";
     let productCategory = "";
@@ -229,14 +234,22 @@ const filterCategories = (activecategoryOption, activeCategoryGender) => {
     for (i = 1; i <= shopLength; i++) {
         productGender = $(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-gender");
         productCategory = $(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-category");
-
+        // Exact Match
         if (productCategory == activecategoryOption && productGender == activeCategoryGender) {
             $(`.shop-product-grid a:nth-child(${i})`).removeClass("filter-hide-category");
-        } else if (productCategory == activecategoryOption && productGender == "Unisex") {
+        }
+        // Category Match with Unisex
+        else if (productCategory == activecategoryOption && productGender == "Unisex") {
             $(`.shop-product-grid a:nth-child(${i})`).removeClass("filter-hide-category");
-        } else {
+        }
+        // No Match
+        else {
             $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-category");
         }
+    }
+    console.log(activecategoryOption, activeCategoryGender);
+    if (activecategoryOption == "Skoene" && activeCategoryGender == "Kinders") {
+        $(`.shop-product-grid a template[data-product-gender="Unisex"]`).parent().addClass("filter-hide-category");
     }
 }
 
@@ -300,7 +313,7 @@ const loadShopProducts = () => {
                         <template data-product-tags="${product.name},${product.category},${product.color},${product.gender},${product.material}, ${product.tags}"
                         data-product-color="${product.colorGroup}"
                         data-product-sizes="${product.sizes}"
-                        data-product-price="${product.price}"
+                        data-product-price="${product.price - product.discount}"
                         data-product-gender="${product.gender}"
                         data-product-category="${product.category}"
                         ></template>
@@ -308,7 +321,7 @@ const loadShopProducts = () => {
                         <img src="${product.productThumbnailUrl}">
                         </div>
                         <p class="product-name">${product.name}</p>
-                        <p class="product-price">R ${product.price}</p>
+                        <p class="product-price">R ${product.price - product.discount}</p>
                     </a>`
                 );
 
@@ -351,8 +364,8 @@ const loadProductPage = () => {
             document.title = "Varkhart | " + product.name;
             $(".product-page-name").html(product.name);
             if (product.discount !== null) {
-                $(".product-page-price").html(`R ${product.price * (100 - product.discount)/100}`);
-                $(".product-page-price-container p").html(`${product.discount}% Af`)
+                $(".product-page-price").html(`R ${product.price - product.discount}`);
+                $(".product-page-price-container p").html(`R ${product.discount} Af`)
 
             } else {
                 $(".product-page-price").html(`R ${product.price}`);
@@ -424,30 +437,28 @@ const loadHomeProducts = () => {
     axios.get(`https://varkhart-backend.herokuapp.com/products`)
         .then((response) => {
             const products = response.data;
-
             products.forEach(product => {
-                if (product.home === true) {
-                    console.log(product);
+                if (product.home == true) {
                     // Check for Discount
                     let productPrice;
-                    if (product.discount > 0 || product.discount !== "") {
-                        productPrice = product.price * (100 - product.discount) / 100
+                    if (product.discount !== null) {
+                        productPrice = product.price - product.discount;
                     } else {
                         productPrice = product.price
                     }
 
 
                     // Insert HTML
-                    $(".home-slick").append(
+                    $(".home-grid").append(
                         `
-                        <a class="col-10 offset-1 offset-sm-0 col-sm-6 col-md-3 product" href="./produk.html#${product.productCode}" id="${product.productCode}">
+                        <a class="col-10 offset-1 offset-sm-0 col-sm-6 col-md-6 col-lg-4 col-xl-3 product" href="./produk.html#${product.productCode}" id="${product.productCode}">
                             <div class="product-image-container">
                                 <img src="${product.productThumbnailUrl}" alt="Varkhart Bestseller Product - ${product.productCode}">
                             </div>
                             <p class="product-name">${product.name}</p>
                             <p class="product-price">R ${productPrice}</p>
-                            <div class="product-divider"></div>
-                        </a>`
+                        </a>
+                        `
                     );
                     // // Insert Product Promo
                     // if (product.promo !== "") {
@@ -455,11 +466,6 @@ const loadHomeProducts = () => {
                     // }
                 }
             });
-            $('.home-slick').slick({
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                arrows: false,
-            })
         })
         .catch(err => {
             console.log(err);

@@ -195,8 +195,8 @@ const loadCart = () => {
 
 
                         let productPrice;
-                        if (product.discount > 0 || product.discount !== "") {
-                            productPrice = product.price * (100 - product.discount) / 100
+                        if (product.discount !== null) {
+                            productPrice = product.price - product.discount;
                         } else {
                             productPrice = product.price
                         }
