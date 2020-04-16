@@ -326,16 +326,13 @@ $(document).on("click", ".cart-content-item-delete i", function () {
 
 const deleteCartItem = (item) => {
     // Get Info & Cart
-    const currentID = getCartItemID(item);
-    const cartProductID = getCartItemProductID(currentID);
+    let currentCartPosition = getCartItemID(item);
+    // const cartProductID = getCartItemProductID(currentID);
     let currentCart = JSON.parse(localStorage.getItem("cart"));
-
+    let cartPostition = currentCartPosition.slice(currentCartPosition.lastIndexOf("-") + 1, currentCartPosition.length);
+    console.log(cartPostition)
     // Delete Item
-    var removeIndex = currentCart.map(function (item) {
-        return item.id;
-    }).indexOf(cartProductID);
-    console.log(removeIndex)
-    currentCart.splice(removeIndex - 1, 1);
+    currentCart.splice(cartPostition - 1, 1);
 
     localStorage.setItem("cart", JSON.stringify(currentCart));
     updateCartCounter();
