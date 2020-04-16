@@ -451,7 +451,7 @@ const loadHomeProducts = () => {
                     // Insert HTML
                     $(".home-grid").append(
                         `
-                        <a class="col-10 offset-1 offset-sm-0 col-sm-6 col-md-6 col-lg-4 col-xl-3 product" href="./produk.html#${product.productCode}" id="${product.productCode}">
+                        <a class="col-10 offset-sm-0 col-sm-6 col-md-6 col-lg-4 col-xl-3 product" href="./produk.html#${product.productCode}" id="${product.productCode}">
                             <div class="product-image-container">
                                 <img src="${product.productThumbnailUrl}" alt="Varkhart Bestseller Product - ${product.productCode}">
                             </div>
