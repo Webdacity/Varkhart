@@ -365,7 +365,7 @@ const loadProductPage = () => {
             $(".product-page-name").html(product.name);
             if (product.discount !== null) {
                 $(".product-page-price").html(`R ${product.price - product.discount}`);
-                $(".product-page-price-container p").html(`R ${product.discount} Af`)
+                $(".product-page-price-container p").html(`R ${product.discount} AF`)
 
             } else {
                 $(".product-page-price").html(`R ${product.price}`);
