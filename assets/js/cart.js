@@ -386,8 +386,10 @@ const sendOrder = () => {
     $(".order-form [name='item_description']").val(newCart.toString());
     $(".order-form [name='custom_str3']").val($(".order-form #order-cell").val());
     $(".order-form [name='amount']").val(parseInt($(".checkout-total h5 span").html()));
-    $(".order-form [name='merchant_id']").val("15264989");
-    $(".order-form [name='merchant_key']").val("cjqavjznyhybl");
+    $(".order-form [name='merchant_id']").val("10016549");
+    $(".order-form [name='merchant_key']").val("sxou1f0t4mr2c");
+    // $(".order-form [name='merchant_id']").val("15264989");
+    // $(".order-form [name='merchant_key']").val("cjqavjznyhybl");
     $(".order-form").submit();
 }
 
