@@ -359,7 +359,7 @@ footer form button {
 }
 
 footer form input {
-  border: none;
+  border: 1px solid var(--brown);
   padding: 4px 12px;
   background-color: white;
   margin-right: 20px;
