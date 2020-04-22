@@ -133,8 +133,7 @@ const newsletterSubmit = () => {
         showLoader()
         axios({
                 method: "post",
-                // url: "https://varkhart-backend.herokuapp.com/sendgrid/newsletter",
-                url: "http://localhost:3000/sendgrid/newsletter",
+                url: "https://varkhart-backend.herokuapp.com/sendgrid/newsletter",
                 data: {
                     "email": $(".newsletter-form [name='email']").val(),
                     "first_name": $(".newsletter-form [name='name']").val(),
