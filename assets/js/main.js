@@ -121,42 +121,35 @@ const hideLoader = () => {
 }
 
 // Submit Newsletter Form
-// const newsletterSubmit = () => {
-//     event.preventDefault();
+const newsletterSubmit = () => {
+    event.preventDefault();
 
-//     // Validate Email
-//     let email = $(".newsletter-form [name='email']").val();
-//     let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-//     if (re.test(String(email).toLowerCase()) === false) {
-//         alert("Please enter a valid email address");
-//     } else {
-//         axios({
-//                 method: "put",
-//                 url: "https://api.sendgrid.com/v3/marketing/contacts",
-//                 headers: {
-//                     "Authorization": `Bearer ${process.env.SENDGRID_API_KEY}`,
-//                     // "Authorization": `Bearer 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`,
-//                     "Content-Type": "application/json"
-//                 },
-//                 data: {
-//                     "list_ids": [
-//                         "52a6677b-23a5-41b1-b01f-9709c1c47d36"
-//                     ],
-//                     "contacts": [{
-//                         "email": $(".newsletter-form [name='email']").val(),
-//                         "first_name": $(".newsletter-form [name='name']").val(),
-//                     }]
-//                 }
-//             })
-//             .then(result => {
-//                 if (result.status === 202) {
-//                     console.log(result);
-//                     alert("Jy is 'n legende! Hou 'n oog op jou e-pos vir ons nuusbriewe")
-//                 }
-//             })
-//             .catch(error => {
-//                 console.log(error)
-//             })
-//     }
+    // Validate Email
+    let email = $(".newsletter-form [name='email']").val();
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (re.test(String(email).toLowerCase()) === false) {
+        alert("Please enter a valid email address");
+    } else {
+        showLoader()
+        axios({
+                method: "post",
+                // url: "https://varkhart-backend.herokuapp.com/sendgrid/newsletter",
+                url: "http://localhost:3000/sendgrid/newsletter",
+                data: {
+                    "email": $(".newsletter-form [name='email']").val(),
+                    "first_name": $(".newsletter-form [name='name']").val(),
+                }
+            })
+            .then(result => {
+                if (result.status === 200) {
+                    console.log(result)
+                    hideLoader();
+                    notify("Jy is 'n legende! Hou 'n oog op jou e-pos vir ons nuusbriewe")
+                }
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
 
-// }
+}
