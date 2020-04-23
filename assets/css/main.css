@@ -454,6 +454,11 @@ footer form input:focus {
   -o-transform: scale(1.1);
 }
 
+.footer-bottom a {
+  color: var(--brown);
+  font-weight: 500;
+}
+
 
 /* Notifications */
 .notify-bar {
