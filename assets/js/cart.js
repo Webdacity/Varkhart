@@ -360,6 +360,7 @@ $(".cart-content-item-delete i").hover(
 
 // Send POST to backend for validation
 const sendOrder = () => {
+    showLoader();
     // Get Cart List 
     const cart = JSON.parse(localStorage.getItem("cart"));
     let newCart = [];
@@ -388,7 +389,35 @@ const sendOrder = () => {
     $(".order-form [name='amount']").val(parseInt($(".checkout-total h5 span").html()));
     $(".order-form [name='merchant_id']").val("15264989");
     $(".order-form [name='merchant_key']").val("cjqavjznyhybl");
-    $(".order-form").submit();
+
+    const orderToSave = {
+        email_address: $(".order-form [name='email_address']").val(),
+        first_name: $(".order-form [name='name_first']").val(),
+        last_name: $(".order-form [name='name_last']").val(),
+        address_line_1: $(".order-form #order-straat-nommer").val() + ", " +
+            $(".order-form #order-straat-naam").val() + ", " +
+            $(".order-form #order-gebou-details").val() + ", " +
+            $(".order-form #order-woongebied").val(),
+        phone_number: $(".order-form [name='cell_number']").val(),
+        city: $(".order-form #order-stad").val(),
+        state_province_region: $(".order-form #order-provinsie").val(),
+        post_code: $(".order-form #order-poskode").val(),
+        cart: $(".order-form [name='item_description']").val()
+    }
+    axios({
+            method: "post",
+            url: "https://varkhart-backend.herokuapp.com/sendgrid/cartDetails",
+            data: orderToSave
+        })
+        .then(response => {
+            if (response.status === 201) {
+                hideLoader()
+                $(".order-form").submit();
+            } else {
+                notify("Error Processing your transaction. Please contact Support")
+            }
+        })
+        .catch(err => console.log(err));
 }
 
 // Validate Form
@@ -413,11 +442,8 @@ const validateForm = (formToVal, callback) => {
 
 
 $(document).ready(function () {
-
     if (window.location.pathname == "/mandjie.html") {
         loadCart();
         updateCartCounter();
     }
-    15264989
-
 });
