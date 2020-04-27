@@ -494,9 +494,6 @@ if (window.location.pathname == "/winkel.html") {
     loadShopProducts();
 }
 
-
-
-
 // SLICK
 
 // SLick Arrows
