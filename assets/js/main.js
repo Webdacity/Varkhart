@@ -152,3 +152,37 @@ const newsletterSubmit = () => {
     }
 
 }
+
+// Submit Newsletter Modal Form
+const newsletterModalSubmit = () => {
+    $('#newsletter-modal').modal('toggle');
+    event.preventDefault();
+
+    // Validate Email
+    let email = $(".newsletter-modal-form [name='email']").val();
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (re.test(String(email).toLowerCase()) === false) {
+        alert("Please enter a valid email address");
+    } else {
+        showLoader()
+        axios({
+                method: "post",
+                url: "https://varkhart-backend.herokuapp.com/sendgrid/newsletter",
+                data: {
+                    "email": $(".newsletter-modal-form [name='email']").val(),
+                    "first_name": $(".newsletter-modal-form [name='name']").val(),
+                }
+            })
+            .then(result => {
+                if (result.status === 200) {
+                    console.log(result)
+                    hideLoader();
+                    notify("Jy is 'n legende! Hou 'n oog op jou e-pos vir ons nuusbriewe")
+                }
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
+}
