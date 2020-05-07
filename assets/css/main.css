@@ -746,7 +746,7 @@ footer form input:focus {
 .home-newsletter-section .container {
   background-color: var(--beige);
   text-align: center;
-  padding: 1rem;
+  padding: 2rem 1rem;
   margin: 1rem auto;
   color: var(--brown);
 }
