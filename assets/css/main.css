@@ -1944,6 +1944,17 @@ input[type=number] {
   background-color: transparent;
 }
 
+.payfast-error {
+  text-align: center;
+  color: var(--brown);
+  margin-top: 1rem;
+  display: none;
+}
+
+.payfast-error:hover {
+  color: var(--brown);
+}
+
 .cart-summary h4 span {
   color: var(--brown);
 }
