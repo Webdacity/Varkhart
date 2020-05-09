@@ -137,7 +137,7 @@ const checkoutCart = () => {
 
 
     $(".checkout-cart-count").html(cartLength);
-    $(".checkout-total h5 span").html(`${cartTotal+100}`); // {Incl Delivery}
+    $(".checkout-total h5 span").html(`${cartTotal+117}`); // {Incl Delivery}
 }
 
 // UTILS
