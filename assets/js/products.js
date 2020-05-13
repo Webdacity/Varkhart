@@ -307,9 +307,10 @@ const loadShopProducts = () => {
             const products = response.data;
 
             products.forEach(product => {
-                // Insert HTML
-                $(".shop-product-grid").append(
-                    `<a class="col-10 offset-1 offset-sm-0 col-sm-6 col-md-6 col-lg-4 col-xl-3 product" href="./produk.html#${product.productCode}" id="${product.productCode}" >
+                if (product.visibility) {
+                    // Insert HTML
+                    $(".shop-product-grid").append(
+                        `<a class="col-10 offset-1 offset-sm-0 col-sm-6 col-md-6 col-lg-4 col-xl-3 product" href="./produk.html#${product.productCode}" id="${product.productCode}" >
                         <template data-product-tags="${product.name},${product.category},${product.color},${product.gender},${product.material}, ${product.tags}"
                         data-product-color="${product.colorGroup}"
                         data-product-sizes="${product.sizes}"
@@ -323,11 +324,12 @@ const loadShopProducts = () => {
                         <p class="product-name">${product.name}</p>
                         <p class="product-price">R ${product.price - product.discount}</p>
                     </a>`
-                );
+                    );
 
-                // Insert Product Tag
-                if (product.promo !== "") {
-                    $(`<span class="product-promo" data-product-promo="${product.promo}">${product.promo}</span>`).prependTo(`#${product.productCode}`)
+                    // Insert Product Tag
+                    if (product.promo !== "") {
+                        $(`<span class="product-promo" data-product-promo="${product.promo}">${product.promo}</span>`).prependTo(`#${product.productCode}`)
+                    }
                 }
             })
             loadNavSearch();
