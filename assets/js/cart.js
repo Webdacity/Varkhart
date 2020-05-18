@@ -140,7 +140,7 @@ const checkoutCart = () => {
     $(".checkout-total h5 span").html(`${cartTotal+117}`); // {Incl Delivery}
 }
 
-// UTILS
+// CART UTILS
 
 $(".notify-bar").hide();
 
@@ -164,94 +164,104 @@ const showCart = () => {
     console.log("Current Cart:" + localStorage.getItem("cart"));
 }
 
+// Check if Cart is Empty
+const checkCartEmpty = () => {
+    currentCart = JSON.parse(localStorage.getItem("cart"));
+    if (currentCart === null || currentCart.length < 1) {
+        $(".cart-content").hide();
+        $(".cart-empty").fadeIn();
+        hideLoader();
+        return true
+    }
+}
+
 // CART FUNCTIONS
 
 // Load Cart with Items from Storage
 const loadCart = () => {
     showLoader()
-    let cartArray = JSON.parse(localStorage.getItem("cart"));
+    if (!checkCartEmpty()) {
+        let cartArray = JSON.parse(localStorage.getItem("cart"));
 
-    // Empty Cart
-    if (cartArray == null) {
-        $(".cart-content").hide();
-        $(".cart-empty").fadeIn();
-        hideLoader();
-    } else if (cartArray.length == 0) {
-        $(".cart-content").hide();
-        $(".cart-empty").fadeIn();
-        hideLoader();
-    } else {
-        let productCodesToLoad = cartArray.map(function (item) {
-            return item.id
+        let productCodes = [];
+        cartArray.forEach(item => {
+            productCodes.push(item.id)
         });
         let initialCartTotal = 0;
+
         axios.get(`https://varkhart-backend.herokuapp.com/products`)
             .then((response) => {
-                hideLoader();
                 const products = response.data;
                 let counter = 0;
-                let itemCount = 1;
 
                 // Ensure Cart in same format as localStorage cart
-                for (let i = 0; i < productCodesToLoad.length; i++) {
-                    for (let j = 0; j < products.length; j++) {
-                        if (products[j].productCode === productCodesToLoad[i]) {
-                            let productPrice;
-                            if (products[j].discount !== null) {
-                                productPrice = products[j].price - products[j].discount;
-                            } else {
-                                productPrice = products[j].price
-                            }
-                            initialCartTotal += productPrice;
-                            // Actual Cart
-                            $(".cart-content-item-grid").append(
-                                `
-                            <div class="cart-content-item container d-flex align-items-center" id="cart-item-${itemCount}"
-                                data-cart-item-price=${productPrice}>
-                                <template id=${products[j].productCode}></template>
-                                <div class="4 col-md-1 cart-content-image-container">
-                                    <img src="${products[j].productThumbnailUrl}" alt="Varkhart Cart Item" class="img-fluid">
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="d-flex flex-column">
-                                        <a class="cart-content-item-name" href="./produk.html#${products[j].productCode}">${products[j].name}</a>
-                                        <div>
-                                        <small class="text-muted cart-content-size">${cartArray[counter].size}</small>
-                                        <small class="text-muted cart-content-color">| ${products[j].color}</small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="offset-md-0 col-md-8 d-flex align-items-center">
-                                    <div class="col-md-3 offset-md-5">
-                                        <div class="cart-content-quantity">
-                                            <i class="far fa-minus minus"></i>
-                                            <input type="number" value="1" disabled class="cart-content-quantity-input">
-                                            <i class="far fa-plus plus"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 mt-md-0">
-                                        <p class="cart-content-total">
-                                            R <span>${productPrice}</span>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="cart-content-item-delete">
-                                    <i class="fal fa-times"></i>
-                                </div>
-                            </div>`
-                            );
-
-                            $(".cart-content-totals h4 span").html(initialCartTotal);
-                            counter++;
-                            itemCount++;
+                productCodes.forEach(code => {
+                    let productFound = products.find(product => product.productCode === code);
+                    if (productFound !== undefined && productFound.visibility) {
+                        product = products[products.indexOf(productFound)];
+                        let productPrice;
+                        if (product.discount !== null) {
+                            productPrice = product.price - product.discount;
+                        } else {
+                            productPrice = product.price
                         }
+                        initialCartTotal += productPrice;
+                        // Actual Cart
+                        $(".cart-content-item-grid").append(
+                            `
+                                <div class="cart-content-item container d-flex align-items-center" id="cart-item-${counter+1}"
+                                    data-cart-item-price=${productPrice}>
+                                    <template id=${product.productCode}></template>
+                                    <div class="4 col-md-1 cart-content-image-container">
+                                        <img src="${product.productThumbnailUrl}" alt="Varkhart Cart Item" class="img-fluid">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="d-flex flex-column">
+                                            <a class="cart-content-item-name" href="./produk.html#${product.productCode}">${product.name}</a>
+                                            <div>
+                                            <small class="text-muted cart-content-size">${cartArray[counter].size}</small>
+                                            <small class="text-muted cart-content-color">| ${product.color}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="offset-md-0 col-md-8 d-flex align-items-center">
+                                        <div class="col-md-3 offset-md-5">
+                                            <div class="cart-content-quantity">
+                                                <i class="far fa-minus minus"></i>
+                                                <input type="number" value="1" disabled class="cart-content-quantity-input">
+                                                <i class="far fa-plus plus"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mt-md-0">
+                                            <p class="cart-content-total">
+                                                R <span>${productPrice}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="cart-content-item-delete">
+                                        <i class="fal fa-times"></i>
+                                    </div>
+                                </div>`
+                        );
+
+                        $(".cart-content-totals h4 span").html(initialCartTotal);
+                        counter++;
+                    } else {
+                        // Remove deleted product
+                        let deletedProduct = cartArray.find(item => item.id === code);
+                        console.log(deletedProduct)
+                        cartArray.splice(cartArray.indexOf(deletedProduct), 1);
+                        localStorage.setItem("cart", JSON.stringify(cartArray));
+                        location.reload();
                     }
-                }
+                });
+                hideLoader();
             })
             .catch(err => {
                 console.log(err);
             });
     }
+
 }
 
 // 

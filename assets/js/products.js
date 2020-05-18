@@ -359,67 +359,67 @@ const loadProductPage = () => {
         .then((response) => {
             hideLoader();
             const product = response.data;
-            console.log(product);
+            if (product !== undefined && product.visibility) {
 
 
-            // Insert HTML
-            document.title = "Varkhart | " + product.name;
-            $(".product-page-name").html(product.name);
-            if (product.discount !== null) {
-                $(".product-page-price").html(`R ${product.price - product.discount}`);
-                $(".product-page-price-container p").html(`R ${product.discount} AF`)
+                // Insert HTML
+                document.title = "Varkhart | " + product.name;
+                $(".product-page-name").html(product.name);
+                if (product.discount !== null) {
+                    $(".product-page-price").html(`R ${product.price - product.discount}`);
+                    $(".product-page-price-container p").html(`R ${product.discount} AF`)
 
-            } else {
-                $(".product-page-price").html(`R ${product.price}`);
-            }
-            $(".product-page-description").html(product.description);
-            $(".product-page-gender p").html(product.gender);
-            $(".product-page-color p").html(product.color);
-            $(`<span>${product.info}</span>`).appendTo(".product-page-info p:first-child()")
-            $(".product-page-info").append(
-                `<p>${product.material}</p>`
-            )
-
-
-            // Material
-
-            // Sizes
-            const sizes = product.sizes;
-            if (sizes.length == 1) {
-                $(".product-page-sizes-buttons").append(
-                    // `<p> Een Groote </p>`
-                    `<button class="active-size">${sizes[0]}</button>`
+                } else {
+                    $(".product-page-price").html(`R ${product.price}`);
+                }
+                $(".product-page-description").html(product.description);
+                $(".product-page-gender p").html(product.gender);
+                $(".product-page-color p").html(product.color);
+                $(`<span>${product.info}</span>`).appendTo(".product-page-info p:first-child()")
+                $(".product-page-info").append(
+                    `<p>${product.material}</p>`
                 )
-            } else {
-                product.sizes.forEach(size => {
-                    $(".product-page-sizes-buttons").append(
-                        `<span>${size}</span>`
-                    )
-                })
-            }
 
-            // Images 
-            product.productImageUrls.forEach(image => {
-                $(".product-slick").append(
-                    `
+
+                // Material
+
+                // Sizes
+                const sizes = product.sizes;
+                if (sizes.length == 1) {
+                    $(".product-page-sizes-buttons").append(
+                        // `<p> Een Groote </p>`
+                        `<button class="active-size">${sizes[0]}</button>`
+                    )
+                } else {
+                    product.sizes.forEach(size => {
+                        $(".product-page-sizes-buttons").append(
+                            `<span>${size}</span>`
+                        )
+                    })
+                }
+
+                // Images 
+                product.productImageUrls.forEach(image => {
+                    $(".product-slick").append(
+                        `
                     <div class="product-slick-image-container">
                     <img src="${image}" alt="Varkhart Product Slide - ${productCode}"/>
                     </div>
                     `
-                )
-            })
+                    )
+                })
 
-            $('.product-slick').slick({
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                arrows: false,
-            })
+                $('.product-slick').slick({
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: false,
+                })
 
-            // Hide arrows if 1 image
-            if ($(".product-slick .slick-track").children().length <= 1) {
-                $(".product-slick-container .slick-arrow").hide();
+                // Hide arrows if 1 image
+                if ($(".product-slick .slick-track").children().length <= 1) {
+                    $(".product-slick-container .slick-arrow").hide();
+                }
             }
-
         })
         .catch(err => {
             if (err.response.status = 404) {
@@ -440,7 +440,7 @@ const loadHomeProducts = () => {
         .then((response) => {
             const products = response.data;
             products.forEach(product => {
-                if (product.home == true) {
+                if (product.home && product.visibility) {
                     // Check for Discount
                     let productPrice;
                     if (product.discount !== null) {
