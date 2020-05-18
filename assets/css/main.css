@@ -2188,6 +2188,7 @@ input[type=number] {
 .section-about,
 .section-returns {
   padding-top: 15vh;
+  color: var(--brown);
 }
 
 .section-about {
