@@ -19,3 +19,20 @@ if (url.includes("?")) {
 else {
     window.location.replace("../index.html");
 }
+
+const checkAffiliateActive = (affiliateCode) => {
+    axios({
+            method: "post",
+            // url: `${api_url}/affiliates/checkStatus`,
+            url: `http://localhost:3000/affiliates/checkStatus`,
+            data: {
+                code: affiliateCode
+            }
+        })
+        .then(result => {
+            return result.data
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
