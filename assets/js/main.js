@@ -1,3 +1,5 @@
+const api_url = "https://varkhart-backend.herokuapp.com"
+
 $(document).ready(() => {
 
     // Load Templates
@@ -167,7 +169,7 @@ const newsletterModalSubmit = () => {
         showLoader()
         axios({
                 method: "post",
-                url: "https://varkhart-backend.herokuapp.com/sendgrid/newsletter",
+                url: `${api_url}/sendgrid/newsletter`,
                 data: {
                     "email": $(".newsletter-modal-form [name='email']").val(),
                     "first_name": $(".newsletter-modal-form [name='name']").val(),
@@ -185,3 +187,22 @@ const newsletterModalSubmit = () => {
             })
     }
 }
+
+const checkAffiliateActive = (affiliateCode) => {
+    axios({
+            method: "post",
+            // url: `${api_url}/affiliates/checkStatus`,
+            url: `http://localhost:3000/affiliates/checkStatus`,
+            data: {
+                code: affiliateCode
+            }
+        })
+        .then(result => {
+            return result.data
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+checkAffiliateActive("ArnoV102");
