@@ -8,5 +8,5 @@ if (url.includes("?")) {
     console.log(fortnightAway);
     document.cookie = `afflCode=${affiliateCode};expires=${fortnightAway.toGMTString()};path=/`;
 
-    window.location.replace("../index.html")
+    window.location.replace("./index.html")
 }
