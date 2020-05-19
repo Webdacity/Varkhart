@@ -369,22 +369,32 @@ $(".cart-content-item-delete i").hover(
 
 
 // Send POST to backend for validation
+// Get Affiliate Code
+const getAfflCode = () => {
+    let cookies = document.cookie;
+    if (cookies.includes("afflCode")) {
+        cookies = cookies.split("; ");
+        let afflCode;
+        if (cookies.length === 1) {
+            afflCode = cookies[0].substring(cookies[0].indexOf("=") + 1, cookies[0].length);
+            return afflCode
+        } else {
+            afflCode = cookies.find(cookie => cookie.includes("afflCode"));
+            afflCode = afflCode.replace("afflCode=", "");
+            return afflCode
+        }
+    } else {
+        return undefined
+    }
+}
+
 const sendOrder = () => {
     showLoader();
     // Get Cart List 
     const cart = JSON.parse(localStorage.getItem("cart"));
     let newCart = [];
-    cartKeys = Object.keys(cart)
+    cartKeys = Object.keys(cart);
 
-    for (i = 0; i < cartKeys.length; i++) {
-        let cartString = `${i+1}. `;
-        cartString = cartString.concat(`#${cart[cartKeys[i]].id} - `)
-        cartString = cartString.concat($(`.cart-details-list li:nth-child(${i+1}) a`).html() + " - ");
-        cartString = cartString.concat($(`.cart-details-list li:nth-child(${i+1}) small`).html() + " - ");
-        cartString = cartString.concat($(`.cart-details-list li:nth-child(${i+1}) p`).html());
-        newCart.push(cartString)
-    }
-    console.log(newCart.toString())
     $(".order-form [name='custom_str1']").val(
         $(".order-form #order-straat-nommer").val() + ", " +
         $(".order-form #order-straat-naam").val() + ", " +
@@ -394,12 +404,19 @@ const sendOrder = () => {
         $(".order-form #order-provinsie").val() + "," +
         $(".order-form #order-poskode").val()
     );
-    $(".order-form [name='item_description']").val(newCart.toString());
+
+    if (getAfflCode() !== undefined) {
+        $(".order-form [name='custom_str4']").val(getAfflCode());
+    }
+
+
+    $("#shipping-form input[name='item_description']").val(localStorage.getItem("cart"));
     $(".order-form [name='custom_str3']").val($(".order-form #order-cell").val());
     $(".order-form [name='amount']").val(parseInt($(".checkout-total h5 span").html()));
     $(".order-form [name='merchant_id']").val("15264989");
     $(".order-form [name='merchant_key']").val("cjqavjznyhybl");
 
+    // SendGrid
     const orderToSave = {
         email_address: $(".order-form [name='email_address']").val(),
         first_name: $(".order-form [name='name_first']").val(),
@@ -414,6 +431,7 @@ const sendOrder = () => {
         post_code: $(".order-form #order-poskode").val(),
         cart: $(".order-form [name='item_description']").val()
     }
+
     axios({
             method: "post",
             url: "https://varkhart-backend.herokuapp.com/sendgrid/cartDetails",
@@ -457,23 +475,3 @@ $(document).ready(function () {
         updateCartCounter();
     }
 });
-
-// Get Affiliate Code
-const getAfflCode = () => {
-    let cookies = document.cookie;
-    if (cookies.includes("afflCode")) {
-        cookies = cookies.split("; ");
-        console.log(cookies)
-        let afflCode;
-        if (cookies.length === 1) {
-            afflCode = cookies[0].substring(cookies[0].indexOf("=") + 1, cookies[0].length);
-            return afflCode
-        } else {
-            afflCode = cookies.find(cookie => cookie.includes("afflCode"));
-            afflCode = afflCode.replace("afflCode=", "");
-            return afflCode
-        }
-    } else {
-        return undefined
-    }
-}
