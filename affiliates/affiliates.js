@@ -3,7 +3,7 @@
 const checkAffiliateActive = (affiliateCode) => {
     axios({
             method: "post",
-            url: `${api_url}/affiliates/checkStatus`,
+            url: `https://varkhart-backend.herokuapp.com/affiliates/checkStatus`,
             data: {
                 code: affiliateCode
             }
