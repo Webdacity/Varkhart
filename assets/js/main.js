@@ -184,5 +184,4 @@ const newsletterModalSubmit = () => {
                 console.log(error)
             })
     }
-
 }

@@ -457,3 +457,23 @@ $(document).ready(function () {
         updateCartCounter();
     }
 });
+
+// Get Affiliate Code
+const getAfflCode = () => {
+    let cookies = document.cookie;
+    if (cookies.includes("afflCode")) {
+        cookies = cookies.split("; ");
+        console.log(cookies)
+        let afflCode;
+        if (cookies.length === 1) {
+            afflCode = cookies[0].substring(cookies[0].indexOf("=") + 1, cookies[0].length);
+            return afflCode
+        } else {
+            afflCode = cookies.find(cookie => cookie.includes("afflCode"));
+            afflCode = afflCode.replace("afflCode=", "");
+            return afflCode
+        }
+    } else {
+        return undefined
+    }
+}
