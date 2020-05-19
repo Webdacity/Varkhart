@@ -9,5 +9,7 @@ if (url.includes("?")) {
     document.cookie = `afflCode=${affiliateCode};expires=${fortnightAway.toGMTString()};path=/`;
 
     window.location.replace("../index.html");
+} else {
+    window.location.replace("../index.html");
 
 }
