@@ -3,14 +3,12 @@
 const checkAffiliateActive = (affiliateCode) => {
     axios({
             method: "post",
-            // url: `${api_url}/affiliates/checkStatus`,
-            url: `http://localhost:3000/affiliates/checkStatus`,
+            url: `${api_url}/affiliates/checkStatus`,
             data: {
                 code: affiliateCode
             }
         })
         .then(result => {
-            console.log(result.data)
             return result.data
         })
         .catch(error => {
@@ -21,7 +19,6 @@ const checkAffiliateActive = (affiliateCode) => {
 const url = window.location.href;
 if (url.includes("?")) {
     const affiliateCode = url.substring(url.indexOf("?") + 1, url.length);
-    console.log(affiliateCode)
     // Check if Affiliate Active
     if (checkAffiliateActive(affiliateCode)) {
         var fortnightAway = new Date(Date.now() + 12096e5);
