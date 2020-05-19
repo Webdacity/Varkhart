@@ -410,7 +410,7 @@ const sendOrder = () => {
     }
 
 
-    $("#shipping-form input[name='item_description']").val(localStorage.getItem("cart"));
+    $(".order-form input[name='item_description']").val(localStorage.getItem("cart"));
     $(".order-form [name='custom_str3']").val($(".order-form #order-cell").val());
     $(".order-form [name='amount']").val(parseInt($(".checkout-total h5 span").html()));
     $(".order-form [name='merchant_id']").val("15264989");
