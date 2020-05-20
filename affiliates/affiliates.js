@@ -2,40 +2,51 @@
 
 let currentCookies = document.cookie;
 
+const saveCookie = (url) => {
+    const affiliateCode = url.substring(url.indexOf("?") + 1, url.length);
+    console.log(affiliateCode);
+
+    axios({
+            method: "post",
+            url: `https://varkhart-backend.herokuapp.com/affiliates/checkStatus`,
+            data: {
+                code: affiliateCode
+            }
+        })
+        .then(result => {
+            // Check if Affiliate Active
+            if (result.data === true) {
+                var fortnightAway = new Date(Date.now() + 12096e5);
+                document.cookie = `afflCode=${affiliateCode};expires=${fortnightAway.toGMTString()};path=/`;
+                window.location.replace("../index.html");
+            } else {
+                window.location.replace("../index.html");
+            }
+
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
 // Check if cookie already exists
 if (currentCookies.includes("afflCode")) {
     window.location.replace("../index.html");
 } else {
-    const url = window.location.href;
-    if (url.includes("?")) {
-        const affiliateCode = url.substring(url.indexOf("?") + 1, url.length);
-        console.log(affiliateCode);
+    let url = window.location.href;
+    if (url.includes("%20")) {
+        console.log("space");
+        url = url.replace("%20", "");
+        console.log(url);
+        saveCookie(url)
+    } else {
+        if (url.includes("?")) {
+            saveCookie(url)
+        }
 
-        axios({
-                method: "post",
-                url: `https://varkhart-backend.herokuapp.com/affiliates/checkStatus`,
-                data: {
-                    code: affiliateCode
-                }
-            })
-            .then(result => {
-                // Check if Affiliate Active
-                if (result.data === true) {
-                    var fortnightAway = new Date(Date.now() + 12096e5);
-                    document.cookie = `afflCode=${affiliateCode};expires=${fortnightAway.toGMTString()};path=/`;
-                    window.location.replace("../index.html");
-                } else {
-                    window.location.replace("../index.html");
-                }
-
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    }
-
-    //  If No Code in url
-    else {
-        window.location.replace("../index.html");
+        //  If No Code in url
+        else {
+            window.location.replace("../index.html");
+        }
     }
 }
