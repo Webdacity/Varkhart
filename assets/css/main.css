@@ -474,6 +474,12 @@ footer form input:focus {
   font-weight: 500;
 }
 
+.footer-social #tik-tok img {
+  width: 1.1rem;
+  display: inline-block;
+  vertical-align: unset;
+}
+
 
 /* Notifications */
 .notify-bar {
