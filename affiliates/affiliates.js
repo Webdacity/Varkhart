@@ -14,7 +14,9 @@ const saveCookie = (url) => {
             }
         })
         .then(result => {
+            console.log(result.status)
             // Check if Affiliate Active
+
             if (result.data === true) {
                 var fortnightAway = new Date(Date.now() + 12096e5);
                 document.cookie = `afflCode=${affiliateCode};expires=${fortnightAway.toGMTString()};path=/`;
@@ -25,6 +27,7 @@ const saveCookie = (url) => {
 
         })
         .catch(error => {
+            window.location.replace("../index.html");
             console.log(error)
         })
 }
