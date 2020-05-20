@@ -37,7 +37,12 @@ if (currentCookies.includes("afflCode")) {
     window.location.replace("../index.html");
 } else {
     let url = window.location.href;
-    if (url.includes("%20")) {
+
+    if (url.includes("&fbclid")) {
+        url = url.substring(0, url.indexOf("&fbclid"));
+        console.log(url)
+        saveCookie(url)
+    } else if (url.includes("%20")) {
         console.log("space");
         url = url.replace("%20", "");
         console.log(url);
