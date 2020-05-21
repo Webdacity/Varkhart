@@ -301,7 +301,7 @@ $(".shop-display-sort select").change(function () {
 const loadShopProducts = () => {
     // Axios GET
     showLoader();
-    axios.get(`https://varkhart-backend.herokuapp.com/products`)
+    axios.get(`${api_url}/products`)
         .then((response) => {
             hideLoader()
             const products = response.data;
@@ -355,7 +355,7 @@ const loadProductPage = () => {
     }
 
     // JSON
-    axios.get(`https://varkhart-backend.herokuapp.com/products/productCode/${productCode}`)
+    axios.get(`${api_url}/products/productCode/${productCode}`)
         .then((response) => {
             hideLoader();
             const product = response.data;
@@ -447,7 +447,7 @@ const loadProductPage = () => {
 // Insert Products in Home:
 const loadHomeProducts = () => {
 
-    axios.get(`https://varkhart-backend.herokuapp.com/products`)
+    axios.get(`${api_url}/products`)
         .then((response) => {
             const products = response.data;
             products.forEach(product => {

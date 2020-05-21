@@ -1,4 +1,5 @@
 const api_url = "https://varkhart-backend.herokuapp.com"
+// const api_url = "http://localhost:3000"
 
 $(document).ready(() => {
 
@@ -122,6 +123,25 @@ const hideLoader = () => {
     $(".loader-container").fadeOut(500)
 }
 
+// Get Affiliate Code
+const getAfflCode = () => {
+    let cookies = document.cookie;
+    if (cookies.includes("afflCode")) {
+        cookies = cookies.split("; ");
+        let afflCode;
+        if (cookies.length === 1) {
+            afflCode = cookies[0].substring(cookies[0].indexOf("=") + 1, cookies[0].length);
+            return afflCode
+        } else {
+            afflCode = cookies.find(cookie => cookie.includes("afflCode"));
+            afflCode = afflCode.replace("afflCode=", "");
+            return afflCode
+        }
+    } else {
+        return undefined
+    }
+}
+
 // Submit Newsletter Form
 const newsletterSubmit = () => {
     event.preventDefault();
@@ -135,10 +155,11 @@ const newsletterSubmit = () => {
         showLoader()
         axios({
                 method: "post",
-                url: "https://varkhart-backend.herokuapp.com/sendgrid/newsletter",
+                url: `${api_url}/sendgrid/newsletter`,
                 data: {
-                    "email": $(".newsletter-form [name='email']").val(),
-                    "first_name": $(".newsletter-form [name='name']").val(),
+                    email: $(".newsletter-form [name='email']").val(),
+                    first_name: $(".newsletter-form [name='name']").val(),
+                    affiliateCode: getAfflCode()
                 }
             })
             .then(result => {

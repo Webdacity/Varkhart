@@ -189,7 +189,7 @@ const loadCart = () => {
         });
         let initialCartTotal = 0;
 
-        axios.get(`https://varkhart-backend.herokuapp.com/products`)
+        axios.get(`${api_url}/products`)
             .then((response) => {
                 const products = response.data;
                 let counter = 0;
@@ -247,7 +247,7 @@ const loadCart = () => {
                         $(".cart-content-totals h4 span").html(initialCartTotal);
                         counter++;
                     } else {
-                        // Remove deleted product
+                        // Remove deleted / invisible product
                         let deletedProduct = cartArray.find(item => item.id === code);
                         console.log(deletedProduct)
                         cartArray.splice(cartArray.indexOf(deletedProduct), 1);
@@ -369,24 +369,6 @@ $(".cart-content-item-delete i").hover(
 
 
 // Send POST to backend for validation
-// Get Affiliate Code
-const getAfflCode = () => {
-    let cookies = document.cookie;
-    if (cookies.includes("afflCode")) {
-        cookies = cookies.split("; ");
-        let afflCode;
-        if (cookies.length === 1) {
-            afflCode = cookies[0].substring(cookies[0].indexOf("=") + 1, cookies[0].length);
-            return afflCode
-        } else {
-            afflCode = cookies.find(cookie => cookie.includes("afflCode"));
-            afflCode = afflCode.replace("afflCode=", "");
-            return afflCode
-        }
-    } else {
-        return undefined
-    }
-}
 
 const sendOrder = () => {
     showLoader();
@@ -434,7 +416,7 @@ const sendOrder = () => {
 
     axios({
             method: "post",
-            url: "https://varkhart-backend.herokuapp.com/sendgrid/cartDetails",
+            url: `${api_url}/sendgrid/cartDetails`,
             data: orderToSave
         })
         .then(response => {
