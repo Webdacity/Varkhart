@@ -380,6 +380,17 @@ const loadProductPage = () => {
                     `<p>${product.material}</p>`
                 )
 
+                // Other Colours
+                if (product.otherColours.length > 0) {
+                    product.otherColours.forEach(otherColour => {
+                        $(".product-page-other-colors p").append(
+                            `
+                            <a target="blank" href="${otherColour.productLink}"> ${otherColour.colour} </a> <span>|</span>
+                        `
+                        )
+                    })
+                }
+
 
                 // Material
 

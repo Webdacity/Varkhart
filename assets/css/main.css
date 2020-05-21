@@ -1470,7 +1470,7 @@ input[type=range]::-webkit-slider-thumb::before {
 
 .product-page-name {
   text-transform: uppercase;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 500;
   letter-spacing: 1px;
   margin: 0;
@@ -1485,7 +1485,7 @@ input[type=range]::-webkit-slider-thumb::before {
   letter-spacing: 1px;
   display: inline-block !important;
   margin: 4% 0;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .product-page-price-container {
@@ -1521,9 +1521,9 @@ input[type=range]::-webkit-slider-thumb::before {
 }
 
 .product-cart-specs h4 {
-  font-size: 1.1rem;
+  font-size: 1rem;
   margin: 0;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .product-page-description {
@@ -1543,7 +1543,7 @@ input[type=range]::-webkit-slider-thumb::before {
   padding: 2px 6px;
   font-weight: 500;
   display: inline-block;
-  margin-right: 5px;
+  margin-right: 0.5rem;
   margin-bottom: 5px;
   transition: 0.5s;
   -webkit-transition: 0.5s;
@@ -1564,7 +1564,7 @@ input[type=range]::-webkit-slider-thumb::before {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 5px;
+  margin-right: 0.5rem;
   padding: 0.25rem 0.5rem;
   margin-bottom: 5px;
   transition: 0.5s;
@@ -1609,11 +1609,22 @@ input[type=range]::-webkit-slider-thumb::before {
   margin: 0;
 }
 
+.product-page-other-colors p a {
+  color: var(--brown);
+  font-weight: 500;
+  padding: 0.25rem;
+  text-decoration: underline;
+}
+
 .product-cart-specs .heading-divider {
   background-color: var(--brown);
-  height: 1px;
+  height: 1.5px;
   width: 20px;
   margin: 10px 0;
+}
+
+.product-page-other-colors p span:last-child {
+  display: none;
 }
 
 .product-page-colours>div {
