@@ -123,6 +123,17 @@ const hideLoader = () => {
     $(".loader-container").fadeOut(500)
 }
 
+$(".notify-bar").hide();
+
+const notify = (text) => {
+    $(".notify-bar p").html(text);
+    $(".notify-bar").fadeIn(500, () => {
+        setTimeout(() => {
+            $(".notify-bar").fadeOut(500)
+        }, 2000);
+    })
+}
+
 // Get Affiliate Code
 const getAfflCode = () => {
     let cookies = document.cookie;

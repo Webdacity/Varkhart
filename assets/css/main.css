@@ -2214,3 +2214,18 @@ input[type=number] {
 .section-returns span {
   font-weight: 500;
 }
+
+.section-returns h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.section-returns h1 {
+  margin-bottom: 2rem;
+}
+
+/* Affiliate Balance */
+.section-affiliate-balance {
+  border-top: 2px solid var(--brown);
+  min-height: 100vh;
+}

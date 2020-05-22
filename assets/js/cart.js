@@ -142,17 +142,6 @@ const checkoutCart = () => {
 
 // CART UTILS
 
-$(".notify-bar").hide();
-
-const notify = (text) => {
-    $(".notify-bar p").html(text);
-    $(".notify-bar").fadeIn(500, () => {
-        setTimeout(() => {
-            $(".notify-bar").fadeOut(500)
-        }, 2000);
-    })
-}
-
 // Clear Cart Storage
 const clearCart = () => {
     localStorage.clear();
