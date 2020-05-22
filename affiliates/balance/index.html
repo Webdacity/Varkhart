@@ -44,92 +44,30 @@
 
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-md">
+    <nav class="navbar navbar-expand-md justify-content-center">
         <!-- Brand -->
         <a class="navbar-brand" href="../../index.html">
             <img src="../../assets/images/logos/navbar-logo.png" alt="Varkhart Navbar Logo">
         </a>
-
-        <!-- Toggler/collapsibe Button -->
-        <button class="navbar-toggler" type="button">
-            <i class="far fa-bars"></i>
-        </button>
-
-        <!-- Navbar links -->
-        <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
-            <ul class="navbar-nav ">
-                <li class="nav-item">
-                    <a class="nav-link" href="../../winkel.html">
-                        <img src="../../assets/images/logos/navbar-home.png" alt="Varkhart Navbar Logo">
-                        Winkel
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../../mandjie.html">
-                        <i class="fas fa-shopping-bag"></i>
-                        Mandjie
-                        <span class="nav-cart-count"></span>
-
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <!-- Mobile-Nav -->
-        <div class="mobile-nav">
-            <i class="fal fa-times mobile-nav-close"></i>
-            <div class="mobile-nav-content">
-                <div class="mobile-nav-img">
-                    <img src="../../assets/images/logos/navbar-logo-mobile.png" alt="Varkhart Navbar Logo">
-                </div>
-                <div class="mobile-nav-menu">
-                    <a href="../../index.html">
-                        <img src="../../assets/images/logos/navbar-home-mobile.png" alt="Varkhart Navbar Logo">
-                        Tuis
-                    </a>
-                    <a href="../../winkel.html">
-                        <i class="fas fa-store-alt"></i>
-                        Winkel
-                    </a>
-                    <a href="../../mandjie.html">
-                        <i class="fas fa-shopping-bag"></i>
-                        Mandjie
-                        <span class="nav-cart-count"></span>
-                    </a>
-                </div>
-                <div class="mobile-nav-social">
-                    <div class="mobile-newsletter">
-                        <a onclick="$('#newsletter-modal').modal('toggle')">
-                            <i class="fas fa-envelope"></i>
-                            Nuusbrief
-                        </a>
-                    </div>
-                    <div class="mobile-nav-social-icons">
-                        <a href="https://www.facebook.com/Varkhart/" target="blank">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="http://wa.me/27740595106?text=Hi%20Varkhart!" target="blank">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                        <a href="https://instagram.com/varkhart" target="blank">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/company/varkhart" target="blank">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a id="tik-tok" href="https://vm.tiktok.com/TK8Br6/" target="blank">
-                            <img src="../../assets/images/icons/tik-tok-mobile.png" alt="">
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
     </nav>
     <!-- End Nav -->
 
 
     <section class="section-affiliate-balance">
-
+        <div class="container">
+            <h3>Hi Legende!</h3>
+            <p>Sit jou Affiliaat Kode hier in om jou balans via e-pos te ontvang:</p>
+            <form id="affiliate-balance-form">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="affiliate-balance-code">
+                    <div class="invalid-feedback">
+                        'n Geldige Affiliaat Kode word vereis
+                    </div>
+                    <button class="my-button" onclick="checkAffiliateBalance()">Stuur Balans</button>
+                </div>
+                <small class="form-text text-muted">Onthou ook jou Kode is "Caps-Sensitive".</small>
+            </form>
+        </div>
     </section>
 
 
@@ -139,7 +77,9 @@
         <p></p>
     </div>
 
-
+    <div class="loader-container">
+        <div class="loader"></div>
+    </div>
 
 
 
@@ -155,7 +95,6 @@
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
-    <script src="../../assets/js/main.js"></script>
     <script src="./balance.js"></script>
 
 

@@ -2225,7 +2225,53 @@ input[type=number] {
 }
 
 /* Affiliate Balance */
+
 .section-affiliate-balance {
   border-top: 2px solid var(--brown);
   min-height: 100vh;
+  display: flex;
+  color: var(--brown);
+}
+
+.section-affiliate-balance .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#affiliate-balance-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#affiliate-balance-form button {
+  margin: 1rem auto;
+  display: block;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  background-color: var(--brown);
+  border: none;
+  padding: 6px 12px;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+#affiliate-balance-form input {
+  color: var(--brown);
+  font-weight: 500;
+  text-align: center;
+}
+
+#affiliate-balance-form input:focus {
+  box-shadow: none;
+  border: 1px solid var(--brown);
 }
