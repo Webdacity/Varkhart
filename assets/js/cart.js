@@ -366,7 +366,7 @@ const sendOrder = () => {
     let newCart = [];
     cartKeys = Object.keys(cart);
 
-    $(".order-form [name='custom_str1']").val(
+    $(".order-form [name='custom_str4']").val(
         $(".order-form #order-straat-nommer").val() + ", " +
         $(".order-form #order-straat-naam").val() + ", " +
         $(".order-form #order-gebou-details").val() + ", " +
@@ -376,41 +376,34 @@ const sendOrder = () => {
         $(".order-form #order-poskode").val()
     );
 
-    if (getAfflCode() !== undefined) {
-        $(".order-form [name='custom_str4']").val(getAfflCode());
-    }
-
-
-    $(".order-form input[name='item_description']").val(localStorage.getItem("cart"));
-    $(".order-form [name='custom_str3']").val($(".order-form #order-cell").val());
     $(".order-form [name='amount']").val(parseInt($(".checkout-total h5 span").html()));
     $(".order-form [name='merchant_id']").val("15264989");
     $(".order-form [name='merchant_key']").val("cjqavjznyhybl");
 
     // SendGrid
-    const orderToSave = {
+    const orderConfirmation = {
+        merchant_id: $(".order-form [name='merchant_id']").val(),
         email_address: $(".order-form [name='email_address']").val(),
-        first_name: $(".order-form [name='name_first']").val(),
-        last_name: $(".order-form [name='name_last']").val(),
-        address_line_1: $(".order-form #order-straat-nommer").val() + ", " +
-            $(".order-form #order-straat-naam").val() + ", " +
-            $(".order-form #order-gebou-details").val() + ", " +
-            $(".order-form #order-woongebied").val(),
-        phone_number: $(".order-form [name='cell_number']").val(),
-        city: $(".order-form #order-stad").val(),
-        state_province_region: $(".order-form #order-provinsie").val(),
-        post_code: $(".order-form #order-poskode").val(),
-        cart: $(".order-form [name='item_description']").val()
+        name_first: $(".order-form [name='name_first']").val(),
+        name_last: $(".order-form [name='name_last']").val(),
+        amount_gross: $(".order-form [name='amount']").val(),
+        cell_number: $(".order-form #order-cell").val(),
+        cart_items: JSON.parse(localStorage.getItem("cart")),
+        delivery_address: $(".order-form [name='custom_str4']").val(),
+        delivery_notes: $(".order-form [name='custom_str2']").val(),
+        affiliateCode: getAfflCode()
     }
 
     axios({
             method: "post",
-            url: `${api_url}/sendgrid/cartDetails`,
-            data: orderToSave
+            url: `${api_url}/orders/confirmation`,
+            data: orderConfirmation
         })
         .then(response => {
             if (response.status === 201) {
-                hideLoader()
+                hideLoader();
+                $(".order-form [name='custom_str1']").val(response.data.order_number);
+                console.log(response)
                 $(".order-form").submit();
             } else {
                 notify("Error Processing your transaction. Please contact Support")
