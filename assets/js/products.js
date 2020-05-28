@@ -6,17 +6,6 @@ const loadNavSearch = () => {
     if (searchTerm.includes("?") > 0) {
         searchTerm = searchTerm.slice(searchTerm.indexOf("?") + 1).toLocaleLowerCase();
         searchTerm = searchTerm.split("%20");
-
-        // Unisex Exeption
-        if (searchTerm.includes("mans")) {
-            genderReplace = "mans";
-            searchTerm.splice(searchTerm.indexOf("mans"), 1);
-            searchTerm.push("unisex")
-        } else if (searchTerm.includes("vrouens")) {
-            genderReplace = "vrouens";
-            searchTerm.splice(searchTerm.indexOf("vrouens"), 1);
-            searchTerm.push("unisex")
-        }
     } else {
         searchTerm = null;
     }
@@ -33,8 +22,16 @@ const loadNavSearch = () => {
             const productTags = $(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-tags").toLowerCase();
             // Load Results
             for (let j = 0; j < searchTerm.length; j++) {
-                if (productTags.includes(searchTerm[j])) {
-                    tagFoundCount++;
+
+                // Unisex Exeption
+                if (searchTerm[j] === ("mans") || searchTerm[j] === ("vrouens")) {
+                    if (productTags.includes(searchTerm[j]) || productTags.includes("unisex")) {
+                        tagFoundCount++;
+                    }
+                } else {
+                    if (productTags.includes(searchTerm[j])) {
+                        tagFoundCount++;
+                    }
                 }
             }
 
@@ -54,12 +51,6 @@ const loadNavSearch = () => {
 
     // (Insert searchterm in filters
     if (searchTerm != null) {
-        // Unisex Exeption Chnage Back
-        if (searchTerm.includes("unisex")) {
-            searchTerm.splice(searchTerm.indexOf("unisex"), 1);
-            searchTerm.unshift(genderReplace);
-        }
-
         $(".card-search").css("display", "flex");
         $(".card-search input").val(`-  "${searchTerm.join(" ")}"`);
     } else {
