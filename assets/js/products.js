@@ -2,11 +2,26 @@
 const loadNavSearch = () => {
     // Get Search Term
     let searchTerm = window.location.href;
+    let genderReplace;
     if (searchTerm.includes("?") > 0) {
         searchTerm = searchTerm.slice(searchTerm.indexOf("?") + 1).toLocaleLowerCase();
+        searchTerm = searchTerm.split("%20");
+
+        // Unisex Exeption
+        if (searchTerm.includes("mans")) {
+            genderReplace = "mans";
+            searchTerm.splice(searchTerm.indexOf("mans"), 1);
+            searchTerm.push("unisex")
+        } else if (searchTerm.includes("vrouens")) {
+            genderReplace = "vrouens";
+            searchTerm.splice(searchTerm.indexOf("vrouens"), 1);
+            searchTerm.push("unisex")
+        }
     } else {
         searchTerm = null;
     }
+
+
 
     // {Find products who's product tags match ~ searchterm}
     if (searchTerm !== null) {
@@ -14,10 +29,16 @@ const loadNavSearch = () => {
         let resultsCount = 0;
         // Loop through every product to & hide non-results
         for (i = 1; i <= shopLength; i++) {
-
+            let tagFoundCount = 0;
             const productTags = $(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-tags").toLowerCase();
             // Load Results
-            if (!productTags.includes(searchTerm)) {
+            for (let j = 0; j < searchTerm.length; j++) {
+                if (productTags.includes(searchTerm[j])) {
+                    tagFoundCount++;
+                }
+            }
+
+            if (tagFoundCount !== searchTerm.length) {
                 $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-search")
             } else {
                 resultsCount++
@@ -31,10 +52,16 @@ const loadNavSearch = () => {
     }
 
 
-    // (Insert searchterm in filters)
+    // (Insert searchterm in filters
     if (searchTerm != null) {
+        // Unisex Exeption Chnage Back
+        if (searchTerm.includes("unisex")) {
+            searchTerm.splice(searchTerm.indexOf("unisex"), 1);
+            searchTerm.unshift(genderReplace);
+        }
+
         $(".card-search").css("display", "flex");
-        $(".card-search input").val(`-  "${searchTerm}"`);
+        $(".card-search input").val(`-  "${searchTerm.join(" ")}"`);
     } else {
         $(".card-search").hide();
     }

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-164760975-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-164760975-1');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name=" robots" content="index, follow">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Webdacity -->
+    <meta name="author" content="Webdacity">
+    <meta name="publisher" content="Webdacity" />
+    <meta name="copyright" content="2019 " />
+
+    <!-- Website Content -->
+    <title> Kategorieë </title>
+    <meta name="description"
+        content="Varkhart is ‘n Afrikaanse handelsmerk gestig deur ‘n groep vennote sedert 2017 om legendes hul welverdiende status te verskaf.">
+    <meta name="keywords" content="Varkhart, Klere, Legendes, Oorspronklik" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./assets/images/logos/favicon.png">
+
+    <!-- StyleSheets -->
+
+    <!-- Theme Colour -->
+    <meta name="theme-color" content="#">
+    <meta name="apple-mobile-web-app-status-bar-style" content="">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700&display=swap" rel="stylesheet">
+
+    <!-- Vendors -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="./assets/vendors/font-awesome/css/all.css" rel="stylesheet">
+
+    <!-- Internal -->
+    <link rel="stylesheet" type="text/css" href="./assets/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="./assets/css/responsive.css" />
+
+
+</head>
+
+<body>
+
+
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md">
+        <!-- Brand -->
+        <a class="navbar-brand" href="./index.html">
+            <img src="./assets/images/logos/navbar-logo.png" alt="Varkhart Navbar Logo">
+        </a>
+
+        <!-- Toggler/collapsibe Button -->
+        <button class="navbar-toggler" type="button">
+            <i class="far fa-bars"></i>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+            <form class="form-inline search-bar">
+                <input type="search" placeholder="Ek Soek...">
+                <button class="search-button" type="submit"><i class="far fa-search"></i></button>
+            </form>
+            <ul class="navbar-nav ">
+                <li class="nav-item">
+                    <a class="nav-link" href="./winkel.html">
+                        <img src="./assets/images/logos/navbar-home.png" alt="Varkhart Navbar Logo">
+                        Winkel
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./mandjie.html">
+                        <i class="fas fa-shopping-bag"></i>
+                        Mandjie
+                        <span class="nav-cart-count"></span>
+
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Mobile-Nav -->
+        <div class="mobile-nav">
+            <i class="fal fa-times mobile-nav-close"></i>
+            <div class="mobile-nav-content">
+                <div class="mobile-nav-img">
+                    <img src="./assets/images/logos/navbar-logo-mobile.png" alt="Varkhart Navbar Logo">
+                </div>
+                <div class="mobile-nav-menu">
+                    <a href="./index.html">
+                        <img src="./assets/images/logos/navbar-home-mobile.png" alt="Varkhart Navbar Logo">
+                        Tuis
+                    </a>
+                    <a href="./winkel.html">
+                        <i class="fas fa-store-alt"></i>
+                        Winkel
+                    </a>
+                    <a href="./mandjie.html">
+                        <i class="fas fa-shopping-bag"></i>
+                        Mandjie
+                        <span class="nav-cart-count"></span>
+                    </a>
+                </div>
+                <div class="mobile-nav-social">
+                    <div class="mobile-newsletter">
+                        <a onclick="$('#newsletter-modal').modal('toggle')">
+                            <i class="fas fa-envelope"></i>
+                            Nuusbrief
+                        </a>
+                    </div>
+                    <div class="mobile-nav-social-icons">
+                        <a href="https://www.facebook.com/Varkhart/" target="blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="http://wa.me/27740595106?text=Hi%20Varkhart!" target="blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://instagram.com/varkhart" target="blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/company/varkhart" target="blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a id="tik-tok" href="https://vm.tiktok.com/TK8Br6/" target="blank">
+                            <img src="./assets/images/icons/tik-tok-mobile.png" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- End Nav -->
+
+    <!-- Gender Blocks -->
+
+    <section class="gender-blocks-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mb-md-0 mb-3 product-block" id="genderBlockMans">
+                    <a onclick="showCategory('Mans')">
+                        <img class=" img-fluid" src="./assets/images/category-blocks/mans-baadjies.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Mans</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block" id="genderBlockVrouens">
+                    <a onclick="showCategory('Vrouens')">
+                        <img class="img-fluid" src="./assets/images/category-blocks/vrouens-kort.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Vrouens</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block" id="genderBlockMen">
+                    <a onclick="showCategory('Kinders')">
+                        <img class="img-fluid" src="./assets/images/category-blocks/kinders-kort.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Kinders</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block" id="genderBlockKinders">
+                    <a href="./winkel.html">
+                        <img class="img-fluid" src="./assets/images/category-blocks/mans-skoene.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Alle Items</h5>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Blocks -->
+
+    <!-- Mans -->
+    <section class="category-blocks-section" id="categorySectionMans">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?mans kortmou">
+                        <img class="img-fluid" src="./assets/images/category-blocks/mans-kort.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text light-text pb-bottom-right">Kortmou Hemde</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?mans langmou">
+                        <img class="img-fluid" src="./assets/images/category-blocks/mans-lank.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-right">Langmou Hemde</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?mans baadjies">
+                        <img class="img-fluid" src="./assets/images/category-blocks/mans-baadjies.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Baadjies</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?mans skoene">
+                        <img class="img-fluid" src="./assets/images/category-blocks/mans-skoene.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Skoene</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?mans kepse">
+                        <img class="img-fluid" src="./assets/images/category-blocks/kepse.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Kepse</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?mans">
+                        <img class="img-fluid" src="./assets/images/category-blocks/bybehore.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Geskenke</h5>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vrouens -->
+    <section class="category-blocks-section" id="categorySectionVrouens">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?vrouens hemde">
+                        <img class="img-fluid" src="./assets/images/category-blocks/vrouens-kort.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Kortmou Hemde</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?vrouens langmou">
+                        <img class="img-fluid" src="./assets/images/category-blocks/vrouens-lank.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-right">Langmou Hemde</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?vrouens baadjies">
+                        <img class="img-fluid" src="./assets/images/category-blocks/vrouens-baadjies.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Baadjies</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?vrouens skoene">
+                        <img class="img-fluid" src="./assets/images/category-blocks/vrouens-skoene.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-right">Skoene</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?vrouens keps">
+                        <img class="img-fluid" src="./assets/images/category-blocks/kepse.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Kepse</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?vrouens">
+                        <img class="img-fluid" src="./assets/images/category-blocks/bybehore.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Geskenke</h5>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kinders -->
+    <section class="category-blocks-section" id="categorySectionKinders">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?kinders hemde">
+                        <img class="img-fluid" src="./assets/images/category-blocks/kinders-kort.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Kortmou Hemde</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?kinders langmou">
+                        <img class="img-fluid" src="./assets/images/category-blocks/kinders-lank.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Langmou Hemde</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?kinders baadjies">
+                        <img class="img-fluid" src="./assets/images/category-blocks/kinders-baadjies.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-right">Baadjies</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?kinders skoene">
+                        <img class="img-fluid" src="./assets/images/category-blocks/kinders-skoene.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Skoene</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?kinders kepse">
+                        <img class="img-fluid" src="./assets/images/category-blocks/kepse.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Kepse</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?kinders">
+                        <img class="img-fluid" src="./assets/images/category-blocks/bybehore.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Geskenke</h5>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <div class="loader-container">
+        <div class="loader"></div>
+    </div>
+
+    <!-- footer -->
+    <div id="footer"></div>
+
+    <!-- Notfication -->
+    <div class="notify-bar">
+        <img src="./assets/images/logos/notifications.png" alt="Varkhart Notification Logo">
+        <p></p>
+    </div>
+
+    <!-- Newsletter Modal -->
+    <div class="modal fade newsletter-modal" id="newsletter-modal" tabindex="-1" role="dialog"
+        aria-labelledby="newsletterModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Skryf in vir ons Nuubrief:</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Maak seker jy mis nooit enigiets van Varkhart nie!
+                        <br>
+                        Bly op datum met die nuutse verwikkelinge en
+                        promosies.</p>
+                    <form class="newsletter-modal-form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Jou Naam" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Jou E-Pos" name="email" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn" onclick="newsletterModalSubmit()">Skryf In</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/products.js"></script>
+    <script src="./assets/js/cart.js"></script>
+
+
+</body>
+
+</html>

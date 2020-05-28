@@ -735,6 +735,10 @@ footer form input:focus {
   margin: 0;
 }
 
+.product-block-text.light-text {
+  color: var(--grey);
+}
+
 .product-block-text span {
   font-weight: 700;
   font-size: calc(100% *1.25);
@@ -742,6 +746,10 @@ footer form input:focus {
 
 .product-block:hover .product-block-text {
   border-bottom: 2px solid var(--brown);
+}
+
+.product-block:hover .product-block-text.light-text {
+  border-bottom: 2px solid var(--grey);
 }
 
 /* Home Newsletter  */
@@ -1140,6 +1148,7 @@ input:checked+.slider:before {
   border: none;
   color: var(--brown);
   font-weight: 500;
+  font-size: 0.9em;
 }
 
 
@@ -2318,4 +2327,31 @@ input[type=number] {
 #affiliate-balance-form input:focus {
   box-shadow: none;
   border: 1px solid var(--brown);
+}
+
+
+
+/* --------------------- */
+
+/* Category Page */
+
+/* Gender & Category Blocks */
+
+.gender-blocks-section,
+.category-blocks-section {
+  margin: 1rem 0 3rem;
+}
+
+.gender-blocks-section .product-block,
+.category-blocks-section .product-block {
+  margin-top: 2rem;
+  cursor: pointer;
+}
+
+.category-blocks-section {
+  display: none;
+}
+
+.category-blocks-section.category-show {
+  display: block;
 }
