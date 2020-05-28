@@ -735,6 +735,10 @@ footer form input:focus {
   margin: 0;
 }
 
+.product-block-text.light-text {
+  color: var(--grey);
+}
+
 .product-block-text span {
   font-weight: 700;
   font-size: calc(100% *1.25);
@@ -742,6 +746,10 @@ footer form input:focus {
 
 .product-block:hover .product-block-text {
   border-bottom: 2px solid var(--brown);
+}
+
+.product-block:hover .product-block-text.light-text {
+  border-bottom: 2px solid var(--grey);
 }
 
 /* Home Newsletter  */
@@ -796,6 +804,47 @@ footer form input:focus {
 .home-products-section {
   padding: 10vh 0;
   position: relative;
+}
+
+.home-products-section .section-heading p {
+  margin: 1rem 0;
+}
+
+.home-products-section button {
+  display: block;
+  margin: 0 auto;
+  background: var(--brown);
+  border: 2px solid var(--brown);
+  color: white;
+  transition: 0.4s ease;
+  -webkit-transition: 0.4s ease;
+  -moz-transition: 0.4s ease;
+  -ms-transition: 0.4s ease;
+  -o-transition: 0.4s ease;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  cursor: pointer;
+  padding: 0;
+}
+
+.home-products-section button:hover {
+  background-color: transparent;
+  color: var(--brown);
+  outline: none;
+}
+
+.home-products-section button a {
+  display: block;
+  padding: 0.25rem 1rem;
+  color: var(--beige);
+  text-decoration: none;
+}
+
+.home-products-section button:hover a {
+  color: var(--brown);
 }
 
 .product-range {
