@@ -415,6 +415,7 @@ const loadProductPage = () => {
 
                 // Images 
                 product.productImageUrls.forEach(image => {
+                    image = image.replace("upload/", "upload/f_auto/");
                     $(".product-slick").append(
                         `
                     <div class="product-slick-image-container">
