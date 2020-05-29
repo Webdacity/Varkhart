@@ -200,10 +200,11 @@ $(document).on("click", ".card-color .color-boxes span", function () {
 const loadFilterCategories = () => {
     const shopLength = $(".shop-product-grid .product").length;
     let genders = ["Mans", "Vrouens", "Kinders"];
+    // let genders = ["Unisex", "Mans", "Vrouens", "Kinders"];
 
     genders.forEach(gender => {
 
-
+        // if (gender !== "Unisex") {
         $(".card-category #collapseCategory > .card-body").append(
             `            <!-- ${gender} -->
             <h6 data-toggle="collapse" href="#collapse${gender}" role="button"
@@ -218,7 +219,7 @@ const loadFilterCategories = () => {
             </div>
             `
         );
-
+        // }
 
         //  Get Categories for Gender
         let categories = [];
@@ -272,13 +273,19 @@ const adjustFilterCategories = () => {
         if ($(`#collapseCategory .category-filter-item`).eq(i).hasClass("active")) {
             category = $(`#collapseCategory .category-filter-item`).eq(i).find("p").html();
             gender = $(`#collapseCategory .category-filter-item`).eq(i).attr("data-filter-gender");
+            // if (gender === "Mans" || gender === "Vrouens") {
+            //     activeFilters["Mans"].push(category);
+            //     activeFilters["Vrouens"].push(category);
+            //     activeFilterCount++;
+            // } else {
             activeFilters[gender].push(category);
             activeFilterCount++;
+            // }
         }
     }
 
-    console.log(activeFilters);
     console.log(activeFilterCount);
+    console.log(activeFilters)
 
     // Show / Hide products
 
@@ -370,6 +377,7 @@ const loadShopProducts = () => {
 
                     let productThumbnail = product.productThumbnailUrl;
                     productThumbnail = productThumbnail.replace("upload/", "upload/w_200/f_auto/");
+
                     // Insert HTML
                     $(".shop-product-grid").append(
                         `<a class="col-10 offset-1 offset-sm-0 col-sm-6 col-md-6 col-lg-4 col-xl-3 product" href="./produk.html#${product.productCode}" id="${product.productCode}" >
