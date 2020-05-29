@@ -308,6 +308,10 @@ const loadShopProducts = () => {
 
             products.forEach(product => {
                 if (product.visibility) {
+                    // Thumbnail Optimisation
+
+                    let productThumbnail = product.productThumbnailUrl;
+                    productThumbnail = productThumbnail.replace("upload/", "upload/f_auto/");
                     // Insert HTML
                     $(".shop-product-grid").append(
                         `<a class="col-10 offset-1 offset-sm-0 col-sm-6 col-md-6 col-lg-4 col-xl-3 product" href="./produk.html#${product.productCode}" id="${product.productCode}" >
@@ -319,7 +323,7 @@ const loadShopProducts = () => {
                         data-product-category="${product.category}"
                         ></template>
                         <div class="product-image-container">
-                        <img src="${product.productThumbnailUrl}">
+                        <img src="${productThumbnail}">
                         </div>
                         <p class="product-name">${product.name}</p>
                         <p class="product-price">R ${product.price - product.discount}</p>
@@ -460,13 +464,14 @@ const loadHomeProducts = () => {
                         productPrice = product.price
                     }
 
-
+                    let productThumbnail = product.productThumbnailUrl;
+                    productThumbnail = productThumbnail.replace("upload/", "upload/f_auto/");
                     // Insert HTML
                     $(".home-grid").append(
                         `
                         <a class="col-10 offset-sm-0 col-sm-6 col-md-6 col-lg-4 col-xl-3 product" href="./produk.html#${product.productCode}" id="${product.productCode}">
                             <div class="product-image-container">
-                                <img src="${product.productThumbnailUrl}" alt="Varkhart Bestseller Product - ${product.productCode}">
+                                <img src="${productThumbnail}" alt="Varkhart Bestseller Product - ${product.productCode}">
                             </div>
                             <p class="product-name">${product.name}</p>
                             <p class="product-price">R ${productPrice}</p>
