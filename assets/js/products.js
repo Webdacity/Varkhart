@@ -311,7 +311,7 @@ const loadShopProducts = () => {
                     // Thumbnail Optimisation
 
                     let productThumbnail = product.productThumbnailUrl;
-                    productThumbnail = productThumbnail.replace("upload/", "upload/f_auto/");
+                    productThumbnail = productThumbnail.replace("upload/", "upload/w_200/f_auto/");
                     // Insert HTML
                     $(".shop-product-grid").append(
                         `<a class="col-10 offset-1 offset-sm-0 col-sm-6 col-md-6 col-lg-4 col-xl-3 product" href="./produk.html#${product.productCode}" id="${product.productCode}" >
@@ -465,7 +465,7 @@ const loadHomeProducts = () => {
                     }
 
                     let productThumbnail = product.productThumbnailUrl;
-                    productThumbnail = productThumbnail.replace("upload/", "upload/f_auto/");
+                    productThumbnail = productThumbnail.replace("upload/", "upload/w_200/f_auto/");
                     // Insert HTML
                     $(".home-grid").append(
                         `
