@@ -2,11 +2,15 @@
 const loadNavSearch = () => {
     // Get Search Term
     let searchTerm = window.location.href;
+    let genderReplace;
     if (searchTerm.includes("?") > 0) {
         searchTerm = searchTerm.slice(searchTerm.indexOf("?") + 1).toLocaleLowerCase();
+        searchTerm = searchTerm.split("%20");
     } else {
         searchTerm = null;
     }
+
+
 
     // {Find products who's product tags match ~ searchterm}
     if (searchTerm !== null) {
@@ -14,10 +18,24 @@ const loadNavSearch = () => {
         let resultsCount = 0;
         // Loop through every product to & hide non-results
         for (i = 1; i <= shopLength; i++) {
-
+            let tagFoundCount = 0;
             const productTags = $(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-tags").toLowerCase();
             // Load Results
-            if (!productTags.includes(searchTerm)) {
+            for (let j = 0; j < searchTerm.length; j++) {
+
+                // Unisex Exeption
+                if (searchTerm[j] === ("mans") || searchTerm[j] === ("vrouens")) {
+                    if (productTags.includes(searchTerm[j]) || productTags.includes("unisex")) {
+                        tagFoundCount++;
+                    }
+                } else {
+                    if (productTags.includes(searchTerm[j])) {
+                        tagFoundCount++;
+                    }
+                }
+            }
+
+            if (tagFoundCount !== searchTerm.length) {
                 $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-search")
             } else {
                 resultsCount++
@@ -31,10 +49,10 @@ const loadNavSearch = () => {
     }
 
 
-    // (Insert searchterm in filters)
+    // (Insert searchterm in filters
     if (searchTerm != null) {
         $(".card-search").css("display", "flex");
-        $(".card-search input").val(`-  "${searchTerm}"`);
+        $(".card-search input").val(`-  "${searchTerm.join(" ")}"`);
     } else {
         $(".card-search").hide();
     }
@@ -176,80 +194,121 @@ $(document).on("click", ".card-color .color-boxes span", function () {
     adjustFilterColors();
 });
 
-// Filter Category
-// $(".categoryGender").click(function () {
-//     $(".categoryGender").removeClass("active-category-gender")
-//     $(this).addClass("active-category-gender");
-// })
+
+// Filter Categories
+
+const loadFilterCategories = () => {
+    const shopLength = $(".shop-product-grid .product").length;
+    let genders = ["Mans", "Vrouens", "Kinders"];
+
+    genders.forEach(gender => {
 
 
+        $(".card-category #collapseCategory > .card-body").append(
+            `            <!-- ${gender} -->
+            <h6 data-toggle="collapse" href="#collapse${gender}" role="button"
+                aria-expanded="false" aria-controls="collapse${gender}"
+                class="categoryGender collapsed">
+                <span>${gender}</span>
+            </h6>
+            <div class="collapse" id="collapse${gender}">
+                <div class="card card-body card-category-inner-body">
 
-$(".card-category p").click(function () {
-    if ($(this).hasClass("active-category-filter")) {
-        $(".shop-product-grid a").removeClass("filter-hide-category");
-    } else {
-        $(".categoryGender").removeClass("active-category-gender");
-        $(this).closest(".collapse ").prev().first().addClass("active-category-gender");
+                </div>
+            </div>
+            `
+        );
 
-        let activecategoryOption = $(this).find("span").html();
-        let activeCategoryGender = $(".active-category-gender span").html();
-        filterCategories(activecategoryOption, activeCategoryGender);
-    }
 
-    if ($(this).hasClass("active-category-filter")) {
-        $(".card-category p").removeClass("active-category-filter");
-        $(this).children().first().addClass("fal fa-square");
-        $(this).children().first().removeClass("fas fa-check-square");
-    } else {
-        $(".card-category p").removeClass("active-category-filter");
-        $(this).addClass("active-category-filter");
-        $(".card-category p i").removeClass("fas fa-check-square");
-        $(".card-category p i").addClass("fal fa-square");
-        $(this).children().first().removeClass("fal fa-square");
-        $(this).children().first().addClass("fas fa-check-square");
-    }
+        //  Get Categories for Gender
+        let categories = [];
+        let currentCategory = "";
+        for (let i = 1; i <= shopLength; i++) {
+            currentCategory = $(`.shop-product-grid .product:nth-child(${i}) template[data-product-gender="${gender}"]`).attr("data-product-category");
+            if (!categories.includes(currentCategory) && currentCategory !== undefined) {
+                categories.push(currentCategory)
+            }
+        }
+
+        categories.forEach(category => {
+            $(`#collapse${gender} .card-category-inner-body`).append(
+                `<div class="category-filter-item" data-filter-gender="${gender}">
+                    <span>
+                        <i class="far fa-check"></i>
+                    </span>
+                    <p>${category}<p>
+                </div>
+                `
+            )
+        })
+
+    });
+}
+
+// Click on category filter
+
+$(document).on("click", ".category-filter-item", function () {
+    $(this).toggleClass("active");
+    adjustFilterCategories();
 });
 
-$("#categoryBybehore").click(function () {
-    const shopLength = $(".shop-product-grid").children().length;
-    for (i = 1; i <= shopLength; i++) {
-        productGender = $(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-gender");
-        productCategory = $(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-category");
-        if (productCategory == "Bybehore") {
-            $(`.shop-product-grid a:nth-child(${i})`).removeClass("filter-hide-category");
-        } else {
-            $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-category");
+const adjustFilterCategories = () => {
+    const filterCount = $(".category-filter-item").length;
+    const shopLength = $(".shop-product-grid .product").length;
+    $(`.shop-product-grid .product`).removeClass("filter-hide-category")
+
+    // Get Active Filters
+    let activeFilters = {
+        Mans: [],
+        Vrouens: [],
+        Kinders: []
+    };
+    let activeFilterCount = 0;
+
+    for (let i = 0; i < filterCount; i++) {
+        let category;
+        let gender;
+
+        if ($(`#collapseCategory .category-filter-item`).eq(i).hasClass("active")) {
+            category = $(`#collapseCategory .category-filter-item`).eq(i).find("p").html();
+            gender = $(`#collapseCategory .category-filter-item`).eq(i).attr("data-filter-gender");
+            activeFilters[gender].push(category);
+            activeFilterCount++;
         }
     }
-})
 
-const filterCategories = (activecategoryOption, activeCategoryGender) => {
-    const shopLength = $(".shop-product-grid").children().length;
-    let activeCategory = "";
-    let productCategory = "";
-    let productGender = "";
+    console.log(activeFilters);
+    console.log(activeFilterCount);
+
+    // Show / Hide products
+
+    if (activeFilterCount > 0) {
+
+        for (let j = 1; j <= shopLength; j++) {
+            let productGender = $(`.shop-product-grid .product:nth-child(${j}) template`).attr("data-product-gender");
+            let productCategory = $(`.shop-product-grid .product:nth-child(${j}) template`).attr("data-product-category");
 
 
-    // Match Above against product catgories
-    for (i = 1; i <= shopLength; i++) {
-        productGender = $(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-gender");
-        productCategory = $(`.shop-product-grid a:nth-child(${i}) template`).attr("data-product-category");
-        // Exact Match
-        if (productCategory == activecategoryOption && productGender == activeCategoryGender) {
-            $(`.shop-product-grid a:nth-child(${i})`).removeClass("filter-hide-category");
+            if (productGender === "Unisex") {
+
+                // Unisex Exemption
+                if (!activeFilters["Mans"].includes(productCategory) && activeFilters["Mans"].length > 0 || !activeFilters["Vrouens"].includes(productCategory) && activeFilters["Vrouens"].length > 0) {
+                    $(`.shop-product-grid .product:nth-child(${j})`).addClass("filter-hide-category")
+                } else {
+                    $(`.shop-product-grid .product:nth-child(${j})`).addClass("filter-hide-category")
+                }
+
+            } else {
+                if (activeFilters[productGender].length > 0) {
+                    if (!activeFilters[productGender].includes(productCategory)) {
+                        $(`.shop-product-grid .product:nth-child(${j})`).addClass("filter-hide-category");
+                    }
+                } else {
+                    $(`.shop-product-grid .product:nth-child(${j})`).addClass("filter-hide-category");
+                }
+
+            }
         }
-        // Category Match with Unisex
-        else if (productCategory == activecategoryOption && productGender == "Unisex") {
-            $(`.shop-product-grid a:nth-child(${i})`).removeClass("filter-hide-category");
-        }
-        // No Match
-        else {
-            $(`.shop-product-grid a:nth-child(${i})`).addClass("filter-hide-category");
-        }
-    }
-    console.log(activecategoryOption, activeCategoryGender);
-    if (activecategoryOption == "Skoene" && activeCategoryGender == "Kinders") {
-        $(`.shop-product-grid a template[data-product-gender="Unisex"]`).parent().addClass("filter-hide-category");
     }
 }
 
@@ -257,8 +316,7 @@ const filterCategories = (activecategoryOption, activeCategoryGender) => {
 
 
 
-
-
+// -----------------------------------
 
 // SORT 
 
@@ -339,6 +397,7 @@ const loadShopProducts = () => {
             loadNavSearch();
             loadFilterColors();
             loadFilterPrice();
+            loadFilterCategories();
         })
         .catch(err => {
             console.log(err);

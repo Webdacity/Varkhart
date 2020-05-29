@@ -219,3 +219,14 @@ const newsletterModalSubmit = () => {
             })
     }
 }
+
+
+// -------------------------
+
+// Category Page
+
+const showCategory = (category) => {
+    console.log(category)
+    $(".gender-blocks-section").fadeOut()
+    $(`#categorySection${category}`).fadeIn()
+}

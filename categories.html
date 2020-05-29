@@ -23,7 +23,7 @@
     <meta name="copyright" content="2019 " />
 
     <!-- Website Content -->
-    <title> Varkhart </title>
+    <title> Kategorieë </title>
     <meta name="description"
         content="Varkhart is ‘n Afrikaanse handelsmerk gestig deur ‘n groep vennote sedert 2017 om legendes hul welverdiende status te verskaf.">
     <meta name="keywords" content="Varkhart, Klere, Legendes, Oorspronklik" />
@@ -76,7 +76,7 @@
             </form>
             <ul class="navbar-nav ">
                 <li class="nav-item">
-                    <a class="nav-link" href="./categories.html">
+                    <a class="nav-link" href="./winkel.html">
                         <img src="./assets/images/logos/navbar-home.png" alt="Varkhart Navbar Logo">
                         Winkel
                     </a>
@@ -104,7 +104,7 @@
                         <img src="./assets/images/logos/navbar-home-mobile.png" alt="Varkhart Navbar Logo">
                         Tuis
                     </a>
-                    <a href="./categories.html">
+                    <a href="./winkel.html">
                         <i class="fas fa-store-alt"></i>
                         Winkel
                     </a>
@@ -144,135 +144,198 @@
     </nav>
     <!-- End Nav -->
 
+    <!-- Gender Blocks -->
 
-    <!-- Home Carousel -->
-
-    <section class="landing-section">
-        <div class="home-carousel container-fluid">
-            <div id="home-carousel" class="carousel slide carousel-fade m-auto" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#home-carousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#home-carousel" data-slide-to="1"></li>
-                </ol>
-                <div class="carousel-inner">
-                    <div class="carousel-item active ">
-                        <div class="d-sm-none">
-                            <img class="d-block w-100" src="./assets/images/landing-carousel/carousel1-mobile.jpg"
-                                alt="First slide">
-                        </div>
-                        <div class="d-none d-sm-block">
-                            <img class="d-block w-100" src="./assets/images/landing-carousel/carousel1.jpg"
-                                alt="First slide">
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="d-sm-none">
-                            <img class="d-block w-100" src="./assets/images/landing-carousel/carousel2-mobile.jpg"
-                                alt="Second slide">
-                        </div>
-                        <div class="d-none d-sm-block">
-                            <img class="d-block w-100" src="./assets/images/landing-carousel/carousel2.jpg"
-                                alt="Second slide">
-                        </div>
-                    </div>
-
+    <section class="gender-blocks-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mb-md-0 mb-3 product-block" id="genderBlockMans">
+                    <a onclick="showCategory('Mans')">
+                        <img class=" img-fluid" src="./assets/images/category-blocks/mans-baadjies.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Mans</h5>
+                    </a>
                 </div>
-                <a class="carousel-control-prev" href="#home-carousel" role="button" data-slide="prev">
-                    <i class="fas fa-angle-left"></i>
-                </a>
-                <a class="carousel-control-next" href="#home-carousel" role="button" data-slide="next">
-                    <i class="fas fa-angle-right"></i>
-                </a>
+                <div class="col-md-6 mb-md-0 mb-3 product-block" id="genderBlockVrouens">
+                    <a onclick="showCategory('Vrouens')">
+                        <img class="img-fluid" src="./assets/images/category-blocks/vrouens-kort.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Vrouens</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block" id="genderBlockMen">
+                    <a onclick="showCategory('Kinders')">
+                        <img class="img-fluid" src="./assets/images/category-blocks/kinders-kort.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Kinders</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block" id="genderBlockKinders">
+                    <a href="./winkel.html">
+                        <img class="img-fluid" src="./assets/images/category-blocks/mans-skoene.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Alle Items</h5>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="home-newsletter-section">
-        <div class="container">
-            <h4>Skryf in vir ons Nuusbrief</h4>
-            <p>Maak seker jy mis nooit enigiets van Varkhart nie!
+    <!-- Category Blocks -->
 
-                Bly op datum met die nuutse verwikkelinge en
-                promosies.</p>
-            <button class="btn" onclick="$('#newsletter-modal').modal('toggle')">SKRYF IN</button>
-        </div>
-    </section>
-
-    <!-- Home Product Blocks 2 -->
-
-    <section class="product-block-section">
+    <!-- Mans -->
+    <section class="category-blocks-section" id="categorySectionMans">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 product-block" id="block-dames-themde">
-                    <a href="./winkel.html?hemp">
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?mans kortmou">
                         <img class="img-fluid" src="./assets/images/category-blocks/mans-kort.jpg"
                             alt="Varkhart Product Block">
-                        <!-- <p class="product-block-alert pb-top-left">20% af</p> -->
-                        <h5 class="product-block-text light-text pb-bottom-right">Alle produkte</h5>
+                        <h5 class="product-block-text light-text pb-bottom-right">Kortmou <br> Hemde</h5>
                     </a>
                 </div>
-                <div class="col-md-6 product-block" id="block-dames-themde">
-                    <a href="./winkel.html?hemp">
-                        <img class="img-fluid" src="./assets/images/product-blocks/block2.jpg"
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?mans langmou">
+                        <img class="img-fluid" src="./assets/images/category-blocks/mans-lank.jpg"
                             alt="Varkhart Product Block">
-                        <!-- <p class="product-block-alert pb-top-left">20% af</p> -->
-                        <h5 class="product-block-text pb-bottom-left">Hemde</h5>
+                        <h5 class="product-block-text pb-bottom-right">Langmou <br> Hemde</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?mans baadjies">
+                        <img class="img-fluid" src="./assets/images/category-blocks/mans-baadjies.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Baadjies</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?mans skoene">
+                        <img class="img-fluid" src="./assets/images/category-blocks/mans-skoene.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Skoene</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?mans kepse">
+                        <img class="img-fluid" src="./assets/images/category-blocks/kepse.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Kepse</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?mans">
+                        <img class="img-fluid" src="./assets/images/category-blocks/bybehore.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Geskenke</h5>
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-
-
-    <!-- Home Product Range -->
-
-    <section class="home-products-section">
-        <div class="container">
-            <div class="section-heading">
-                <h1>Beste Verkopers</h1>
-                <span></span>
-                <p>'n Versameling van ons beste Verkopers. Besoek gerus ons winkel om alle produkte te beskou.</p>
-            </div>
-
-
-            <div class="home-grid">
-                <!-- Insert Products -->
-            </div>
-
-        </div>
-        <h1 class="big-text">OORSPRONKLIK</h1>
-        <button>
-            <a href="./winkel.html">
-                Alle Produkte
-            </a>
-        </button>
-    </section>
-
-    <!-- Home Product Blocks 2 -->
-
-    <section class="product-block-section">
+    <!-- Vrouens -->
+    <section class="category-blocks-section" id="categorySectionVrouens">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 mb-md-0 mb-3 product-block ">
-                    <a href="/winkel.html?skoene">
-                        <img class="img-fluid" src="./assets/images/product-blocks/block1.jpg"
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?vrouens kortmou">
+                        <img class="img-fluid" src="./assets/images/category-blocks/vrouens-kort.jpg"
                             alt="Varkhart Product Block">
-                        <!-- <p class="product-block-alert pb-top-right">nuut</p> -->
-                        <h5 class="product-block-text pb-bottom-right">Varkhart <br> Vellies</h5>
+                        <h5 class="product-block-text pb-bottom-left">Kortmou <br> Hemde</h5>
                     </a>
                 </div>
-                <div class="col-md-6 product-block" id="block-dames-themde">
-                    <a href="./winkel.html?varkhartjie">
-                        <img class="img-fluid" src="./assets/images/product-blocks/block4.jpg"
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?vrouens langmou">
+                        <img class="img-fluid" src="./assets/images/category-blocks/vrouens-lank.jpg"
                             alt="Varkhart Product Block">
-                        <p class="product-block-alert pb-top-left">Kom Binnerkort</p>
-                        <h5 class="product-block-text pb-bottom-left">Varkhartjie</h5>
+                        <h5 class="product-block-text pb-bottom-right">Langmou <br> Hemde</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?vrouens baadjies">
+                        <img class="img-fluid" src="./assets/images/category-blocks/vrouens-baadjies.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Baadjies</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?vrouens skoene">
+                        <img class="img-fluid" src="./assets/images/category-blocks/vrouens-skoene.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-right">Skoene</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?vrouens keps">
+                        <img class="img-fluid" src="./assets/images/category-blocks/kepse.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Kepse</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?vrouens">
+                        <img class="img-fluid" src="./assets/images/category-blocks/bybehore.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Geskenke</h5>
                     </a>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Kinders -->
+    <section class="category-blocks-section" id="categorySectionKinders">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?kinders kortmou">
+                        <img class="img-fluid" src="./assets/images/category-blocks/kinders-kort.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Kortmou <br> Hemde</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?kinders langmou">
+                        <img class="img-fluid" src="./assets/images/category-blocks/kinders-lank.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Langmou <br> Hemde</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?kinders baadjie">
+                        <img class="img-fluid" src="./assets/images/category-blocks/kinders-baadjies.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-right">Baadjies</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?kinders skoene">
+                        <img class="img-fluid" src="./assets/images/category-blocks/kinders-skoene.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Skoene</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?kinders kepse">
+                        <img class="img-fluid" src="./assets/images/category-blocks/kepse.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Kepse</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-md-0 mb-3 product-block">
+                    <a href="./winkel.html?kinders">
+                        <img class="img-fluid" src="./assets/images/category-blocks/bybehore.jpg"
+                            alt="Varkhart Product Block">
+                        <h5 class="product-block-text pb-bottom-left">Geskenke</h5>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
     <div class="loader-container">
         <div class="loader"></div>
     </div>
