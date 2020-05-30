@@ -200,33 +200,39 @@ $(document).on("click", ".card-color .color-boxes span", function () {
 const loadFilterCategories = () => {
     const shopLength = $(".shop-product-grid .product").length;
     let genders = ["Mans", "Vrouens", "Kinders"];
-    // let genders = ["Unisex", "Mans", "Vrouens", "Kinders"];
 
     genders.forEach(gender => {
+        if (gender !== "Unisex") {
+            $(".card-category #collapseCategory > .card-body").append(
+                `       <!-- ${gender} -->
+                        <h6 data-toggle="collapse" href="#collapse${gender}" role="button"
+                            aria-expanded="false" aria-controls="collapse${gender}"
+                            class="categoryGender collapsed">
+                            <span>${gender}</span>
+                        </h6>
+                        <div class="collapse" id="collapse${gender}">
+                            <div class="card card-body card-category-inner-body">
 
-        // if (gender !== "Unisex") {
-        $(".card-category #collapseCategory > .card-body").append(
-            `            <!-- ${gender} -->
-            <h6 data-toggle="collapse" href="#collapse${gender}" role="button"
-                aria-expanded="false" aria-controls="collapse${gender}"
-                class="categoryGender collapsed">
-                <span>${gender}</span>
-            </h6>
-            <div class="collapse" id="collapse${gender}">
-                <div class="card card-body card-category-inner-body">
+                            </div>
+                        </div>
+                        `
+            );
+        }
 
-                </div>
-            </div>
-            `
-        );
-        // }
 
         //  Get Categories for Gender
         let categories = [];
         let currentCategory = "";
+        let currentGender = "";
         for (let i = 1; i <= shopLength; i++) {
-            currentCategory = $(`.shop-product-grid .product:nth-child(${i}) template[data-product-gender="${gender}"]`).attr("data-product-category");
-            if (!categories.includes(currentCategory) && currentCategory !== undefined) {
+            currentCategory = $(`.shop-product-grid .product:nth-child(${i}) template`).attr("data-product-category");
+            currentGender = $(`.shop-product-grid .product:nth-child(${i}) template`).attr("data-product-gender");
+            // Unisex Exeption
+            if (gender === "Mans" && currentGender === "Unisex" && !categories.includes(currentCategory) && currentCategory !== undefined) {
+                categories.push(currentCategory)
+            } else if (gender === "Vrouens" && currentGender === "Unisex" && !categories.includes(currentCategory) && currentCategory !== undefined) {
+                categories.push(currentCategory)
+            } else if (currentGender === gender && !categories.includes(currentCategory) && currentCategory !== undefined) {
                 categories.push(currentCategory)
             }
         }
@@ -273,18 +279,12 @@ const adjustFilterCategories = () => {
         if ($(`#collapseCategory .category-filter-item`).eq(i).hasClass("active")) {
             category = $(`#collapseCategory .category-filter-item`).eq(i).find("p").html();
             gender = $(`#collapseCategory .category-filter-item`).eq(i).attr("data-filter-gender");
-            // if (gender === "Mans" || gender === "Vrouens") {
-            //     activeFilters["Mans"].push(category);
-            //     activeFilters["Vrouens"].push(category);
-            //     activeFilterCount++;
-            // } else {
+
             activeFilters[gender].push(category);
             activeFilterCount++;
-            // }
         }
     }
 
-    console.log(activeFilterCount);
     console.log(activeFilters)
 
     // Show / Hide products
@@ -299,12 +299,11 @@ const adjustFilterCategories = () => {
             if (productGender === "Unisex") {
 
                 // Unisex Exemption
-                if (!activeFilters["Mans"].includes(productCategory) && activeFilters["Mans"].length > 0 || !activeFilters["Vrouens"].includes(productCategory) && activeFilters["Vrouens"].length > 0) {
+                if (!activeFilters["Mans"].includes(productCategory) && activeFilters["Mans"].length > 0) {
                     $(`.shop-product-grid .product:nth-child(${j})`).addClass("filter-hide-category")
-                } else {
+                } else if (!activeFilters["Vrouens"].includes(productCategory) && activeFilters["Vrouens"].length > 0) {
                     $(`.shop-product-grid .product:nth-child(${j})`).addClass("filter-hide-category")
                 }
-
             } else {
                 if (activeFilters[productGender].length > 0) {
                     if (!activeFilters[productGender].includes(productCategory)) {
