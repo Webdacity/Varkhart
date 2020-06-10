@@ -360,6 +360,7 @@ $(".cart-content-item-delete i").hover(
 // Send POST to backend for validation
 
 const sendOrder = () => {
+    $('#delivery-modal').modal('hide');
     showLoader();
     // Get Cart List 
     const cart = JSON.parse(localStorage.getItem("cart"));
@@ -410,6 +411,11 @@ const sendOrder = () => {
             }
         })
         .catch(err => console.log(err));
+}
+
+// Show Delivery Notice
+const showDeliveryNotice = () => {
+    $('#delivery-modal').modal('toggle');
 }
 
 // Validate Form
