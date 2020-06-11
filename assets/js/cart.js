@@ -395,6 +395,46 @@ const sendOrder = () => {
         affiliateCode: getAfflCode()
     }
 
+    $(".order-form").submit();
+
+}
+
+// Show Delivery Notice
+const showDeliveryNotice = () => {
+    showLoader();
+    // Get Cart List 
+    const cart = JSON.parse(localStorage.getItem("cart"));
+    let newCart = [];
+    cartKeys = Object.keys(cart);
+
+    $(".order-form [name='custom_str4']").val(
+        $(".order-form #order-straat-nommer").val() + ", " +
+        $(".order-form #order-straat-naam").val() + ", " +
+        $(".order-form #order-gebou-details").val() + ", " +
+        $(".order-form #order-woongebied").val() + ", " +
+        $(".order-form #order-stad").val() + ", " +
+        $(".order-form #order-provinsie").val() + "," +
+        $(".order-form #order-poskode").val()
+    );
+
+    $(".order-form [name='amount']").val(parseInt($(".checkout-total h5 span").html()));
+    $(".order-form [name='merchant_id']").val("15264989");
+    $(".order-form [name='merchant_key']").val("cjqavjznyhybl");
+
+    // SendGrid
+    const orderConfirmation = {
+        merchant_id: $(".order-form [name='merchant_id']").val(),
+        email_address: $(".order-form [name='email_address']").val(),
+        name_first: $(".order-form [name='name_first']").val(),
+        name_last: $(".order-form [name='name_last']").val(),
+        amount_gross: $(".order-form [name='amount']").val(),
+        cell_number: $(".order-form #order-cell").val(),
+        cart_items: JSON.parse(localStorage.getItem("cart")),
+        delivery_address: $(".order-form [name='custom_str4']").val(),
+        delivery_notes: $(".order-form [name='custom_str2']").val(),
+        affiliateCode: getAfflCode()
+    }
+
     axios({
             method: "post",
             url: `${api_url}/orders/confirmation`,
@@ -404,18 +444,14 @@ const sendOrder = () => {
             if (response.status === 201) {
                 hideLoader();
                 $(".order-form [name='custom_str1']").val(response.data.order_number);
-                console.log(response)
-                $(".order-form").submit();
+                console.log(response);
+                $('#delivery-modal').modal('toggle');
             } else {
                 notify("Error Processing your transaction. Please contact Support")
             }
         })
         .catch(err => console.log(err));
-}
 
-// Show Delivery Notice
-const showDeliveryNotice = () => {
-    $('#delivery-modal').modal('toggle');
 }
 
 // Validate Form
