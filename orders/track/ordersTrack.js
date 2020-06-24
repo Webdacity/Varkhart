@@ -1,29 +1,6 @@
 const api_url = "https://varkhart-backend.herokuapp.com"
 // const api_url = "http://localhost:3000"
 
-// GET ORDER STATUS
-const statusMessages = {
-    "RECEIVED": "Bestelling Ontvang",
-    "SOURCING": "Bestelling word Vervoer vanaf Fabriek",
-    "PACKING": "Bestelling word Verpak",
-    "SHIPPING": "Bestelling is Verskeep na Afleweringsadres"
-}
-
-const orderNumber = window.location.hash.replace("#", "");
-console.log(orderNumber)
-axios({
-        method: "get",
-        url: `${api_url}/orders/getStatus/${orderNumber}`
-    }).then(response => {
-        const shipping_status = response.data;
-        $(".section-order-track h4").html(statusMessages[shipping_status]);
-        $(`#order-status-item-${shipping_status.toLowerCase()}, #order-status-line-${shipping_status.toLowerCase()}`).addClass("active");
-
-    })
-    .catch(err => {
-        console.log(err);
-    });
-
 
 // ----------------------
 
@@ -48,3 +25,30 @@ const showLoader = () => {
 const hideLoader = () => {
     $(".loader-container").fadeOut(500)
 }
+
+
+// GET ORDER STATUS
+const statusMessages = {
+    "RECEIVED": "Bestelling Ontvang",
+    "SOURCING": "Bestelling word Vervoer vanaf Fabriek",
+    "PACKING": "Bestelling word Verpak",
+    "SHIPPING": "Bestelling is Verskeep na Afleweringsadres"
+}
+
+const orderNumber = window.location.hash.replace("#", "");
+showLoader()
+axios({
+        method: "get",
+        url: `${api_url}/orders/getStatus/${orderNumber}`
+    }).then(response => {
+
+        const shipping_status = response.data;
+        $(".section-order-track h4").html(statusMessages[shipping_status]);
+        $(`#order-status-item-${shipping_status.toLowerCase()}, #order-status-line-${shipping_status.toLowerCase()}`).addClass("active");
+        hideLoader()
+    })
+    .catch(err => {
+        console.log(err);
+        alert("Hierdie Bestelling bestaan nie op ons sisteem nie.");
+        window.location.replace("../../index.html")
+    });
