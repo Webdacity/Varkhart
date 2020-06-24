@@ -2301,6 +2301,12 @@ input[type=number] {
   color: var(--brown);
 }
 
+.section-returns img {
+  max-width: 80%;
+  display: block;
+  margin: 2rem auto;
+}
+
 .section-about {
   text-align: center;
 }
@@ -2370,7 +2376,140 @@ input[type=number] {
   border: 1px solid var(--brown);
 }
 
+/* ------------------------- */
+/* ORDER TRACK PAGE */
 
+
+.section-order-track {
+  border-top: 2px solid var(--brown);
+  min-height: 100vh;
+  display: flex;
+  color: var(--brown);
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.section-order-track h1 {
+  font-size: 2rem;
+}
+
+.section-order-track h4 {
+  display: inline-block;
+  background-color: var(--brown);
+  color: var(--grey);
+  font-weight: 400;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  padding: 0.5rem 1rem;
+}
+
+.order-status-cycle {
+  margin-top: 4rem;
+}
+
+.order-status-item {
+  padding: 1rem 0.5rem;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  margin-bottom: 0.5rem;
+  opacity: 0.75;
+}
+
+.order-status-item .fas,
+.order-status-item.active .far {
+  display: none;
+}
+
+.order-status-item i {
+  font-size: 2.25rem;
+}
+
+.order-status-item p {
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+.order-status-item.active {
+  opacity: 1;
+}
+
+.order-status-item.active p {
+  font-weight: 500;
+}
+
+.order-status-item.active .fas {
+  display: inline-block;
+}
+
+.order-status-cycle-lines {
+  border-bottom: 3px solid var(--brown);
+  border-left: 3px solid var(--brown);
+  border-right: 3px solid var(--brown);
+}
+
+.order-status-cycle .mobile-arrow {
+  display: none;
+  margin: 1.5rem 0;
+  font-size: 1.4rem;
+}
+
+
+.order-status-line div {
+  width: 2px;
+  height: 20px;
+  background-color: var(--brown);
+  margin: auto;
+}
+
+.order-status-line.active div {
+  width: 5px;
+}
+
+.order-status-buttons {
+  margin-top: 2rem;
+}
+
+.order-status-buttons button {
+  background-color: transparent;
+  box-shadow: none;
+  border: 2px solid var(--brown);
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  transition: 0.4s ease;
+  -webkit-transition: 0.4s ease;
+  -moz-transition: 0.4s ease;
+  -ms-transition: 0.4s ease;
+  -o-transition: 0.4s ease;
+  margin: 0.5rem;
+}
+
+.order-status-buttons button a {
+  color: var(--brown);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  display: block;
+}
+
+.order-status-buttons button:hover {
+  background-color: var(--brown);
+}
+
+.order-status-buttons button:hover a {
+  color: var(--grey);
+
+}
 
 /* --------------------- */
 

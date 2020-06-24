@@ -87,6 +87,20 @@
         margin: 0 10px;
     }
 
+    /* Order Status Page */
+
+    .order-status-cycle-lines {
+        display: none;
+    }
+
+    .order-status-cycle {
+        align-items: center;
+    }
+
+    .order-status-cycle .mobile-arrow {
+        display: block;
+    }
+
 
 
 }
