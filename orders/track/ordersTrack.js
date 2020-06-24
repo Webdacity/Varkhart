@@ -43,6 +43,7 @@ axios({
     }).then(response => {
 
         const shipping_status = response.data;
+        $(".section-order-track h1").html(`Bestelling #${orderNumber} Status:`);
         $(".section-order-track h4").html(statusMessages[shipping_status]);
         $(`#order-status-item-${shipping_status.toLowerCase()}, #order-status-line-${shipping_status.toLowerCase()}`).addClass("active");
         hideLoader()
