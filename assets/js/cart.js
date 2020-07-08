@@ -309,14 +309,12 @@ const addToCart = () => {
 }
 
 $(".product-add-cart").click(() => {
-    // if (!$(".product-page-sizes-buttons > *").hasClass("active-size")) {
-    //     notify("Kies eers 'n Grootte!");
-    //     $(".product-page-sizes-buttons span").addClass("choose-size-flash")
-    // } else {
-    //     addToCart();
-    // }
-
-    openOrderStopModal();
+    if (!$(".product-page-sizes-buttons > *").hasClass("active-size")) {
+        notify("Kies eers 'n Grootte!");
+        $(".product-page-sizes-buttons span").addClass("choose-size-flash")
+    } else {
+        addToCart();
+    }
 });
 
 

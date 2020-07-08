@@ -185,13 +185,13 @@
                             <p>Terug na Winkel</p>
                         </a>
                     </div>
-                    <!-- <div
+                    <div
                         class="order-1 order-sm-2 col-10 offset-1 offset-sm-0 col-sm-6 justify-content-sm-end justify-content-center">
                         <a class="cart-options-continue">
                             <p>Gaan Voort</p>
                             <i class="far fa-angle-right"></i>
                         </a>
-                    </div> -->
+                    </div>
                 </div>
 
             </div> <!-- End Cart Container-->
@@ -230,7 +230,7 @@
                         <hr class="mb-4">
 
                         <button class="btn btn-lg btn-block pay-button" type="submit"
-                            onclick="validateForm('order-form', showDeliveryNotice)" disabled>
+                            onclick="validateForm('order-form', showDeliveryNotice)">
                             Betaal deur Payfast
                         </button>
                     </div>
@@ -412,7 +412,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Alle bestellings wat geplaas word van die 10 Junie 2020 tot 20 Junie 2020 sal 15 werksdae neem.
+                    <p>Neem asb kennis dat alle aflewerings sal 15 werksdae neem. <br> Skoene is handgemaak en
+                        aflewerings sal 15 - 30 weksdae neem.
                     </p>
                 </div>
                 <div class="modal-footer">
@@ -421,41 +422,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Order Stop Modal -->
-    <div class="modal fade newsletter-modal" id="order-stop-modal" tabindex="-1" role="dialog"
-        aria-labelledby="orderStopModal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Los jou details:</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p> Hi Varkhart.
-                        <br><br>
-                        Ons is tydelik geslote en neem nie bestellings in nie.
-                        <br><br>
-                        Los jou naam en epos sodat ons jou kan
-                        laat weet as ons weer bestellings in vat!</p>
-                    <form class="order-stop-modal-form">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Jou Naam" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Jou E-Pos" name="email" required>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn" onclick="orderStopModalSubmit()">Laat Weet My</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
