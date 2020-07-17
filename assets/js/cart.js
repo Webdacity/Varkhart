@@ -420,6 +420,7 @@ const showDeliveryNotice = () => {
     $(".order-form [name='amount']").val(parseInt($(".checkout-total h5 span").html()));
     $(".order-form [name='merchant_id']").val("15264989");
     $(".order-form [name='merchant_key']").val("cjqavjznyhybl");
+    $(".order-form [name='notify_url']").val(`${api_url}/orders/`);
 
     // SendGrid
     const orderConfirmation = {
