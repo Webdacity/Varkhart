@@ -217,7 +217,7 @@ const loadCart = () => {
                                         <div class="col-md-3 offset-md-5">
                                             <div class="cart-content-quantity">
                                                 <i class="far fa-minus minus"></i>
-                                                <input type="number" value="1" disabled class="cart-content-quantity-input">
+                                                <input type="number" value="${cartArray[counter].quantity}" disabled class="cart-content-quantity-input">
                                                 <i class="far fa-plus plus"></i>
                                             </div>
                                         </div>
