@@ -194,7 +194,7 @@ const loadCart = () => {
                         } else {
                             productPrice = product.price
                         }
-                        initialCartTotal += productPrice;
+                        initialCartTotal += productPrice * cartArray[counter].quantity;
                         // Actual Cart
                         $(".cart-content-item-grid").append(
                             `
@@ -217,13 +217,13 @@ const loadCart = () => {
                                         <div class="col-md-3 offset-md-5">
                                             <div class="cart-content-quantity">
                                                 <i class="far fa-minus minus"></i>
-                                                <input type="number" value="1" disabled class="cart-content-quantity-input">
+                                                <input type="number" value="${cartArray[counter].quantity}" disabled class="cart-content-quantity-input">
                                                 <i class="far fa-plus plus"></i>
                                             </div>
                                         </div>
                                         <div class="col-md-3 mt-md-0">
                                             <p class="cart-content-total">
-                                                R <span>${productPrice}</span>
+                                            R <span>${productPrice * cartArray[counter].quantity}</span>
                                             </p>
                                         </div>
                                     </div>
