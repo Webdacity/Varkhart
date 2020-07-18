@@ -411,11 +411,10 @@ const sendOrder = () => {
             data: orderConfirmation
         })
         .then(response => {
+            console.log(response.data)
             if (response.status === 201) {
-                $(".order-form [name='custom_str1']").val(response.data.order_number);
-
                 // Affiliate Share
-                if (orderConfirmation.affiliateCode !== undefined || orderConfirmation.affiliateCode !== null) {
+                if (response.data.affiliateFound !== false || response.data.merchant_id !== undefined) {
                     const affiliateSettings = {
                         "split_payment": {
                             "merchant_id": response.data.affiliate_merchant_ID,
@@ -424,14 +423,13 @@ const sendOrder = () => {
                     }
                     $(".order-form [name='setup']").val(JSON.stringify(affiliateSettings));
                     $(".order-form").submit();
-                    console.log("Payfast OK with Affiliate");
+                    console.log("Payfast OK + Affiliate");
                     console.log(affiliateSettings)
                 } else {
                     $(".order-form [name='setup']").remove();
                     $(".order-form").submit();
                     console.log("Payfast Ok No Affiliate")
                 }
-                console.log(response);
             } else {
                 hideLoader()
                 notify("Error Processing your transaction. Please contact Support")
