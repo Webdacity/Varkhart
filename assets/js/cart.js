@@ -1,3 +1,14 @@
+// SETTINGS
+
+const deliveryFee = 117;
+const affiliateShare = 2000 //Cents
+
+
+
+
+// -------------------------
+
+
 // Calculate Cart Total
 function calcCartTotal() {
     let totalCart = 0;
@@ -137,7 +148,7 @@ const checkoutCart = () => {
 
 
     $(".checkout-cart-count").html(cartLength);
-    $(".checkout-total h5 span").html(`${cartTotal+117}`); // {Incl Delivery}
+    $(".checkout-total h5 span").html(`${cartTotal+deliveryFee}`); // {Incl Delivery}
 }
 
 // CART UTILS
@@ -380,47 +391,8 @@ const sendOrder = () => {
     $(".order-form [name='amount']").val(parseInt($(".checkout-total h5 span").html()));
     $(".order-form [name='merchant_id']").val("15264989");
     $(".order-form [name='merchant_key']").val("cjqavjznyhybl");
-
-    // SendGrid
-    const orderConfirmation = {
-        merchant_id: $(".order-form [name='merchant_id']").val(),
-        email_address: $(".order-form [name='email_address']").val(),
-        name_first: $(".order-form [name='name_first']").val(),
-        name_last: $(".order-form [name='name_last']").val(),
-        amount_gross: $(".order-form [name='amount']").val(),
-        cell_number: $(".order-form #order-cell").val(),
-        cart_items: JSON.parse(localStorage.getItem("cart")),
-        delivery_address: $(".order-form [name='custom_str4']").val(),
-        delivery_notes: $(".order-form [name='custom_str2']").val(),
-        affiliateCode: getAfflCode()
-    }
-
-    $(".order-form").submit();
-
-}
-
-// Show Delivery Notice
-const showDeliveryNotice = () => {
-    showLoader();
-    // Get Cart List 
-    const cart = JSON.parse(localStorage.getItem("cart"));
-    let newCart = [];
-    cartKeys = Object.keys(cart);
-
-    $(".order-form [name='custom_str4']").val(
-        $(".order-form #order-straat-nommer").val() + ", " +
-        $(".order-form #order-straat-naam").val() + ", " +
-        $(".order-form #order-gebou-details").val() + ", " +
-        $(".order-form #order-woongebied").val() + ", " +
-        $(".order-form #order-stad").val() + ", " +
-        $(".order-form #order-provinsie").val() + "," +
-        $(".order-form #order-poskode").val()
-    );
-
-    $(".order-form [name='amount']").val(parseInt($(".checkout-total h5 span").html()));
-    $(".order-form [name='merchant_id']").val("15264989");
-    $(".order-form [name='merchant_key']").val("cjqavjznyhybl");
     $(".order-form [name='notify_url']").val(`${api_url}/orders/`);
+
 
     // SendGrid
     const orderConfirmation = {
@@ -443,16 +415,42 @@ const showDeliveryNotice = () => {
         })
         .then(response => {
             if (response.status === 201) {
-                hideLoader();
                 $(".order-form [name='custom_str1']").val(response.data.order_number);
+
+                // Affiliate Share
+                if (orderConfirmation.affiliateCode !== undefined) {
+                    const affiliateSettings = {
+                        "split_payment": {
+                            "merchant_id": response.data.affiliate_merchant_ID,
+                            "amount": calculateAffiliateShare() * affiliateShare
+                        }
+                    }
+                    $(".order-form [name='setup']").val(JSON.stringify(affiliateSettings));
+                    $(".order-form").submit();
+                    console.log("Payfast OK with Affiliate");
+                    console.log(affiliateSettings)
+                } else {
+                    $(".order-form [name='setup']").remove();
+                    $(".order-form").submit();
+                    console.log("Payfast Ok No Affiliate")
+                }
                 console.log(response);
-                $('#delivery-modal').modal('toggle');
             } else {
+                hideLoader()
                 notify("Error Processing your transaction. Please contact Support")
             }
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            console.log(err);
+            hideLoader();
+            notify("There seems to be an error processing your order. Please contact support.")
+        });
 
+}
+
+// Show Delivery Notice
+const showDeliveryNotice = () => {
+    $('#delivery-modal').modal('toggle');
 }
 
 // Validate Form
@@ -473,7 +471,19 @@ const validateForm = (formToVal, callback) => {
         callback();
     }
     form.classList.add('was-validated');
-};
+}
+
+// Calculate Affiliate Share
+const calculateAffiliateShare = () => {
+    let currentCart = JSON.parse(localStorage.getItem("cart"));
+    let totalItems = 0;
+
+    currentCart.forEach(item => {
+        totalItems += item.quantity;
+    });
+
+    return totalItems
+}
 
 
 $(document).ready(function () {

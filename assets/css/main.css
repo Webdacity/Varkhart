@@ -46,6 +46,47 @@ html {
   margin: auto;
 }
 
+.my-button,
+.my-button-alt {
+  border: none;
+  background-color: transparent;
+  margin: 0.5rem 0;
+}
+
+.my-button a,
+.my-button-alt a {
+  padding: 0.5rem 1.5rem;
+  text-decoration: none;
+  transition: 0.4s;
+  -webkit-transition: 0.4s;
+  -moz-transition: 0.4s;
+  -ms-transition: 0.4s;
+  -o-transition: 0.4s;
+}
+
+.my-button a {
+  background-color: var(--brown);
+  color: var(--white);
+}
+
+.my-button:hover a {
+  border: 2px solid var(--brown);
+  background-color: transparent;
+  color: var(--brown);
+
+}
+
+.my-button-alt a {
+  background-color: transparent;
+  color: var(--brown);
+  border: 2px solid var(--brown);
+}
+
+.my-button-alt:hover a {
+  background-color: var(--brown);
+  color: var(--white);
+}
+
 /* -------- */
 
 /* Scrollbar */
@@ -2374,6 +2415,51 @@ input[type=number] {
 #affiliate-balance-form input:focus {
   box-shadow: none;
   border: 1px solid var(--brown);
+}
+
+
+
+/* Affiliate Sign-up Page */
+
+
+.section-affiliate-signup {
+  padding: 3rem 0;
+  text-align: center;
+}
+
+.section-affiliate-signup h1 {
+  margin-bottom: 1rem;
+}
+
+.section-affiliate-signup .info-buttons {
+  margin: 1rem 0 2rem 0;
+}
+
+.section-affiliate-signup span {
+  font-weight: 500;
+  padding: 0.5rem 0;
+  display: block;
+}
+
+.section-affiliate-signup .sign-up-form {
+  display: none;
+}
+
+.section-affiliate-signup .sign-up-form form {
+  margin: auto;
+}
+
+.section-affiliate-signup .sign-up-form form .row {
+  margin-top: 1rem;
+}
+
+.section-affiliate-signup .sign-up-form input {
+  text-align: center;
+  color: var(--brown);
+}
+
+.section-affiliate-signup .sign-up-form .sign-up-button {
+  margin: 1rem auto;
 }
 
 /* ------------------------- */

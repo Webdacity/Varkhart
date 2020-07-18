@@ -434,11 +434,12 @@ const loadProductPage = () => {
 
                 // Insert HTML
                 document.title = "Varkhart | " + product.name;
+                $('meta[name=description]').remove();
+                $('head').append(`<meta name="description" content='${product.description}'>`);
                 $(".product-page-name").html(product.name);
                 if (product.discount !== null) {
                     $(".product-page-price").html(`R ${product.price - product.discount}`);
                     $(".product-page-price-container p").html(`R ${product.discount} AF`)
-
                 } else {
                     $(".product-page-price").html(`R ${product.price}`);
                 }
