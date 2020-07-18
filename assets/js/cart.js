@@ -1,10 +1,7 @@
 // SETTINGS
 
 const deliveryFee = 117;
-const affiliateShare = 2000 //Cents
-
-
-
+const affiliateShare = 200 //Cents
 
 // -------------------------
 
