@@ -1,7 +1,7 @@
 // SETTINGS
 
 const deliveryFee = 117;
-const affiliateShare = 200 //Cents
+const affiliateShare = 2000 //Cents
 
 // -------------------------
 
@@ -415,7 +415,7 @@ const sendOrder = () => {
                 $(".order-form [name='custom_str1']").val(response.data.order_number);
 
                 // Affiliate Share
-                if (orderConfirmation.affiliateCode !== undefined) {
+                if (orderConfirmation.affiliateCode !== undefined || orderConfirmation.affiliateCode !== null) {
                     const affiliateSettings = {
                         "split_payment": {
                             "merchant_id": response.data.affiliate_merchant_ID,
