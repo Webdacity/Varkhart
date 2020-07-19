@@ -241,7 +241,7 @@ const loadFilterCategories = () => {
             $(`#collapse${gender} .card-category-inner-body`).append(
                 `<div class="category-filter-item" data-filter-gender="${gender}">
                     <span>
-                        <i class="far fa-check"></i>
+                        <i class="material-icons">check</i>
                     </span>
                     <p>${category}<p>
                 </div>
