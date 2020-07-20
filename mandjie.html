@@ -226,7 +226,7 @@
                         <hr class="mb-4">
 
                         <button class="btn btn-lg btn-block pay-button" type="submit"
-                            onclick="validateForm('order-form', showDeliveryNotice)">
+                            onclick="validateForm('order-form', sendOrder)">
                             Betaal deur Payfast
                         </button>
                     </div>
@@ -280,11 +280,17 @@
                                     <label>Straatnommer</label>
                                     <input type="number" class="form-control field" id="order-straat-nommer"
                                         placeholder="123" required>
+                                    <div class="invalid-feedback">
+                                        'n Geldige Straatnommer word vereis.
+                                    </div>
                                 </div>
                                 <div class="col-md-9 mb-3">
                                     <label>Straatnaam</label>
                                     <input type="text" class="form-control field" placeholder="Hoek Straat"
                                         id="order-straat-naam" required>
+                                    <div class="invalid-feedback">
+                                        'n Geldige Straatnaam word vereis.
+                                    </div>
                                 </div>
                             </div>
 
@@ -292,6 +298,9 @@
                                 <label for="">Woongebied</label>
                                 <input type="text" class="form-control field" id="order-woongebied"
                                     placeholder="Waterkloof" required>
+                                <div class="invalid-feedback">
+                                    'n Geldige Woongebied word vereis.
+                                </div>
                             </div>
 
                             <div class="mb-3">
@@ -361,7 +370,7 @@
     <div id="footer"></div>
 
 
-    <!-- Notfication -->
+    <!-- Notification -->
     <div class="notify-bar">
         <img src="./assets/images/logos/notifications.png" alt="Varkhart Notification Logo">
         <p></p>

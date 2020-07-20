@@ -368,7 +368,6 @@ $(".cart-content-item-delete i").hover(
 // Send POST to backend for validation
 
 const sendOrder = () => {
-    $('#delivery-modal').modal('hide');
     showLoader();
     // Get Cart List 
     const cart = JSON.parse(localStorage.getItem("cart"));
@@ -411,7 +410,10 @@ const sendOrder = () => {
             data: orderConfirmation
         })
         .then(response => {
-            console.log(response.data)
+            console.log(response.data);
+
+            $(".order-form [name='amount']").val(response.data.order_amount);
+
             if (response.status === 201) {
                 // Affiliate Share
                 if (response.data.affiliateFound !== false || response.data.merchant_id !== undefined) {
@@ -441,11 +443,6 @@ const sendOrder = () => {
             notify("There seems to be an error processing your order. Please contact support.")
         });
 
-}
-
-// Show Delivery Notice
-const showDeliveryNotice = () => {
-    $('#delivery-modal').modal('toggle');
 }
 
 // Validate Form
