@@ -224,9 +224,9 @@ const loadCart = () => {
                                     <div class="offset-md-0 col-md-8 d-flex align-items-center">
                                         <div class="col-md-3 offset-md-5">
                                             <div class="cart-content-quantity">
-                                                <i class="material-icons">remove</i>
+                                                <i class="material-icons minus">remove</i>
                                                 <input type="number" value="${cartArray[counter].quantity}" disabled class="cart-content-quantity-input">
-                                                <i class="material-icons">add</i>
+                                                <i class="material-icons plus">add</i>
                                             </div>
                                         </div>
                                         <div class="col-md-3 mt-md-0">
