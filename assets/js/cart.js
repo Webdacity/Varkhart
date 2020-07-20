@@ -413,6 +413,7 @@ const sendOrder = () => {
             console.log(response.data);
 
             $(".order-form [name='amount']").val(response.data.order_amount);
+            $(".order-form [name='custom_str1']").val(response.data.order_number);
 
             if (response.status === 201) {
                 // Affiliate Share
