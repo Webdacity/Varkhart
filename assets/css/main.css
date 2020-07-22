@@ -2513,6 +2513,22 @@ input[type=number] {
   margin: 1rem auto;
 }
 
+.section-affiliate-signup-info {
+  text-align: center;
+  padding: 4rem 0;
+}
+
+.section-affiliate-signup-info h1 {
+  padding-top: 1rem;
+}
+
+.section-affiliate-signup-info .line {
+  width: 60%;
+  background-color: var(--brown);
+  height: 5px;
+  margin: 3rem auto 0 auto;
+}
+
 /* ------------------------- */
 /* ORDER TRACK PAGE */
 
