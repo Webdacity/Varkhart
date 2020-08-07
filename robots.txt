@@ -1,1 +1,20 @@
 Sitemap: http://www.varkhart.co.za/sitemap.txt
+
+User-agent: *
+Disallow: /privacy.html
+
+User-agent: *
+Disallow: /terms.html
+
+User-agent: *
+Disallow: /mandjie.html
+
+User-agent: *
+Disallow: /returns.html
+
+
+User-agent: *
+Disallow: /footer.html
+
+User-agent: *
+Disallow: /404.html
