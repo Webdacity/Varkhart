@@ -207,7 +207,7 @@ const loadFilterCategories = () => {
                 `       <!-- ${gender} -->
                         <h6 data-toggle="collapse" href="#collapse${gender}" role="button"
                             aria-expanded="false" aria-controls="collapse${gender}"
-                            class="categoryGender collapsed">
+                            class="categoryGender collapsed" id="categoryGender${gender}">
                             <span>${gender}</span>
                         </h6>
                         <div class="collapse" id="collapse${gender}">
@@ -237,17 +237,22 @@ const loadFilterCategories = () => {
             }
         }
 
-        categories.forEach(category => {
-            $(`#collapse${gender} .card-category-inner-body`).append(
-                `<div class="category-filter-item" data-filter-gender="${gender}">
-                    <span>
-                        <i class="material-icons">check</i>
-                    </span>
-                    <p>${category}<p>
-                </div>
-                `
-            )
-        })
+        if (categories.length < 1) {
+            $(`.card-category #collapseCategory > .card-body #categoryGender${gender}`).remove()
+        } else {
+            categories.forEach(category => {
+                $(`#collapse${gender} .card-category-inner-body`).append(
+                    `<div class="category-filter-item" data-filter-gender="${gender}">
+                        <span>
+                            <i class="material-icons">check</i>
+                        </span>
+                        <p>${category}<p>
+                    </div>
+                    `
+                )
+            })
+        }
+
 
     });
 }
