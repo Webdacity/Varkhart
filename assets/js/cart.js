@@ -1,7 +1,6 @@
 // SETTINGS
 
 const deliveryFee = 117;
-const affiliateShare = 2000 //Cents
 
 // -------------------------
 
@@ -410,28 +409,30 @@ const sendOrder = () => {
             data: orderConfirmation
         })
         .then(response => {
+            let orderReceived = response.data.order
             console.log(response.data);
 
-            $(".order-form [name='amount']").val(response.data.order_amount);
-            $(".order-form [name='custom_str1']").val(response.data.order_number);
+            $(".order-form [name='amount']").val(orderReceived.amount_gross);
+            $(".order-form [name='custom_str1']").val(orderReceived.order_number);
 
             if (response.status === 201) {
-                // Affiliate Share
-                if (response.data.affiliateFound !== false || response.data.merchant_id !== undefined) {
+                if (response.data.affiliate) {
+                    // Affiliate Found
                     const affiliateSettings = {
                         "split_payment": {
-                            "merchant_id": response.data.affiliate_merchant_ID,
-                            "amount": calculateAffiliateShare() * affiliateShare
+                            "merchant_id": response.data.affiliate.merchantID,
+                            "amount": orderReceived.affiliateShareTotal * 100 // *To Cents
                         }
                     }
                     $(".order-form [name='setup']").val(JSON.stringify(affiliateSettings));
-                    $(".order-form").submit();
                     console.log("Payfast OK + Affiliate");
-                    console.log(affiliateSettings)
-                } else {
-                    $(".order-form [name='setup']").remove();
+                    console.log(affiliateSettings);
                     $(".order-form").submit();
-                    console.log("Payfast Ok No Affiliate")
+                } else {
+                    // No Affiliate Found
+                    $(".order-form [name='setup']").remove();
+                    console.log("Payfast Ok No Affiliate");
+                    $(".order-form").submit();
                 }
             } else {
                 hideLoader()
@@ -465,19 +466,6 @@ const validateForm = (formToVal, callback) => {
     }
     form.classList.add('was-validated');
 }
-
-// Calculate Affiliate Share
-const calculateAffiliateShare = () => {
-    let currentCart = JSON.parse(localStorage.getItem("cart"));
-    let totalItems = 0;
-
-    currentCart.forEach(item => {
-        totalItems += item.quantity;
-    });
-
-    return totalItems
-}
-
 
 $(document).ready(function () {
     if (window.location.pathname == "/mandjie.html") {
