@@ -229,3 +229,46 @@ const showCategory = (category) => {
     $(".gender-blocks-section").fadeOut()
     $(`#categorySection${category}`).fadeIn()
 }
+
+
+// Submit Newsletter Modal Form
+const openOrderStopModal = () => {
+    $('#order-stop-modal').modal('toggle');
+
+}
+
+const orderStopModalSubmit = () => {
+    $('#order-stop-modal').modal('toggle');
+    event.preventDefault();
+
+    // Validate Email
+    let email = $(".order-stop-modal-form [name='email']").val();
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (re.test(String(email).toLowerCase()) === false) {
+        alert("Please enter a valid email address");
+    } else {
+        showLoader()
+        axios({
+                method: "post",
+                url: `${api_url}/sendgrid/orderStop`,
+                data: {
+                    "email": $(".order-stop-modal-form [name='email']").val(),
+                    "first_name": $(".order-stop-modal-form [name='name']").val(),
+                }
+            })
+            .then(result => {
+                if (result.status === 201) {
+                    console.log(result)
+                    hideLoader();
+                    notify("Jy is 'n legende! Hou 'n oog op jou e-pos vir wanneer ons jou kontak.")
+                }
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+}
+
+if (window.location.pathname === "/mandjie.html") {
+    openOrderStopModal();
+}
