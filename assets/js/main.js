@@ -165,14 +165,14 @@ const newsletterSubmit = () => {
     } else {
         showLoader()
         axios({
-                method: "post",
-                url: `${api_url}/sendgrid/newsletter`,
-                data: {
-                    email: $(".newsletter-form [name='email']").val(),
-                    first_name: $(".newsletter-form [name='name']").val(),
-                    affiliateCode: getAfflCode()
-                }
-            })
+            method: "post",
+            url: `${api_url}/sendgrid/newsletter`,
+            data: {
+                email: $(".newsletter-form [name='email']").val(),
+                first_name: $(".newsletter-form [name='name']").val(),
+                affiliateCode: getAfflCode()
+            }
+        })
             .then(result => {
                 if (result.status === 200) {
                     console.log(result)
@@ -200,13 +200,13 @@ const newsletterModalSubmit = () => {
     } else {
         showLoader()
         axios({
-                method: "post",
-                url: `${api_url}/sendgrid/newsletter`,
-                data: {
-                    "email": $(".newsletter-modal-form [name='email']").val(),
-                    "first_name": $(".newsletter-modal-form [name='name']").val(),
-                }
-            })
+            method: "post",
+            url: `${api_url}/sendgrid/newsletter`,
+            data: {
+                "email": $(".newsletter-modal-form [name='email']").val(),
+                "first_name": $(".newsletter-modal-form [name='name']").val(),
+            }
+        })
             .then(result => {
                 if (result.status === 200) {
                     console.log(result)
@@ -234,7 +234,6 @@ const showCategory = (category) => {
 // Submit Newsletter Modal Form
 const openOrderStopModal = () => {
     $('#order-stop-modal').modal('toggle');
-
 }
 
 const orderStopModalSubmit = () => {
@@ -249,13 +248,13 @@ const orderStopModalSubmit = () => {
     } else {
         showLoader()
         axios({
-                method: "post",
-                url: `${api_url}/sendgrid/orderStop`,
-                data: {
-                    "email": $(".order-stop-modal-form [name='email']").val(),
-                    "first_name": $(".order-stop-modal-form [name='name']").val(),
-                }
-            })
+            method: "post",
+            url: `${api_url}/sendgrid/orderStop`,
+            data: {
+                "email": $(".order-stop-modal-form [name='email']").val(),
+                "first_name": $(".order-stop-modal-form [name='name']").val(),
+            }
+        })
             .then(result => {
                 if (result.status === 201) {
                     console.log(result)
@@ -269,6 +268,6 @@ const orderStopModalSubmit = () => {
     }
 }
 
-if (window.location.pathname === "/mandjie.html") {
-    openOrderStopModal();
-}
+// if (window.location.pathname === "/mandjie.html") {
+//     openOrderStopModal();
+// }

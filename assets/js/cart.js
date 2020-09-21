@@ -144,7 +144,7 @@ const checkoutCart = () => {
 
 
     $(".checkout-cart-count").html(cartLength);
-    $(".checkout-total h5 span").html(`${cartTotal+deliveryFee}`); // {Incl Delivery}
+    $(".checkout-total h5 span").html(`${cartTotal + deliveryFee}`); // {Incl Delivery}
 }
 
 // CART UTILS
@@ -205,7 +205,7 @@ const loadCart = () => {
                         // Actual Cart
                         $(".cart-content-item-grid").append(
                             `
-                                <div class="cart-content-item container d-flex align-items-center" id="cart-item-${counter+1}"
+                                <div class="cart-content-item container d-flex align-items-center" id="cart-item-${counter + 1}"
                                     data-cart-item-price=${productPrice}>
                                     <template id=${product.productCode}></template>
                                     <div class="4 col-md-1 cart-content-image-container">
@@ -367,7 +367,9 @@ $(".cart-content-item-delete i").hover(
 // Send POST to backend for validation
 
 const sendOrder = () => {
+    $('#delivery-modal').modal('toggle');
     showLoader();
+
     // Get Cart List 
     const cart = JSON.parse(localStorage.getItem("cart"));
     let newCart = [];
@@ -404,10 +406,10 @@ const sendOrder = () => {
     }
 
     axios({
-            method: "post",
-            url: `${api_url}/orders/confirmation`,
-            data: orderConfirmation
-        })
+        method: "post",
+        url: `${api_url}/orders/confirmation`,
+        data: orderConfirmation
+    })
         .then(response => {
             let orderReceived = response.data.order
             console.log(response.data);
@@ -473,3 +475,7 @@ $(document).ready(function () {
         updateCartCounter();
     }
 });
+
+const showDeliveryModal = () => {
+    $('#delivery-modal').modal('toggle');
+}
