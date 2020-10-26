@@ -268,6 +268,6 @@ const orderStopModalSubmit = () => {
     }
 }
 
-if (window.location.pathname === "/mandjie.html") {
-    openOrderStopModal();
-}
+// if (window.location.pathname === "/mandjie.html") {
+//     openOrderStopModal();
+// }
