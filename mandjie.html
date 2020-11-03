@@ -139,7 +139,7 @@
                 </div>
                 <div class="mobile-nav-social">
                     <div class="mobile-newsletter">
-                        <a onclick="$('#newsletter-modal').modal('toggle')">
+                        <a onclick="openNewsletterModal()">
                             <i class="material-icons">mail</i>
                             Nuusbrief
                         </a>
@@ -234,17 +234,29 @@
                         </h4>
                         <ul class="list-group mb-3 cart-details-list">
                         </ul>
+                        <div class="checkout-coupon">
+                            <p class="mb-0">Afslagkode:</p>
+                            <h6 class="mb-0"> <span>0</span></h6>
+                        </div>
                         <div class="checkout-delivery d-flex justify-content-between align-items-center">
                             <p class="mb-0">Aflewering:</p>
                             <h6 class="mb-0">R 117</h6>
                         </div>
                         <hr class="my-2">
                         <div class="checkout-total d-flex justify-content-between align-items-center">
-                            <p class="mb-0">Totaal:</p>
+                            <p class="mb-0">Totaal:
+                                <small>(Na Afslag)</small>
+                            </p>
                             <h5 class="mb-0">R <span></span></h5>
                         </div>
                         <hr class="mb-4">
-
+                        <p id="coupon-code-test">Ek het 'n afslag kode</p>
+                        <div class="coupon-code-validation">
+                            <label>Aflagkode</label>
+                            <input type="email" class="form-control" placeholder="Tik jou kode hier in" name="code">
+                            <p class="message"></p>
+                            <button onClick="testCoupon()">Gebruik Afslag</button>
+                        </div>
                         <button class="btn btn-lg btn-block pay-button" type="submit" onclick="validateForm('order-form', showDeliveryModal)">
                             Betaal deur Payfast
                         </button>

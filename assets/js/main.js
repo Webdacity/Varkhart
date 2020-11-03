@@ -1,5 +1,5 @@
-const api_url = "https://varkhart-backend.herokuapp.com"
-// const api_url = "http://localhost:3000"
+// const api_url = "https://varkhart-backend.herokuapp.com"
+const api_url = "http://localhost:3000"
 
 $(document).ready(() => {
 
@@ -26,6 +26,28 @@ $(document).ready(() => {
 
     updateCartCounter();
 });
+
+// Shop Settings
+async function getShopSettings() {
+    let getSettings = axios({
+        method: "get",
+        url: `${api_url}/shopSettings/`,
+    })
+        .then(result => {
+            console.log("Request Finished")
+            return result.data;
+        })
+        .catch(error => {
+            console.log(error)
+        })
+
+    // wait until the promise returns us a value
+    let shopSettings = await getSettings;
+    localStorage.setItem("shopSettings", JSON.stringify(shopSettings));
+
+    // "Now it's done!"
+    console.log("Settings Saved")
+}
 
 // Update Cart Counter
 
@@ -153,41 +175,8 @@ const getAfflCode = () => {
     }
 }
 
-// Submit Newsletter Form
-const newsletterSubmit = () => {
-    event.preventDefault();
-
-    // Validate Email
-    let email = $(".newsletter-form [name='email']").val();
-    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (re.test(String(email).toLowerCase()) === false) {
-        alert("Please enter a valid email address");
-    } else {
-        showLoader()
-        axios({
-            method: "post",
-            url: `${api_url}/sendgrid/newsletter`,
-            data: {
-                email: $(".newsletter-form [name='email']").val(),
-                first_name: $(".newsletter-form [name='name']").val(),
-                affiliateCode: getAfflCode()
-            }
-        })
-            .then(result => {
-                if (result.status === 200) {
-                    console.log(result)
-                    hideLoader();
-                    notify("Jy is 'n legende! Hou 'n oog op jou e-pos vir ons nuusbriewe")
-                }
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    }
-
-}
-
 // Submit Newsletter Modal Form
+
 const newsletterModalSubmit = () => {
     $('#newsletter-modal').modal('toggle');
     event.preventDefault();
@@ -201,24 +190,41 @@ const newsletterModalSubmit = () => {
         showLoader()
         axios({
             method: "post",
-            url: `${api_url}/sendgrid/newsletter`,
+            url: `${api_url}/coupons/create/customer`,
             data: {
                 "email": $(".newsletter-modal-form [name='email']").val(),
                 "first_name": $(".newsletter-modal-form [name='name']").val(),
+                "phone": $(".newsletter-modal-form [name='phone']").val(),
             }
         })
             .then(result => {
                 if (result.status === 200) {
                     console.log(result)
                     hideLoader();
-                    notify("Jy is 'n legende! Hou 'n oog op jou e-pos vir ons nuusbriewe")
+                    $('#newsletter-modal-submit').modal('toggle');
+                    $('#newsletter-modal-submit p').html("Jy is 'n legende! <br/><br/>  Jy sal jou afslagkode ontvang per sms. <br/><br/> Hou ook 'n oog op jou e-pos vir ons nuusbriewe.");
                 }
             })
             .catch(error => {
-                console.log(error)
+                console.log(error);
+                if (error.response.status === 400) {
+                    hideLoader();
+                    $('#newsletter-modal-submit').modal('toggle');
+                    $('#newsletter-modal-submit p').html("Slegs een afslagkode per koper word toegelaat. <br/><br/> Jy is wel ingeskryf vir ons nuusbrief!");
+                }
             })
     }
 }
+
+const openNewsletterModal = () => {
+    showLoader()
+    $('#newsletter-modal').modal('toggle');
+    getShopSettings();
+    let shopSettings = JSON.parse(localStorage.getItem("shopSettings"));
+    console.log(shopSettings.subscriptionCouponValue)
+    $("#newsletter-coupon-value").html(`${shopSettings.subscriptionCouponValue}%`)
+}
+
 
 // -------------------------
 
@@ -229,45 +235,3 @@ const showCategory = (category) => {
     $(".gender-blocks-section").fadeOut()
     $(`#categorySection${category}`).fadeIn()
 }
-
-
-// Submit Newsletter Modal Form
-const openOrderStopModal = () => {
-    $('#order-stop-modal').modal('toggle');
-}
-
-const orderStopModalSubmit = () => {
-    $('#order-stop-modal').modal('toggle');
-    event.preventDefault();
-
-    // Validate Email
-    let email = $(".order-stop-modal-form [name='email']").val();
-    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (re.test(String(email).toLowerCase()) === false) {
-        alert("Please enter a valid email address");
-    } else {
-        showLoader()
-        axios({
-            method: "post",
-            url: `${api_url}/sendgrid/orderStop`,
-            data: {
-                "email": $(".order-stop-modal-form [name='email']").val(),
-                "first_name": $(".order-stop-modal-form [name='name']").val(),
-            }
-        })
-            .then(result => {
-                if (result.status === 201) {
-                    console.log(result)
-                    hideLoader();
-                    notify("Jy is 'n legende! Hou 'n oog op jou e-pos vir wanneer ons jou kontak.")
-                }
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    }
-}
-
-// if (window.location.pathname === "/mandjie.html") {
-//     openOrderStopModal();
-// }

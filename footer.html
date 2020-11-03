@@ -10,13 +10,11 @@
                     Varkhart is oorspronklik. Varkhart is vir Legendes.</p>
                 <h4>Skryf in vir ons nuusbrief:</h4>
                 <p>Maak seker jy mis nooit enigiets van Varkhart nie!</p>
-                <form class="newsletter-form" onsubmit="newsletterSubmit()">
-                    <div class="form-group  mb-0">
-                        <input type="text" class="mt-2 mt-xl-0 col-md-4" name="name" placeholder="Naam" required>
-                        <input type="email" class="mt-2 mt-xl-0 col-md-7" name="email" placeholder="E-pos" required>
-                    </div>
-                    <button type="submit" class="mt-2">Skryf In</button>
-                </form>
+
+                <button class="mt-2 my-button" onclick="openNewsletterModal()">
+                    <button class="mt-2 my-button" onclick="openNewsletterModal()">
+                        <a>Skryf In</a>
+                    </button>
             </div>
             <div class="col-12 col-lg-6 footer-links">
                 <div class="row justify-content-around">
@@ -128,9 +126,9 @@
                 </div>
                 <div class="modal-body">
                     <p>Maak seker jy mis nooit enigiets van Varkhart nie!
-                        <br>
-                        Bly op datum met die nuutse verwikkelinge en
-                        promosies.</p>
+                        <br> <br>
+                        Skryf in vir ons nuusbrief om <span id="newsletter-coupon-value"></span> afslag te kry op jou volgende aankoop en om op datum te bly met die nuutse verwikkelinge en promosies by Varkhart.
+                    </p>
                     <form class="newsletter-modal-form">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Jou Naam" name="name" required>
@@ -138,10 +136,31 @@
                         <div class="form-group">
                             <input type="email" class="form-control" placeholder="Jou E-Pos" name="email" required>
                         </div>
+                        <div class="form-group">
+                            <input type="tel" class="form-control" placeholder="Jou Nommer" name="phone" required>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn" onclick="newsletterModalSubmit()">Skryf In</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Newsletter Submit Modal -->
+    <div class="modal fade newsletter-modal-submit" id="newsletter-modal-submit" tabindex="-1" role="dialog" aria-labelledby="newsletterModalSubmit" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Varkhart Nuusbrief</h5>
+                </div>
+                <div class="modal-body">
+                    <p>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn" onclick="$('#newsletter-modal-submit').modal('toggle')">Ok</button>
                 </div>
             </div>
         </div>

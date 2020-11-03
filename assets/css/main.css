@@ -81,7 +81,7 @@ html {
 
 .my-button a {
   background-color: var(--brown);
-  color: var(--white);
+  color: var(--white) !important;
 }
 
 .my-button:hover a {
@@ -337,8 +337,6 @@ html {
   display: flex;
   justify-content: center;
 }
-
-
 
 .mobile-newsletter a {
   color: var(--grey) !important;
@@ -2272,8 +2270,16 @@ input[type=number] {
 }
 
 .checkout-total,
-.checkout-delivery {
+.checkout-delivery, .checkout-coupon {
   padding: 1% 5%;
+}
+
+.checkout-total small {
+  display: none;
+}
+
+.checkout-total.coupon small {
+  display: block;
 }
 
 .pay-button {
@@ -2326,6 +2332,59 @@ input[type=number] {
 }
 
 
+/* Coupon */
+
+.cart-summary > p {
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.cart-summary > p:hover {
+  text-decoration: underline;
+}
+.coupon-code-validation {
+  height: 0;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  text-align: c;
+}
+
+.coupon-code-validation button {
+  background-color: #2d150e;
+  padding: 0.4rem 0.8rem;
+  color: white;
+  outline: none;
+  border: none;
+  display: inline-block;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.coupon-code-validation.active {
+  height: unset;
+}
+
+.coupon-code-validation .message {
+  font-size: 0.9rem;
+}
+
+.coupon-code-validation .message.fail {
+  color: red;
+}
+
+.coupon-code-validation .message.success {
+  color: green;
+}
+
+.checkout-coupon {
+  display: none;
+}
+
+.checkout-coupon.active {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 
 /* ------------------------- */
@@ -2697,4 +2756,34 @@ input[type=number] {
 
 .category-blocks-section.category-show {
   display: block;
+}
+
+
+
+
+/* -------------------- */
+
+/* Coupon View */
+
+.section-coupon-view {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.section-coupon-view h2 {
+  color: var(--brown);
+  font-size: 1.5rem;
+}
+
+.section-coupon-view h3 {
+  color: var(--brown);
+  margin: 1rem;
+  font-size: 1.25rem;
+  font-weight: 500;
+  padding: 0.5rem 2rem;
+  background-color: var(--grey);
+  display: inline-block;
 }
