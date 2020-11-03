@@ -66,6 +66,14 @@ html {
   border: none;
   background-color: transparent;
   margin: 0.5rem 0;
+  outline: none;
+  cursor: pointer;
+}
+
+
+.my-button:focus,
+.my-button-alt:focus {
+  outline: none;
 }
 
 .my-button a,
@@ -84,11 +92,11 @@ html {
   color: var(--white) !important;
 }
 
-.my-button:hover a {
+.my-button:hover a,
+.my-button:hover a:not([href]) {
   border: 2px solid var(--brown);
   background-color: transparent;
-  color: var(--brown);
-
+  color: var(--brown) !important;
 }
 
 .my-button-alt a {
@@ -863,31 +871,6 @@ footer form input:focus {
   font-size: 1.1rem;
   margin: 1rem 0;
 }
-
-.home-newsletter-section button {
-  display: inline-block;
-  background: var(--brown);
-  border: 2px solid var(--brown);
-  color: white;
-  transition: 0.4s ease;
-  -webkit-transition: 0.4s ease;
-  -moz-transition: 0.4s ease;
-  -ms-transition: 0.4s ease;
-  -o-transition: 0.4s ease;
-  border-radius: 0;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  -ms-border-radius: 0;
-  -o-border-radius: 0;
-}
-
-.home-newsletter-section button:hover {
-  background-color: transparent;
-  color: var(--brown);
-  outline: none;
-}
-
-
 
 /* Home Product Range */
 

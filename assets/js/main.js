@@ -11,8 +11,6 @@ $(document).ready(() => {
 
     //  Animations
 
-
-
     $(".search-button").hover(
         function () {
             $(this).children().toggleClass("far");
@@ -25,6 +23,7 @@ $(document).ready(() => {
     );
 
     updateCartCounter();
+    getShopSettings();
 });
 
 // Shop Settings
@@ -34,19 +33,14 @@ async function getShopSettings() {
         url: `${api_url}/shopSettings/`,
     })
         .then(result => {
-            console.log("Request Finished")
             return result.data;
         })
         .catch(error => {
             console.log(error)
         })
 
-    // wait until the promise returns us a value
     let shopSettings = await getSettings;
     localStorage.setItem("shopSettings", JSON.stringify(shopSettings));
-
-    // "Now it's done!"
-    console.log("Settings Saved")
 }
 
 // Update Cart Counter
@@ -219,10 +213,11 @@ const newsletterModalSubmit = () => {
 const openNewsletterModal = () => {
     showLoader()
     $('#newsletter-modal').modal('toggle');
-    getShopSettings();
-    let shopSettings = JSON.parse(localStorage.getItem("shopSettings"));
-    console.log(shopSettings.subscriptionCouponValue)
-    $("#newsletter-coupon-value").html(`${shopSettings.subscriptionCouponValue}%`)
+    getShopSettings().then(() => {
+        hideLoader();
+        let shopSettings = JSON.parse(localStorage.getItem("shopSettings"));
+        $("#newsletter-coupon-value").html(`${shopSettings.subscriptionCouponValue}%`);
+    })
 }
 
 
