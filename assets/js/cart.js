@@ -560,7 +560,7 @@ const testCoupon = () => {
         method: "post",
         url: `${api_url}/coupons/validate`,
         data: {
-            "code": couponCode
+            code: couponCode
         }
     })
         .then(result => {
