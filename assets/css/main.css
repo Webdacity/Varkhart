@@ -2774,6 +2774,7 @@ input[type=number] {
   padding: 0.5rem 2rem;
   background-color: var(--grey);
   display: inline-block;
+  word-break: break-word;
 }
 
 
