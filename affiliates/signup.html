@@ -102,7 +102,7 @@
                 </div>
                 <div class="mobile-nav-social">
                     <div class="mobile-newsletter">
-                        <a onclick="$('#newsletter-modal').modal('toggle')">
+                        <a onclick="openNewsletterModal()">
                             <i class="material-icons">mail</i>
                             Nuusbrief
                         </a>
@@ -345,21 +345,17 @@
             <div class="row">
                 <div class="col-12 col-lg-6">
                     <h1>VARKHART</h1>
-                    <p>Varkhart is `n Afrikaanse handelsmerk gevind deur `n groep vennote sedert 2017. Geen kinders of
-                        diere
+                    <p>Varkhart is `n Afrikaanse handelsmerk gevind deur `n groep vennote sedert 2017. Geen kinders of diere
                         is ernstig beseer of negatief beinvloed deur die making van ‘Varkhart’ nie.
 
                         <br><br>
                         Varkhart is oorspronklik. Varkhart is vir Legendes.</p>
                     <h4>Skryf in vir ons nuusbrief:</h4>
                     <p>Maak seker jy mis nooit enigiets van Varkhart nie!</p>
-                    <form class="newsletter-form" onsubmit="newsletterSubmit()">
-                        <div class="form-group  mb-0">
-                            <input type="text" class="mt-2 mt-xl-0 col-md-4" name="name" placeholder="Naam" required>
-                            <input type="email" class="mt-2 mt-xl-0 col-md-7" name="email" placeholder="E-pos" required>
-                        </div>
-                        <button type="submit" class="mt-2">Skryf In</button>
-                    </form>
+
+                    <button class="mt-2 my-button" onclick="openNewsletterModal()">
+                        <a>Skryf In</a>
+                    </button>
                 </div>
                 <div class="col-12 col-lg-6 footer-links">
                     <div class="row justify-content-around">
@@ -368,37 +364,37 @@
                             <span></span>
                             <ul class="row">
                                 <li class="col-sm-6 col-md-6 col-lg-12">
-                                    <a target="blank" href="../aflewerings.html">
+                                    <a target="blank" href="./aflewerings.html">
                                         <i class="material-icons">keyboard_arrow_right</i>
                                         Aflewerings
                                     </a>
                                 </li>
                                 <li class="col-sm-6 col-md-6 col-lg-12">
-                                    <a href="../about.html">
+                                    <a href="./about.html">
                                         <i class="material-icons">keyboard_arrow_right</i>
                                         Ons Storie
                                     </a>
                                 </li>
                                 <li class="col-sm-6 col-md-6 col-lg-12">
-                                    <a href="../returns.html">
+                                    <a href="./returns.html">
                                         <i class="material-icons">keyboard_arrow_right</i>
                                         Terugkerings
                                     </a>
                                 </li>
                                 <li class="col-sm-6 col-md-6 col-lg-12">
-                                    <a href="../privacy.html">
+                                    <a href="./privacy.html">
                                         <i class="material-icons">keyboard_arrow_right</i>
                                         Privaatbeleid
                                     </a>
                                 </li>
                                 <li class="col-sm-6 col-md-6 col-lg-12">
-                                    <a href="../affiliates/signup.html">
+                                    <a href="./affiliates/signup.html">
                                         <i class="material-icons">keyboard_arrow_right</i>
                                         Word 'n Affiliaat
                                     </a>
                                 </li>
                                 <li class="col-sm-6 col-md-6 col-lg-12">
-                                    <a href="../terms.html">
+                                    <a href="./terms.html">
                                         <i class="material-icons">keyboard_arrow_right</i>
                                         Terme & Voorwaardes
                                     </a>
@@ -432,16 +428,16 @@
                             <span></span>
                             <div class="footer-social">
                                 <a href="https://www.facebook.com/Varkhart/" target="blank">
-                                    <img src="../assets/images/icons/Footer/facebook.svg" alt="">
+                                    <img src="./assets/images/icons/Footer/facebook.svg" alt="">
                                 </a>
                                 <a href="https://instagram.com/varkhart" target="blank">
-                                    <img src="../assets/images/icons/Footer/instagram.svg" alt="">
+                                    <img src="./assets/images/icons/Footer/instagram.svg" alt="">
                                 </a>
                                 <a href="https://www.linkedin.com/company/varkhart" target="blank">
-                                    <img src="../assets/images/icons/Footer/linkedin.svg" alt="">
+                                    <img src="./assets/images/icons/Footer/linkedin.svg" alt="">
                                 </a>
                                 <a id="tik-tok" href="https://vm.tiktok.com/TK8Br6/" target="blank">
-                                    <img src="../assets/images/icons/Footer/tiktok.svg" alt="">
+                                    <img src="./assets/images/icons/Footer/tiktok.svg" alt="">
                                 </a>
                             </div>
                         </div>
@@ -457,6 +453,42 @@
                 <p>Powered by <a href="http://www.webdacity.co.za/" target="blank">Webdacity</a></p>
             </div>
         </div>
+
+
+        <!-- Newsletter Modal -->
+        <div class="modal fade newsletter-modal" id="newsletter-modal" tabindex="-1" role="dialog" aria-labelledby="newsletterModal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Skryf in vir ons Nuusbrief:</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Maak seker jy mis nooit enigiets van Varkhart nie!
+                            <br> <br>
+                            Skryf in vir ons nuusbrief om <span id="newsletter-coupon-value"></span> afslag te kry op jou volgende aankoop en om op datum te bly met die nuutse verwikkelinge en promosies by Varkhart.
+                        </p>
+                        <form class="newsletter-modal-form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Jou Naam" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Jou E-Pos" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" class="form-control" placeholder="Jou Nommer" name="phone" required>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn" onclick="newsletterModalSubmit()">Skryf In</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </footer>
 
 

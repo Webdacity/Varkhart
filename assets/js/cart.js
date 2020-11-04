@@ -118,7 +118,7 @@ $(".cart-options-continue").click(() => {
     checkoutCart();
 });
 
-const checkoutCart = () => {
+const checkoutCart = (couponValue) => {
 
     $(".cart-details-list").empty();
     const cartLength = $(".cart-content-item-grid").children().length;
@@ -144,7 +144,13 @@ const checkoutCart = () => {
 
 
     $(".checkout-cart-count").html(cartLength);
-    $(".checkout-total h5 span").html(`${cartTotal + deliveryFee}`); // {Incl Delivery}
+    if (couponValue) {
+        $(".checkout-total h5 span").html(`${Math.round(cartTotal * (100 - couponValue) / 100) + deliveryFee}`); // {Incl Delivery}
+        $(".checkout-total").addClass("coupon")
+    } else {
+        $(".checkout-total h5 span").html(`${cartTotal + deliveryFee}`); // {Incl Delivery}
+
+    }
 }
 
 // CART UTILS
@@ -389,6 +395,7 @@ const sendOrder = () => {
     $(".order-form [name='merchant_id']").val("15264989");
     $(".order-form [name='merchant_key']").val("cjqavjznyhybl");
     $(".order-form [name='notify_url']").val(`${api_url}/orders/`);
+    // Coupon Code
 
 
     // SendGrid
@@ -404,6 +411,13 @@ const sendOrder = () => {
         delivery_notes: $(".order-form [name='custom_str2']").val(),
         affiliateCode: getAfflCode()
     }
+
+    if ($(".coupon-code-validation").hasClass("test-ok")) {
+        orderConfirmation.couponCode = $(".coupon-code-validation input[name='code']").val();
+    }
+
+
+
 
     axios({
         method: "post",
@@ -473,9 +487,110 @@ $(document).ready(function () {
     if (window.location.pathname == "/mandjie.html") {
         loadCart();
         updateCartCounter();
+        checkShopStatus();
+        resetCoupon();
     }
 });
 
 const showDeliveryModal = () => {
     $('#delivery-modal').modal('toggle');
+}
+
+// ---------
+// Shop Status
+const checkShopStatus = () => {
+    let shopSettings = JSON.parse(localStorage.getItem("shopSettings"));
+    if (!shopSettings.shopStatus) {
+        openOrderStopModal();
+        $(".pay-button").attr("disabled", true)
+    }
+}
+
+// Shop Closed
+const openOrderStopModal = () => {
+    $('#order-stop-modal').modal('toggle');
+}
+
+const orderStopModalSubmit = () => {
+    $('#order-stop-modal').modal('toggle');
+    event.preventDefault();
+
+    // Validate Email
+    let email = $(".order-stop-modal-form [name='email']").val();
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (re.test(String(email).toLowerCase()) === false) {
+        alert("Please enter a valid email address");
+    } else {
+        showLoader()
+        axios({
+            method: "post",
+            url: `${api_url}/sendgrid/orderStop`,
+            data: {
+                "email": $(".order-stop-modal-form [name='email']").val(),
+                "first_name": $(".order-stop-modal-form [name='name']").val(),
+            }
+        })
+            .then(result => {
+                if (result.status === 201) {
+                    console.log(result)
+                    hideLoader();
+                    notify("Jy is 'n legende! Hou 'n oog op jou e-pos vir wanneer ons jou kontak.")
+                }
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+}
+
+
+
+
+
+// Coupon Code
+
+$("#coupon-code-test").click(() => {
+    $(".coupon-code-validation").toggleClass("active")
+});
+
+const testCoupon = () => {
+    showLoader()
+    let couponCode = $(".coupon-code-validation input[name='code']").val();
+    axios({
+        method: "get",
+        url: `${api_url}/coupons/validate`,
+        data: {
+            "code": couponCode
+        }
+    })
+        .then(result => {
+            if (result.status === 202) {
+                $(".coupon-code-validation .message").addClass("success")
+                $(".coupon-code-validation .message").html("Afslagkode geldig.")
+                $(".coupon-code-validation").addClass("test-ok")
+                hideLoader();
+                calcCartTotalCoupon(result.data.value);
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            hideLoader();
+            if (error.response.status === 406) {
+                $(".coupon-code-validation .message").addClass("fail")
+                $(".coupon-code-validation .message").html("Die Afslagkode is nie geldig.")
+            }
+        })
+
+}
+
+const calcCartTotalCoupon = (couponValue) => {
+    const cartTotal = parseInt($(".cart-content-totals span").html());
+    $(".checkout-coupon h6 span").html(couponValue + "%");
+    $(".checkout-coupon").addClass("active");
+    checkoutCart(couponValue)
+}
+
+const resetCoupon = () => {
+    $(".coupon-code-validation input[name='code']").val("");
+    $(".checkout-coupon").removeClass("active");
 }

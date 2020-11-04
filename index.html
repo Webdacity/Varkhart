@@ -136,7 +136,7 @@
                 </div>
                 <div class="mobile-nav-social">
                     <div class="mobile-newsletter">
-                        <a onclick="$('#newsletter-modal').modal('toggle')">
+                        <a onclick="openNewsletterModal()">
                             <i class="material-icons">mail</i>
                             Nuusbrief
                         </a>
@@ -209,7 +209,9 @@
 
                 Bly op datum met die nuutse verwikkelinge en
                 promosies.</p>
-            <button class="btn" onclick="$('#newsletter-modal').modal('toggle')">SKRYF IN</button>
+            <button class="my-button" onclick="openNewsletterModal()">
+                <a>Skryf In</a>
+            </button>
         </div>
     </section>
 
@@ -290,7 +292,7 @@
             <p>Sluit aan om 'n amptelike Varkhart Affiliaat te word.
 
             </p>
-            <button class="btn my-button" onclick="">
+            <button class="my-button">
                 <a href="./affiliates/signup.html">Sluit Aan</a>
             </button>
         </div>
@@ -309,41 +311,6 @@
         <img src="./assets/images/logos/notifications.png" alt="Varkhart Notification Logo">
         <p></p>
     </div>
-
-    <!-- Newsletter Modal -->
-    <div class="modal fade newsletter-modal" id="newsletter-modal" tabindex="-1" role="dialog" aria-labelledby="newsletterModal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Skryf in vir ons Nuusbrief:</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Maak seker jy mis nooit enigiets van Varkhart nie!
-                        <br>
-                        Bly op datum met die nuutse verwikkelinge en
-                        promosies.</p>
-                    <form class="newsletter-modal-form">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Jou Naam" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Jou E-Pos" name="email" required>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn" onclick="newsletterModalSubmit()">Skryf In</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>

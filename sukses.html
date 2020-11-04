@@ -136,7 +136,7 @@
                 </div>
                 <div class="mobile-nav-social">
                     <div class="mobile-newsletter">
-                        <a onclick="$('#newsletter-modal').modal('toggle')">
+                        <a onclick="openNewsletterModal()">
                             <i class="material-icons">mail</i>
                             Nuusbrief
                         </a>
@@ -185,37 +185,6 @@
 
     <!-- Footer -->
     <div id="footer"></div>
-
-    <!-- Newsletter Modal -->
-    <div class="modal fade newsletter-modal" id="newsletter-modal" tabindex="-1" role="dialog" aria-labelledby="newsletterModal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Skryf in vir ons Nuusbrief:</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Maak seker jy mis nooit enigiets van Varkhart nie!
-                        <br>
-                        Bly op datum met die nuutse verwikkelinge en
-                        promosies.</p>
-                    <form class="newsletter-modal-form">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Jou Naam" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Jou E-Pos" name="email" required>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn" onclick="newsletterModalSubmit()">Skryf In</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
     <!-- Scripts -->
