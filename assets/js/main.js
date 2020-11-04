@@ -24,6 +24,10 @@ $(document).ready(() => {
 
     updateCartCounter();
     getShopSettings();
+
+    setTimeout(function () {
+        showNewsletterPopup()
+    }, 5000);
 });
 
 // Shop Settings
@@ -222,13 +226,22 @@ const newsletterModalSubmit = () => {
 }
 
 const openNewsletterModal = () => {
-    showLoader()
     $('#newsletter-modal').modal('toggle');
     getShopSettings().then(() => {
-        hideLoader();
         let shopSettings = JSON.parse(localStorage.getItem("shopSettings"));
         $("#newsletter-coupon-value").html(`${shopSettings.subscriptionCouponValue}%`);
     })
+}
+
+// Newsletter Popup
+const showNewsletterPopup = () => {
+    // Check if already opened
+    let newsletterPopupShown = JSON.parse(localStorage.getItem("newsletterPopup"));
+
+    if (!newsletterPopupShown) {
+        openNewsletterModal()
+        localStorage.setItem("newsletterPopup", true);
+    }
 }
 
 
