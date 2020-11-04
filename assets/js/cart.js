@@ -499,11 +499,14 @@ const showDeliveryModal = () => {
 // ---------
 // Shop Status
 const checkShopStatus = () => {
-    let shopSettings = JSON.parse(localStorage.getItem("shopSettings"));
-    if (!shopSettings.shopStatus) {
-        openOrderStopModal();
-        $(".pay-button").attr("disabled", true)
-    }
+    getShopSettings().then(() => {
+        let shopSettings = JSON.parse(localStorage.getItem("shopSettings"));
+        if (!shopSettings.shopStatus) {
+            openOrderStopModal();
+            $(".pay-button").attr("disabled", true)
+        }
+    })
+
 }
 
 // Shop Closed
