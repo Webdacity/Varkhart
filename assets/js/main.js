@@ -234,8 +234,6 @@ const openNewsletterModal = () => {
     })
 }
 
-openNewsletterModal()
-
 // Newsletter Popup
 const showNewsletterPopup = () => {
     // Check if already opened
