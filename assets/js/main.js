@@ -230,8 +230,11 @@ const openNewsletterModal = () => {
     getShopSettings().then(() => {
         let shopSettings = JSON.parse(localStorage.getItem("shopSettings"));
         $("#newsletter-coupon-value").html(`${shopSettings.subscriptionCouponValue}%`);
+        $("#newsletter-modal .my-button span").html(`${shopSettings.subscriptionCouponValue}%`);
     })
 }
+
+openNewsletterModal()
 
 // Newsletter Popup
 const showNewsletterPopup = () => {

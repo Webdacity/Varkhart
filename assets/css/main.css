@@ -660,10 +660,39 @@ footer form input:focus {
   -o-border-radius: 0;
 }
 
+.newsletter-modal .modal-body {
+  text-align: center;
+}
+
+.newsletter-modal .modal-body img {
+  width: 40%;
+  margin-bottom: 1rem;
+}
+
+.newsletter-modal .modal-body h6{
+  font-size: 1.2rem;
+  color:  var(--brown);
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.newsletter-modal .modal-body h6 strong{
+  display: block;
+  font-size: 2.5rem ;
+  font-weight: 500;
+  margin: 0.75rem 0;
+}
+
 .newsletter-modal .modal-body p{
   font-size: 1rem;
   color:  var(--brown);
   font-weight: 400;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.newsletter-modal #newsletter-modal-form input {
+  text-align: center;
 }
 
 .newsletter-modal .modal-content * {
