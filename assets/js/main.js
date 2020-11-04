@@ -1,5 +1,5 @@
-// const api_url = "https://varkhart-backend.herokuapp.com"
-const api_url = "http://localhost:3000"
+const api_url = "https://varkhart-backend.herokuapp.com"
+// const api_url = "http://localhost:3000"
 
 $(document).ready(() => {
 
@@ -172,15 +172,26 @@ const getAfflCode = () => {
 // Submit Newsletter Modal Form
 
 const newsletterModalSubmit = () => {
-    $('#newsletter-modal').modal('toggle');
+    // $('#newsletter-modal').modal('toggle');
     event.preventDefault();
 
+    let form = document.getElementById("newsletter-modal-form");
     // Validate Email
     let email = $(".newsletter-modal-form [name='email']").val();
+    let cellnumber = $(".newsletter-modal-form [name='phone']").val();
     let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (re.test(String(email).toLowerCase()) === false) {
+    if (form.checkValidity() === false) {
+        console.log("Validation Fail")
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    else if (re.test(String(email).toLowerCase()) === false) {
         alert("Please enter a valid email address");
-    } else {
+    } else if (cellnumber.length < 10 || cellnumber.length > 10) {
+        alert("Die foonnommer is nie geldig nie");
+    }
+    else {
+        $('#newsletter-modal').modal('toggle');
         showLoader()
         axios({
             method: "post",
@@ -193,7 +204,6 @@ const newsletterModalSubmit = () => {
         })
             .then(result => {
                 if (result.status === 200) {
-                    console.log(result)
                     hideLoader();
                     $('#newsletter-modal-submit').modal('toggle');
                     $('#newsletter-modal-submit p').html("Jy is 'n legende! <br/><br/>  Jy sal jou afslagkode ontvang per sms. <br/><br/> Hou ook 'n oog op jou e-pos vir ons nuusbriewe.");
@@ -208,6 +218,7 @@ const newsletterModalSubmit = () => {
                 }
             })
     }
+    form.classList.add('was-validated');
 }
 
 const openNewsletterModal = () => {

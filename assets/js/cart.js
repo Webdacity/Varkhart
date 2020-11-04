@@ -557,7 +557,7 @@ const testCoupon = () => {
     showLoader()
     let couponCode = $(".coupon-code-validation input[name='code']").val();
     axios({
-        method: "post",
+        method: "get",
         url: `${api_url}/coupons/validate`,
         data: {
             "code": couponCode

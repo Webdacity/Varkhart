@@ -658,7 +658,12 @@ footer form input:focus {
   -moz-border-radius: 0;
   -ms-border-radius: 0;
   -o-border-radius: 0;
-  color: var(--brown);
+}
+
+.newsletter-modal .modal-body p{
+  font-size: 1rem;
+  color:  var(--brown);
+  font-weight: 400;
 }
 
 .newsletter-modal .modal-content * {
@@ -2770,3 +2775,6 @@ input[type=number] {
   background-color: var(--grey);
   display: inline-block;
 }
+
+
+

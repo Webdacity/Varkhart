@@ -128,15 +128,24 @@
                         <br> <br>
                         Skryf in vir ons nuusbrief om <span id="newsletter-coupon-value"></span> afslag te kry op jou volgende aankoop en om op datum te bly met die nuutse verwikkelinge en promosies by Varkhart.
                     </p>
-                    <form class="newsletter-modal-form">
+                    <form class="newsletter-modal-form needs-validaton" id="newsletter-modal-form">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Jou Naam" name="name" required>
+                            <div class="invalid-feedback">
+                                'n Geldige naam word vereis.
+                            </div>
                         </div>
                         <div class="form-group">
                             <input type="email" class="form-control" placeholder="Jou E-Pos" name="email" required>
+                            <div class="invalid-feedback">
+                                'n Geldige e-pos word vereis.
+                            </div>
                         </div>
                         <div class="form-group">
                             <input type="tel" class="form-control" placeholder="Jou Nommer" name="phone" required>
+                            <div class="invalid-feedback">
+                                'n Geldige e-pos word selfoon nommer vereis.
+                            </div>
                         </div>
                     </form>
                 </div>
