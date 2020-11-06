@@ -650,9 +650,9 @@ footer form input:focus {
 /* Normal Modal */
 
 
-.normal-modal .modal-body p{
+.normal-modal .modal-body p {
   font-size: 1rem;
-  color:  var(--brown);
+  color: var(--brown);
   font-weight: 400;
   padding: 0;
   margin-top: 1rem;
@@ -681,23 +681,23 @@ footer form input:focus {
   margin-bottom: 1rem;
 }
 
-.newsletter-modal .modal-body h6{
+.newsletter-modal .modal-body h6 {
   font-size: 1.2rem;
-  color:  var(--brown);
+  color: var(--brown);
   font-weight: 400;
   text-transform: uppercase;
 }
 
-.newsletter-modal .modal-body h6 strong{
+.newsletter-modal .modal-body h6 strong {
   display: block;
-  font-size: 2.5rem ;
+  font-size: 2.5rem;
   font-weight: 500;
   margin: 0.75rem 0;
 }
 
-.newsletter-modal .modal-body p{
+.newsletter-modal .modal-body p {
   font-size: 1rem;
-  color:  var(--brown);
+  color: var(--brown);
   font-weight: 400;
   padding: 0;
   margin-top: 1rem;
@@ -2299,7 +2299,8 @@ input[type=number] {
 }
 
 .checkout-total,
-.checkout-delivery, .checkout-coupon {
+.checkout-delivery,
+.checkout-coupon {
   padding: 1% 5%;
 }
 
@@ -2363,14 +2364,15 @@ input[type=number] {
 
 /* Coupon */
 
-.cart-summary > p {
+.cart-summary>p {
   font-size: 0.9rem;
   cursor: pointer;
 }
 
-.cart-summary > p:hover {
+.cart-summary>p:hover {
   text-decoration: underline;
 }
+
 .coupon-code-validation {
   height: 0;
   overflow: hidden;
@@ -2819,4 +2821,61 @@ input[type=number] {
 }
 
 
+/* ------------------------------------- */
+/* REVIEWS */
 
+
+.section-review-submit {
+  padding: 3rem 0;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.section-review-submit form {
+  padding-top: 2rem;
+  text-align: center;
+}
+
+.section-review-submit form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.section-review-submit form label {
+  margin-bottom: 1rem;
+}
+
+.section-review-submit form input,
+.section-review-submit form textarea {
+  border: 1px solid var(--brown) !important;
+  border-radius: 0;
+  outline: none !important;
+  text-align: center;
+}
+
+.section-review-submit form textarea {
+  height: 6rem;
+}
+
+.section-review-submit form input:active,
+.section-review-submit form textarea:active,
+.section-review-submit form input:focus,
+.section-review-submit form textarea:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.section-review-submit .review-rating span {
+  border: 1.5px solid var(--brown);
+  padding: 0.25rem 0.5rem;
+  margin: 0 0.5rem;
+  cursor: pointer;
+}
+
+.section-review-submit .review-rating span.active {
+  background-color: var(--brown);
+  color: var(--grey);
+}
