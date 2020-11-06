@@ -11,7 +11,7 @@ const hideLoader = () => {
     $(".loader-container").fadeOut(500)
 }
 
-const validateForm = (formToVal, callback) => {
+const validateAffiliateForm = (formToVal, callback) => {
     event.preventDefault()
     let form = document.getElementById(formToVal);
     let email = $(`#${formToVal} input[name='email']`).val();
@@ -47,12 +47,12 @@ const saveAffiliateCode = () => {
         console.log(affiliateCode);
 
         axios({
-                method: "post",
-                url: `${api_url}/affiliates/checkStatus`,
-                data: {
-                    code: affiliateCode
-                }
-            })
+            method: "post",
+            url: `${api_url}/affiliates/checkStatus`,
+            data: {
+                code: affiliateCode
+            }
+        })
             .then(result => {
                 console.log(result.status)
                 // Check if Affiliate Active
@@ -124,10 +124,10 @@ const saveAffiliate = () => {
     }
 
     axios({
-            method: "post",
-            url: `${api_url}/affiliates/`,
-            data: affiliate
-        })
+        method: "post",
+        url: `${api_url}/affiliates/`,
+        data: affiliate
+    })
         .then(result => {
             console.log(result);
             hideLoader();

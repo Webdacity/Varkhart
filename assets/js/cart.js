@@ -1,6 +1,6 @@
 // SETTINGS
-
-const deliveryFee = 117;
+let deliveryFee;
+let freeDeliveryThreshold;
 
 // -------------------------
 
@@ -15,6 +15,7 @@ function calcCartTotal() {
         totalCart += currentItemTotal;
     }
     $(".cart-content-totals h4 span").html(totalCart);
+    return totalCart
 }
 
 // Cart Quantity + Total Counter
@@ -115,7 +116,14 @@ $(".cart-options-continue").click(() => {
     $(".cart-section").fadeOut(500, () => {
         $(".cart-details").fadeIn();
     });
-    checkoutCart();
+    getShopSettings()
+        .then((shopSettings) => {
+            deliveryFee = shopSettings.deliveryFee;
+            freeDeliveryThreshold = shopSettings.freeDeliveryThreshold;
+            checkFreeDelivery();
+            checkoutCart();
+        })
+
 });
 
 const checkoutCart = (couponValue) => {
@@ -144,12 +152,20 @@ const checkoutCart = (couponValue) => {
 
 
     $(".checkout-cart-count").html(cartLength);
+    console.log(deliveryFee)
     if (couponValue) {
-        $(".checkout-total h5 span").html(`${Math.round(cartTotal * (100 - couponValue) / 100) + deliveryFee}`); // {Incl Delivery}
-        $(".checkout-total").addClass("coupon")
+        getShopSettings()
+            .then((shopSettings) => {
+                deliveryFee = shopSettings.deliveryFee;
+                freeDeliveryThreshold = shopSettings.freeDeliveryThreshold;
+                checkFreeDelivery(couponValue);
+                checkoutCart();
+                console.log(deliveryFee);
+                $(".checkout-total h5 span").html(`${Math.round(cartTotal * (100 - couponValue) / 100) + deliveryFee}`); // {Incl Delivery}
+                $(".checkout-total").addClass("coupon")
+            })
     } else {
         $(".checkout-total h5 span").html(`${cartTotal + deliveryFee}`); // {Incl Delivery}
-
     }
 }
 
@@ -373,7 +389,7 @@ $(".cart-content-item-delete i").hover(
 // Send POST to backend for validation
 
 const sendOrder = () => {
-    $('#delivery-modal').modal('toggle');
+    $('#normal-modal').modal('toggle');
     showLoader();
 
     // Get Cart List 
@@ -464,7 +480,7 @@ const sendOrder = () => {
 }
 
 // Validate Form
-const validateForm = (formToVal, callback) => {
+const validateCartForm = (formToVal, callback) => {
     let form = document.getElementById(formToVal);
     let email = $(".order-form [name='email_address']").val();
     let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -487,26 +503,24 @@ $(document).ready(function () {
     if (window.location.pathname == "/mandjie.html") {
         loadCart();
         updateCartCounter();
-        checkShopStatus();
         resetCoupon();
+        getShopSettings()
+            .then((shopSettings) => {
+                deliveryFee = shopSettings.deliveryFee;
+                freeDeliveryThreshold = shopSettings.freeDeliveryThreshold;
+                checkShopStatus(shopSettings)
+            })
     }
 });
 
-const showDeliveryModal = () => {
-    $('#delivery-modal').modal('toggle');
-}
 
 // ---------
 // Shop Status
-const checkShopStatus = () => {
-    getShopSettings().then(() => {
-        let shopSettings = JSON.parse(localStorage.getItem("shopSettings"));
-        if (!shopSettings.shopStatus) {
-            openOrderStopModal();
-            $(".pay-button").attr("disabled", true)
-        }
-    })
-
+const checkShopStatus = (shopSettings) => {
+    if (!shopSettings.shopStatus) {
+        openOrderStopModal();
+        $(".pay-button").attr("disabled", true)
+    }
 }
 
 // Shop Closed
@@ -596,4 +610,55 @@ const calcCartTotalCoupon = (couponValue) => {
 const resetCoupon = () => {
     $(".coupon-code-validation input[name='code']").val("");
     $(".checkout-coupon").removeClass("active");
+}
+
+//   Delivery
+
+const deliveryModal = () => {
+    showModal({
+        heading: "Aflewerings",
+        text: "Neem asb kennis dat alle aflewerings sal 3-5 werksdae neem.",
+        buttonText: "Betaal",
+        buttonFunction: sendOrder
+    })
+}
+
+const checkFreeDelivery = (couponValue) => {
+    const cartTotal = calcCartTotal();
+
+    // With Coupon
+    if (couponValue && (cartTotal >= freeDeliveryThreshold)) {
+        totalAfterCoupon = Math.round(cartTotal * (100 - couponValue) / 100);
+        // If total after coupon < R 1000
+        if (totalAfterCoupon <= freeDeliveryThreshold) {
+            deliveryFee = deliveryFee;
+            $(".checkout-delivery h6").html(`R ${deliveryFee}`)
+        }
+        // If total after coupon > R 1000
+        else {
+            deliveryFee = 0;
+            $(".checkout-delivery h6").html(`R 0`)
+        }
+    }
+
+    // No Coupon
+    else if (cartTotal >= freeDeliveryThreshold) {
+        console.log("Free Delivery")
+        // No Coupon, Total > Threshold
+        deliveryFee = 0;
+        $(".checkout-delivery h6").html(`R 0`)
+    } else {
+        // No Coupon, Total < Threshold
+        $(".checkout-delivery h6").html(`R ${deliveryFee}`)
+
+        // Prompt Free Delivery
+        if (cartTotal > (freeDeliveryThreshold - 300) && cartTotal < freeDeliveryThreshold) {
+            showModal({
+                heading: "Gratis Aflewering",
+                text: "Aflewering is gratis indien jou bestelling meer as R 1000 is. <br><br> Gooi nog 'n item of twee in jou mandjie en kry gratis aflewering!",
+                buttonText: "Ok",
+                buttonFunction: hideModal
+            });
+        }
+    }
 }

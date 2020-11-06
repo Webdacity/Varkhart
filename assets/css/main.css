@@ -646,6 +646,18 @@ footer form input:focus {
   }
 }
 
+
+/* Normal Modal */
+
+
+.normal-modal .modal-body p{
+  font-size: 1rem;
+  color:  var(--brown);
+  font-weight: 400;
+  padding: 0;
+  margin-top: 1rem;
+}
+
 /* Newsletter Modal */
 
 .newsletter-modal {

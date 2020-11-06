@@ -1,5 +1,5 @@
-const api_url = "https://varkhart-backend.herokuapp.com"
-// const api_url = "http://localhost:3000"
+// const api_url = "https://varkhart-backend.herokuapp.com"
+const api_url = "http://localhost:3000"
 
 $(document).ready(() => {
 
@@ -23,7 +23,6 @@ $(document).ready(() => {
     );
 
     updateCartCounter();
-    getShopSettings();
 
     setTimeout(function () {
         showNewsletterPopup()
@@ -45,6 +44,7 @@ async function getShopSettings() {
 
     let shopSettings = await getSettings;
     localStorage.setItem("shopSettings", JSON.stringify(shopSettings));
+    return shopSettings
 }
 
 // Update Cart Counter
@@ -227,8 +227,7 @@ const newsletterModalSubmit = () => {
 
 const openNewsletterModal = () => {
     $('#newsletter-modal').modal('toggle');
-    getShopSettings().then(() => {
-        let shopSettings = JSON.parse(localStorage.getItem("shopSettings"));
+    getShopSettings().then((shopSettings) => {
         $("#newsletter-coupon-value").html(`${shopSettings.subscriptionCouponValue}%`);
         $("#newsletter-modal .my-button span").html(`${shopSettings.subscriptionCouponValue}%`);
     })
@@ -254,4 +253,20 @@ const showCategory = (category) => {
     console.log(category)
     $(".gender-blocks-section").fadeOut()
     $(`#categorySection${category}`).fadeIn()
+}
+
+// ----------------
+
+// Modals
+const showModal = (settings) => {
+    $(".normal-modal").modal("toggle");
+    $(".normal-modal .modal-title").html(settings.heading);
+    $(".normal-modal .modal-body p").html(settings.text);
+    $(".normal-modal .modal-footer button").html(settings.buttonText);
+    $(".normal-modal .modal-footer button").off('click');;
+    $(".normal-modal .modal-footer button").click(settings.buttonFunction);
+}
+
+const hideModal = () => {
+    $(".normal-modal").modal("toggle")
 }

@@ -240,7 +240,7 @@
                         </div>
                         <div class="checkout-delivery d-flex justify-content-between align-items-center">
                             <p class="mb-0">Aflewering:</p>
-                            <h6 class="mb-0">R 117</h6>
+                            <h6 class="mb-0"></h6>
                         </div>
                         <hr class="my-2">
                         <div class="checkout-total d-flex justify-content-between align-items-center">
@@ -257,7 +257,7 @@
                             <p class="message"></p>
                             <button onClick="testCoupon()">Gebruik Afslag</button>
                         </div>
-                        <button class="btn btn-lg btn-block pay-button" type="submit" onclick="validateForm('order-form', showDeliveryModal)">
+                        <button class="btn btn-lg btn-block pay-button" type="submit" onclick="validateCartForm('order-form', deliveryModal)">
                             Betaal deur Payfast
                         </button>
                     </div>
@@ -421,27 +421,6 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn" onclick="newsletterModalSubmit()">Skryf In</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Delivery Modal -->
-    <div class="modal fade newsletter-modal" id="delivery-modal" tabindex="-1" role="dialog" aria-labelledby="newsletterModal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Aflewerings:</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Neem asb kennis dat alle aflewerings sal 3-5 werksdae neem.
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn" onclick="sendOrder()">Betaal</button>
                 </div>
             </div>
         </div>
