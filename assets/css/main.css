@@ -542,6 +542,20 @@ footer form input:focus {
   margin-top: 30px;
 }
 
+.footer-bottom .legal-links {
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.footer-bottom .legal-links a {
+  font-weight: 300;
+}
+
+.footer-bottom .legal-links span {
+  margin: 0 0.5rem;
+  font-weight: 300;
+}
+
 .footer-social a {
   text-decoration: none;
   margin-right: 10px;
@@ -2868,14 +2882,72 @@ input[type=number] {
   box-shadow: none !important;
 }
 
-.section-review-submit .review-rating span {
+.section-review-submit .review-rating {
+  display: flex;
+  justify-content: center;
+}
+
+.section-review-submit .review-rating div {
   border: 1.5px solid var(--brown);
   padding: 0.25rem 0.5rem;
   margin: 0 0.5rem;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: var(--brown);
 }
 
-.section-review-submit .review-rating span.active {
+.section-review-submit .review-rating div.active {
   background-color: var(--brown);
   color: var(--grey);
+}
+
+.section-review-submit .review-rating div span i {
+  font-size: 1rem;
+}
+
+/* View Reviews */
+
+.section-reviews-view {
+  min-height: 100vh;
+  padding-top: 5rem;
+}
+
+.section-reviews-view h1 {
+  color: var(--brown);
+  font-size: 2rem;
+  text-align: center;
+}
+
+.reviews-grid {
+  display: flex;
+  padding: 2rem 0;
+  flex-wrap: wrap;
+  row-gap: 1.5rem;
+}
+
+.reviews-grid-item {
+  background-color: var(--grey);
+  padding: 1.5rem 2rem;
+  width: 100%;
+}
+
+.reviews-grid-item .header {
+  color: var(--brown);
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+}
+
+.reviews-grid-item .header .rating i {
+  opacity: 0.4;
+}
+
+.reviews-grid-item .header .rating i.active {
+  opacity: 1;
+}
+
+.reviews-grid-item .header h4 {
+  font-size: 1.3rem;
+  margin: 0;
 }

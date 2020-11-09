@@ -24,8 +24,8 @@ const hideLoader = () => {
     $(".loader-container").fadeOut(500)
 }
 
-$(".review-rating span").click(function () {
-    $(".review-rating span").removeClass("active");
+$(".review-rating div").click(function () {
+    $(".review-rating div").removeClass("active");
     $(this).addClass("active")
 })
 
@@ -34,7 +34,7 @@ const validateReviewForm = (formToVal, callback) => {
     let form = document.getElementById(formToVal);
     if (form.checkValidity() === false) {
         console.log("Validation Fail")
-    } else if ($("#review-form .review-rating span").hasClass("active") === false) {
+    } else if ($("#review-form .review-rating div").hasClass("active") === false) {
         alert("Jy het nie 'n gradering gekies nie.")
     } else {
         console.log("Validation Success")
@@ -52,7 +52,7 @@ const submitReview = () => {
     const review = {
         name: $("#review-form input[name='name']").val(),
         text: $("#review-form textarea[name='text']").val(),
-        rating: parseInt($("#review-form .review-rating span.active").html())
+        rating: parseInt($("#review-form .review-rating div.active span").html())
     }
     console.log(review)
     axios({
