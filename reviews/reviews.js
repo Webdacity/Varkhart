@@ -48,11 +48,14 @@ const validateReviewForm = (formToVal, callback) => {
 
 const submitReview = () => {
     showLoader();
+    let order_number = window.location.hash.replace("#", "");
+    order_number = order_number.length > 0 ? order_number : null
 
     const review = {
         name: $("#review-form input[name='name']").val(),
         text: $("#review-form textarea[name='text']").val(),
-        rating: parseInt($("#review-form .review-rating div.active span").html())
+        rating: parseInt($("#review-form .review-rating div.active span").html()),
+        order_number: order_number
     }
     console.log(review)
     axios({
@@ -61,9 +64,32 @@ const submitReview = () => {
         data: review
     }).then(response => {
         hideLoader();
-        notify("Baie dankie vir jou resensie. Dit help ons groei en nog meer Varkharte bymekaar bring!");
+        showModal({
+            heading: "Jou Resensie",
+            text: "Baie dankie vir jou resensie. Dit help ons groei en nog meer Varkharte bymekaar bring!",
+            buttonText: "Ok",
+            buttonFunction: hideModal
+        });
     })
         .catch(err => {
             console.log(err);
         });
+}
+
+
+// ----------------
+
+// Modals
+const showModal = (settings) => {
+    $(".normal-modal").modal("toggle");
+    $(".normal-modal .modal-title").html(settings.heading);
+    $(".normal-modal .modal-body p").html(settings.text);
+    $(".normal-modal .modal-footer button").html(settings.buttonText);
+    $(".normal-modal .modal-footer button").off('click');;
+    $(".normal-modal .modal-footer button").click(settings.buttonFunction);
+}
+
+const hideModal = () => {
+    $(".normal-modal").modal("toggle");
+    window.location.replace("../index.html")
 }
