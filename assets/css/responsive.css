@@ -108,6 +108,19 @@
 /* Small */
 @media screen and (max-width:576px) {
 
+    /* Nav */
+
+    .mobile-newsletter {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .mobile-newsletter a {
+        margin: 0.5rem;
+    }
+
     /* Cart Page */
 
     .cart-options a {
@@ -136,6 +149,25 @@
     footer ul,
     .footer-bottom p {
         padding-left: 15px !important;
+    }
+
+
+    /* Reviews */
+
+    .reviews-grid-item {
+        text-align: center;
+    }
+
+    .reviews-grid-item .header {
+        color: var(--brown);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .reviews-grid-item .header h4 {
+        margin-bottom: 0.5rem;
     }
 
 }

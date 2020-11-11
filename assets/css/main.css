@@ -343,7 +343,7 @@ html {
 
 .mobile-newsletter {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 .mobile-newsletter a {
