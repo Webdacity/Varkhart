@@ -1,5 +1,5 @@
-// const api_url = "https://varkhart-backend.herokuapp.com"
-const api_url = "http://localhost:3000"
+const api_url = "https://varkhart-backend.herokuapp.com"
+// const api_url = "http://localhost:3000"
 
 $(document).ready(() => {
 
