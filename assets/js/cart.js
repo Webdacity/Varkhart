@@ -389,7 +389,6 @@ $(".cart-content-item-delete i").hover(
 // Send POST to backend for validation
 
 const sendOrder = () => {
-    $('#normal-modal').modal('toggle');
     showLoader();
 
     // Get Cart List 
