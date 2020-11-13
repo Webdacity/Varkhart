@@ -1,6 +1,8 @@
 // SETTINGS
 let deliveryFee;
 let freeDeliveryThreshold;
+let freeDeliveryThresholdCoupon;
+
 
 // -------------------------
 
@@ -116,10 +118,12 @@ $(".cart-options-continue").click(() => {
     $(".cart-section").fadeOut(500, () => {
         $(".cart-details").fadeIn();
     });
+    $(".free-delivery-banner").css("display", "none")
     getShopSettings()
         .then((shopSettings) => {
             deliveryFee = shopSettings.deliveryFee;
             freeDeliveryThreshold = shopSettings.freeDeliveryThreshold;
+            freeDeliveryThresholdCoupon = shopSettings.freeDeliveryThresholdCoupon;
             checkFreeDelivery();
             checkoutCart();
         })
@@ -158,6 +162,7 @@ const checkoutCart = (couponValue) => {
             .then((shopSettings) => {
                 deliveryFee = shopSettings.deliveryFee;
                 freeDeliveryThreshold = shopSettings.freeDeliveryThreshold;
+                freeDeliveryThresholdCoupons = shopSettings.freeDeliveryThresholdCoupons;
                 checkFreeDelivery(couponValue);
                 checkoutCart();
                 console.log(deliveryFee);
@@ -507,7 +512,9 @@ $(document).ready(function () {
             .then((shopSettings) => {
                 deliveryFee = shopSettings.deliveryFee;
                 freeDeliveryThreshold = shopSettings.freeDeliveryThreshold;
-                checkShopStatus(shopSettings)
+                freeDeliveryThresholdCoupons = shopSettings.freeDeliveryThresholdCoupons;
+                checkShopStatus(shopSettings);
+                $(".free-delivery-banner span").html(shopSettings.freeDeliveryThreshold)
             })
     }
 });
@@ -613,36 +620,46 @@ const resetCoupon = () => {
 
 //   Delivery
 
-const deliveryModal = () => {
-    showModal({
-        heading: "Aflewerings",
-        text: "Neem asb kennis dat alle aflewerings sal 3-5 werksdae neem.",
-        buttonText: "Betaal",
-        buttonFunction: sendOrder
-    })
+const showHeaderDropdown = (text) => {
+    $(".header-dropdown p").html(text);
+    $(".header-dropdown").fadeIn()
+
+    setTimeout(() => {
+        hideHeaderDropdown()
+    }, 5000);
 }
+
+const hideHeaderDropdown = (text) => {
+    $(".header-dropdown p").html("");
+    $(".header-dropdown").fadeOut()
+}
+
+$(".header-dropdown").click(() => {
+    hideHeaderDropdown()
+})
+
 
 const checkFreeDelivery = (couponValue) => {
     const cartTotal = calcCartTotal();
 
     // With Coupon
-    if (couponValue && (cartTotal >= freeDeliveryThreshold)) {
+    if (couponValue) {
         totalAfterCoupon = Math.round(cartTotal * (100 - couponValue) / 100);
-        // If total after coupon < R 1000
-        if (totalAfterCoupon <= freeDeliveryThreshold) {
-            deliveryFee = deliveryFee;
-            $(".checkout-delivery h6").html(`R ${deliveryFee}`)
-        }
-        // If total after coupon > R 1000
-        else {
+        // Cart Total after coupon >= freeDeliveryThresholdCoupons
+        if (totalAfterCoupon >= freeDeliveryThresholdCoupons) {
             deliveryFee = 0;
-            $(".checkout-delivery h6").html(`R 0`)
+            $(".checkout-delivery h6").html(`R 0`);
+        }
+        // If total after coupon < freeDeliveryThresholdCoupons
+        else if (totalAfterCoupon <= freeDeliveryThresholdCoupons) {
+            deliveryFee = deliveryFee;
+            $(".checkout-delivery h6").html(`R ${deliveryFee}`);
+            showHeaderDropdown(`<i class='material-icons'> local_shipping </i> Aflewering is gratis indien jou bestelling meer as R ${freeDeliveryThresholdCoupons} is met die gebruik van 'n afslagkode.`)
         }
     }
 
     // No Coupon
     else if (cartTotal >= freeDeliveryThreshold) {
-        console.log("Free Delivery")
         // No Coupon, Total > Threshold
         deliveryFee = 0;
         $(".checkout-delivery h6").html(`R 0`)
@@ -652,12 +669,7 @@ const checkFreeDelivery = (couponValue) => {
 
         // Prompt Free Delivery
         if (cartTotal > (freeDeliveryThreshold - 300) && cartTotal < freeDeliveryThreshold) {
-            showModal({
-                heading: "Gratis Aflewering",
-                text: "Aflewering is gratis indien jou bestelling meer as R 1000 is. <br><br> Gooi nog 'n item of twee in jou mandjie en kry gratis aflewering!",
-                buttonText: "Ok",
-                buttonFunction: hideModal
-            });
+            showHeaderDropdown(`  <i class='material-icons'> local_shipping </i>Aflewering is gratis indien jou bestelling meer as R ${freeDeliveryThreshold} is. Gooi nog 'n item of twee in jou mandjie en kry gratis aflewering!`)
         }
     }
 }

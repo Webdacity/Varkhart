@@ -661,6 +661,38 @@ footer form input:focus {
 }
 
 
+/* Header Dropdown*/
+
+.header-dropdown {
+  background-color: var(--brown);
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  color: white;
+  overflow-y: hidden;
+  display: none;
+  box-sizing: border-box;
+}
+
+.header-dropdown-inner {
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.header-dropdown i {
+  margin-right: 1rem;
+  font-size: 1.25rem;
+}
+
+.header-dropdown p {
+  margin: 0;
+}
+
+
 /* Normal Modal */
 
 
@@ -1986,6 +2018,22 @@ input[type=range]::-webkit-slider-thumb::before {
 }
 
 /* Cart Content */
+.free-delivery-banner {
+  background-color: var(--brown);
+  color: white;
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.free-delivery-banner i {
+  margin-right: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.free-delivery-banner p {
+  margin: 0;
+}
 
 .cart-heading i {
   cursor: pointer;
