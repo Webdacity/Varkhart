@@ -126,34 +126,59 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <img src="./assets/images/logos/navbar-logo.png" alt="">
-                    <h6>Hi Varkhart! Kry <strong><span id="newsletter-coupon-value"></span> af</strong> op jou volgende aankoop!
-                    </h6>
-                    <p>Skryf in vir ons nuusbrief hier: </p>
-                    <form class="newsletter-modal-form needs-validaton" id="newsletter-modal-form">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Jou Naam" name="name" required>
-                            <div class="invalid-feedback">
-                                'n Geldige naam word vereis.
+                <div class="newsletter-modal-coupon">
+                    <div class="modal-body">
+                        <img src="./assets/images/logos/navbar-logo.png" alt="">
+                        <h6>Hi Varkhart! Kry <strong><span id="newsletter-coupon-value"></span> af</strong> op jou volgende aankoop!
+                        </h6>
+                        <p>Skryf in vir ons nuusbrief hier: </p>
+                        <form class="newsletter-modal-form needs-validaton" id="newsletter-modal-form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Jou Naam" name="name" required>
+                                <div class="invalid-feedback">
+                                    'n Geldige naam word vereis.
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Jou E-Pos" name="email" required>
-                            <div class="invalid-feedback">
-                                'n Geldige e-pos word vereis.
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Jou E-Pos" name="email" required>
+                                <div class="invalid-feedback">
+                                    'n Geldige e-pos word vereis.
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <input type="tel" class="form-control" placeholder="Jou Nommer" name="phone" required>
-                            <div class="invalid-feedback">
-                                'n Geldige e-pos word selfoon nommer vereis.
+                            <div class="form-group">
+                                <input type="tel" class="form-control" placeholder="Jou Nommer" name="phone" required>
+                                <div class="invalid-feedback">
+                                    'n Geldige selfoon nommer word vereis.
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="my-button mx-auto" onclick="newsletterModalSubmitCoupon()">KRY <span></span> AF</button>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="my-button mx-auto" onclick="newsletterModalSubmit()">KRY <span></span> AF</button>
+                <div class="newsletter-modal-normal">
+                    <div class="modal-body">
+                        <img src="./assets/images/logos/navbar-logo.png" alt="">
+                        <p>Hy Varkhart! <br><br> Skryf in vir ons nuusbrief en bly op datum met die nuutste verwikkelinge en promosies: </p>
+                        <form class="newsletter-modal-form needs-validaton" id="newsletter-modal-form-normal">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Jou Naam" name="name" required>
+                                <div class="invalid-feedback">
+                                    'n Geldige naam word vereis.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Jou E-Pos" name="email" required>
+                                <div class="invalid-feedback">
+                                    'n Geldige e-pos word vereis.
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="my-button mx-auto" onclick="newsletterModalSubmitNormal()">Skryf In</button>
+                    </div>
                 </div>
             </div>
         </div>

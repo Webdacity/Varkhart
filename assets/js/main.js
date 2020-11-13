@@ -175,7 +175,7 @@ const getAfflCode = () => {
 
 // Submit Newsletter Modal Form
 
-const newsletterModalSubmit = () => {
+const newsletterModalSubmitCoupon = () => {
     // $('#newsletter-modal').modal('toggle');
     event.preventDefault();
 
@@ -225,11 +225,53 @@ const newsletterModalSubmit = () => {
     form.classList.add('was-validated');
 }
 
+const newsletterModalSubmitNormal = () => {
+    event.preventDefault();
+
+    // Validate Email
+    let email = $("#newsletter-modal-form-normal [name='email']").val();
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (re.test(String(email).toLowerCase()) === false) {
+        alert("Please enter a valid email address");
+    } else {
+        showLoader();
+        $('#newsletter-modal').modal('toggle');
+        axios({
+            method: "post",
+            url: `${api_url}/sendgrid/newsletter`,
+            data: {
+                email: $("#newsletter-modal-form-normal [name='email']").val(),
+                first_name: $("#newsletter-modal-form-normal [name='name']").val(),
+                affiliateCode: getAfflCode()
+            }
+        })
+            .then(result => {
+                if (result.status === 200) {
+                    console.log(result)
+                    hideLoader();
+                    notify("Jy is 'n legende! Hou 'n oog op jou e-pos vir ons nuusbriewe")
+                }
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
+}
+
 const openNewsletterModal = () => {
     $('#newsletter-modal').modal('toggle');
     getShopSettings().then((shopSettings) => {
-        $("#newsletter-coupon-value").html(`${shopSettings.subscriptionCouponValue}%`);
-        $("#newsletter-modal .my-button span").html(`${shopSettings.subscriptionCouponValue}%`);
+        console.log(shopSettings)
+        if (shopSettings.subscriptionCouponStatus) {
+            $(".newsletter-modal-normal").hide();
+            $(".newsletter-modal-coupon").show();
+            $("#newsletter-coupon-value").html(`${shopSettings.subscriptionCouponValue}%`);
+            $("#newsletter-modal .my-button span").html(`${shopSettings.subscriptionCouponValue}%`);
+        } else {
+            $(".newsletter-modal-coupon").hide()
+            $(".newsletter-modal-normal").show();
+        }
     })
 }
 
