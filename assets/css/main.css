@@ -1862,7 +1862,66 @@ input[type=range]::-webkit-slider-thumb::before {
   font-weight: 400;
 }
 
-.product-page-gender p,
+.product-page-sizes-guide {
+  display: none;
+  margin-top: 0.25rem;
+}
+
+
+
+.product-page-sizes-guide.active {
+  display: block;
+}
+
+.size-guide-modal {
+  background-color: #1d1d1dcb;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 2000;
+  display: none;
+}
+
+.size-guide-modal .image {
+  width: 100%;
+  height: 100%;
+}
+
+.size-guide-modal .image img {
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+
+.size-guide-modal.active {
+  display: block;
+}
+
+
+.size-guide-modal i {
+  color: white;
+  font-size: 1.5rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 1rem;
+}
+
+.product-page-sizes-guide a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: underline !important;
+  cursor: pointer;
+}
+
+.size-guide-modal .product-page-gender p,
 .product-page-color p {
   font-weight: 500;
   margin: 0;

@@ -485,6 +485,14 @@ const loadProductPage = () => {
                     })
                 }
 
+
+                // Size Guide
+
+                if (product.productSizeImageUrl) {
+                    $(".product-page-sizes-guide").addClass("active")
+                    $(".size-guide-modal img").attr("src", product.productSizeImageUrl)
+                }
+
                 // Images 
                 product.productImageUrls.forEach(image => {
                     image = image.replace("upload/", "upload/f_auto/");
@@ -510,7 +518,7 @@ const loadProductPage = () => {
             }
         })
         .catch(err => {
-            if (err.response.status = 404) {
+            if (err.response.status === 404) {
                 window.location = "/winkel.html"
             } else {
                 console.log(err);
@@ -596,3 +604,15 @@ $("#slick-prev").click(() => {
     $('.product-slick').slick("slickPrev");
     $('.home-slick').slick("slickPrev");
 })
+
+
+
+// Size Guides
+
+const openSizeGuideModal = () => {
+    $(".size-guide-modal").addClass("active")
+}
+
+const closeSizeGuideModal = () => {
+    $(".size-guide-modal").removeClass("active")
+};
