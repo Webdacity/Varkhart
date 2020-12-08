@@ -1,3 +1,6 @@
+
+
+
 // Nav Search Bar
 const loadNavSearch = () => {
     // Get Search Term
@@ -515,6 +518,9 @@ const loadProductPage = () => {
                 if ($(".product-slick .slick-track").children().length <= 1) {
                     $(".product-slick-container .slick-arrow").hide();
                 }
+
+                // Klaviyo
+                // klaviyoActions.viewedProduct(product)
             }
         })
         .catch(err => {
@@ -605,8 +611,6 @@ $("#slick-prev").click(() => {
     $('.home-slick').slick("slickPrev");
 })
 
-
-
 // Size Guides
 
 const openSizeGuideModal = () => {
@@ -616,3 +620,5 @@ const openSizeGuideModal = () => {
 const closeSizeGuideModal = () => {
     $(".size-guide-modal").removeClass("active")
 };
+
+

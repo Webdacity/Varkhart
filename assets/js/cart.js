@@ -337,6 +337,9 @@ const addToCart = () => {
         localStorage.setItem("cart", JSON.stringify(currentCart));
         updateCartCounter();
         notify("Bygevoeg in Mandjie");
+
+        // Klaviyo
+        // klaviyoActions.addedToCart(productID)
     }
 
 

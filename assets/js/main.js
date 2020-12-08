@@ -312,3 +312,20 @@ const showModal = (settings) => {
 const hideModal = () => {
     $(".normal-modal").modal("toggle")
 }
+
+
+
+
+
+// const klaviyoActions = {
+//     viewedProduct: function (product) {
+//         $.getScript("./assets/js/klaviyo.js", function () {
+//             viewedProduct(product)
+//         });
+//     },
+//     addedToCart: function (productCode) {
+//         $.getScript("./assets/js/klaviyo.js", function () {
+//             addedToCart(productCode)
+//         });
+//     }
+// }
