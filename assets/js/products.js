@@ -440,7 +440,7 @@ const loadProductPage = () => {
 
             if (product !== undefined && product.visibility) {
                 // Klaviyo
-                klaviyoActions.viewedProduct(product)
+                trackingActions.viewedProduct(product)
 
                 // Insert HTML
                 document.title = "Varkhart | " + product.name;

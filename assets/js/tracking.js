@@ -35,7 +35,8 @@ function viewedProduct(product) {
             "Price": product.price,
         }
     }]);
-    console.log("Viewed product")
+
+    GTMviewedProduct(product)
 }
 
 function addedToCart(productCode, size) {
@@ -57,9 +58,9 @@ function addedToCart(productCode, size) {
                 "CheckoutURL": "http://www.varkhart..co.za/mandjie.html",
                 "Items": getCartItems(products)
             }
-            console.log(data)
             _learnq.push(["track", "Added to Cart", data]);
-            console.log("addedToCart");
+
+            GTMaddedToCart(addedProduct)
         })
         .catch(err => console.log(err))
 }
@@ -75,13 +76,14 @@ function startedCheckout() {
                 "Categories": getCartItemCategories(products),
                 "Items": getCartItems(products)
             }
-            console.log(data)
             _learnq.push(["track", "Started Checkout", data]);
-            console.log("startedCheckout");
         })
         .catch(err => console.log(err))
 }
 
+
+
+// ---------------------------
 
 // Helpers
 
@@ -143,4 +145,148 @@ function getCartTotal(products) {
         total += product.price * item.quantity
     });
     return total
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+// --------------------------------------------
+
+
+
+// GTM TRACKING
+function GTMviewedProduct(product) {
+
+    let data = {
+        'event': 'productClick',
+        'ecommerce': {
+            'currencyCode': "ZAR",
+            'add': {
+                'products': [{
+                    'name': product.name,
+                    'id': product.productCode,
+                    'price': product.price,
+                    'brand': 'Varkhart',
+                    'category': `${product.gender} | ${product.category}`,
+                    'variant': product.color
+                }]
+            }
+        }
+    }
+    dataLayer.push(data);
+
+    data = {
+        'event': 'ProductView',
+        'ecommerce': {
+            'currencyCode': "ZAR",
+            'ProductView': {
+                'products': [{
+                    'name': product.name,
+                    'id': product.productCode,
+                    'price': product.price,
+                    'brand': 'Varkhart',
+                    'category': `${product.gender} | ${product.category}`,
+                    'variant': product.color
+                }]
+            }
+        }
+    }
+    dataLayer.push(data);
+}
+
+function GTMaddedToCart(product) {
+    let data = {
+        'event': 'addtocart',
+        'ecommerce': {
+            'currencyCode': 'ZAR',
+            'add': {                                // 'add' actionFieldObject measures.
+                'products': [{                        //  adding a product to a shopping cart.
+                    'name': product.name,
+                    'id': product.productCode,
+                    'price': product.price,
+                    'brand': 'Varkhart',
+                    'category': product.category,
+                    'variant': product.color,
+                    'quantity': 1
+                }]
+            }
+        }
+    }
+    dataLayer.push(data);
+}
+
+function GTMremoveFromCart(productCode) {
+    axios.get(`${api_url}/products/productCode/${productCode}`)
+        .then(result => {
+            const product = result.data;
+
+            let data = {
+                'event': 'addtocart',
+                'ecommerce': {
+                    'currencyCode': 'ZAR',
+                    'remove': {                                // 'add' actionFieldObject measures.
+                        'products': [{                        //  adding a product to a shopping cart.
+                            'name': product.name,
+                            'id': product.productCode,
+                            'price': product.price,
+                            'brand': 'Varkhart',
+                            'category': product.category,
+                            'variant': product.color,
+                        }]
+                    }
+                }
+            }
+            dataLayer.push(data);
+        })
+        .catch(err => console.log(err))
+}
+
+function GTMcheckoutSteps(step) {
+    axios.get(`${api_url}/products`)
+        .then(result => {
+            const products = result.data;
+            let data = {
+                'event': 'checkout',
+                'ecommerce': {
+                    'currencyCode': 'ZAR',
+                    'checkout': {
+                        'actionField': { 'step': step },
+                        'products': getCheckoutProducts(products)
+                    }
+                }
+            }
+            console.log(data)
+            dataLayer.push(data)
+        })
+
+}
+
+// Helpers
+function getCheckoutProducts(products) {
+    let items = [];
+    let currentCart = JSON.parse(localStorage.getItem("cart"));
+    currentCart.forEach(item => {
+        let product = products.find(product => product.productCode === item.id);
+        let itemToAdd =
+        {
+            'name': product.name,
+            'id': product.productCode,
+            'price': product.price,
+            'brand': 'Varkhart',
+            'category': product.category,
+            'variant': product.color,
+            'quantity': item.quantity
+        }
+        items.push(itemToAdd)
+    });
+    return items
 }

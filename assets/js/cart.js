@@ -61,7 +61,7 @@ function updateItemTotal(itemID, quantity) {
     showCart();
 
     // Klaviyo
-    klaviyoActions.addedToCart(currentProductID, currentProductSize)
+    trackingActions.addedToCart(currentProductID, currentProductSize)
 }
 
 
@@ -100,7 +100,11 @@ const getCartItemProductID = (itemID) => {
 // Delete Cart Items
 $(document).on("click", ".cart-content-item-delete i", function () {
     const currentID = getCartItemID($(this));
+    let productCode = $(`#${currentID} template`).attr("id");
+    trackingActions.removeFromCart(productCode)
+
     $(`#${currentID}`).remove();
+
 
     // Refactor Cart ID's
     for (i = 1; i <= getCartSize(); i++) {
@@ -119,6 +123,8 @@ $(document).on("click", ".cart-content-item-delete i", function () {
 
 
 $(".cart-options-continue").click(() => {
+    trackingActions.checkoutSteps(1)
+
     $(".cart-section").fadeOut(500, () => {
         $(".cart-details").fadeIn();
     });
@@ -131,7 +137,6 @@ $(".cart-options-continue").click(() => {
             checkFreeDelivery();
             checkoutCart();
         })
-
 });
 
 const checkoutCart = (couponValue) => {
@@ -341,7 +346,7 @@ const addToCart = () => {
         notify("Bygevoeg in Mandjie");
 
         // Klaviyo
-        klaviyoActions.addedToCart(productID, productSize)
+        trackingActions.addedToCart(productID, productSize)
     }
 
 
@@ -400,13 +405,14 @@ $(".order-form [name='email_address']").change(() => {
     let email = $(".order-form [name='email_address']").val();
     let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (re.test(String(email).toLowerCase()) === true) {
-        return klaviyoActions.identify(email)
+        return trackingActions.identify(email)
     }
 })
 
 // Send POST to backend for validation
 
 const sendOrder = () => {
+    trackingActions.checkoutSteps(2)
     showLoader();
 
     // Get Cart List 

@@ -316,25 +316,35 @@ const hideModal = () => {
 
 
 
-const klaviyoActions = {
+const trackingActions = {
     identify: function (user) {
-        $.getScript("./assets/js/klaviyo.js", function () {
+        $.getScript("./assets/js/tracking.js", function () {
             identify(user)
         });
     },
     viewedProduct: function (product) {
-        $.getScript("./assets/js/klaviyo.js", function () {
+        $.getScript("./assets/js/tracking.js", function () {
             viewedProduct(product)
         });
     },
     addedToCart: function (productCode, size) {
-        $.getScript("./assets/js/klaviyo.js", function () {
+        $.getScript("./assets/js/tracking.js", function () {
             addedToCart(productCode, size)
         });
     },
+    removeFromCart: function (productCode) {
+        $.getScript("./assets/js/tracking.js", function () {
+            GTMremoveFromCart(productCode)
+        });
+    },
     startedCheckout: function (user) {
-        $.getScript("./assets/js/klaviyo.js", function () {
+        $.getScript("./assets/js/tracking.js", function () {
             startedCheckout(user)
+        });
+    },
+    checkoutSteps: function (step) {
+        $.getScript("./assets/js/tracking.js", function () {
+            GTMcheckoutSteps(step)
         });
     }
 }
