@@ -262,7 +262,6 @@ const newsletterModalSubmitNormal = () => {
 const openNewsletterModal = () => {
     $('#newsletter-modal').modal('toggle');
     getShopSettings().then((shopSettings) => {
-        console.log(shopSettings)
         if (shopSettings.subscriptionCouponStatus) {
             $(".newsletter-modal-normal").hide();
             $(".newsletter-modal-coupon").show();
@@ -317,15 +316,25 @@ const hideModal = () => {
 
 
 
-// const klaviyoActions = {
-//     viewedProduct: function (product) {
-//         $.getScript("./assets/js/klaviyo.js", function () {
-//             viewedProduct(product)
-//         });
-//     },
-//     addedToCart: function (productCode) {
-//         $.getScript("./assets/js/klaviyo.js", function () {
-//             addedToCart(productCode)
-//         });
-//     }
-// }
+const klaviyoActions = {
+    identify: function (user) {
+        $.getScript("./assets/js/klaviyo.js", function () {
+            identify(user)
+        });
+    },
+    viewedProduct: function (product) {
+        $.getScript("./assets/js/klaviyo.js", function () {
+            viewedProduct(product)
+        });
+    },
+    addedToCart: function (productCode, size) {
+        $.getScript("./assets/js/klaviyo.js", function () {
+            addedToCart(productCode, size)
+        });
+    },
+    startedCheckout: function (user) {
+        $.getScript("./assets/js/klaviyo.js", function () {
+            startedCheckout(user)
+        });
+    }
+}

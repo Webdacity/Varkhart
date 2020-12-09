@@ -437,8 +437,10 @@ const loadProductPage = () => {
         .then((response) => {
             hideLoader();
             const product = response.data;
-            if (product !== undefined && product.visibility) {
 
+            if (product !== undefined && product.visibility) {
+                // Klaviyo
+                klaviyoActions.viewedProduct(product)
 
                 // Insert HTML
                 document.title = "Varkhart | " + product.name;
@@ -519,8 +521,7 @@ const loadProductPage = () => {
                     $(".product-slick-container .slick-arrow").hide();
                 }
 
-                // Klaviyo
-                // klaviyoActions.viewedProduct(product)
+
             }
         })
         .catch(err => {

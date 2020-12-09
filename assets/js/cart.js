@@ -5,7 +5,10 @@ let freeDeliveryThresholdCoupon;
 
 
 // -------------------------
-
+const getCart = () => {
+    let currentCart = JSON.parse(localStorage.getItem("cart"));
+    return currentCart
+}
 
 // Calculate Cart Total
 function calcCartTotal() {
@@ -23,7 +26,6 @@ function calcCartTotal() {
 // Cart Quantity + Total Counter
 const getCartItemID = (item) => {
     const id = $(item).closest(".cart-content-item").attr("id");
-    console.log(id)
     return id;
 }
 
@@ -52,12 +54,14 @@ function updateItemTotal(itemID, quantity) {
     let currentProductQuant = parseInt($(`#${itemID} .cart-content-quantity-input`).val());
     currentCart.forEach(item => {
         if (item.id == currentProductID && item.size == currentProductSize) {
-            console.log("found")
             item.quantity = currentProductQuant;
         }
     });
     localStorage.setItem("cart", JSON.stringify(currentCart));
-    showCart()
+    showCart();
+
+    // Klaviyo
+    klaviyoActions.addedToCart(currentProductID, currentProductSize)
 }
 
 
@@ -156,7 +160,6 @@ const checkoutCart = (couponValue) => {
 
 
     $(".checkout-cart-count").html(cartLength);
-    console.log(deliveryFee)
     if (couponValue) {
         getShopSettings()
             .then((shopSettings) => {
@@ -178,7 +181,7 @@ const checkoutCart = (couponValue) => {
 
 // Clear Cart Storage
 const clearCart = () => {
-    localStorage.clear();
+    localStorage.removeItem("cart");
     console.log("Cleared. Current Cart:" + localStorage.getItem("cart"));
     updateCartCounter();
 }
@@ -317,7 +320,6 @@ const addToCart = () => {
 
     // Get Current Cart
     let currentCart = JSON.parse(localStorage.getItem("cart"));
-    console.log(currentCart)
     // Check if already in cart
     if (searchCart(productID, productSize) > 0) {
         notify("Produk is klaar n mandjie - Verander hoeveelheid in mandjie")
@@ -339,7 +341,7 @@ const addToCart = () => {
         notify("Bygevoeg in Mandjie");
 
         // Klaviyo
-        // klaviyoActions.addedToCart(productID)
+        klaviyoActions.addedToCart(productID, productSize)
     }
 
 
@@ -393,6 +395,14 @@ $(".cart-content-item-delete i").hover(
     }
 );
 
+// Klaviyo Track Started Checkout
+$(".order-form [name='email_address']").change(() => {
+    let email = $(".order-form [name='email_address']").val();
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (re.test(String(email).toLowerCase()) === true) {
+        return klaviyoActions.identify(email)
+    }
+})
 
 // Send POST to backend for validation
 
