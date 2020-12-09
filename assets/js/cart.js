@@ -465,7 +465,7 @@ const sendOrder = () => {
     })
         .then(response => {
             let orderReceived = response.data.order
-            console.log(response.data);
+            saveOrderSession(orderReceived)
 
             $(".order-form [name='amount']").val(orderReceived.amount_gross);
             $(".order-form [name='custom_str1']").val(orderReceived.order_number);
@@ -536,7 +536,17 @@ $(document).ready(function () {
                 $(".free-delivery-banner span").html(shopSettings.freeDeliveryThreshold)
             })
     }
+
+    if (window.location.pathname == "/sukses.html") {
+        trackingActions.purchaseEvent()
+    }
 });
+
+const saveOrderSession = (order) => {
+    console.log(order)
+    sessionStorage.setItem("order", JSON.stringify(order));
+}
+
 
 
 // ---------

@@ -250,10 +250,11 @@ function GTMremoveFromCart(productCode) {
         .catch(err => console.log(err))
 }
 
+
 function GTMcheckoutSteps(step) {
     axios.get(`${api_url}/products`)
         .then(result => {
-            const products = result.data;
+            let products = result.data;
             let data = {
                 'event': 'checkout',
                 'ecommerce': {
@@ -266,7 +267,33 @@ function GTMcheckoutSteps(step) {
             }
             dataLayer.push(data)
         })
+        .catch(err => console.log(err))
 
+}
+
+function GTMpurchaseEvent() {
+    let order = JSON.parse(sessionStorage.getItem("order"));
+    axios.get(`${api_url}/products`)
+        .then(result => {
+            let products = result.data;
+            let data = {
+                'event': 'purchase',
+                'ecommerce': {
+                    'currencyCode': 'ZAR', //replace with user currency
+                    'purchase': {
+                        'actionField': {
+                            'id': order.order_number,                         // Transaction ID. Required for purchases and refunds.
+                            'revenue': order.amount_gross,                     // Total revenue including tax.
+                            'shipping': order.delivery_fee,
+                            'products': getCheckoutProducts(products)
+                        }
+                    }
+                }
+            }
+            console.log(data)
+            dataLayer.push(data)
+        })
+        .catch(err => console.log(err))
 }
 
 // Helpers

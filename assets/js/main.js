@@ -346,5 +346,10 @@ const trackingActions = {
         $.getScript("./assets/js/tracking.js", function () {
             GTMcheckoutSteps(step)
         });
+    },
+    purchaseEvent: function () {
+        $.getScript("./assets/js/tracking.js", function () {
+            GTMpurchaseEvent()
+        });
     }
 }
