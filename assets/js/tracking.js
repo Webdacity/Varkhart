@@ -264,7 +264,6 @@ function GTMcheckoutSteps(step) {
                     }
                 }
             }
-            console.log(data)
             dataLayer.push(data)
         })
 
