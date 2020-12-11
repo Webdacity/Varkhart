@@ -230,7 +230,7 @@ function GTMremoveFromCart(productCode) {
             const product = result.data;
 
             let data = {
-                'event': 'addtocart',
+                'event': 'removeFromCart',
                 'ecommerce': {
                     'currencyCode': 'ZAR',
                     'remove': {                                // 'add' actionFieldObject measures.
@@ -246,6 +246,7 @@ function GTMremoveFromCart(productCode) {
                 }
             }
             dataLayer.push(data);
+            console.log(data)
         })
         .catch(err => console.log(err))
 }
@@ -265,6 +266,7 @@ function GTMcheckoutSteps(step) {
                     }
                 }
             }
+            console.log(data)
             dataLayer.push(data)
         })
         .catch(err => console.log(err))
@@ -292,6 +294,7 @@ function GTMpurchaseEvent() {
             }
             console.log(data)
             dataLayer.push(data)
+            clearCart()
         })
         .catch(err => console.log(err))
 }

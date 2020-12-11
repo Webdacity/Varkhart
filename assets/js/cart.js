@@ -173,7 +173,6 @@ const checkoutCart = (couponValue) => {
                 freeDeliveryThresholdCoupons = shopSettings.freeDeliveryThresholdCoupons;
                 checkFreeDelivery(couponValue);
                 checkoutCart();
-                console.log(deliveryFee);
                 $(".checkout-total h5 span").html(`${Math.round(cartTotal * (100 - couponValue) / 100) + deliveryFee}`); // {Incl Delivery}
                 $(".checkout-total").addClass("coupon")
             })
@@ -280,7 +279,6 @@ const loadCart = () => {
                     } else {
                         // Remove deleted / invisible product
                         let deletedProduct = cartArray.find(item => item.id === code);
-                        console.log(deletedProduct)
                         cartArray.splice(cartArray.indexOf(deletedProduct), 1);
                         localStorage.setItem("cart", JSON.stringify(cartArray));
                         location.reload();
@@ -373,7 +371,6 @@ const deleteCartItem = (item) => {
     // const cartProductID = getCartItemProductID(currentID);
     let currentCart = JSON.parse(localStorage.getItem("cart"));
     let cartPostition = currentCartPosition.slice(currentCartPosition.lastIndexOf("-") + 1, currentCartPosition.length);
-    console.log(cartPostition)
     // Delete Item
     currentCart.splice(cartPostition - 1, 1);
 
@@ -584,7 +581,6 @@ const orderStopModalSubmit = () => {
         })
             .then(result => {
                 if (result.status === 201) {
-                    console.log(result)
                     hideLoader();
                     notify("Jy is 'n legende! Hou 'n oog op jou e-pos vir wanneer ons jou kontak.")
                 }
