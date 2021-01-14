@@ -29,6 +29,51 @@ $(document).ready(() => {
     }, 5000);
 });
 
+
+
+const trackingActions = {
+    identify: function (user) {
+        $.getScript("./assets/js/tracking.js", function () {
+            identify(user)
+        });
+    },
+    newsletter: function (user) {
+        $.getScript("./assets/js/tracking.js", function () {
+            newsletter(user)
+        });
+    },
+    viewedProduct: function (product) {
+        $.getScript("./assets/js/tracking.js", function () {
+            viewedProduct(product)
+        });
+    },
+    addedToCart: function (productCode, size) {
+        $.getScript("./assets/js/tracking.js", function () {
+            addedToCart(productCode, size)
+        });
+    },
+    removeFromCart: function (productCode) {
+        $.getScript("./assets/js/tracking.js", function () {
+            GTMremoveFromCart(productCode)
+        });
+    },
+    startedCheckout: function (user) {
+        $.getScript("./assets/js/tracking.js", function () {
+            startedCheckout(user)
+        });
+    },
+    checkoutSteps: function (step) {
+        $.getScript("./assets/js/tracking.js", function () {
+            GTMcheckoutSteps(step)
+        });
+    },
+    purchaseEvent: function () {
+        $.getScript("./assets/js/tracking.js", function () {
+            GTMpurchaseEvent()
+        });
+    }
+}
+
 // Shop Settings
 async function getShopSettings() {
     let getSettings = axios({
@@ -197,6 +242,12 @@ const newsletterModalSubmitCoupon = () => {
     else {
         $('#newsletter-modal').modal('toggle');
         showLoader()
+        let user = {
+            email: $(".newsletter-modal-form [name='email']").val(),
+            first_name: $(".newsletter-modal-form [name='name']").val(),
+            phone: $(".newsletter-modal-form [name='phone']").val(),
+        }
+        trackingActions.newsletter(user);
         axios({
             method: "post",
             url: `${api_url}/coupons/create/customer`,
@@ -236,6 +287,11 @@ const newsletterModalSubmitNormal = () => {
     } else {
         showLoader();
         $('#newsletter-modal').modal('toggle');
+        let user = {
+            email: $("#newsletter-modal-form-normal [name='email']").val(),
+            first_name: $("#newsletter-modal-form-normal [name='name']").val(),
+        }
+        trackingActions.newsletter(user);
         axios({
             method: "post",
             url: `${api_url}/sendgrid/newsletter`,
@@ -314,42 +370,3 @@ const hideModal = () => {
 
 
 
-
-
-const trackingActions = {
-    identify: function (user) {
-        $.getScript("./assets/js/tracking.js", function () {
-            identify(user)
-        });
-    },
-    viewedProduct: function (product) {
-        $.getScript("./assets/js/tracking.js", function () {
-            viewedProduct(product)
-        });
-    },
-    addedToCart: function (productCode, size) {
-        $.getScript("./assets/js/tracking.js", function () {
-            addedToCart(productCode, size)
-        });
-    },
-    removeFromCart: function (productCode) {
-        $.getScript("./assets/js/tracking.js", function () {
-            GTMremoveFromCart(productCode)
-        });
-    },
-    startedCheckout: function (user) {
-        $.getScript("./assets/js/tracking.js", function () {
-            startedCheckout(user)
-        });
-    },
-    checkoutSteps: function (step) {
-        $.getScript("./assets/js/tracking.js", function () {
-            GTMcheckoutSteps(step)
-        });
-    },
-    purchaseEvent: function () {
-        $.getScript("./assets/js/tracking.js", function () {
-            GTMpurchaseEvent()
-        });
-    }
-}

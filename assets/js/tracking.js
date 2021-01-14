@@ -10,6 +10,16 @@ function identify(email) {
     }, 5000);
 }
 
+function newsletter(user) {
+    console.log(user)
+    var _learnq = _learnq || [];
+    _learnq.push(['identify', {
+        '$email': user.email,
+        '$first_name': user.first_name,
+        '$phone_number': user.phone_number ? user.phone_number : ""
+    }]);
+}
+
 function viewedProduct(product) {
     var _learnq = _learnq || [];
     var item = {
