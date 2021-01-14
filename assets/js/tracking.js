@@ -11,13 +11,13 @@ function identify(email) {
 }
 
 function newsletter(user) {
-    console.log(user)
     var _learnq = _learnq || [];
     _learnq.push(['identify', {
         '$email': user.email,
         '$first_name': user.first_name,
-        '$phone_number': user.phone_number ? user.phone_number : ""
+        '$phone_number': user.phone ? user.phone : ""
     }]);
+    console.log(user)
 }
 
 function viewedProduct(product) {
