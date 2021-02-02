@@ -34,6 +34,14 @@ function viewedProduct(product) {
     };
     _learnq.push(["track", "Viewed Product", item]);
 
+    console.log(item)
+    console.log(`Viewed Product: ${item}`);
+
+    recentlyViewed(product);
+    GTMviewedProduct(product);
+}
+
+function recentlyViewed(product) {
     _learnq.push(["trackViewedItem", {
         "Title": product.name,
         "ItemId": product.productCode,
@@ -45,9 +53,7 @@ function viewedProduct(product) {
             "Price": product.price,
         }
     }]);
-    console.log(item)
-    console.log(`Viewed Product: ${item}`)
-    GTMviewedProduct(product)
+
 }
 
 function addedToCart(productCode, size) {
