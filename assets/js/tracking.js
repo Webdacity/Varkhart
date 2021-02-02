@@ -45,7 +45,8 @@ function viewedProduct(product) {
             "Price": product.price,
         }
     }]);
-
+    console.log(item)
+    console.log(`Viewed Product: ${item}`)
     GTMviewedProduct(product)
 }
 
