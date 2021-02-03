@@ -23,10 +23,9 @@ function newsletter(user) {
 function viewedProduct(product) {
     var _learnq = _learnq || [];
 
-    if (_learnq) {
-        $(`<script defer>
+    $(`<script defer>
         var _learnq = _learnq || [];
-    let item = {
+    var item = {
         "ProductName": '${product.name}',
         "ProductID": '${product.productCode}',
         "SKU": '${product.productCode}',
@@ -39,12 +38,6 @@ function viewedProduct(product) {
     };
     _learnq.push(["track", "Viewed Product", item]);
     <\/script>`).appendTo(document.body);
-    } else {
-        console.log("no learnq")
-    }
-
-    // console.log(item)
-    // console.log(`Viewed Product: ${item}`);
 
     recentlyViewed(product);
     GTMviewedProduct(product);
