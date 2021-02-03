@@ -23,14 +23,14 @@ function newsletter(user) {
 function viewedProduct(product) {
     console.log(product);
 
-    $(`<script>
+    $(`<script defer>
     let _learnq = _learnq || [];
     let item = {
         "ProductName": '${product.name}',
         "ProductID": '${product.productCode}',
         "SKU": '${product.productCode}',
-        "Categories": ${[product.category, product.gender]},
-        "ImageURL": ${product.productThumbnailUrl},
+        "Categories": ['${product.category}', '${product.gender}'],
+        "ImageURL": '${product.productThumbnailUrl}',
         "URL": 'http://www.varkhart.co.za/produk.html#${product.productCode}',
         "Brand": "Varkhart",
         "Price": ${product.price},
