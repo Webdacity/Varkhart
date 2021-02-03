@@ -21,26 +21,26 @@ function newsletter(user) {
 }
 
 function viewedProduct(product) {
-    // const script = document.createElement("script");
-    var _learnq = _learnq || [];
-    var item = {
-        "ProductName": product.name,
-        "ProductID": product.productCode,
-        "SKU": product.productCode,
-        "Categories": [product.category, product.gender],
-        "ImageURL": product.productThumbnailUrl,
-        "URL": `http://www.varkhart.co.za/produk.html#${product.productCode}`,
+    console.log(product);
+
+    $(`<script>
+    let _learnq = _learnq || [];
+    let item = {
+        "ProductName": '${product.name}',
+        "ProductID": '${product.productCode}',
+        "SKU": '${product.productCode}',
+        "Categories": ${[product.category, product.gender]},
+        "ImageURL": ${product.productThumbnailUrl},
+        "URL": 'http://www.varkhart.co.za/produk.html#${product.productCode}',
         "Brand": "Varkhart",
-        "Price": product.price,
-        "CompareAtPrice": product.price * 1.1
+        "Price": ${product.price},
+        "CompareAtPrice": ${Math.round(product.price * 1.1)}
     };
     _learnq.push(["track", "Viewed Product", item]);
+    <\/script>`).appendTo(document.body);
 
     // console.log(item)
     // console.log(`Viewed Product: ${item}`);
-
-    const inlineScript = document.createTextNode(``);
-
 
     recentlyViewed(product);
     GTMviewedProduct(product);
