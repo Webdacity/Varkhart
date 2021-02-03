@@ -21,10 +21,11 @@ function newsletter(user) {
 }
 
 function viewedProduct(product) {
-    console.log(product);
+    var _learnq = _learnq || [];
 
-    $(`<script defer>
-    let _learnq = _learnq || [];
+    if (_learnq) {
+        $(`<script defer>
+        var _learnq = _learnq || [];
     let item = {
         "ProductName": '${product.name}',
         "ProductID": '${product.productCode}',
@@ -38,6 +39,9 @@ function viewedProduct(product) {
     };
     _learnq.push(["track", "Viewed Product", item]);
     <\/script>`).appendTo(document.body);
+    } else {
+        console.log("no learnq")
+    }
 
     // console.log(item)
     // console.log(`Viewed Product: ${item}`);
