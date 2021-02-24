@@ -396,7 +396,7 @@ const loadShopProducts = () => {
                         data-product-category="${product.category}"
                         ></template>
                         <div class="product-image-container">
-                        <img src="${productThumbnail}">
+                        <img src="${productThumbnail}" loading="lazy">
                         </div>
                         <p class="product-name">${product.name}</p>
                         <p class="product-price">R ${product.price - product.discount}</p>
