@@ -591,10 +591,6 @@ const orderStopModalSubmit = () => {
     }
 }
 
-
-
-
-
 // Coupon Code
 
 $("#coupon-code-test").click(() => {
