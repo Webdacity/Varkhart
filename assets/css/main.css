@@ -2608,6 +2608,7 @@ input[type=number] {
 .section-returns {
   padding-top: 15vh;
   color: var(--brown);
+  min-height: 50vh;
 }
 
 .section-returns img {
